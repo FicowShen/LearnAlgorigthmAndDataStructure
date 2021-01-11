@@ -16,7 +16,54 @@ class Solution {
     }
 
     func run() {
-        testMoveZeroes()
+        testClimbStairs()
+    }
+
+    private func testClimbStairs() {
+        for i in 0..<10 {
+            print(climbStairs(i))
+//            res.removeAll()
+        }
+//        print(climbStairs(38))
+    }
+
+//    var res = [Int]()
+
+    func climbStairs(_ n: Int) -> Int {
+
+        // fibonacci formula
+
+        let sqrt5 = sqrt(5)
+        let divisor = Double(n + 1)
+        let fibn: Double = pow((1 + sqrt5) / 2, divisor) - pow((1 - sqrt5) / 2, divisor)
+        return Int(round(fibn / sqrt5))
+
+        // fibonacci
+
+//        guard n > 1 else {
+//            return 1
+//        }
+//        var x = 1, y = 1, res = 0
+//        for _ in 2...n {
+//            res = x + y
+//            y = x
+//            x = res
+//        }
+//        return res
+
+        // recursion
+
+//        if n < 2 {
+//            return 1
+//        }
+//        if res.isEmpty {
+//            res = [Int](repeating: 0, count: n+1)
+//        }
+//        if res[n] != 0 {
+//            return res[n]
+//        }
+//        res[n] = climbStairs(n - 1) + climbStairs(n - 2)
+//        return res[n]
     }
 
     private func testMoveZeroes() {
