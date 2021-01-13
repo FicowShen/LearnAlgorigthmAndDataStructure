@@ -16,7 +16,57 @@ class Solution {
     }
 
     func run() {
-        testClimbStairs()
+        testThreeSum()
+    }
+
+    private func testThreeSum() {
+        print(threeSum([-1,0,1,2,-1,-4]))
+        print(threeSum([]))
+        print(threeSum([0]))
+        print(threeSum([1,2,-2,-1]))
+    }
+
+    // https://leetcode-cn.com/problems/3sum/
+    func threeSum(_ nums: [Int]) -> [[Int]] {
+        // use a sorted array to avoid duplicate results
+        let sortedNums = nums.sorted()
+        let maxIndex = nums.count - 1
+        var results = [[Int]]()
+
+        for first in 0..<nums.count {
+            // if the first number is bigger than 0
+            if sortedNums[first] > 0 { return results }
+            // skip same first numbers
+            if first > 0 && sortedNums[first] == sortedNums[first-1] {
+                continue
+            }
+            let expectedSum = -sortedNums[first]
+            var second = first + 1
+            var third = maxIndex
+            while second < maxIndex {
+                defer {
+                    second += 1
+//                    print(sortedNums[first], sortedNums[second], sortedNums[third], #line)
+                }
+                // skip same second numbers
+                if second > first + 1 && sortedNums[second] == sortedNums[second-1] {
+//                    print(sortedNums[first], sortedNums[second], sortedNums[third], #line)
+                    continue
+                }
+                while second < third && sortedNums[second] + sortedNums[third] > expectedSum {
+                    third -= 1
+//                    print(sortedNums[first], sortedNums[second], sortedNums[third], #line)
+                }
+                // b gets bigger, so c should gets smaller. but b should be bigger than c
+                if second == third {
+                    break
+                }
+                if sortedNums[second] + sortedNums[third] == expectedSum {
+                    results.append([sortedNums[first], sortedNums[second], sortedNums[third]])
+                }
+            }
+        }
+        return results
     }
 
     private func testClimbStairs() {
@@ -29,6 +79,7 @@ class Solution {
 
 //    var res = [Int]()
 
+    // https://leetcode-cn.com/problems/climbing-stairs/
     func climbStairs(_ n: Int) -> Int {
 
         // fibonacci formula
