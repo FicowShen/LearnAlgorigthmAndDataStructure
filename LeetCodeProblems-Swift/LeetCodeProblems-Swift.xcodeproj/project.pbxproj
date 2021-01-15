@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6A1450F125A3E56E006357FE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1450F025A3E56E006357FE /* main.swift */; };
 		6A1450FA25A3E707006357FE /* Solutions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1450F925A3E707006357FE /* Solutions.swift */; };
+		6A7F1AE625B10EC200B2620E /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7F1AE525B10EC200B2620E /* Helpers.swift */; };
+		6A7F1AE925B10EF200B2620E /* ArrayProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7F1AE825B10EF200B2620E /* ArrayProblems.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +29,8 @@
 		6A1450ED25A3E56E006357FE /* LeetCodeProblems-Swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "LeetCodeProblems-Swift"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A1450F025A3E56E006357FE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		6A1450F925A3E707006357FE /* Solutions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solutions.swift; sourceTree = "<group>"; };
+		6A7F1AE525B10EC200B2620E /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		6A7F1AE825B10EF200B2620E /* ArrayProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayProblems.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 			children = (
 				6A1450F025A3E56E006357FE /* main.swift */,
 				6A1450F925A3E707006357FE /* Solutions.swift */,
+				6A7F1AE825B10EF200B2620E /* ArrayProblems.swift */,
+				6A7F1AE525B10EC200B2620E /* Helpers.swift */,
 			);
 			path = "LeetCodeProblems-Swift";
 			sourceTree = "<group>";
@@ -123,6 +129,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A1450FA25A3E707006357FE /* Solutions.swift in Sources */,
+				6A7F1AE925B10EF200B2620E /* ArrayProblems.swift in Sources */,
+				6A7F1AE625B10EC200B2620E /* Helpers.swift in Sources */,
 				6A1450F125A3E56E006357FE /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
