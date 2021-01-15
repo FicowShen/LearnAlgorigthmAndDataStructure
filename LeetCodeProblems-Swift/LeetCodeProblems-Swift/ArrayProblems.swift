@@ -77,7 +77,7 @@ final class ArrayProblems {
 //            DLog(key)
             if let node = dict[key] {
                 // get value and update order
-                moveToTail(node: node)
+                moveToHead(node: node)
                 return node.value
             }
             return LRUCache.notFound
@@ -88,42 +88,43 @@ final class ArrayProblems {
             if let node = dict[key] {
                 // set value and update order
                 node.value = value
-                moveToTail(node: node)
+                moveToHead(node: node)
             } else {
                 if dict.keys.count >= capacity {
                     // remove the least recently used value
-                    removeFirst()
+                    removeTail()
                 }
                 // set value and update order
                 let node = Node(key: key, value: value)
                 dict[key] = node
-                moveToTail(node: node)
+                moveToHead(node: node)
             }
         }
 
-        private func moveToTail(node: Node) {
+        private func moveToHead(node: Node) {
             // remove from the current node position
             let prev = node.prev
             let next = node.next
             prev?.next = next
             next?.prev = prev
             // append to the tail
-            let last = tail.prev
-            last?.next = node
-            node.prev = last
-            node.next = tail
-            tail.prev = node
+            let first = head.next
+            head.next = node
+            node.prev = head
+            first?.prev = node
+            node.next = first
         }
 
-        private func removeFirst() {
-            guard let first = head.next else {
+        private func removeTail() {
+            guard let last = tail.prev,
+                  last !== head else {
                 return
             }
-            let second = first.next
-            head.next = second
-            second?.prev = head
+            let newLast = last.prev
+            newLast?.next = tail
+            tail.prev = newLast
 
-            dict[first.key] = nil
+            dict[last.key] = nil
         }
 
         final class Node {
