@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Recommended problems: https://blog.ficowshen.com/page/post/46
 final class ArrayProblems {
 
     func run() {
@@ -74,57 +75,53 @@ final class ArrayProblems {
         }
 
         func get(_ key: Int) -> Int {
-//            DLog(key)
             if let node = dict[key] {
-                // get value and update order
-                moveToHead(node: node)
+                moveNodeToHead(node)
                 return node.value
             }
             return LRUCache.notFound
         }
 
         func put(_ key: Int, _ value: Int) {
-//            DLog((key, value))
             if let node = dict[key] {
-                // set value and update order
                 node.value = value
-                moveToHead(node: node)
+                moveNodeToHead(node)
             } else {
                 if dict.keys.count >= capacity {
-                    // remove the least recently used value
-                    removeTail()
+                    let last = removeTail()
+                    dict[last.key] = nil
                 }
-                // set value and update order
                 let node = Node(key: key, value: value)
                 dict[key] = node
-                moveToHead(node: node)
+                addNodeToHead(node)
             }
         }
 
-        private func moveToHead(node: Node) {
-            // remove from the current node position
+        private func addNodeToHead(_ node: Node) {
+            head.next?.prev = node
+            node.next = head.next
+
+            node.prev = head
+            head.next = node
+        }
+
+        private func removeNode(_ node: Node) {
             let prev = node.prev
             let next = node.next
             prev?.next = next
             next?.prev = prev
-            // append to the tail
-            let first = head.next
-            head.next = node
-            node.prev = head
-            first?.prev = node
-            node.next = first
         }
 
-        private func removeTail() {
-            guard let last = tail.prev,
-                  last !== head else {
-                return
-            }
-            let newLast = last.prev
-            newLast?.next = tail
-            tail.prev = newLast
+        private func moveNodeToHead(_ node: Node) {
+            removeNode(node)
+            addNodeToHead(node)
+        }
 
-            dict[last.key] = nil
+        private func removeTail() -> Node {
+            let last = tail.prev!
+            tail.prev = last.prev
+            last.prev!.next = tail
+            return last
         }
 
         final class Node {
