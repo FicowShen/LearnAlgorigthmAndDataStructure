@@ -43,22 +43,37 @@ final class TreeProblems {
     // https://leetcode-cn.com/problems/binary-tree-preorder-traversal/
     func preorderTraversal(_ root: TreeNode?) -> [Int] {
 
-        // iteration with a stack
+        // iteration with a stack, solution 1
+        guard let root = root else { return [] }
         var result = [Int]()
-        var stack = [TreeNode]()
-        var node: TreeNode! = root
-        while !stack.isEmpty || node != nil {
-            while node != nil {
-                result.append(node.val)
-                stack.append(node)
-                node = node.left
+        var stack = [root]
+        while let node = stack.popLast() {
+            result.append(node.val)
+            if let right = node.right {
+                stack.append(right)
             }
-            node = stack.popLast()
-            node = node?.right
+            if let left = node.left {
+                stack.append(left)
+            }
         }
         return result
 
-        // recursion 2
+        // iteration with a stack, solution 2
+//        var result = [Int]()
+//        var stack = [TreeNode]()
+//        var node: TreeNode! = root
+//        while !stack.isEmpty || node != nil {
+//            while node != nil {
+//                result.append(node.val)
+//                stack.append(node)
+//                node = node.left
+//            }
+//            node = stack.popLast()
+//            node = node?.right
+//        }
+//        return result
+
+        // recursion 1
 //        var result = [Int]()
 //        func traverse(_ node: TreeNode?) {
 //            guard let node = node else { return }
