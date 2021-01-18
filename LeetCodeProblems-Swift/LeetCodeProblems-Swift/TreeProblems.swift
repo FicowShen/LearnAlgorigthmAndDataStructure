@@ -50,18 +50,17 @@ final class TreeProblems {
         guard let root = root else { return result }
         var stack: [Any] = [root]
         while let last = stack.popLast() {
-            switch last {
-            case let node as TreeNode:
-                if let right = node.right {
-                    stack.append(right)
-                }
-                stack.append(node.val)
-                if let left = node.left {
-                    stack.append(left)
-                }
-            case let value as Int:
+            if let value = last as? Int {
                 result.append(value)
-            default: fatalError()
+                continue
+            }
+            let node = last as! TreeNode
+            if let right = node.right {
+                stack.append(right)
+            }
+            stack.append(node.val)
+            if let left = node.left {
+                stack.append(left)
             }
         }
         return result
@@ -72,18 +71,22 @@ final class TreeProblems {
 //        guard let root = root else { return result }
 //        var stack: [(isAccessed: Bool, node: TreeNode?)] = [(false, root)]
 //        while let last = stack.popLast() {
-//            if last.node == nil { continue }
 //            if last.isAccessed {
 //                if let node = last.node {
 //                    result.append(node.val)
 //                }
 //            } else {
-//                stack.append((false, last.node?.right))
-//                stack.append((true, last.node))
-//                stack.append((false, last.node?.left))
+//                if let right = last.node?.right {
+//                    stack.append((false, right))
+//                }
+//                if let node = last.node {
+//                    stack.append((true, node))
+//                }
+//                if let left = last.node?.left {
+//                    stack.append((false, left))
+//                }
 //            }
 //        }
-//
 //        return result
 
         // iteration with a stack, normal iteration
