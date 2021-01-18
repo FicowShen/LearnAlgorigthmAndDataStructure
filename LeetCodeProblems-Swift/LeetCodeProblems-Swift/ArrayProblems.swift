@@ -141,10 +141,10 @@ final class ArrayProblems {
     // MARK: - threeSum
 
     private func testThreeSum() {
-        print(threeSum([-1,0,1,2,-1,-4]))
-        print(threeSum([]))
-        print(threeSum([0]))
-        print(threeSum([1,2,-2,-1]))
+        assert(threeSum([-1,0,1,2,-1,-4]) == [[-1, -1, 2], [-1, 0, 1]])
+        assert(threeSum([]) == [])
+        assert(threeSum([0]) == [])
+        assert(threeSum([1,2,-2,-1]) == [])
     }
 
     // https://leetcode-cn.com/problems/3sum/
@@ -193,11 +193,12 @@ final class ArrayProblems {
     // MARK: - climbStairs
 
     private func testClimbStairs() {
+        var result = [Int]()
         for i in 0..<10 {
-            print(climbStairs(i))
-//            res.removeAll()
+            result.append(climbStairs(i))
+//            result.removeAll()
         }
-//        print(climbStairs(38))
+        assert(result == [1, 1, 2, 3, 5, 8, 13, 21, 34, 55])
     }
 
 //    var res = [Int]()
@@ -246,7 +247,7 @@ final class ArrayProblems {
         var nums = [2,1,0,0,3]
 //         var nums = [0,1,0,3,12]
         moveZeroes(&nums)
-        print(nums)
+        assert(nums == [2, 1, 3, 0, 0])
     }
 
     // https://leetcode-cn.com/problems/move-zeroes/
@@ -316,11 +317,11 @@ final class ArrayProblems {
 
     private func testContainerWithMostWater() {
 //        benchmark {
-            print(maxArea([1,8,6,2,5,4,8,3,7]))
-            print(maxArea([1,1]))
-            print(maxArea([4,3,2,1,4]))
-            print(maxArea([1,2,1]))
-            print(maxArea([2,1]))
+        assert(maxArea([1,8,6,2,5,4,8,3,7]) == 49)
+        assert(maxArea([1,1]) == 1)
+        assert(maxArea([4,3,2,1,4]) == 16)
+        assert(maxArea([1,2,1]) == 2)
+        assert(maxArea([2,1]) == 1)
 //        }
     }
 
