@@ -11,7 +11,7 @@ import Foundation
 final class TreeProblems {
 
     func run() {
-        testPreorderTraversal()
+        testInorderTraversal()
     }
 
 
@@ -25,14 +25,53 @@ final class TreeProblems {
 //
 //    }
 
-//    func testInorderTraversal() {
-//
-//    }
-//
-//    // https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
-//    func inorderTraversal(_ root: TreeNode?) -> [Int] {
-//
-//    }
+    func testInorderTraversal() {
+        var tree = TreeNode(1, nil, .init(2, .init(3), nil))
+        var result = inorderTraversal(tree)
+        assert(result == [1, 3, 2])
+
+        result = inorderTraversal(nil)
+        assert(result == [])
+
+        tree = TreeNode(1)
+        result = inorderTraversal(tree)
+        assert(result == [1])
+
+        tree = TreeNode(2, .init(3, .init(1), nil), nil)
+        result = inorderTraversal(tree)
+        assert(result == [1, 3, 2])
+    }
+
+    // https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
+    func inorderTraversal(_ root: TreeNode?) -> [Int] {
+        // iteration with a stack
+        var result = [Int]()
+        guard let root = root else { return result }
+        var stack = [TreeNode]()
+        var node: TreeNode! = root
+        while !stack.isEmpty || node != nil {
+            while node != nil {
+                stack.append(node)
+                node = node.left
+            }
+            node = stack.popLast()
+            result.append(node.val)
+            node = node.right
+        }
+        return result
+
+
+        // recursion
+//        var result = [Int]()
+//        func traverse(node: TreeNode?) {
+//            guard let node = node else { return }
+//            traverse(node: node.left)
+//            result.append(node.val)
+//            traverse(node: node.right)
+//        }
+//        traverse(node: root)
+//        return result
+    }
 
     func testPreorderTraversal() {
         var tree = TreeNode(1, nil, .init(2, .init(3), nil))
