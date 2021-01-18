@@ -44,21 +44,63 @@ final class TreeProblems {
 
     // https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
     func inorderTraversal(_ root: TreeNode?) -> [Int] {
-        // iteration with a stack
+
+        // iteration with a stack, harness data type(optimized)
         var result = [Int]()
         guard let root = root else { return result }
-        var stack = [TreeNode]()
-        var node: TreeNode! = root
-        while !stack.isEmpty || node != nil {
-            while node != nil {
-                stack.append(node)
-                node = node.left
+        var stack: [Any] = [root]
+        while let last = stack.popLast() {
+            switch last {
+            case let node as TreeNode:
+                if let right = node.right {
+                    stack.append(right)
+                }
+                stack.append(node.val)
+                if let left = node.left {
+                    stack.append(left)
+                }
+            case let value as Int:
+                result.append(value)
+            default: fatalError()
             }
-            node = stack.popLast()
-            result.append(node.val)
-            node = node.right
         }
         return result
+
+        // iteration with a stack, harness data type
+        // https://leetcode-cn.com/problems/binary-tree-inorder-traversal/solution/yan-se-biao-ji-fa-yi-chong-tong-yong-qie-jian-ming/
+//        var result = [Int]()
+//        guard let root = root else { return result }
+//        var stack: [(isAccessed: Bool, node: TreeNode?)] = [(false, root)]
+//        while let last = stack.popLast() {
+//            if last.node == nil { continue }
+//            if last.isAccessed {
+//                if let node = last.node {
+//                    result.append(node.val)
+//                }
+//            } else {
+//                stack.append((false, last.node?.right))
+//                stack.append((true, last.node))
+//                stack.append((false, last.node?.left))
+//            }
+//        }
+//
+//        return result
+
+        // iteration with a stack, normal iteration
+//        var result = [Int]()
+//        guard let root = root else { return result }
+//        var stack = [TreeNode]()
+//        var node: TreeNode! = root
+//        while !stack.isEmpty || node != nil {
+//            while node != nil {
+//                stack.append(node)
+//                node = node.left
+//            }
+//            node = stack.popLast()
+//            result.append(node.val)
+//            node = node.right
+//        }
+//        return result
 
 
         // recursion
