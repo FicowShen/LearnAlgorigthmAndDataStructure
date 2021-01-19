@@ -45,25 +45,51 @@ final class TreeProblems {
     // https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
     func inorderTraversal(_ root: TreeNode?) -> [Int] {
 
-        // iteration with a stack, harness data type(optimized)
+        // Morris traversal
         var result = [Int]()
         guard let root = root else { return result }
-        var stack: [Any] = [root]
-        while let last = stack.popLast() {
-            if let value = last as? Int {
-                result.append(value)
+        var p1: TreeNode! = root, p2: TreeNode!
+        while p1 != nil {
+            p2 = p1.left
+            if p2 == nil { // no left branch
+                result.append(p1.val)
+                p1 = p1.right
                 continue
             }
-            let node = last as! TreeNode
-            if let right = node.right {
-                stack.append(right)
+            while p2.right != nil && p2.right !== p1 { // go to the right most non-nil node
+                p2 = p2.right
             }
-            stack.append(node.val)
-            if let left = node.left {
-                stack.append(left)
+            if p2.right == nil { // save p1 to the right most nil node
+                p2.right = p1
+                // preorder traversal should append the value here
+                p1 = p1.left
+            } else { // set this right most nil node back to nil
+                p2.right = nil
+                result.append(p1.val) // inorder should append the value here
+                p1 = p1.right
             }
         }
         return result
+
+        // iteration with a stack, harness data type(optimized)
+//        var result = [Int]()
+//        guard let root = root else { return result }
+//        var stack: [Any] = [root]
+//        while let last = stack.popLast() {
+//            if let value = last as? Int {
+//                result.append(value)
+//                continue
+//            }
+//            let node = last as! TreeNode
+//            if let right = node.right {
+//                stack.append(right)
+//            }
+//            stack.append(node.val)
+//            if let left = node.left {
+//                stack.append(left)
+//            }
+//        }
+//        return result
 
         // iteration with a stack, harness data type
         // https://leetcode-cn.com/problems/binary-tree-inorder-traversal/solution/yan-se-biao-ji-fa-yi-chong-tong-yong-qie-jian-ming/
