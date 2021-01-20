@@ -11,19 +11,81 @@ import Foundation
 final class TreeProblems {
 
     func run() {
-        testInorderTraversal()
+        testPostorderTraversal()
     }
 
+    // MARK: - Traversals
 
-//
-//    func testPostorderTraversal() {
-//
-//    }
-//
-//    // https://leetcode-cn.com/problems/binary-tree-postorder-traversal/
-//    func postorderTraversal(_ root: TreeNode?) -> [Int] {
-//
-//    }
+    func testPostorderTraversal() {
+        var tree = TreeNode(1, nil, .init(2, .init(3), nil))
+        var result = postorderTraversal(tree)
+        assert(result == [3, 2, 1])
+
+        result = postorderTraversal(nil)
+        assert(result == [])
+
+        tree = TreeNode(1)
+        result = postorderTraversal(tree)
+        assert(result == [1])
+
+        tree = TreeNode(2, .init(3, .init(1), nil), nil)
+        result = postorderTraversal(tree)
+        assert(result == [1, 3, 2])
+    }
+
+    // https://leetcode-cn.com/problems/binary-tree-postorder-traversal/
+    func postorderTraversal(_ root: TreeNode?) -> [Int] {
+
+        // iteration with a stack, normal implementation
+        var result = [Int]()
+        var stack = [TreeNode]()
+        var node: TreeNode! = root, lastPopNode: TreeNode!
+        while !stack.isEmpty || node != nil {
+            while node != nil {
+                stack.append(node)
+                node = node.left
+            }
+            let top = stack.last!
+            if top.right != nil && lastPopNode !== top.right {
+                node = top.right
+                continue
+            }
+            lastPopNode = stack.popLast()
+            result.append(top.val)
+        }
+        return result
+
+        // iteration with a stack, color notation
+//        var result = [Int]()
+//        guard let root = root else { return result }
+//        var stack: [Any] = [root]
+//        while let node = stack.popLast() {
+//            if let value = node as? Int {
+//                result.append(value)
+//                continue
+//            }
+//            let node = node as! TreeNode
+//            stack.append(node.val)
+//            if let right = node.right {
+//                stack.append(right)
+//            }
+//            if let left = node.left {
+//                stack.append(left)
+//            }
+//        }
+//        return result
+
+        // recursion
+//        var result = [Int]()
+//        func traverse(root: TreeNode?) {
+//            guard let root = root else { return }
+//            traverse(root: root.left)
+//            traverse(root: root.right)
+//            result.append(root.val)
+//        }
+//        traverse(root: root)
+//        return result
+    }
 
     func testInorderTraversal() {
         var tree = TreeNode(1, nil, .init(2, .init(3), nil))
@@ -261,6 +323,8 @@ final class TreeProblems {
 //        }
 //        return result
     }
+
+    // MARK: - Tree Definition
 
     final class TreeNode {
 
