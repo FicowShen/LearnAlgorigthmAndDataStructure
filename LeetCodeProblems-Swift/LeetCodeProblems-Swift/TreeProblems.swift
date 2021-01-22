@@ -36,24 +36,66 @@ final class TreeProblems {
     // https://leetcode-cn.com/problems/binary-tree-postorder-traversal/
     func postorderTraversal(_ root: TreeNode?) -> [Int] {
 
-        // iteration with a stack, normal implementation
-        var result = [Int]()
-        var stack = [TreeNode]()
-        var node: TreeNode! = root, lastPopNode: TreeNode!
-        while !stack.isEmpty || node != nil {
+        // Morris traversal
+        func reverseRightBranchResult(result: inout [Int], rightBranchRoot root: TreeNode?) {
+            var node: TreeNode! = root
+            var lowIndex = result.count
             while node != nil {
-                stack.append(node)
-                node = node.left
+                result.append(node.val)
+                node = node.right
             }
-            let top = stack.last!
-            if top.right != nil && lastPopNode !== top.right {
-                node = top.right
+            guard !result.isEmpty else { return }
+            var highIndex = result.count - 1
+            while lowIndex < highIndex {
+                let lowValue = result[lowIndex]
+                result[lowIndex] = result[highIndex]
+                result[highIndex] = lowValue
+                lowIndex += 1
+                highIndex -= 1
+            }
+        }
+
+        var result = [Int]()
+        var p1: TreeNode! = root, p2: TreeNode!
+        while p1 != nil {
+            p2 = p1.left
+            if p2 == nil {
+                p1 = p1.right
                 continue
             }
-            lastPopNode = stack.popLast()
-            result.append(top.val)
+            while p2.right != nil && p2.right !== p1 {
+                p2 = p2.right
+            }
+            if p2.right == nil {
+                p2.right = p1
+                p1 = p1.left
+            } else {
+                p2.right = nil
+                reverseRightBranchResult(result: &result, rightBranchRoot: p1.left)
+                p1 = p1.right
+            }
         }
+        reverseRightBranchResult(result: &result, rightBranchRoot: root)
         return result
+
+        // iteration with a stack, normal implementation
+//        var result = [Int]()
+//        var stack = [TreeNode]()
+//        var node: TreeNode! = root, lastPopNode: TreeNode!
+//        while !stack.isEmpty || node != nil {
+//            while node != nil {
+//                stack.append(node)
+//                node = node.left
+//            }
+//            let top = stack.last!
+//            if top.right != nil && lastPopNode !== top.right {
+//                node = top.right
+//                continue
+//            }
+//            lastPopNode = stack.popLast()
+//            result.append(top.val)
+//        }
+//        return result
 
         // iteration with a stack, color notation
 //        var result = [Int]()
