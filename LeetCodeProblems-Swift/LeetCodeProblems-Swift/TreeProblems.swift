@@ -78,6 +78,32 @@ final class TreeProblems {
         reverseRightBranchResult(result: &result, rightBranchRoot: root)
         return result
 
+
+        // https://leetcode.com/problems/binary-tree-postorder-traversal/discuss/45551/Preorder-Inorder-and-Postorder-Iteratively-Summarization/219137
+        // iteration with a stack, normal implementation(easier to understand)
+//        var result = [Int]()
+//        var stack = [TreeNode]()
+//        var node: TreeNode! = root
+//        while !stack.isEmpty || node != nil {
+//            while node != nil {
+//                stack.append(node)
+//                if node.left != nil {
+//                    node = node.left
+//                } else {
+//                    node = node.right
+//                }
+//            }
+//            guard let current = stack.popLast() else {
+//                continue
+//            }
+//            result.append(current.val)
+//            if let last = stack.last,
+//               last.left === current { // only update node for the left branch
+//                node = last.right
+//            }
+//        }
+//        return result
+
         // iteration with a stack, normal implementation
 //        var result = [Int]()
 //        var stack = [TreeNode]()
