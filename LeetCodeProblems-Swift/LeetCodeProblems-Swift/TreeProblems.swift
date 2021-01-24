@@ -30,28 +30,50 @@ final class TreeProblems {
 
     // https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/
     func levelOrder(_ root: Node?) -> [[Int]] {
+
+        // better solution
         var result = [[Int]]()
         guard let node = root else { return result }
-        var queue = Queue<(node: Node, level: Int)>()
+        var queue = Queue<Node>()
         var levelValues = [Int]()
-        var currentLevel = 0
-        queue.enqueue((node, currentLevel))
+        queue.enqueue(node)
 
-        while let current = queue.dequeue() {
-            if current.level != currentLevel {
-                result.append(levelValues)
-                levelValues.removeAll()
-                currentLevel = current.level
+        while !queue.isEmpty {
+            levelValues.removeAll()
+            var count = queue.count
+            while count > 0 {
+                defer { count -= 1 }
+                let node = queue.dequeue()!
+                levelValues.append(node.val)
+                node.children.forEach { queue.enqueue($0) }
             }
-            levelValues.append(current.node.val)
-            current.node.children.forEach { child in
-                queue.enqueue((child, currentLevel + 1))
-            }
-        }
-        if !levelValues.isEmpty {
             result.append(levelValues)
         }
         return result
+
+        // tag notation implementation
+//        var result = [[Int]]()
+//        guard let node = root else { return result }
+//        var queue = Queue<(node: Node, level: Int)>()
+//        var levelValues = [Int]()
+//        var currentLevel = 0
+//        queue.enqueue((node, currentLevel))
+//
+//        while let current = queue.dequeue() {
+//            if current.level != currentLevel {
+//                result.append(levelValues)
+//                levelValues.removeAll()
+//                currentLevel = current.level
+//            }
+//            levelValues.append(current.node.val)
+//            current.node.children.forEach { child in
+//                queue.enqueue((child, currentLevel + 1))
+//            }
+//        }
+//        if !levelValues.isEmpty {
+//            result.append(levelValues)
+//        }
+//        return result
     }
 
     struct Queue<Element> {
@@ -61,6 +83,8 @@ final class TreeProblems {
         var first: Element? { dequeueStack.last }
 
         var isEmpty: Bool { dequeueStack.isEmpty && enqueueStack.isEmpty }
+
+        var count: Int { dequeueStack.count + enqueueStack.count }
 
         mutating func enqueue(_ element: Element) {
             enqueueStack.append(element)
