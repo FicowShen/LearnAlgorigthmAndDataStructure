@@ -31,25 +31,45 @@ final class TreeProblems {
     // https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/
     func levelOrder(_ root: Node?) -> [[Int]] {
 
-        // better solution
+        // Simpler solution with two arrays
         var result = [[Int]]()
         guard let node = root else { return result }
-        var queue = Queue<Node>()
+        var levelNodes = [node]
+        var nextLevelNodes = [Node]()
         var levelValues = [Int]()
-        queue.enqueue(node)
 
-        while !queue.isEmpty {
-            levelValues.removeAll()
-            var count = queue.count
-            while count > 0 {
-                defer { count -= 1 }
-                let node = queue.dequeue()!
+        while !levelNodes.isEmpty {
+            levelNodes.forEach { node in
                 levelValues.append(node.val)
-                queue.enqueue(contentsOf: node.children)
+                nextLevelNodes.append(contentsOf: node.children)
             }
             result.append(levelValues)
+            levelValues.removeAll()
+
+            levelNodes = nextLevelNodes
+            nextLevelNodes.removeAll()
         }
         return result
+
+        // Simplified Queue solution
+//        var result = [[Int]]()
+//        guard let node = root else { return result }
+//        var queue = Queue<Node>()
+//        var levelValues = [Int]()
+//        queue.enqueue(node)
+//
+//        while !queue.isEmpty {
+//            levelValues.removeAll()
+//            var count = queue.count
+//            while count > 0 {
+//                defer { count -= 1 }
+//                let node = queue.dequeue()!
+//                levelValues.append(node.val)
+//                queue.enqueue(contentsOf: node.children)
+//            }
+//            result.append(levelValues)
+//        }
+//        return result
 
         // tag notation implementation
 //        var result = [[Int]]()
