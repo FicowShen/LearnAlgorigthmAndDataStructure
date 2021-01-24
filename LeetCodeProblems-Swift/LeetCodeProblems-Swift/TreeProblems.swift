@@ -11,19 +11,75 @@ import Foundation
 final class TreeProblems {
 
     func run() {
-        testNaryTreePreorderTraversal()
+        testLevelOrderTraversal()
+    }
+
+    // MARK: - N-ary Tree Level Order Traversal
+
+    private func testLevelOrderTraversal() {
+        let root = Node(1, children: [
+            .init(3, children: [
+                .init(5),
+                .init(6)
+            ]),
+            .init(2),
+            .init(4)
+        ])
+        assert(levelOrder(root) == [[1],[3,2,4],[5,6]])
+    }
+
+    // https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/
+    func levelOrder(_ root: Node?) -> [[Int]] {
+        var result = [[Int]]()
+        guard let node = root else { return result }
+        var queue = Queue<(node: Node, level: Int)>()
+        var levelValues = [Int]()
+        var currentLevel = 0
+        queue.enqueue((node, currentLevel))
+
+        while let current = queue.dequeue() {
+            if current.level != currentLevel {
+                result.append(levelValues)
+                levelValues.removeAll()
+                currentLevel = current.level
+            }
+            levelValues.append(current.node.val)
+            current.node.children.forEach { child in
+                queue.enqueue((child, currentLevel + 1))
+            }
+        }
+        if !levelValues.isEmpty {
+            result.append(levelValues)
+        }
+        return result
+    }
+
+    struct Queue<Element> {
+        private var enqueueStack = [Element]()
+        private var dequeueStack = [Element]()
+
+        var first: Element? { dequeueStack.last }
+
+        var isEmpty: Bool { dequeueStack.isEmpty && enqueueStack.isEmpty }
+
+        mutating func enqueue(_ element: Element) {
+            enqueueStack.append(element)
+        }
+
+        mutating func enqueue(contentsOf elements: [Element]) {
+            enqueueStack.append(contentsOf: elements)
+        }
+
+        mutating func dequeue() -> Element? {
+            if dequeueStack.isEmpty {
+                dequeueStack = enqueueStack.reversed()
+                enqueueStack.removeAll()
+            }
+            return dequeueStack.popLast()
+        }
     }
 
     // MARK: - N-ary Tree Preorder Traversal
-
-    public class Node {
-        public var val: Int
-        public var children: [Node]
-        public init(_ val: Int, children: [Node] = []) {
-            self.val = val
-            self.children = children
-        }
-    }
 
     private func testNaryTreePreorderTraversal() {
         let root = Node(1, children: [
@@ -460,6 +516,15 @@ final class TreeProblems {
             self.val = val
             self.left = left
             self.right = right
+        }
+    }
+
+    final class Node {
+        public var val: Int
+        public var children: [Node]
+        public init(_ val: Int, children: [Node] = []) {
+            self.val = val
+            self.children = children
         }
     }
 
