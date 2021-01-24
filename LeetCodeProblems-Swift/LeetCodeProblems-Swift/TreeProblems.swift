@@ -45,7 +45,7 @@ final class TreeProblems {
                 defer { count -= 1 }
                 let node = queue.dequeue()!
                 levelValues.append(node.val)
-                node.children.forEach { queue.enqueue($0) }
+                queue.enqueue(contentsOf: node.children)
             }
             result.append(levelValues)
         }
