@@ -31,25 +31,38 @@ final class TreeProblems {
     // https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/
     func levelOrder(_ root: Node?) -> [[Int]] {
 
-        // Simpler solution with two arrays
+        // Recursion with a level number
         var result = [[Int]]()
-        guard let node = root else { return result }
-        var levelNodes = [node]
-        var nextLevelNodes = [Node]()
-        var levelValues = [Int]()
-
-        while !levelNodes.isEmpty {
-            levelNodes.forEach { node in
-                levelValues.append(node.val)
-                nextLevelNodes.append(contentsOf: node.children)
+        func traverse(root: Node?, level: Int) {
+            guard let node = root else { return }
+            if result.count == level {
+                result.append([])
             }
-            result.append(levelValues)
-            levelValues.removeAll()
-
-            levelNodes = nextLevelNodes
-            nextLevelNodes.removeAll()
+            result[level].append(node.val)
+            node.children.forEach { traverse(root: $0, level: level + 1) }
         }
+        traverse(root: root, level: 0)
         return result
+
+        // Simpler solution with two arrays
+//        var result = [[Int]]()
+//        guard let node = root else { return result }
+//        var levelNodes = [node]
+//        var nextLevelNodes = [Node]()
+//        var levelValues = [Int]()
+//
+//        while !levelNodes.isEmpty {
+//            levelNodes.forEach { node in
+//                levelValues.append(node.val)
+//                nextLevelNodes.append(contentsOf: node.children)
+//            }
+//            result.append(levelValues)
+//            levelValues.removeAll()
+//
+//            levelNodes = nextLevelNodes
+//            nextLevelNodes.removeAll()
+//        }
+//        return result
 
         // Simplified Queue solution
 //        var result = [[Int]]()
