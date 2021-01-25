@@ -22,3 +22,9 @@ let DefaultDateFormatter: DateFormatter = {
     formatter.timeZone = NSTimeZone.system
     return formatter
 }()
+
+func benchmark(_ block: () -> Void) {
+    let now = Date()
+    block()
+    print("Time consumed(ms):", Date().timeIntervalSince(now) * 1000)
+}
