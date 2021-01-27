@@ -201,7 +201,9 @@ final class ArrayProblems {
         assert(result == [1, 1, 2, 3, 5, 8, 13, 21, 34, 55])
     }
 
-//    var res = [Int]()
+//    var res = [Int]() // recursion with an array
+
+//    var result = [0: 1, 1: 1] // recursion with a dict
 
     // https://leetcode-cn.com/problems/climbing-stairs/
     func climbStairs(_ n: Int) -> Int {
@@ -226,7 +228,24 @@ final class ArrayProblems {
 //        }
 //        return res
 
-        // recursion
+        // recursion with a dict
+//        guard n > 1 else { return 1 }
+//        var x: Int, y: Int
+//        if let v = result[n - 1] {
+//            x = v
+//        } else {
+//            x = climbStairs(n - 1)
+//            result[n - 1] = x
+//        }
+//        if let v = result[n - 2] {
+//            y = v
+//        } else {
+//            y = climbStairs(n - 2)
+//            result[n - 2] = y
+//        }
+//        return x + y
+
+        // recursion with an array
 
 //        if n < 2 {
 //            return 1
