@@ -23,8 +23,8 @@ let DefaultDateFormatter: DateFormatter = {
     return formatter
 }()
 
-func benchmark(_ block: () -> Void) {
+func benchmark(identifier: String, _ block: () -> Void) {
     let now = Date()
     block()
-    print("Time consumed(ms):", Date().timeIntervalSince(now) * 1000)
+    print("\(identifier) - consumed(ms):", Date().timeIntervalSince(now) * 1000)
 }

@@ -12,7 +12,8 @@ final class Solution {
     func run() {
 //        ArrayProblems().run()
 //        TreeProblems().run()
-        MathProblems().run()
+//        MathProblems().run()
+        RecursionProblems().run()
     }
 
 }

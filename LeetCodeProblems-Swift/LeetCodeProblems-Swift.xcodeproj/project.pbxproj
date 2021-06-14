@@ -13,6 +13,7 @@
 		6A7F1AE925B10EF200B2620E /* ArrayProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7F1AE825B10EF200B2620E /* ArrayProblems.swift */; };
 		6A7F1AEE25B26C0A00B2620E /* TreeProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7F1AED25B26C0A00B2620E /* TreeProblems.swift */; };
 		6A7F1B1A25C0E7D000B2620E /* MathProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7F1B1925C0E7D000B2620E /* MathProblems.swift */; };
+		6AF428EB2676E6CD00B19460 /* RecursionProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF428EA2676E6CD00B19460 /* RecursionProblems.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,7 @@
 		6A7F1AE825B10EF200B2620E /* ArrayProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayProblems.swift; sourceTree = "<group>"; };
 		6A7F1AED25B26C0A00B2620E /* TreeProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeProblems.swift; sourceTree = "<group>"; };
 		6A7F1B1925C0E7D000B2620E /* MathProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathProblems.swift; sourceTree = "<group>"; };
+		6AF428EA2676E6CD00B19460 /* RecursionProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursionProblems.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				6A7F1AE825B10EF200B2620E /* ArrayProblems.swift */,
 				6A7F1AED25B26C0A00B2620E /* TreeProblems.swift */,
 				6A7F1B1925C0E7D000B2620E /* MathProblems.swift */,
+				6AF428EA2676E6CD00B19460 /* RecursionProblems.swift */,
 				6A7F1AE525B10EC200B2620E /* Helpers.swift */,
 			);
 			path = "LeetCodeProblems-Swift";
@@ -138,6 +141,7 @@
 				6A1450FA25A3E707006357FE /* Solutions.swift in Sources */,
 				6A7F1AE925B10EF200B2620E /* ArrayProblems.swift in Sources */,
 				6A7F1AE625B10EC200B2620E /* Helpers.swift in Sources */,
+				6AF428EB2676E6CD00B19460 /* RecursionProblems.swift in Sources */,
 				6A1450F125A3E56E006357FE /* main.swift in Sources */,
 				6A7F1B1A25C0E7D000B2620E /* MathProblems.swift in Sources */,
 			);
