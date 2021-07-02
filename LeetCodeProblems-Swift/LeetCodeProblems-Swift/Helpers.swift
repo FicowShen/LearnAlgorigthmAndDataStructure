@@ -28,3 +28,10 @@ func benchmark(identifier: String, _ block: () -> Void) {
     block()
     print("\(identifier) - consumed(ms):", Date().timeIntervalSince(now) * 1000)
 }
+
+func printAndAssert<T: Equatable>(result: T, expected: T) {
+    if result != expected {
+        print("Failed to match the result:", result, "with the expected result:", expected, separator: "\n", terminator: "\n\n")
+    }
+    assert(result == expected)
+}

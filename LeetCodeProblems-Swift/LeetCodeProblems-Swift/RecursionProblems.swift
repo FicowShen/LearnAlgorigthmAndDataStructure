@@ -10,7 +10,40 @@ import Foundation
 final class RecursionProblems {
 
     func run() {
+        testGenerateParenthesis()
 //        testReverseArray()
+    }
+
+    private func testGenerateParenthesis() {
+        printAndAssert(result: generateParenthesis(1),
+                       expected: ["()"])
+        printAndAssert(result: generateParenthesis(3),
+                       expected: ["((()))","(()())","(())()","()(())","()()()"])
+    }
+
+    var result = [String]()
+    let parentheses = ["(", ")"]
+    // https://leetcode-cn.com/problems/generate-parentheses/
+    func generateParenthesis(_ n: Int) -> [String] {
+        result.removeAll()
+        backtrackParenthesis(left: n, right: n, path: "")
+        return result
+    }
+
+    func backtrackParenthesis(left: Int, right: Int, path: String) {
+        if left > right {
+            return
+        }
+        if left == 0 && right == 0 {
+            result.append(path)
+            return
+        }
+        if left > 0 {
+            backtrackParenthesis(left: left - 1, right: right, path: path + "(")
+        }
+        if right > 0 {
+            backtrackParenthesis(left: left, right: right - 1, path: path + ")")
+        }
     }
 
     private func testReverseArray() {
