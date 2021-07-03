@@ -11,9 +11,45 @@ import Foundation
 final class TreeProblems {
 
     func run() {
-        testIsValidBST()
+        testInvertTree()
+//        testIsValidBST()
 //        testMinDepth()
 //        testMaxDepth()
+    }
+
+    private func testInvertTree() {
+        func judge(levelNodes: [Int?], expectedNodes: [Int?]) {
+            let tree = perfectBinaryTreeWithLevelNodes(levelNodes)
+            let expectedTree = perfectBinaryTreeWithLevelNodes(expectedNodes)
+            printAndAssert(result: invertTree(tree), expected: expectedTree)
+        }
+        judge(levelNodes: [], expectedNodes: [])
+        judge(levelNodes: [2,1,3], expectedNodes: [2,3,1])
+        judge(levelNodes: [4,2,7,1,3,6,9], expectedNodes: [4,7,2,9,6,3,1])
+    }
+
+    // https://leetcode-cn.com/problems/invert-binary-tree/
+    func invertTree(_ root: TreeNode?) -> TreeNode? {
+        // iteration & tuple swap
+        guard let root = root else { return nil }
+        var nodes = [root]
+        while let node = nodes.popLast() {
+            if let left = node.left {
+                nodes.append(left)
+            }
+            if let right = node.right {
+                nodes.append(right)
+            }
+            (node.left, node.right) = (node.right, node.left)
+        }
+        return root
+
+        // recursion
+//        guard let root = root else { return nil }
+//        let left = invertTree(root.left)
+//        root.left = invertTree(root.right)
+//        root.right = left
+//        return root
     }
 
     private func testIsValidBST() {
@@ -726,7 +762,21 @@ final class TreeProblems {
 
     // MARK: - Tree Definition
 
-    final class TreeNode {
+    final class TreeNode: Equatable {
+        static func == (lhs: TreeNode, rhs: TreeNode) -> Bool {
+            func equal(left: TreeNode?, right: TreeNode?) -> Bool {
+                guard let left = left, let right = right else {
+                    if left == nil && right == nil {
+                        return true
+                    }
+                    return false
+                }
+                if left.val != right.val { return false }
+                return equal(left: left.left, right: right.left)
+                    && equal(left: left.right, right: right.right)
+            }
+            return equal(left: lhs, right: rhs)
+        }
 
         public var val: Int
         public var left: TreeNode?
