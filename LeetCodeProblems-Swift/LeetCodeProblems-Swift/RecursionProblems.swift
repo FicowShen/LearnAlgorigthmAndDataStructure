@@ -17,17 +17,46 @@ final class RecursionProblems {
     private func testGenerateParenthesis() {
         printAndAssert(result: generateParenthesis(1),
                        expected: ["()"])
-        printAndAssert(result: generateParenthesis(3),
-                       expected: ["((()))","(()())","(())()","()(())","()()()"])
+        printAndAssert(result: Set(generateParenthesis(3)),
+                       expected: Set(["((()))","(()())","(())()","()(())","()()()"]))
+        printAndAssert(result: Set(generateParenthesis(4)), expected: Set(["()()()()","(())()()","()(())()","(()())()","((()))()","()()(())","(())(())","()(()())","(()()())","((())())","()((()))","(()(()))","((()()))","(((())))"]))
     }
 
     var result = [String]()
     let parentheses = ["(", ")"]
     // https://leetcode-cn.com/problems/generate-parentheses/
     func generateParenthesis(_ n: Int) -> [String] {
-        result.removeAll()
-        backtrackParenthesis(left: n, right: n, path: "")
-        return result
+
+        return dpParenthesis(n)
+//        result.removeAll()
+//        backtrackParenthesis(left: n, right: n, path: "")
+//        return result
+    }
+
+    func dpParenthesis(_ n: Int) -> [String]  {
+        if n <= 0 { return [] }
+        let parentheses = "()"
+        if n == 1 { return [parentheses] }
+
+        var preDP: Set = [parentheses]
+        var curDP = Set<String>()
+
+        for _ in 2...n {
+            for old in preDP {
+                let halfIndex = old.count/2 + 1
+                let startIndex = old.startIndex
+                for index in 0...halfIndex {
+                    var new = old
+                    new.insert(contentsOf: parentheses, at: new.index(startIndex, offsetBy: index))
+                    curDP.insert(new)
+                }
+            }
+//            print("curDP(\(i):", curDP)
+            preDP = curDP
+            curDP = []
+        }
+
+        return [String](preDP)
     }
 
     func backtrackParenthesis(left: Int, right: Int, path: String) {
