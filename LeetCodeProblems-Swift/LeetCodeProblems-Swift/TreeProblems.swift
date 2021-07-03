@@ -55,19 +55,25 @@ final class TreeProblems {
 
         func minDepthDFS(_ root: TreeNode?) -> Int {
             guard let root = root else { return 0 }
-            if let left = root.left, let right = root.right {
-                return min(minDepth(left), minDepth(right)) + 1
+            guard let left = root.left, let right = root.right else {
+                let min = root.left == nil ? minDepth(root.right) : minDepth(root.left)
+                return min + 1
             }
-            if root.left == nil {
-                return minDepth(root.right) + 1
-            }
-            if root.right == nil {
-                return minDepth(root.left) + 1
-            }
-            return 1
+            return min(minDepth(left), minDepth(right)) + 1
+
+//            if let left = root.left, let right = root.right {
+//                return min(minDepth(left), minDepth(right)) + 1
+//            }
+//            if root.left == nil {
+//                return minDepth(root.right) + 1
+//            }
+//            if root.right == nil {
+//                return minDepth(root.left) + 1
+//            }
+//            return 1
         }
 
-        return minDepthBFS(root)
+        return minDepthDFS(root)
     }
 
     private func testMaxDepth() {
