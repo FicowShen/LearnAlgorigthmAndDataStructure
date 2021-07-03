@@ -11,7 +11,69 @@ import Foundation
 final class TreeProblems {
 
     func run() {
-        testLevelOrderTraversal()
+        testMaxDepth()
+    }
+
+    private func testMaxDepth() {
+
+        func perfectBinaryTreeWithLevelNodes(_ nodes: [Int?]) -> TreeNode? {
+            guard let first = nodes.first,
+                  let rootValue = first
+            else { return nil }
+            var queue = Queue<TreeNode>()
+            let root = TreeNode(rootValue)
+            var nodeIndex = 1
+            queue.enqueue(root)
+            while let node = queue.dequeue(), nodeIndex < nodes.count {
+                if let left = nodes[nodeIndex] {
+                    node.left = TreeNode(left)
+                    queue.enqueue(node.left!)
+//                    DLog("left: \(left)")
+                }
+                nodeIndex += 1
+                if let right = nodes[nodeIndex] {
+                    node.right = TreeNode(right)
+                    queue.enqueue(node.right!)
+//                    DLog("right: \(right)")
+                }
+                nodeIndex += 1
+            }
+            return root
+        }
+
+        let root: [Int?] = [3,9,20,nil,nil,15,7]
+        let tree = perfectBinaryTreeWithLevelNodes(root)
+        printAndAssert(result: maxDepth(tree), expected: 3)
+    }
+
+    func maxDepth(_ root: TreeNode?) -> Int {
+        // bfs
+        guard let root = root else { return 0 }
+        var levelNodes = [root]
+        var level = 0
+        while !levelNodes.isEmpty {
+            var nodes = [TreeNode]()
+            for i in 0..<levelNodes.count {
+                if let left = levelNodes[i].left {
+                    nodes.append(left)
+                }
+                if let right = levelNodes[i].right {
+                    nodes.append(right)
+                }
+            }
+            levelNodes = nodes
+            level += 1
+        }
+        return level
+
+        // dfs without using max function
+//        if root == nil { return 0 }
+//        let left = maxDepth(root!.left)
+//        let right = maxDepth(root!.right)
+//        return (left > right ? left : right) + 1
+        
+        // dfs
+//        return root == nil ? 0 : max(maxDepth(root!.left), maxDepth(root!.right)) + 1
     }
 
     // MARK: - N-ary Tree Level Order Traversal
