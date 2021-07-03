@@ -11,41 +11,72 @@ import Foundation
 final class TreeProblems {
 
     func run() {
-        testMaxDepth()
+        testMinDepth()
+//        testMaxDepth()
+    }
+
+    private func testMinDepth() {
+        var levelNodes = [3,9,20,nil,nil,15,7]
+        var tree = perfectBinaryTreeWithLevelNodes(levelNodes)
+        printAndAssert(result: minDepth(tree), expected: 2)
+
+        levelNodes = [2,nil,3,nil,4,nil,5,nil,6]
+        tree = perfectBinaryTreeWithLevelNodes(levelNodes)
+        printAndAssert(result: minDepth(tree), expected: 5)
+    }
+
+    // https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/
+    func minDepth(_ root: TreeNode?) -> Int {
+
+        func minDepthBFS(_ root: TreeNode?) -> Int {
+            guard let root = root else { return 0 }
+            var levelNodes = [root]
+            var level = 0
+
+            while !levelNodes.isEmpty {
+                level += 1
+                var nodes = [TreeNode]()
+                for i in 0..<levelNodes.count {
+                    let node = levelNodes[i]
+                    if node.left == nil && node.right == nil {
+                        return level
+                    }
+                    if let left = node.left {
+                        nodes.append(left)
+                    }
+                    if let right = node.right {
+                        nodes.append(right)
+                    }
+                }
+                levelNodes = nodes
+            }
+            return level
+        }
+
+        func minDepthDFS(_ root: TreeNode?) -> Int {
+            guard let root = root else { return 0 }
+            if let left = root.left, let right = root.right {
+                return min(minDepth(left), minDepth(right)) + 1
+            }
+            if root.left == nil {
+                return minDepth(root.right) + 1
+            }
+            if root.right == nil {
+                return minDepth(root.left) + 1
+            }
+            return 1
+        }
+
+        return minDepthBFS(root)
     }
 
     private func testMaxDepth() {
-
-        func perfectBinaryTreeWithLevelNodes(_ nodes: [Int?]) -> TreeNode? {
-            guard let first = nodes.first,
-                  let rootValue = first
-            else { return nil }
-            var queue = Queue<TreeNode>()
-            let root = TreeNode(rootValue)
-            var nodeIndex = 1
-            queue.enqueue(root)
-            while let node = queue.dequeue(), nodeIndex < nodes.count {
-                if let left = nodes[nodeIndex] {
-                    node.left = TreeNode(left)
-                    queue.enqueue(node.left!)
-//                    DLog("left: \(left)")
-                }
-                nodeIndex += 1
-                if let right = nodes[nodeIndex] {
-                    node.right = TreeNode(right)
-                    queue.enqueue(node.right!)
-//                    DLog("right: \(right)")
-                }
-                nodeIndex += 1
-            }
-            return root
-        }
-
-        let root: [Int?] = [3,9,20,nil,nil,15,7]
-        let tree = perfectBinaryTreeWithLevelNodes(root)
+        let levelNodes = [3,9,20,nil,nil,15,7]
+        let tree = perfectBinaryTreeWithLevelNodes(levelNodes)
         printAndAssert(result: maxDepth(tree), expected: 3)
     }
 
+    // https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
     func maxDepth(_ root: TreeNode?) -> Int {
         // bfs
         guard let root = root else { return 0 }
@@ -71,7 +102,7 @@ final class TreeProblems {
 //        let left = maxDepth(root!.left)
 //        let right = maxDepth(root!.right)
 //        return (left > right ? left : right) + 1
-        
+
         // dfs
 //        return root == nil ? 0 : max(maxDepth(root!.left), maxDepth(root!.right)) + 1
     }
@@ -609,6 +640,33 @@ final class TreeProblems {
 //            result.append(contentsOf: preorderTraversal(right))
 //        }
 //        return result
+    }
+
+    // MARK: - Create a tree
+
+    func perfectBinaryTreeWithLevelNodes(_ nodes: [Int?]) -> TreeNode? {
+        guard let first = nodes.first,
+              let rootValue = first
+        else { return nil }
+        var queue = Queue<TreeNode>()
+        let root = TreeNode(rootValue)
+        var nodeIndex = 1
+        queue.enqueue(root)
+        while let node = queue.dequeue(), nodeIndex < nodes.count {
+            if let left = nodes[nodeIndex] {
+                node.left = TreeNode(left)
+                queue.enqueue(node.left!)
+//                    DLog("left: \(left)")
+            }
+            nodeIndex += 1
+            if let right = nodes[nodeIndex] {
+                node.right = TreeNode(right)
+                queue.enqueue(node.right!)
+//                    DLog("right: \(right)")
+            }
+            nodeIndex += 1
+        }
+        return root
     }
 
     // MARK: - Tree Definition
