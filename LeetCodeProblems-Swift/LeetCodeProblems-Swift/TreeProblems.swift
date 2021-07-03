@@ -34,6 +34,8 @@ final class TreeProblems {
         guard let root = root else { return nil }
         var nodes = [root]
         while let node = nodes.popLast() {
+//            node.left == nil ? () : nodes.append(node.left!)
+//            node.right == nil ? () : nodes.append(node.right!)
             if let left = node.left {
                 nodes.append(left)
             }
