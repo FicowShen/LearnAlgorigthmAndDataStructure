@@ -26,13 +26,19 @@ final class TreeProblems {
 
     // https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/
     func serialize(_ root: TreeNode?) -> String {
+        // postorder
+        guard let root = root else { return "*," }
+        var result = serialize(root.left)
+        result += serialize(root.right)
+        result += "\(root.val),"
+        return result
 
         // preorder
-        guard let root = root else { return "*," }
-        var result = "\(root.val),"
-        result += serialize(root.left)
-        result += serialize(root.right)
-        return result
+//        guard let root = root else { return "*," }
+//        var result = "\(root.val),"
+//        result += serialize(root.left)
+//        result += serialize(root.right)
+//        return result
 
         // level order
 //        guard let root = root else { return "" }
@@ -56,27 +62,46 @@ final class TreeProblems {
     }
 
     func deserialize(_ data: String) -> TreeNode? {
-        // preorder
-        var nodes: [Int?] = data.split(separator: ",")
-            .reversed()
+        // postorder
+        let nodes: [Int?] = data.split(separator: ",")
             .map { value -> Int? in
                 return Int(String(value))
             }
-
-        func deserialize(nodes: inout [Int?]) -> TreeNode? {
-            guard let last = nodes.last,
-                  let value = last else {
-                nodes.removeLast() // O(1)
+        var index = nodes.count - 1
+        func deserializeInPostorder(nodes: [Int?], index: inout Int) -> TreeNode? {
+            guard index >= 0, let nodeValue = nodes[index] else {
+                index -= 1
                 return nil
             }
-            let node = TreeNode(value)
-            nodes.removeLast() // O(1)
-            node.left = deserialize(nodes: &nodes)
-            node.right = deserialize(nodes: &nodes)
+            index -= 1
+            let node = TreeNode(nodeValue)
+            node.right = deserializeInPostorder(nodes: nodes, index: &index)
+            node.left = deserializeInPostorder(nodes: nodes, index: &index)
             return node
         }
 
-        return deserialize(nodes: &nodes)
+        return deserializeInPostorder(nodes: nodes, index: &index)
+
+        // preorder
+//        var nodes: [Int?] = data.split(separator: ",")
+//            .reversed()
+//            .map { value -> Int? in
+//                return Int(String(value))
+//            }
+//        func deserializeInPreorder(nodes: inout [Int?]) -> TreeNode? {
+//            guard let last = nodes.last,
+//                  let value = last else {
+//                nodes.removeLast() // O(1)
+//                return nil
+//            }
+//            let node = TreeNode(value)
+//            nodes.removeLast() // O(1)
+//            node.left = deserializeInPreorder(nodes: &nodes)
+//            node.right = deserializeInPreorder(nodes: &nodes)
+//            return node
+//        }
+//
+//        return deserializeInPreorder(nodes: &nodes)
 
         // level order
 //        guard !data.isEmpty else { return nil }
