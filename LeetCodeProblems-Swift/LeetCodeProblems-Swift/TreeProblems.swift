@@ -11,10 +11,110 @@ import Foundation
 final class TreeProblems {
 
     func run() {
-        testInvertTree()
+        testSerializeAndDeserializeTree()
+//        testInvertTree()
 //        testIsValidBST()
 //        testMinDepth()
 //        testMaxDepth()
+    }
+
+    private func testSerializeAndDeserializeTree() {
+        let tree = perfectBinaryTreeWithLevelNodes([1,2,3,nil,nil,4,5])
+        print(serialize(tree))
+        printAndAssert(result: deserialize(serialize(tree)), expected: tree)
+    }
+
+    // https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/
+    func serialize(_ root: TreeNode?) -> String {
+
+        // preorder
+        guard let root = root else { return "*," }
+        var result = "\(root.val),"
+        result += serialize(root.left)
+        result += serialize(root.right)
+        return result
+
+        // level order
+//        guard let root = root else { return "" }
+//        var queue = Queue<TreeNode?>()
+//        queue.enqueue(root)
+//        var result = ""
+//        while let node = queue.dequeue() {
+////            print(result)
+//            guard let node = node else {
+//                result += "*,"
+//                continue
+//            }
+//            result += "\(node.val),"
+//            queue.enqueue(node.left)
+//            queue.enqueue(node.right)
+//        }
+//        if result.last == "," {
+//            result.removeLast()
+//        }
+//        return result
+    }
+
+    func deserialize(_ data: String) -> TreeNode? {
+        // preorder
+        var nodes: [Int?] = data.split(separator: ",")
+            .reversed()
+            .map { value -> Int? in
+                return Int(String(value))
+            }
+
+        func deserialize(nodes: inout [Int?]) -> TreeNode? {
+            guard let last = nodes.last,
+                  let value = last else {
+                nodes.removeLast() // O(1)
+                return nil
+            }
+            let node = TreeNode(value)
+            nodes.removeLast() // O(1)
+            node.left = deserialize(nodes: &nodes)
+            node.right = deserialize(nodes: &nodes)
+            return node
+        }
+
+        return deserialize(nodes: &nodes)
+
+        // level order
+//        guard !data.isEmpty else { return nil }
+//        var nodes = [Int?]()
+//        var leftIndex = data.startIndex,
+//            rightIndex = data.startIndex,
+//            endIndex = data.endIndex
+//        while leftIndex < endIndex {
+//            while rightIndex < endIndex && data[rightIndex] != "," {
+//                rightIndex = data.index(rightIndex, offsetBy: 1)
+//            }
+//            let value = Int(data[leftIndex..<rightIndex])
+//            nodes.append(value)
+//            if rightIndex < endIndex {
+//                rightIndex = data.index(rightIndex, offsetBy: 1)
+//            }
+//            leftIndex = rightIndex
+//        }
+//        guard let first = nodes.first,
+//              let rootValue = first
+//        else { return nil }
+//        var queue = Queue<TreeNode>()
+//        let root = TreeNode(rootValue)
+//        var nodeIndex = 1
+//        queue.enqueue(root)
+//        while let node = queue.dequeue(), nodeIndex < nodes.count {
+//            if let left = nodes[nodeIndex] {
+//                node.left = TreeNode(left)
+//                queue.enqueue(node.left!)
+//            }
+//            nodeIndex += 1
+//            if let right = nodes[nodeIndex] {
+//                node.right = TreeNode(right)
+//                queue.enqueue(node.right!)
+//            }
+//            nodeIndex += 1
+//        }
+//        return root
     }
 
     private func testInvertTree() {
