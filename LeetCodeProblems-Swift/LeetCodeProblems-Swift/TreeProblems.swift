@@ -22,8 +22,10 @@ final class TreeProblems {
     func testLowestCommonAncestor() {
         func judge(nodes: [Int?], p: Int, q: Int, expected: Int) {
             let tree = perfectBinaryTreeWithLevelNodes(nodes)
-
-            printAndAssert(result: lowestCommonAncestor(tree, .init(p), .init(q))?.val,
+            // find the node with a specified value
+            let pNode = tree?.findNode(value: p)
+            let qNode = tree?.findNode(value: q)
+            printAndAssert(result: lowestCommonAncestor(tree, pNode, qNode)?.val,
                            expected: expected)
         }
         judge(nodes: [3,5,1,6,2,0,8,nil,nil,7,4], p: 5, q: 1, expected: 3)
@@ -32,13 +34,20 @@ final class TreeProblems {
     }
 
     func lowestCommonAncestor(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
-        guard let root = root else { return nil }
-        if root.val == p?.val || root.val == q?.val { return root }
-        let left = lowestCommonAncestor(root.left, p, q)
-        let right = lowestCommonAncestor(root.right, p, q)
-        if left == nil && right == nil { return nil }
-        if left != nil && right != nil { return root }
-        return left == nil ? right : left
+        // compare memory address
+        if root == nil || root === p || root === q { return root }
+        let left = lowestCommonAncestor(root?.left, p, q)
+        let right = lowestCommonAncestor(root?.right, p, q)
+        if left == nil { return right }
+        if right == nil { return left }
+        return root
+//        guard let root = root else { return nil }
+//        if root.val == p?.val || root.val == q?.val { return root }
+//        let left = lowestCommonAncestor(root.left, p, q)
+//        let right = lowestCommonAncestor(root.right, p, q)
+//        if left == nil && right == nil { return nil }
+//        if left != nil && right != nil { return root }
+//        return left == nil ? right : left
     }
 
     private func testSerializeAndDeserializeTree() {
@@ -947,6 +956,12 @@ final class TreeProblems {
             self.val = val
             self.left = left
             self.right = right
+        }
+
+        public func findNode(value: Int) -> TreeNode? {
+            if val == value { return self }
+            return left?.findNode(value: value)
+                ?? right?.findNode(value: value)
         }
     }
 
