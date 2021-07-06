@@ -11,16 +11,38 @@ import Foundation
 final class TreeProblems {
 
     func run() {
-        testSerializeAndDeserializeTree()
+        testLowestCommonAncestor()
+//        testSerializeAndDeserializeTree()
 //        testInvertTree()
 //        testIsValidBST()
 //        testMinDepth()
 //        testMaxDepth()
     }
 
+    func testLowestCommonAncestor() {
+        func judge(nodes: [Int?], p: Int, q: Int, expected: Int) {
+            let tree = perfectBinaryTreeWithLevelNodes(nodes)
+
+            printAndAssert(result: lowestCommonAncestor(tree, .init(p), .init(q))?.val,
+                           expected: expected)
+        }
+        judge(nodes: [3,5,1,6,2,0,8,nil,nil,7,4], p: 5, q: 1, expected: 3)
+        judge(nodes: [3,5,1,6,2,0,8,nil,nil,7,4], p: 5, q: 4, expected: 5)
+        judge(nodes: [1,2], p: 1, q: 2, expected: 1)
+    }
+
+    func lowestCommonAncestor(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+        guard let root = root else { return nil }
+        if root.val == p?.val || root.val == q?.val { return root }
+        let left = lowestCommonAncestor(root.left, p, q)
+        let right = lowestCommonAncestor(root.right, p, q)
+        if left == nil && right == nil { return nil }
+        if left != nil && right != nil { return root }
+        return left == nil ? right : left
+    }
+
     private func testSerializeAndDeserializeTree() {
         let tree = perfectBinaryTreeWithLevelNodes([1,2,3,nil,nil,4,5])
-        print(serialize(tree))
         printAndAssert(result: deserialize(serialize(tree)), expected: tree)
     }
 
@@ -877,7 +899,7 @@ final class TreeProblems {
 //                    DLog("left: \(left)")
             }
             nodeIndex += 1
-            if let right = nodes[nodeIndex] {
+            if nodeIndex < nodes.count, let right = nodes[nodeIndex] {
                 node.right = TreeNode(right)
                 queue.enqueue(node.right!)
 //                    DLog("right: \(right)")
