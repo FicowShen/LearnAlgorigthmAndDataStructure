@@ -51,16 +51,16 @@ final class TreeProblems {
         }
         var node: TreeNode? = p
         var visited = Set<Int>()
-        while node != nil {
-            visited.insert(node!.val)
-            node = parents[node!.val]
+        while let val = node?.val {
+            visited.insert(val)
+            node = parents[val]
         }
         node = q
-        while node != nil {
-            if visited.contains(node!.val) {
+        while let val = node?.val {
+            if visited.contains(val) {
                 return node
             }
-            node = parents[node!.val]
+            node = parents[val]
         }
         return nil
 
