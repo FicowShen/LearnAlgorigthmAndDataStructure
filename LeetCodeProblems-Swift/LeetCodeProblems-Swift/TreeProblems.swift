@@ -34,13 +34,46 @@ final class TreeProblems {
     }
 
     func lowestCommonAncestor(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+        // iterative using parent pointers
+        guard let root = root, let p = p, let q = q else { return nil }
+        var parents = [Int: TreeNode]()
+        var nodes = [root]
+        while let last = nodes.popLast() {
+            if parents[p.val] != nil, parents[q.val] != nil { break }
+            if let right = last.right {
+                parents[right.val] = last
+                nodes.append(right)
+            }
+            if let left = last.left {
+                parents[left.val] = last
+                nodes.append(left)
+            }
+        }
+        var node: TreeNode? = p
+        var visited = Set<Int>()
+        while node != nil {
+            visited.insert(node!.val)
+            node = parents[node!.val]
+        }
+        node = q
+        while node != nil {
+            if visited.contains(node!.val) {
+                return node
+            }
+            node = parents[node!.val]
+        }
+        return nil
+
+
         // compare memory address
-        if root == nil || root === p || root === q { return root }
-        let left = lowestCommonAncestor(root?.left, p, q)
-        let right = lowestCommonAncestor(root?.right, p, q)
-        if left == nil { return right }
-        if right == nil { return left }
-        return root
+//        if root == nil || root === p || root === q { return root }
+//        let left = lowestCommonAncestor(root?.left, p, q)
+//        let right = lowestCommonAncestor(root?.right, p, q)
+//        if left == nil { return right }
+//        if right == nil { return left }
+//        return root
+
+        // compare node value
 //        guard let root = root else { return nil }
 //        if root.val == p?.val || root.val == q?.val { return root }
 //        let left = lowestCommonAncestor(root.left, p, q)
