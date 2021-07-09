@@ -34,35 +34,75 @@ final class TreeProblems {
     }
 
     func lowestCommonAncestor(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
-        // iterative using parent pointers
+        // iterative without parent pointers
         guard let root = root, let p = p, let q = q else { return nil }
-        var parents = [Int: TreeNode]()
-        var nodes = [root]
-        while let last = nodes.popLast() {
-            if parents[p.val] != nil, parents[q.val] != nil { break }
-            if let right = last.right {
-                parents[right.val] = last
-                nodes.append(right)
-            }
-            if let left = last.left {
-                parents[left.val] = last
-                nodes.append(left)
-            }
+        enum AccessState {
+            case bothPending, leftDone, bothDone
         }
-        var node: TreeNode? = p
-        var visited = Set<Int>()
-        while let val = node?.val {
-            visited.insert(val)
-            node = parents[val]
-        }
-        node = q
-        while let val = node?.val {
-            if visited.contains(val) {
-                return node
+        var stack = [(node: root, state: AccessState.bothPending)]
+        var lcaIndex = -1
+        var foundNode: TreeNode?
+        while !stack.isEmpty {
+            guard let last = stack.last else { break }
+//            print(last.node.val, last.state, foundNode?.val, lcaIndex)
+            if (last.node.val == p.val || last.node.val == q.val)
+                && last.node.val != foundNode?.val {
+                if foundNode == nil {
+                    lcaIndex = stack.count - 1
+                    foundNode = (last.node.val == p.val ? p : q)
+                } else {
+                    return stack[lcaIndex].node
+                }
             }
-            node = parents[val]
+            switch last.state {
+            case .bothPending:
+                stack[stack.count - 1].state = .leftDone
+                if let left = last.node.left {
+                    stack.append((left, .bothPending))
+                }
+            case .leftDone:
+                stack[stack.count - 1].state = .bothDone
+                if let right = last.node.right {
+                    stack.append((right, .bothPending))
+                }
+            case .bothDone:
+                _ = stack.popLast()
+                if lcaIndex >= stack.count {
+                    lcaIndex = stack.count - 1
+                }
+            }
         }
         return nil
+
+        // iterative using parent pointers
+//        guard let root = root, let p = p, let q = q else { return nil }
+//        var parents = [Int: TreeNode]()
+//        var nodes = [root]
+//        while let last = nodes.popLast() {
+//            if parents[p.val] != nil, parents[q.val] != nil { break }
+//            if let right = last.right {
+//                parents[right.val] = last
+//                nodes.append(right)
+//            }
+//            if let left = last.left {
+//                parents[left.val] = last
+//                nodes.append(left)
+//            }
+//        }
+//        var node: TreeNode? = p
+//        var visited = Set<Int>()
+//        while let val = node?.val {
+//            visited.insert(val)
+//            node = parents[val]
+//        }
+//        node = q
+//        while let val = node?.val {
+//            if visited.contains(val) {
+//                return node
+//            }
+//            node = parents[val]
+//        }
+//        return nil
 
 
         // compare memory address
