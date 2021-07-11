@@ -87,3 +87,30 @@ struct Queue<Element> {
         return dequeueStack.popLast()
     }
 }
+
+// MARK: - Create a tree
+
+func perfectBinaryTreeFromLevelTraversal(_ nodes: [Int?]) -> TreeNode? {
+    guard let first = nodes.first,
+          let rootValue = first
+    else { return nil }
+    var queue = Queue<TreeNode>()
+    let root = TreeNode(rootValue)
+    var nodeIndex = 0
+    queue.enqueue(root)
+    while let node = queue.dequeue() {
+        nodeIndex += 1
+        if nodeIndex < nodes.count, let left = nodes[nodeIndex] {
+            node.left = TreeNode(left)
+            queue.enqueue(node.left!)
+//                    DLog("left: \(left)")
+        }
+        nodeIndex += 1
+        if nodeIndex < nodes.count, let right = nodes[nodeIndex] {
+            node.right = TreeNode(right)
+            queue.enqueue(node.right!)
+//                    DLog("right: \(right)")
+        }
+    }
+    return root
+}

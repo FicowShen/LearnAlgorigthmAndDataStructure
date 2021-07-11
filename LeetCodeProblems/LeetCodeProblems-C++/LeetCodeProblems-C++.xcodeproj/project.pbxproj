@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6AD94FAC269AAAFD00AA35B4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94FAB269AAAFD00AA35B4 /* main.cpp */; };
+		6AD94FB5269ACB3400AA35B4 /* TreeProblems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94FB3269ACB3400AA35B4 /* TreeProblems.cpp */; };
+		6AD94FB8269ACB8D00AA35B4 /* DataStructures.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94FB6269ACB8D00AA35B4 /* DataStructures.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,11 @@
 /* Begin PBXFileReference section */
 		6AD94FA8269AAAFD00AA35B4 /* LeetCodeProblems-C++ */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "LeetCodeProblems-C++"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD94FAB269AAAFD00AA35B4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		6AD94FB3269ACB3400AA35B4 /* TreeProblems.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TreeProblems.cpp; sourceTree = "<group>"; };
+		6AD94FB4269ACB3400AA35B4 /* TreeProblems.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TreeProblems.hpp; sourceTree = "<group>"; };
+		6AD94FB6269ACB8D00AA35B4 /* DataStructures.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DataStructures.cpp; sourceTree = "<group>"; };
+		6AD94FB7269ACB8D00AA35B4 /* DataStructures.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DataStructures.hpp; sourceTree = "<group>"; };
+		6AD94FB9269ACC3200AA35B4 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +64,22 @@
 		6AD94FAA269AAAFD00AA35B4 /* LeetCodeProblems-C++ */ = {
 			isa = PBXGroup;
 			children = (
+				6AD94FB2269ACB1100AA35B4 /* TreeProblems */,
 				6AD94FAB269AAAFD00AA35B4 /* main.cpp */,
+				6AD94FB7269ACB8D00AA35B4 /* DataStructures.hpp */,
+				6AD94FB6269ACB8D00AA35B4 /* DataStructures.cpp */,
+				6AD94FB9269ACC3200AA35B4 /* Common.h */,
 			);
 			path = "LeetCodeProblems-C++";
+			sourceTree = "<group>";
+		};
+		6AD94FB2269ACB1100AA35B4 /* TreeProblems */ = {
+			isa = PBXGroup;
+			children = (
+				6AD94FB4269ACB3400AA35B4 /* TreeProblems.hpp */,
+				6AD94FB3269ACB3400AA35B4 /* TreeProblems.cpp */,
+			);
+			path = TreeProblems;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,7 +138,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AD94FB8269ACB8D00AA35B4 /* DataStructures.cpp in Sources */,
 				6AD94FAC269AAAFD00AA35B4 /* main.cpp in Sources */,
+				6AD94FB5269ACB3400AA35B4 /* TreeProblems.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

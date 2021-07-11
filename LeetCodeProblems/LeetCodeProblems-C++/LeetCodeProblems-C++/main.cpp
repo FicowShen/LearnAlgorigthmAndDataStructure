@@ -5,10 +5,14 @@
 //  Created by Ficow on 2021/7/11.
 //
 
-#include <iostream>
+#include "Common.h"
+#include "TreeProblems.hpp"
+
+void runProblems() {
+    TreeProblems().run();
+}
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    runProblems();
     return 0;
 }
