@@ -53,11 +53,13 @@ TreeNode* buildPerfectBinaryTreeWithLevelTraversal(string nodes) {
             TreeNode* left = new TreeNode(*nodeValues[index]);
             node->left = left;
             q.push(left);
+            delete nodeValues[index];
         }
         if (++index < nodeValues.size() && nodeValues[index]) {
             TreeNode* right = new TreeNode(*nodeValues[index]);
             node->right = right;
             q.push(right);
+            delete nodeValues[index];
         }
         q.pop();
     }
