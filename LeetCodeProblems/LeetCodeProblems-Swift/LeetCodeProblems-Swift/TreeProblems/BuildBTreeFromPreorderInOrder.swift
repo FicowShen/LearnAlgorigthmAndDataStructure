@@ -12,7 +12,7 @@ extension TreeProblems {
     func testBuildTree() {
 
         func judge(preorder: [Int], inorder: [Int], levelOrder: [Int?]) {
-            printAndAssert(result: buildTree2(preorder, inorder),
+            printAndAssert(result: buildTree3(preorder, inorder),
                            expected: perfectBinaryTreeFromLevelTraversal(levelOrder))
         }
         judge(preorder: [3,9,20,15,7],
@@ -32,8 +32,51 @@ extension TreeProblems {
         fatalError()
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func buildTree3(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
-        fatalError()
+        var inMap = [Int: Int]()
+        inorder.enumerated().forEach { index, value in
+            inMap[value] = index
+        }
+        func buildNode(preStart: Int, preEnd: Int, inStart: Int, inEnd: Int) -> TreeNode? {
+            if preStart > preEnd || inStart > inEnd {
+                return nil
+            }
+            let rootValue = preorder[preStart]
+            let inorderRootIndex = inMap[rootValue]!
+            let leftNodesCount = inorderRootIndex - inStart
+            let node = TreeNode(rootValue)
+            node.left = buildNode(preStart: preStart+1, preEnd: preStart+leftNodesCount, inStart: inStart, inEnd: inorderRootIndex-1)
+            node.right = buildNode(preStart: preStart+leftNodesCount+1, preEnd: preEnd, inStart: inorderRootIndex+1, inEnd: inEnd)
+            return node
+        }
+        return buildNode(preStart: 0,
+                         preEnd: preorder.count-1,
+                         inStart: 0,
+                         inEnd: inorder.count-1)
     }
 
 
