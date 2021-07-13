@@ -12,7 +12,7 @@ extension TreeProblems {
     func testBuildTree() {
 
         func judge(preorder: [Int], inorder: [Int], levelOrder: [Int?]) {
-            printAndAssert(result: buildTree3(preorder, inorder),
+            printAndAssert(result: buildTree11(preorder, inorder),
                            expected: perfectBinaryTreeFromLevelTraversal(levelOrder))
         }
         judge(preorder: [3,9,20,15,7],
@@ -187,6 +187,56 @@ extension TreeProblems {
                          preEnd: preorder.count - 1,
                          inStart: 0,
                          inEnd: inorder.count - 1)
+    }
+
+    // iterative with a stack
+    //         3
+    //        / \
+    //       9  20
+    //      /  /  \
+    //     8  15   7
+    //    / \
+    //   5  10
+    //  /
+    // 4
+    func buildTree11(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+        guard let first = preorder.first else { return nil }
+        let root = TreeNode(first)
+        var stack = [root]
+        var inorderIndex = 0
+        for i in 1..<preorder.count {
+            let preorderValue = preorder[i]
+            var node: TreeNode! = stack.last
+            // traverse and stack left nodes until reaching the left leaf node
+            // preorder = [3, 9, 8, 5, 4, 10, 20, 15, 7]
+            //                         ^
+            // inorder = [4, 5, 8, 10, 9, 3, 15, 20, 7]
+            //            ^
+            // inorderIndex = 0
+            // stack = [3,9,8,5,4,]
+            if node.val != inorder[inorderIndex] {
+                let left = TreeNode(preorderValue)
+                node.left = left
+                stack.append(left)
+            } else {
+                // pop leaves, move to a right node if exists
+                // preorder = [3, 9, 8, 5, 4, 10, 20, 15, 7]
+                //                            ^
+                // inorder = [4, 5, 8, 10, 9, 3, 15, 20, 7]
+                //                     ^
+                // inorderIndex = 3
+                // stack = [3,9,]
+                // node = 8
+                while !stack.isEmpty, stack.last?.val == inorder[inorderIndex] {
+                    node = stack.popLast()
+                    inorderIndex += 1
+                }
+                let right = TreeNode(preorderValue)
+                node.right = right
+                stack.append(right)
+            }
+        }
+        return root
     }
 
 }
