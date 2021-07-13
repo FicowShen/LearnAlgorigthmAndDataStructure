@@ -12,7 +12,7 @@ extension TreeProblems {
     func testBuildTree() {
 
         func judge(preorder: [Int], inorder: [Int], levelOrder: [Int?]) {
-            printAndAssert(result: buildTree11(preorder, inorder),
+            printAndAssert(result: buildTree22(preorder, inorder),
                            expected: perfectBinaryTreeFromLevelTraversal(levelOrder))
         }
         judge(preorder: [3,9,20,15,7],
@@ -135,7 +135,54 @@ extension TreeProblems {
     }
 
 
-
+    func buildTree22(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+        guard let first = preorder.first else { return nil }
+        //     1
+        //    / \
+        //   2   3
+        //  / \   \
+        // 4   5   6
+        let root = TreeNode(first)
+        var stack = [root]
+        var inorderIndex = 0
+        for i in 1..<preorder.count {
+            let preorderValue = preorder[i]
+            var node: TreeNode! = stack.last
+            // preorder: 1,2,4,5,3,6
+            //             ^
+            // inorder: 4,2,5,1,3,6
+            //          ^
+            if node.val != inorder[inorderIndex] {
+                let left = TreeNode(preorderValue)
+                node.left = left
+                stack.append(left)
+            } else {
+                // preorder: 1,2,4,5,3,6
+                //                 ^
+                // inorder: 4,2,5,1,3,6
+                //          ^
+                // stack = [1,2,4]
+                // node = 4
+                // inorderIndex = 0
+                while !stack.isEmpty && stack.last!.val == inorder[inorderIndex] {
+                    node = stack.popLast()
+                    inorderIndex += 1
+                }
+                // preorder: 1,2,4,5,3,6
+                //                 ^
+                // inorder: 4,2,5,1,3,6
+                //              ^
+                // stack = [1]
+                // node = 2
+                // inorderIndex = 2
+                let right = TreeNode(preorderValue)
+                node.right = right
+                stack.append(right)
+                // stack = [1,5]
+            }
+        }
+        return root
+    }
 
 
 

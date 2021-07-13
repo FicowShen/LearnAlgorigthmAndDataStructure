@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class TreeNode: Equatable {
+final class TreeNode: Equatable, CustomStringConvertible {
     static func == (lhs: TreeNode, rhs: TreeNode) -> Bool {
         func equal(left: TreeNode?, right: TreeNode?) -> Bool {
             guard let left = left, let right = right else {
@@ -49,6 +49,10 @@ final class TreeNode: Equatable {
         if val == value { return self }
         return left?.findNode(value: value)
             ?? right?.findNode(value: value)
+    }
+
+    var description: String {
+        "TreeNode(val=\(val), left=\(left?.val.description ?? "nil"), right=\(right?.val.description ?? "nil"))"
     }
 }
 
