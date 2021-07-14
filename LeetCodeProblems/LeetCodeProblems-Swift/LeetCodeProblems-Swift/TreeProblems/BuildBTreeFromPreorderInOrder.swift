@@ -12,9 +12,12 @@ extension TreeProblems {
     func testBuildTree() {
 
         func judge(preorder: [Int], inorder: [Int], levelOrder: [Int?]) {
-            printAndAssert(result: buildTree33(preorder, inorder),
+            printAndAssert(result: buildTree111(preorder, inorder),
                            expected: perfectBinaryTreeFromLevelTraversal(levelOrder))
         }
+        judge(preorder: [1,2,4,5,3,6],
+              inorder: [4,2,5,1,3,6],
+              levelOrder: [1,2,3,4,5,nil,6])
         judge(preorder: [3,9,20,15,7],
               inorder: [9,3,15,20,7],
               levelOrder: [3,9,20,nil,nil,15,7])
@@ -227,6 +230,7 @@ extension TreeProblems {
 
     // MARK: - 1
 
+    // cannot solve duplicate nodes
     // https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
     func buildTree1(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
         var inorderMap = [Int: Int]()
@@ -260,6 +264,7 @@ extension TreeProblems {
     }
 
     // iterative with a stack
+    // cannot solve duplicate nodes
     //         3
     //        / \
     //       9  20
@@ -307,6 +312,32 @@ extension TreeProblems {
             }
         }
         return root
+    }
+
+    // https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/discuss/34543/Simple-O(n)-without-map
+    // cannot solve duplicate nodes
+    func buildTree111(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+        enum Static {
+            static var pre = 0, inn = 0
+        }
+        (Static.pre, Static.inn) = (0, 0)
+
+        func buildNode(preorder: [Int], inorder: [Int], stop: Int?) -> TreeNode? {
+            if Static.pre == preorder.count {
+                return nil
+            }
+            if inorder[Static.inn] == stop {
+                Static.inn += 1
+                return nil
+            }
+            let rootValue = preorder[Static.pre]
+            Static.pre += 1
+            let root = TreeNode(rootValue)
+            root.left = buildNode(preorder: preorder, inorder: inorder, stop: rootValue)
+            root.right = buildNode(preorder: preorder, inorder: inorder, stop: stop)
+            return root
+        }
+        return buildNode(preorder: preorder, inorder: inorder, stop: nil)
     }
 
 }
