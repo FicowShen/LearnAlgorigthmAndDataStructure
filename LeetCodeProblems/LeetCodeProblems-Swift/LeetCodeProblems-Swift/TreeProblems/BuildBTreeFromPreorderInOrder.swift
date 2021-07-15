@@ -12,7 +12,7 @@ extension TreeProblems {
     func testBuildTree() {
 
         func judge(preorder: [Int], inorder: [Int], levelOrder: [Int?]) {
-            printAndAssert(result: buildTree111(preorder, inorder),
+            printAndAssert(result: buildTree222(preorder, inorder),
                            expected: perfectBinaryTreeFromLevelTraversal(levelOrder))
         }
         judge(preorder: [1,2,4,5,3,6],
@@ -211,7 +211,49 @@ extension TreeProblems {
     }
 
 
-
+    func buildTree222(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+        var preorderIndex = 0, inorderIndex = 0
+        //     1
+        //    / \
+        //   2   3
+        //  / \   \
+        // 4   5   6
+        func buildNode(stop: Int?) -> TreeNode? {
+            if preorderIndex == preorder.count { // 6
+                return nil
+            }
+            if inorder[inorderIndex] == stop { // 4, 2, 5, 1, 3
+                // preorder: 1,2,4,5,3,6
+                //               ^
+                // inorder: 4,2,5,1,3,6
+                //          ^
+                // stop: 4
+                // preorderIndex: 2
+                // inorderIndex: 0
+                inorderIndex += 1
+                // inorderIndex: 1
+                return nil
+            }
+            // the first preorder node is the last most-left inorder node
+            let preorderValue = preorder[preorderIndex]
+            preorderIndex += 1
+            // preorder: 1,2,4,5,3,6
+            //               ^
+            // inorder: 4,2,5,1,3,6
+            //          ^
+            // stop: 4
+            let node = TreeNode(preorderValue)
+            node.left = buildNode(stop: preorderValue)
+            // preorder: 1,2,4,5,3,6
+            //                   ^
+            // inorder: 4,2,5,1,3,6
+            //              ^
+            // stop: 1
+            node.right = buildNode(stop: stop) // right nodes stop at the parent node
+            return node
+        }
+        return buildNode(stop: nil)
+    }
 
 
 

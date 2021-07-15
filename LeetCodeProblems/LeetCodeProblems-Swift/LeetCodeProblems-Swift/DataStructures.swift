@@ -52,7 +52,14 @@ final class TreeNode: Equatable, CustomStringConvertible {
     }
 
     var description: String {
-        "TreeNode(val=\(val), left=\(left?.val.description ?? "nil"), right=\(right?.val.description ?? "nil"))"
+        var result = val.description
+        if let left = left {
+            result += ",\(left.description)"
+        }
+        if let right = right {
+            result += ",\(right.description)"
+        }
+        return result
     }
 }
 
