@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6AB89D4526A106AC00E295BA /* BacktrackProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB89D4426A106AC00E295BA /* BacktrackProblems.swift */; };
+		6AB89D4726A106D700E295BA /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB89D4626A106D700E295BA /* Combine.swift */; };
 		6AD94F5F269AA99000AA35B4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94F5E269AA99000AA35B4 /* main.swift */; };
 		6AD94F79269AA9A000AA35B4 /* Solutions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94F65269AA9A000AA35B4 /* Solutions.swift */; };
 		6AD94F7A269AA9A000AA35B4 /* MathProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94F66269AA9A000AA35B4 /* MathProblems.swift */; };
@@ -42,6 +44,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6AB89D4426A106AC00E295BA /* BacktrackProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BacktrackProblems.swift; sourceTree = "<group>"; };
+		6AB89D4626A106D700E295BA /* Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combine.swift; sourceTree = "<group>"; };
 		6AD94F5B269AA99000AA35B4 /* LeetCodeProblems-Swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "LeetCodeProblems-Swift"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD94F5E269AA99000AA35B4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		6AD94F65269AA9A000AA35B4 /* Solutions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Solutions.swift; sourceTree = "<group>"; };
@@ -76,6 +80,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6AB89D4326A1067D00E295BA /* BacktrackProblems */ = {
+			isa = PBXGroup;
+			children = (
+				6AB89D4426A106AC00E295BA /* BacktrackProblems.swift */,
+				6AB89D4626A106D700E295BA /* Combine.swift */,
+			);
+			path = BacktrackProblems;
+			sourceTree = "<group>";
+		};
 		6AD94F52269AA99000AA35B4 = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +115,7 @@
 				6AD94F66269AA9A000AA35B4 /* MathProblems.swift */,
 				6AD94F77269AA9A000AA35B4 /* RecursionProblems.swift */,
 				6AD94F65269AA9A000AA35B4 /* Solutions.swift */,
+				6AB89D4326A1067D00E295BA /* BacktrackProblems */,
 				6AD94F67269AA9A000AA35B4 /* TreeProblems */,
 			);
 			path = "LeetCodeProblems-Swift";
@@ -185,7 +199,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AD94F8A269AA9A000AA35B4 /* RecursionProblems.swift in Sources */,
+				6AB89D4726A106D700E295BA /* Combine.swift in Sources */,
 				6AD94F81269AA9A000AA35B4 /* TreeMaxDepth.swift in Sources */,
+				6AB89D4526A106AC00E295BA /* BacktrackProblems.swift in Sources */,
 				6AD94F7E269AA9A000AA35B4 /* TreePreorderTraversal.swift in Sources */,
 				6AD94F79269AA9A000AA35B4 /* Solutions.swift in Sources */,
 				6AD94F7F269AA9A000AA35B4 /* BuildBTreeFromPreorderInOrder.swift in Sources */,
