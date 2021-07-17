@@ -137,7 +137,10 @@ final class Combine {
         var i = 0
         while i >= 0 {
             nums[i] += 1
-            if nums[i] > n {
+            // n=4,k=2, [1,2,3,4] -> [2,2,3,4] -> terminate
+            if n - nums[i] + i + 1 < k {
+//          if nums[i] > n {
+//                print(nums)
                 i -= 1
             } else if i == k - 1 {
                 result.append(nums)
@@ -146,6 +149,7 @@ final class Combine {
                 nums[i] = nums[i - 1]
             }
         }
+//        print("---")
         return result
     }
 }
