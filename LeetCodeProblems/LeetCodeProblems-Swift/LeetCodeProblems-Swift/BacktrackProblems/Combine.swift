@@ -14,7 +14,7 @@ final class Combine {
 
     func testCombine() {
         func judge(n: Int, k: Int, expected: [[Int]]) {
-            printAndAssert(result: Set(combine2(n, k).map { $0 }),
+            printAndAssert(result: Set(combine11(n, k).map { $0 }),
                            expected: Set(expected.map { $0 }))
         }
         judge(n: 4, k: 2,
@@ -51,9 +51,10 @@ final class Combine {
                 result.append(list)
                 return
             }
-            if i > n {
-                return
-            }
+            // with (k > list.count + n - j + 1), this `if` is useless
+//            if i > n {
+//                return
+//            }
             for j in i...n {
                 if k > list.count + n - j + 1 {
                     return
@@ -108,10 +109,11 @@ final class Combine {
                 //                print(list)
                 return
             }
-            if index > n {
-                //                print(">")
-                return
-            }
+            // with (k - list.count > n - i + 1), this `if` is useless
+//            if index > n {
+//                //                print(">")
+//                return
+//            }
             //            print(list)
             for i in index...n {
                 // cannot get k elements
@@ -125,6 +127,25 @@ final class Combine {
         }
         var list = [Int]()
         push(index: 1, list: &list)
+        return result
+    }
+
+    // https://leetcode.com/problems/combinations/discuss/26992/Short-Iterative-C%2B%2B-Answer-8ms
+    func combine11(_ n: Int, _ k: Int) -> [[Int]] {
+        var result = [[Int]]()
+        var nums = [Int](repeating: 0, count: k)
+        var i = 0
+        while i >= 0 {
+            nums[i] += 1
+            if nums[i] > n {
+                i -= 1
+            } else if i == k - 1 {
+                result.append(nums)
+            } else {
+                i += 1
+                nums[i] = nums[i - 1]
+            }
+        }
         return result
     }
 }
