@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6AB89D4B26A2748F00E295BA /* BacktrackProblems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AB89D4926A2748F00E295BA /* BacktrackProblems.cpp */; };
+		6AB89D4E26A2751C00E295BA /* Combine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AB89D4C26A2751C00E295BA /* Combine.cpp */; };
 		6AD94FAC269AAAFD00AA35B4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94FAB269AAAFD00AA35B4 /* main.cpp */; };
 		6AD94FB5269ACB3400AA35B4 /* TreeProblems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94FB3269ACB3400AA35B4 /* TreeProblems.cpp */; };
 		6AD94FB8269ACB8D00AA35B4 /* DataStructures.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94FB6269ACB8D00AA35B4 /* DataStructures.cpp */; };
@@ -25,6 +27,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6AB89D4926A2748F00E295BA /* BacktrackProblems.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BacktrackProblems.cpp; sourceTree = "<group>"; };
+		6AB89D4A26A2748F00E295BA /* BacktrackProblems.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BacktrackProblems.hpp; sourceTree = "<group>"; };
+		6AB89D4C26A2751C00E295BA /* Combine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Combine.cpp; sourceTree = "<group>"; };
+		6AB89D4D26A2751C00E295BA /* Combine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Combine.hpp; sourceTree = "<group>"; };
 		6AD94FA8269AAAFD00AA35B4 /* LeetCodeProblems-C++ */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "LeetCodeProblems-C++"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD94FAB269AAAFD00AA35B4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		6AD94FB3269ACB3400AA35B4 /* TreeProblems.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TreeProblems.cpp; sourceTree = "<group>"; };
@@ -45,6 +51,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6AB89D4826A2743800E295BA /* BacktrackProblems */ = {
+			isa = PBXGroup;
+			children = (
+				6AB89D4926A2748F00E295BA /* BacktrackProblems.cpp */,
+				6AB89D4A26A2748F00E295BA /* BacktrackProblems.hpp */,
+				6AB89D4C26A2751C00E295BA /* Combine.cpp */,
+				6AB89D4D26A2751C00E295BA /* Combine.hpp */,
+			);
+			path = BacktrackProblems;
+			sourceTree = "<group>";
+		};
 		6AD94F9F269AAAFD00AA35B4 = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +81,7 @@
 		6AD94FAA269AAAFD00AA35B4 /* LeetCodeProblems-C++ */ = {
 			isa = PBXGroup;
 			children = (
+				6AB89D4826A2743800E295BA /* BacktrackProblems */,
 				6AD94FB2269ACB1100AA35B4 /* TreeProblems */,
 				6AD94FAB269AAAFD00AA35B4 /* main.cpp */,
 				6AD94FB7269ACB8D00AA35B4 /* DataStructures.hpp */,
@@ -138,7 +156,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AB89D4B26A2748F00E295BA /* BacktrackProblems.cpp in Sources */,
 				6AD94FB8269ACB8D00AA35B4 /* DataStructures.cpp in Sources */,
+				6AB89D4E26A2751C00E295BA /* Combine.cpp in Sources */,
 				6AD94FAC269AAAFD00AA35B4 /* main.cpp in Sources */,
 				6AD94FB5269ACB3400AA35B4 /* TreeProblems.cpp in Sources */,
 			);

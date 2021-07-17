@@ -7,8 +7,10 @@
 
 #include "Common.h"
 #include "TreeProblems.hpp"
+#include "BacktrackProblems.hpp"
 
 void runProblems() {
+    BacktrackProblems().run();
     TreeProblems().run();
 }
 
