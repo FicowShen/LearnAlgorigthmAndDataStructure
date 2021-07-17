@@ -14,7 +14,7 @@ final class Combine {
 
     func testCombine() {
         func judge(n: Int, k: Int, expected: [[Int]]) {
-            printAndAssert(result: Set(combine111(n, k).map { $0 }),
+            printAndAssert(result: Set(combine22(n, k).map { $0 }),
                            expected: Set(expected.map { $0 }))
         }
         judge(n: 4, k: 2,
@@ -76,6 +76,23 @@ final class Combine {
     }
 
 
+    func combine22(_ n: Int, _ k: Int) -> [[Int]] {
+        var result = [[Int]]()
+        var nums = [Int](repeating: 0, count: k)
+        var i = 0
+        while i >= 0 {
+            nums[i] += 1
+            if n - nums[i] + i + 1 < k {
+                i -= 1
+            } else if i == k - 1 {
+                result.append(nums)
+            } else {
+                i += 1
+                nums[i] = nums[i - 1]
+            }
+        }
+        return result
+    }
 
 
 
