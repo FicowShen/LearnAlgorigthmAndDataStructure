@@ -13,47 +13,106 @@ final class Combine {
     }
 
     func testCombine() {
-        func judge(result: [[Int]], expected: [[Int]]) {
-            printAndAssert(result: Set(result.map { $0 }),
+        func judge(n: Int, k: Int, expected: [[Int]]) {
+            printAndAssert(result: Set(combine2(n, k).map { $0 }),
                            expected: Set(expected.map { $0 }))
         }
-        judge(result: combine(4, 2),
-                       expected: [
-                        [2,4],
-                        [3,4],
-                        [2,3],
-                        [1,2],
-                        [1,3],
-                        [1,4],
-                       ])
-        judge(result: combine(4, 2),
-                       expected: [
-                        [2,4],
-                        [3,4],
-                        [2,3],
-                        [1,2],
-                        [1,3],
-                        [1,4],
-                       ])
-        printAndAssert(result: combine(1, 1),
-                       expected: [[1]])
-        judge(result: combine(4, 4),
-              expected: [[1, 2, 3, 4]])
+        judge(n: 4, k: 2,
+              expected: [
+                [2,4],
+                [3,4],
+                [2,3],
+                [1,2],
+                [1,3],
+                [1,4],
+              ])
+        judge(n: 1, k: 1, expected: [[1]])
+        judge(n: 4, k: 4, expected: [[1, 2, 3, 4]])
     }
 
-    func combine(_ n: Int, _ k: Int) -> [[Int]] {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    func combine2(_ n: Int, _ k: Int) -> [[Int]] {
+        var result = [[Int]]()
+        func append(_ i: Int, to list: inout [Int]) {
+            if list.count == k {
+                result.append(list)
+                return
+            }
+            if i > n {
+                return
+            }
+            for j in i...n {
+                if k > list.count + n - j + 1 {
+                    return
+                }
+                list.append(j)
+                append(j+1, to: &list)
+                _ = list.popLast()
+            }
+        }
+        var list = [Int]()
+        append(1, to: &list)
+        return result
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    func combine1(_ n: Int, _ k: Int) -> [[Int]] {
         var result = [[Int]]()
         func push(index: Int, list: inout [Int]) {
             if list.count == k {
                 result.append(list)
-//                print(list)
+                //                print(list)
                 return
             }
             if index > n {
-//                print(">")
+                //                print(">")
                 return
             }
-//            print(list)
+            //            print(list)
             for i in index...n {
                 // cannot get k elements
                 if k - list.count > n - i + 1 {
