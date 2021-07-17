@@ -14,7 +14,7 @@ final class Combine {
 
     func testCombine() {
         func judge(n: Int, k: Int, expected: [[Int]]) {
-            printAndAssert(result: Set(combine11(n, k).map { $0 }),
+            printAndAssert(result: Set(combine111(n, k).map { $0 }),
                            expected: Set(expected.map { $0 }))
         }
         judge(n: 4, k: 2,
@@ -28,6 +28,12 @@ final class Combine {
               ])
         judge(n: 1, k: 1, expected: [[1]])
         judge(n: 4, k: 4, expected: [[1, 2, 3, 4]])
+        judge(n: 4, k: 3, expected: [
+            [1, 2, 3],
+            [1, 2, 4],
+            [1, 3, 4],
+            [2, 3, 4],
+        ])
     }
 
 
@@ -151,5 +157,48 @@ final class Combine {
         }
 //        print("---")
         return result
+    }
+
+    func combine111(_ n: Int, _ k: Int) -> [[Int]] {
+        // n=4, k=3
+        // 1, 2, 3, 5
+        //       ^
+        // 1, 2, 4, 5
+        //    ^
+        // 1, 3, 4, 5
+        //    ^
+        // 2, 3, 4, 5
+        // ^
+        // ----------
+        // 1, 3, 4, 5
+        //    ^
+        // 1, 2, 4, 5
+        //       ^
+        // 1, 2, 3, 5
+        //          ^
+        // ----------
+        // 1, 2, 3, 6
+        //          ^
+        var ans = [[Int]]()
+        var temp = [Int]()
+        for i in 1...k {
+            temp.append(i)
+        }
+        // allow j increase to k
+        temp.append(n+1)
+        var j = 0
+        while j < k {
+            ans.append(Array(temp[0...k-1]))
+            j = 0
+            // find the gap
+            while j < k, temp[j] + 1 == temp[j + 1] {
+                temp[j] = j + 1
+                j += 1
+            }
+            // increase the last gap to meet n
+            temp[j] += 1
+//            print(temp)
+        }
+        return ans
     }
 }
