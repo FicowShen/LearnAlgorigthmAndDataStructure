@@ -8,7 +8,8 @@
 import Foundation
 
 final class BacktrackProblems {
-    func run() {
+    static func run() {
         Combine().run()
+        Permute().run()
     }
 }

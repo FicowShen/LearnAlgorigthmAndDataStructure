@@ -11,11 +11,11 @@ final class Solution {
 
     func run() {
 //        ArrayProblems().run()
-//        BacktrackProblems().run()
+        BacktrackProblems.run()
 //        TreeProblems().run()
 //        MathProblems().run()
 //        RecursionProblems().run()
-        WeeklyContest.run()
+//        WeeklyContest.run()
     }
 
 }
