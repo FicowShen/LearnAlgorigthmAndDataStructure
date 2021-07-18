@@ -14,7 +14,7 @@ final class Combine {
 
     func testCombine() {
         func judge(n: Int, k: Int, expected: [[Int]]) {
-            printAndAssert(result: Set(combine222(n, k).map { $0 }),
+            printAndAssert(result: Set(combine333(n, k).map { $0 }),
                            expected: Set(expected.map { $0 }))
         }
         judge(n: 4, k: 2,
@@ -37,8 +37,60 @@ final class Combine {
     }
 
 
+    func combine3(_ n: Int, _ k: Int) -> [[Int]] {
+        var result = [[Int]]()
+        func append(_ i: Int, to list: inout [Int]) {
+            if list.count == k {
+                result.append(list)
+                return
+            }
+            for j in i...n {
+                if n - j + 1 + list.count < k {
+                    return
+                }
+                list.append(j)
+                append(j+1, to: &list)
+                _ = list.popLast()
+            }
+        }
+        var list = [Int]()
+        append(1, to: &list)
+        return result
+    }
 
+    func combine33(_ n: Int, _ k: Int) -> [[Int]] {
+        var result = [[Int]]()
+        var nums = [Int](repeating: 0, count: k)
+        var i = 0
+        while i >= 0 {
+            nums[i] += 1
+            if n - nums[i] + i + 1 < k {
+                i -= 1
+            } else if i == k - 1 {
+                result.append(nums)
+            } else {
+                i += 1
+                nums[i] = nums[i - 1]
+            }
+        }
+        return result
+    }
 
+    func combine333(_ n: Int, _ k: Int) -> [[Int]] {
+        var result = [[Int]]()
+        var nums = [Int](1...k) + [n + 1]
+        var i = 0
+        while i < k {
+            result.append(Array(nums[0...k-1]))
+            i = 0
+            while i < k, nums[i] + 1 == nums[i + 1] {
+                nums[i] = i + 1
+                i += 1
+            }
+            nums[i] += 1
+        }
+        return result
+    }
 
 
 
