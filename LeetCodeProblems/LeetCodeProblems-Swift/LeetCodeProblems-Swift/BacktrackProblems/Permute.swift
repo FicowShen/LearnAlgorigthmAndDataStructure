@@ -15,7 +15,7 @@ final class Permute {
 
     func testPermute() {
         func judge(nums: [Int], expected: [[Int]]) {
-            printAndAssert(result: Set(permute111(nums)), expected: Set(expected))
+            printAndAssert(result: Set(permute222(nums)), expected: Set(expected))
         }
         judge(nums: [1,2,3],
               expected: [[1,2,3],
@@ -47,10 +47,84 @@ final class Permute {
 
 
 
+    func permute2(_ nums: [Int]) -> [[Int]] {
+        var result = [[Int]]()
+        var output = [Int]()
+        var elements = Set<Int>(nums)
+        func backtrack() {
+            if output.count == nums.count {
+                result.append(output)
+                return
+            }
+            for i in elements {
+                output.append(i)
+                elements.remove(i)
+                backtrack()
+                _ = output.popLast()
+                elements.insert(i)
+            }
+        }
+        backtrack()
+        return result
+    }
+
+
+    func permute22(_ nums: [Int]) -> [[Int]] {
+        var result = [[Int]]()
+        var output = [Int]()
+        func backtrack() {
+            if output.count == nums.count {
+                result.append(output)
+                return
+            }
+            for i in nums {
+                if output.contains(i) {
+                    continue
+                }
+                output.append(i)
+                backtrack()
+                _ = output.popLast()
+            }
+        }
+        backtrack()
+        return result
+    }
+
+
+    func permute222(_ nums: [Int]) -> [[Int]] {
+        var result = [[Int]]()
+        var output = nums
+        func backtrack(first: Int) {
+            if first == nums.count {
+                result.append(output)
+                return
+            }
+            for i in first..<nums.count {
+                output.swapAt(i, first)
+                backtrack(first: first+1)
+                output.swapAt(i, first)
+            }
+        }
+        backtrack(first: 0)
+        return result
+    }
 
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     func permute1(_ nums: [Int]) -> [[Int]] {
         var result = [[Int]]()
