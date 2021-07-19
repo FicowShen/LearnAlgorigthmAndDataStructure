@@ -51,7 +51,8 @@ final class Permute {
 
 
 
-
+    // O(n * n!), n! arrays and each array has n elements.
+    // https://leetcode.com/problems/permutations/discuss/18247/My-elegant-recursive-C++-solution-with-inline-explanation/18308
     func permute3(_ nums: [Int]) -> [[Int]] {
         var result = [[Int]]()
         var elements = Set<Int>(nums)
@@ -98,21 +99,23 @@ final class Permute {
         var result = [[Int]]()
         var output = nums
         func backtrack(first: Int) {
+//            let indent = String(repeating: "\t", count: first)
             if first == nums.count {
                 result.append(output)
-//                print(output)
-//                print("------")
+//                print("\(indent)\(first)>>", output)
                 return
             }
             for i in first..<nums.count {
                 output.swapAt(i, first)
-//                print("\(first) >", output)
+//                print("\(indent)\(first)>", output)
                 backtrack(first: first + 1)
                 output.swapAt(i, first)
-//                print("\(first) <", output)
+//                print("\(indent)\(first)<", output)
             }
+//            print(String(repeating: "-", count: 6))
         }
         backtrack(first: 0)
+//        print("\n")
         return result
     }
 
@@ -275,6 +278,30 @@ final class Permute {
             }
         }
         backtrack(first: 0)
+        return result
+    }
+
+    // iterative, https://leetcode.com/problems/permutations/discuss/18237/My-AC-simple-iterative-javapython-solution
+    func permute1111(_ nums: [Int]) -> [[Int]] {
+        var result = [[Int]]()
+        guard let first = nums.first else { return result }
+        result.append([first])
+        for i in 1..<nums.count {
+            let digit = nums[i]
+            let oldResult = result
+            result.removeAll()
+//            print("result:", result)
+            for output in oldResult {
+                for k in 0...i {
+                    var temp = output
+//                    print("\tinsert \(digit) to \(k)")
+                    temp.insert(digit, at: k)
+                    result.append(temp)
+//                    print("\tadd to result: \(temp)")
+                }
+            }
+        }
+//        print("final result:", result, "\n\n")
         return result
     }
 }
