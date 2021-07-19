@@ -15,7 +15,7 @@ final class Permute {
 
     func testPermute() {
         func judge(nums: [Int], expected: [[Int]]) {
-            printAndAssert(result: Set(permute333(nums)), expected: Set(expected))
+            printAndAssert(result: Set(permute2222(nums)), expected: Set(expected))
         }
         judge(nums: [1,2,3],
               expected: [[1,2,3],
@@ -204,7 +204,23 @@ final class Permute {
         return result
     }
 
-
+    func permute2222(_ nums: [Int]) -> [[Int]] {
+        var result = [[Int]]()
+        guard let first = nums.first else { return result }
+        result.append([first])
+        for i in 1..<nums.count {
+            let oldResult = result
+            result.removeAll()
+            for j in 0...i {
+                for k in 0..<oldResult.count {
+                    var temp = oldResult[k]
+                    temp.insert(nums[i], at: j)
+                    result.append(temp)
+                }
+            }
+        }
+        return result
+    }
 
 
 
