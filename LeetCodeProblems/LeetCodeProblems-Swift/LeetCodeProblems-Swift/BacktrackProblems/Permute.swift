@@ -7,15 +7,19 @@
 
 import Foundation
 
+
+/*
+ Solutions:
+ 1. recurse with a set;
+ 2. recurse with an array; (slowest)
+ 3. recurse with swapping;
+ 4. iterate and insert; (fastest)
+ */
 final class Permute {
 
     func run() {
-        testPermute()
-    }
-
-    func testPermute() {
         func judge(nums: [Int], expected: [[Int]]) {
-            printAndAssert(result: Set(permute2222(nums)), expected: Set(expected))
+            printAndAssert(result: Set(permute3333(nums)), expected: Set(expected))
         }
         judge(nums: [1,2,3],
               expected: [[1,2,3],
@@ -28,6 +32,20 @@ final class Permute {
               expected: [[0,1],[1,0]])
         judge(nums: [1],
               expected: [[1]])
+
+//        let elements = [Int](0...8)
+//        benchmark(identifier: "permute3") {
+//            _ = permute3(elements)
+//        }
+//        benchmark(identifier: "permute33") {
+//            _ = permute33(elements)
+//        }
+//        benchmark(identifier: "permute333") {
+//            _ = permute333(elements)
+//        }
+//        benchmark(identifier: "permute3333") {
+//            _ = permute3333(elements)
+//        }
     }
 
 
@@ -119,7 +137,23 @@ final class Permute {
         return result
     }
 
-
+    func permute3333(_ nums: [Int]) -> [[Int]] {
+        var result = [[Int]]()
+        guard let first = nums.first else { return result }
+        result.append([first])
+        for i in 1..<nums.count {
+            let oldResult = result
+            result.removeAll(keepingCapacity: true)
+            for j in 0...i {
+                for k in 0..<oldResult.count {
+                    var temp = oldResult[k]
+                    temp.insert(nums[i], at: j)
+                    result.append(temp)
+                }
+            }
+        }
+        return result
+    }
 
 
 
