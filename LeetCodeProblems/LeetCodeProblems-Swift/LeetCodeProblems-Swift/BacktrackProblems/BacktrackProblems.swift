@@ -11,5 +11,6 @@ final class BacktrackProblems {
     static func run() {
         Combine().run()
         Permute().run()
+        PermuteUnique().run()
     }
 }

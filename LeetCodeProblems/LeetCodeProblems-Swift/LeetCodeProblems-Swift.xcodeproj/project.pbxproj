@@ -12,6 +12,7 @@
 		6AB89D5126A4138100E295BA /* WeeklyContest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB89D5026A4138100E295BA /* WeeklyContest.swift */; };
 		6AB89D5326A413BB00E295BA /* WeeklyContest250.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB89D5226A413BB00E295BA /* WeeklyContest250.swift */; };
 		6AB89D5526A42ECF00E295BA /* Permute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB89D5426A42ECF00E295BA /* Permute.swift */; };
+		6AB89D5726A64E4A00E295BA /* PermuteUnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB89D5626A64E4A00E295BA /* PermuteUnique.swift */; };
 		6AD94F5F269AA99000AA35B4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94F5E269AA99000AA35B4 /* main.swift */; };
 		6AD94F79269AA9A000AA35B4 /* Solutions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94F65269AA9A000AA35B4 /* Solutions.swift */; };
 		6AD94F7A269AA9A000AA35B4 /* MathProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94F66269AA9A000AA35B4 /* MathProblems.swift */; };
@@ -52,6 +53,7 @@
 		6AB89D5026A4138100E295BA /* WeeklyContest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyContest.swift; sourceTree = "<group>"; };
 		6AB89D5226A413BB00E295BA /* WeeklyContest250.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyContest250.swift; sourceTree = "<group>"; };
 		6AB89D5426A42ECF00E295BA /* Permute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permute.swift; sourceTree = "<group>"; };
+		6AB89D5626A64E4A00E295BA /* PermuteUnique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermuteUnique.swift; sourceTree = "<group>"; };
 		6AD94F5B269AA99000AA35B4 /* LeetCodeProblems-Swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "LeetCodeProblems-Swift"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD94F5E269AA99000AA35B4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		6AD94F65269AA9A000AA35B4 /* Solutions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Solutions.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				6AB89D4426A106AC00E295BA /* BacktrackProblems.swift */,
 				6AB89D4626A106D700E295BA /* Combine.swift */,
 				6AB89D5426A42ECF00E295BA /* Permute.swift */,
+				6AB89D5626A64E4A00E295BA /* PermuteUnique.swift */,
 			);
 			path = BacktrackProblems;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				6AB89D5326A413BB00E295BA /* WeeklyContest250.swift in Sources */,
 				6AD94F87269AA9A000AA35B4 /* NaryTreePreorderTraversal.swift in Sources */,
 				6AD94F89269AA9A000AA35B4 /* Helpers.swift in Sources */,
+				6AB89D5726A64E4A00E295BA /* PermuteUnique.swift in Sources */,
 				6AD94F86269AA9A000AA35B4 /* TreeMinDepth.swift in Sources */,
 				6AD94F7A269AA9A000AA35B4 /* MathProblems.swift in Sources */,
 				6AD94F85269AA9A000AA35B4 /* TreeLevelOrderTraversal.swift in Sources */,
