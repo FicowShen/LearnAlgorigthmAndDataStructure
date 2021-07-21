@@ -10,10 +10,10 @@ import Foundation
 final class PermuteUnique {
     func run() {
         func judge(_ nums: [Int], expected: [[Int]]) {
-            printAndAssert(result: Set(permuteUnique222(nums)),
+            printAndAssert(result: Set(permuteUnique333(nums)),
                            expected: Set(expected))
         }
-        judge([1,1,2], expected: [[1,1,2],
+        judge([1,2,1], expected: [[1,1,2],
                                   [1,2,1],
                                   [2,1,1]])
         judge([1,2,3], expected: [[1,2,3],
@@ -36,7 +36,69 @@ final class PermuteUnique {
     }
 
 
+    // swap
+    func permuteUnique3(_ nums: [Int]) -> [[Int]] {
+        var result = Set<[Int]>()
+        var output = nums
+        func backtrack(first: Int) {
+            if first == nums.count {
+                result.insert(output)
+                return
+            }
+            for i in first..<nums.count {
+                output.swapAt(i, first)
+                backtrack(first: first + 1)
+                output.swapAt(i, first)
+            }
+        }
+        backtrack(first: 0)
+        return [[Int]](result)
+    }
 
+    // insert
+    func permuteUnique33(_ nums: [Int]) -> [[Int]] {
+        guard let first = nums.first else { return [] }
+        var result = Set<[Int]>()
+        result.insert([first])
+        for i in 1..<nums.count {
+            let oldResult = result
+            result.removeAll(keepingCapacity: true)
+            for j in 0...i {
+                oldResult.forEach { old in
+                    var temp = old
+                    temp.insert(nums[i], at: j)
+                    result.insert(temp)
+                }
+            }
+        }
+        return [[Int]](result)
+    }
+
+    // sort and visit memo
+    func permuteUnique333(_ nums: [Int]) -> [[Int]] {
+        var result = [[Int]]()
+        var output = [Int]()
+        var visit = [Bool](repeating: false, count: nums.count)
+        let nums = nums.sorted()
+        func backtrack() {
+            if output.count == nums.count {
+                result.append(output)
+                return
+            }
+            for i in 0..<nums.count {
+                if visit[i] || (i > 0 && nums[i] == nums[i - 1] && !visit[i - 1]) {
+                    continue
+                }
+                output.append(nums[i])
+                visit[i] = true
+                backtrack()
+                visit[i] = false
+                _ = output.popLast()
+            }
+        }
+        backtrack()
+        return result
+    }
 
 
 
