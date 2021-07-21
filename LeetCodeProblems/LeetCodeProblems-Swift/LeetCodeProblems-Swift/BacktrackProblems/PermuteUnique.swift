@@ -129,9 +129,8 @@ final class PermuteUnique {
                 results.append(output)
                 return
             }
-            for option in counter {
+            for option in counter where option.1 > 0 {
                 let (num, count) = (option.key, option.value)
-                if count == 0 { continue }
                 output.append(num)
                 counter[num] = count - 1
                 backttrack()
