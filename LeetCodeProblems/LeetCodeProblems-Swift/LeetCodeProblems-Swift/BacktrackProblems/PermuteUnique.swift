@@ -10,7 +10,7 @@ import Foundation
 final class PermuteUnique {
     func run() {
         func judge(_ nums: [Int], expected: [[Int]]) {
-            printAndAssert(result: Set(permuteUnique1(nums)),
+            printAndAssert(result: Set(permuteUniqueWithCounterDict3(nums)),
                            expected: Set(expected))
         }
         judge([1,2,1], expected: [[1,1,2],
@@ -37,6 +37,17 @@ final class PermuteUnique {
 //            _ = permuteUnique1111(elements)
 //        }
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
     // swap
@@ -104,6 +115,33 @@ final class PermuteUnique {
         }
         backtrack()
         return result
+    }
+
+    // counter dict
+    func permuteUniqueWithCounterDict3(_ nums: [Int]) -> [[Int]] {
+        var results = [[Int]]()
+        var output = [Int]()
+        var counter = [Int: Int]()
+        nums.forEach { counter[$0, default: 0] += 1 }
+
+        func backttrack() {
+            if output.count == nums.count {
+                results.append(output)
+                return
+            }
+            for option in counter {
+                let (num, count) = (option.key, option.value)
+                if count == 0 { continue }
+                output.append(num)
+                counter[num] = count - 1
+                backttrack()
+                counter[num] = count
+                _ = output.popLast()
+            }
+        }
+
+        backttrack()
+        return results
     }
 
 
