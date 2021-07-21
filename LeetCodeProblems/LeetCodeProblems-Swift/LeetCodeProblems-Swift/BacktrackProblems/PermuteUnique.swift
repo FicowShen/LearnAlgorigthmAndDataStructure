@@ -10,7 +10,7 @@ import Foundation
 final class PermuteUnique {
     func run() {
         func judge(_ nums: [Int], expected: [[Int]]) {
-            printAndAssert(result: Set(permuteUnique2222(nums)),
+            printAndAssert(result: Set(permuteUnique1(nums)),
                            expected: Set(expected))
         }
         judge([1,2,1], expected: [[1,1,2],
@@ -49,6 +49,9 @@ final class PermuteUnique {
                 return
             }
             for i in first..<nums.count {
+                if i != first && nums[i] == nums[first] {
+                    continue
+                }
                 output.swapAt(i, first)
                 backtrack(first: first + 1)
                 output.swapAt(i, first)
@@ -244,6 +247,9 @@ final class PermuteUnique {
                 return
             }
             for i in first..<nums.count {
+                if i != first && nums[i] == nums[first] {
+                    continue
+                }
                 output.swapAt(i, first)
                 backtrack(first: first + 1)
                 output.swapAt(i, first)
