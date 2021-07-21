@@ -10,7 +10,7 @@ import Foundation
 final class PermuteUnique {
     func run() {
         func judge(_ nums: [Int], expected: [[Int]]) {
-            printAndAssert(result: Set(permuteUnique333(nums)),
+            printAndAssert(result: Set(permuteUnique2222(nums)),
                            expected: Set(expected))
         }
         judge([1,2,1], expected: [[1,1,2],
@@ -23,7 +23,7 @@ final class PermuteUnique {
                                   [3,1,2],
                                   [3,2,1]])
 
-//        let elements = [1, 1, 1, 3, 5, 5, 8, 8, 9, 9]
+//        let elements = [1, 5, 5, 1, 1, 3, 8, 8, 9, 9]
 //        benchmark(identifier: "1") {
 //            _ = permuteUnique1(elements)
 //        }
@@ -32,6 +32,9 @@ final class PermuteUnique {
 //        }
 //        benchmark(identifier: "111") {
 //            _ = permuteUnique111(elements)
+//        }
+//        benchmark(identifier: "1111") {
+//            _ = permuteUnique1111(elements)
 //        }
     }
 
@@ -183,8 +186,30 @@ final class PermuteUnique {
         return result
     }
 
-
-
+    // counter
+    func permuteUnique2222(_ nums: [Int]) -> [[Int]] {
+        var results = [[Int]]()
+        var output = [Int]()
+        var counter = [Int: Int]()
+        nums.forEach { counter[$0, default: 0] += 1 }
+        func backtrack() {
+            if output.count == nums.count {
+                results.append(output)
+                return
+            }
+            for option in counter {
+                let (num, count) = (option.key, option.value)
+                if count == 0 { continue }
+                output.append(num)
+                counter[num] = count - 1
+                backtrack()
+                counter[num] = count
+                _ = output.popLast()
+            }
+        }
+        backtrack()
+        return results
+    }
 
 
 
@@ -280,6 +305,32 @@ final class PermuteUnique {
         }
         backtrack()
         return result
+    }
+
+    // counter
+    // https://leetcode.com/problems/permutations-ii/solution/
+    func permuteUnique1111(_ nums: [Int]) -> [[Int]] {
+        var results = [[Int]]()
+        var output = [Int]()
+        var counter = [Int: Int]()
+        nums.forEach { counter[$0, default: 0] += 1 }
+        func backtrack() {
+            if output.count == nums.count {
+                results.append(output)
+                return
+            }
+            for option in counter {
+                let (num, count) = (option.key, option.value)
+                if count == 0 { continue }
+                output.append(num)
+                counter[num] = count - 1
+                backtrack()
+                counter[num] = count
+                _ = output.popLast()
+            }
+        }
+        backtrack()
+        return results
     }
 
 }
