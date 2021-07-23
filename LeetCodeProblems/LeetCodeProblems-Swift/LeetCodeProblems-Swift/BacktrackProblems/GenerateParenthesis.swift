@@ -9,16 +9,23 @@ import Foundation
 
 /*
  1. backtrack
- 2. dp
+ 2. insert
  */
 final class GenerateParenthesis {
 
     func run() {
-        printAndAssert(result: backtrackSolution2(1),
+        printAndAssert(result: insertSolution2(1),
                        expected: ["()"])
-        printAndAssert(result: Set(backtrackSolution2(3)),
+        printAndAssert(result: Set(insertSolution2(3)),
                        expected: Set(["((()))","(()())","(())()","()(())","()()()"]))
-        printAndAssert(result: Set(backtrackSolution2(4)), expected: Set(["()()()()","(())()()","()(())()","(()())()","((()))()","()()(())","(())(())","()(()())","(()()())","((())())","()((()))","(()(()))","((()()))","(((())))"]))
+        printAndAssert(result: Set(insertSolution2(4)), expected: Set(["()()()()","(())()()","()(())()","(()())()","((()))()","()()(())","(())(())","()(()())","(()()())","((())())","()((()))","(()(()))","((()()))","(((())))"]))
+
+//        benchmark(identifier: "backtrack") {
+//            _ = backtrackSolution1(12)
+//        }
+//        benchmark(identifier: "insert") {
+//            _ = insertSolution1(12)
+//        }
     }
 
 
@@ -39,9 +46,25 @@ final class GenerateParenthesis {
         return results
     }
 
-
-    func dpSolution2(_ n: Int) -> [String] {
-        fatalError()
+    func insertSolution2(_ n: Int) -> [String] {
+        if n <= 0 { return [] }
+        let base = "()"
+        if n == 1 { return [base] }
+        var results: Set = [base]
+        for _ in 2...n {
+            let oldResults = results
+            results.removeAll(keepingCapacity: true)
+            for old in oldResults {
+                let startIndex = old.startIndex
+                let halfIndex = old.count >> 1 + 1
+                for i in 0...halfIndex {
+                    var new = old
+                    new.insert(contentsOf: base, at: new.index(startIndex, offsetBy: i))
+                    results.insert(new)
+                }
+            }
+        }
+        return [String](results)
     }
 
 
@@ -81,7 +104,28 @@ final class GenerateParenthesis {
         return results
     }
 
-    func dpSolution1(_ n: Int) -> [String] {
-        fatalError()
+    func insertSolution1(_ n: Int) -> [String] {
+        if n <= 0 { return [] }
+        let base = "()"
+        if n == 1 { return [base] }
+        var results: Set = [base]
+        // () + () -> [()(),(()]
+        // ()() +() -> ()()(),(())(),()()(), 2 ()()()
+        // (()) +() -> ()(()),(()()),((()))
+        for _ in 2...n {
+            let oldResults = results
+            results.removeAll(keepingCapacity: true)
+            for old in oldResults {
+                let startIndex = old.startIndex
+                let halfIndex = old.count >> 1 + 1
+                for i in 0...halfIndex {
+                    var new = old
+                    let index = new.index(startIndex, offsetBy: i)
+                    new.insert(contentsOf: base, at: index)
+                    results.insert(new)
+                }
+            }
+        }
+        return [String](results)
     }
 }
