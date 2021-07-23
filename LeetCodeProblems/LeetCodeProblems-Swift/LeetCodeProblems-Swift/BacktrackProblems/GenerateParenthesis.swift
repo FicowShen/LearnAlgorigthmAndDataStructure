@@ -15,11 +15,11 @@ import Foundation
 final class GenerateParenthesis {
 
     func run() {
-        printAndAssert(result: insertSolution2(1),
+        printAndAssert(result: insertSolution3(1),
                        expected: ["()"])
-        printAndAssert(result: Set(insertSolution2(3)),
+        printAndAssert(result: Set(insertSolution3(3)),
                        expected: Set(["((()))","(()())","(())()","()(())","()()()"]))
-        printAndAssert(result: Set(insertSolution2(4)), expected: Set(["()()()()","(())()()","()(())()","(()())()","((()))()","()()(())","(())(())","()(()())","(()()())","((())())","()((()))","(()(()))","((()()))","(((())))"]))
+        printAndAssert(result: Set(insertSolution3(4)), expected: Set(["()()()()","(())()()","()(())()","(()())()","((()))()","()()(())","(())(())","()(()())","(()()())","((())())","()((()))","(()(()))","((()()))","(((())))"]))
 
 //        benchmark(identifier: "backtrack") {
 //            _ = backtrackSolution1(12)
@@ -30,7 +30,43 @@ final class GenerateParenthesis {
     }
 
 
+    func backtrackSolution3(_ n: Int) -> [String] {
+        var results = [String]()
+        func backtrack(left: Int, right: Int, output: String) {
+            if left < 0 || right < 0 || left > right {
+                return
+            }
+            if left == 0 && right == 0 {
+                results.append(output)
+                return
+            }
+            backtrack(left: left-1, right: right, output: output+"(")
+            backtrack(left: left, right: right-1, output: output+")")
+        }
+        backtrack(left: n, right: n, output: "")
+        return results
+    }
 
+    func insertSolution3(_ n: Int) -> [String] {
+        if n <= 0 { return [] }
+        let base = "()"
+        if n == 1 { return [base] }
+        var results: Set = [base]
+        for _ in 2...n {
+            let oldResults = results
+            results.removeAll(keepingCapacity: true)
+            for old in oldResults {
+                let startIndex = old.startIndex
+                let halfIndex = old.count >> 1 + 1
+                for i in 0...halfIndex {
+                    var new = old
+                    new.insert(contentsOf: base, at: old.index(startIndex, offsetBy: i))
+                    results.insert(new)
+                }
+            }
+        }
+        return [String](results)
+    }
 
 
 
