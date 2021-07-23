@@ -9,6 +9,7 @@ import Foundation
 
 
 /*
+ https://leetcode.com/problems/permutations
  Solutions:
  1. recurse with a set;
  2. recurse with an array; (slowest)

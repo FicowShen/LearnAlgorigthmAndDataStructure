@@ -8,8 +8,9 @@
 import Foundation
 
 /*
+ https://leetcode-cn.com/problems/generate-parentheses/#
  1. backtrack
- 2. insert
+ 2. insert (low performance)
  */
 final class GenerateParenthesis {
 
@@ -27,6 +28,24 @@ final class GenerateParenthesis {
 //            _ = insertSolution1(12)
 //        }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     func backtrackSolution2(_ n: Int) -> [String] {
