@@ -12,5 +12,6 @@ final class BacktrackProblems {
         Combine().run()
         Permute().run()
         PermuteUnique().run()
+        GenerateParenthesis().run()
     }
 }
