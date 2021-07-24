@@ -15,11 +15,11 @@ import Foundation
 final class GenerateParenthesis {
 
     func run() {
-        printAndAssert(result: dpSolution1(1),
+        printAndAssert(result: dpSolution2(1),
                        expected: ["()"])
-        printAndAssert(result: Set(dpSolution1(3)),
+        printAndAssert(result: Set(dpSolution2(3)),
                        expected: Set(["((()))","(()())","(())()","()(())","()()()"]))
-        printAndAssert(result: Set(dpSolution1(4)), expected: Set(["()()()()","(())()()","()(())()","(()())()","((()))()","()()(())","(())(())","()(()())","(()()())","((())())","()((()))","(()(()))","((()()))","(((())))"]))
+        printAndAssert(result: Set(dpSolution2(4)), expected: Set(["()()()()","(())()()","()(())()","(()())()","((()))()","()()(())","(())(())","()(()())","(()()())","((())())","()((()))","(()(()))","((()()))","(((())))"]))
 
 //        benchmark(identifier: "backtrack") {
 //            _ = backtrackSolution1(13)
@@ -129,7 +129,25 @@ final class GenerateParenthesis {
         return [String](results)
     }
 
-
+    func dpSolution2(_ n: Int) -> [String] {
+        if n <= 0 { return [] }
+        let base = "()"
+        if n == 1 { return [base] }
+        var dp = [[String]](repeating: [], count: n + 1)
+        dp[0] = [""]
+        dp[1] = [base]
+        for i in 2...n {
+            for j in 0..<i {
+                for p in dp[j] {
+                    for q in dp[i - j - 1] {
+                        let s = "(" + p + ")" + q
+                        dp[i].append(s)
+                    }
+                }
+            }
+        }
+        return dp[n]
+    }
 
 
 
