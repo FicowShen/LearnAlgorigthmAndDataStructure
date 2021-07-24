@@ -15,11 +15,11 @@ import Foundation
 final class GenerateParenthesis {
 
     func run() {
-        printAndAssert(result: closureNumberSolution1(1),
+        printAndAssert(result: closureNumberSolution2(1),
                        expected: ["()"])
-        printAndAssert(result: Set(closureNumberSolution1(3)),
+        printAndAssert(result: Set(closureNumberSolution2(3)),
                        expected: Set(["((()))","(()())","(())()","()(())","()()()"]))
-        printAndAssert(result: Set(closureNumberSolution1(4)), expected: Set(["()()()()","(())()()","()(())()","(()())()","((()))()","()()(())","(())(())","()(()())","(()()())","((())())","()((()))","(()(()))","((()()))","(((())))"]))
+        printAndAssert(result: Set(closureNumberSolution2(4)), expected: Set(["()()()()","(())()()","()(())()","(()())()","((()))()","()()(())","(())(())","()(()())","(()()())","((())())","()((()))","(()(()))","((()()))","(((())))"]))
 
 //        benchmark(identifier: "backtrack") {
 //            _ = backtrackSolution1(13)
@@ -155,6 +155,28 @@ final class GenerateParenthesis {
         }
         return dp[n]
     }
+
+    func closureNumberSolution2(_ n: Int) -> [String] {
+        var results = [Int: [String]]()
+        func parenthesis(n: Int) -> [String] {
+            if n == 0 { return [""] }
+            if let result = results[n] { return result }
+            var result = [String]()
+            for i in 0..<n {
+                for left in parenthesis(n: i) {
+                    for right in parenthesis(n: n - i - 1) {
+                        result.append("(" + left + ")" + right)
+                    }
+                }
+            }
+            results[n] = result
+            return result
+        }
+        return parenthesis(n: n)
+    }
+
+
+
 
 
 
