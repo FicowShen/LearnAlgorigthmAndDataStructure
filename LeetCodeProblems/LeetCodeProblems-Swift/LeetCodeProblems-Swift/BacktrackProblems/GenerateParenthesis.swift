@@ -15,17 +15,20 @@ import Foundation
 final class GenerateParenthesis {
 
     func run() {
-        printAndAssert(result: insertSolution3(1),
+        printAndAssert(result: dpSolution1(1),
                        expected: ["()"])
-        printAndAssert(result: Set(insertSolution3(3)),
+        printAndAssert(result: Set(dpSolution1(3)),
                        expected: Set(["((()))","(()())","(())()","()(())","()()()"]))
-        printAndAssert(result: Set(insertSolution3(4)), expected: Set(["()()()()","(())()()","()(())()","(()())()","((()))()","()()(())","(())(())","()(()())","(()()())","((())())","()((()))","(()(()))","((()()))","(((())))"]))
+        printAndAssert(result: Set(dpSolution1(4)), expected: Set(["()()()()","(())()()","()(())()","(()())()","((()))()","()()(())","(())(())","()(()())","(()()())","((())())","()((()))","(()(()))","((()()))","(((())))"]))
 
 //        benchmark(identifier: "backtrack") {
-//            _ = backtrackSolution1(12)
+//            _ = backtrackSolution1(13)
 //        }
 //        benchmark(identifier: "insert") {
-//            _ = insertSolution1(12)
+//            _ = insertSolution1(13)
+//        }
+//        benchmark(identifier: "dp") {
+//            _ = dpSolution1(13)
 //        }
     }
 
@@ -60,6 +63,10 @@ final class GenerateParenthesis {
                 let halfIndex = old.count >> 1 + 1
                 for i in 0...halfIndex {
                     var new = old
+                    /*
+                     let left = old[old.startIndex..<old.index(startIndex, offsetBy: i)]
+                     let right = old[old.index(startIndex, offsetBy: i)..<old.endIndex]
+                     */
                     new.insert(contentsOf: base, at: old.index(startIndex, offsetBy: i))
                     results.insert(new)
                 }
@@ -182,5 +189,30 @@ final class GenerateParenthesis {
             }
         }
         return [String](results)
+    }
+
+    // https://leetcode-cn.com/problems/generate-parentheses/solution/zui-jian-dan-yi-dong-de-dong-tai-gui-hua-bu-lun-da/128715
+    func dpSolution1(_ n: Int) -> [String] {
+        if n <= 0 { return [] }
+        let base = "()"
+        if n == 1 { return [base] }
+        var dp = [[String]](repeating: [], count: n+1)
+        dp[0] = [""]
+        dp[1] = [base]
+        for i in 2...n {
+            for j in 0..<i {
+                for p in dp[j] {
+                    for q in dp[i - j - 1] {
+                        let str = "(" + p + ")" + q
+//                        print("i:", i, "j:", j, "k:", i - j - 1, "\tp:", p, "\tq:", q, "\tstr:", str)
+                        dp[i].append(str)
+                    }
+                }
+            }
+//            print("---")
+        }
+//        print(dp[n])
+//        print("---------")
+        return dp[n]
     }
 }
