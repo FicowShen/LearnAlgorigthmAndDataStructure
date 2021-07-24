@@ -15,11 +15,11 @@ import Foundation
 final class GenerateParenthesis {
 
     func run() {
-        printAndAssert(result: dpSolution2(1),
+        printAndAssert(result: closureNumberSolution1(1),
                        expected: ["()"])
-        printAndAssert(result: Set(dpSolution2(3)),
+        printAndAssert(result: Set(closureNumberSolution1(3)),
                        expected: Set(["((()))","(()())","(())()","()(())","()()()"]))
-        printAndAssert(result: Set(dpSolution2(4)), expected: Set(["()()()()","(())()()","()(())()","(()())()","((()))()","()()(())","(())(())","()(()())","(()()())","((())())","()((()))","(()(()))","((()()))","(((())))"]))
+        printAndAssert(result: Set(closureNumberSolution1(4)), expected: Set(["()()()()","(())()()","()(())()","(()())()","((()))()","()()(())","(())(())","()(()())","(()()())","((())())","()((()))","(()(()))","((()()))","(((())))"]))
 
 //        benchmark(identifier: "backtrack") {
 //            _ = backtrackSolution1(13)
@@ -29,6 +29,9 @@ final class GenerateParenthesis {
 //        }
 //        benchmark(identifier: "dp") {
 //            _ = dpSolution1(13)
+//        }
+//        benchmark(identifier: "closureNumberSolution1") {
+//            _ = closureNumberSolution1(13)
 //        }
     }
 
@@ -140,6 +143,10 @@ final class GenerateParenthesis {
             for j in 0..<i {
                 for p in dp[j] {
                     for q in dp[i - j - 1] {
+                        // j = 0, p = "", i-j-1 = (2-0-1) = 1, q = (), s = ()()
+                        // dp[2] = [()()]
+                        // j = 1, p = (), i-j-1 = (2-1-1) = 0, q = "", s = (())
+                        // dp[2] = [()(), (())]
                         let s = "(" + p + ")" + q
                         dp[i].append(s)
                     }
@@ -148,7 +155,6 @@ final class GenerateParenthesis {
         }
         return dp[n]
     }
-
 
 
 
@@ -232,5 +238,29 @@ final class GenerateParenthesis {
 //        print(dp[n])
 //        print("---------")
         return dp[n]
+    }
+
+    // https://leetcode.com/problems/generate-parentheses/solution/
+    func closureNumberSolution1(_ n: Int) -> [String] {
+        var results = [Int: [String]]()
+        func parenthesis(n: Int) -> [String] {
+            if n == 0 {
+                return [""]
+            }
+            if let result = results[n] {
+                return result
+            }
+            var result = [String]()
+            for i in 0..<n {
+                for left in parenthesis(n: i) {
+                    for right in parenthesis(n: n - i - 1) {
+                        result.append("(" + left + ")" + right)
+                    }
+                }
+            }
+            results[n] = result
+            return result
+        }
+        return parenthesis(n: n)
     }
 }
