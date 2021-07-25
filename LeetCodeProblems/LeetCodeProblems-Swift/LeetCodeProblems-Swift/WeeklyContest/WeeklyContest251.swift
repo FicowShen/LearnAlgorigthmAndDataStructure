@@ -30,9 +30,83 @@ final class WeeklyContest251 {
             judge(num: "00000", change: [0,3,5,8,7,5,4,6,3,2], expected: "00000")
             judge(num: String(repeating: "0", count: Int(1e5)), change: [9,3,5,8,7,5,4,6,3,2], expected: String(repeating: "9", count: Int(1e5)))
         }
+        do {
+            func judge(students: [[Int]], mentors: [[Int]], expected: Int) {
+                printAndAssert(result: maxCompatibilitySum(students, mentors),
+                               expected: expected)
+            }
+            judge(students: [[0,1,0,1,1,1],
+                             [1,0,0,1,0,1],
+                             [1,0,1,1,0,0]],
+                  mentors: [[1,0,0,0,0,1],
+                            [0,1,0,0,1,1],
+                            [0,1,0,0,1,1]],
+                  expected: 10)
+            judge(students: [[1,1,0],[1,0,1],[0,0,1]],
+                  mentors: [[1,0,0],[0,0,1],[1,1,0]],
+                  expected: 8)
+            judge(students: [[0,0],[0,0],[0,0]],
+                  mentors: [[1,1],[1,1],[1,1]],
+                  expected: 0)
+//            judge(students: [[0,0,1,1,1],[0,1,1,1,0],[1,0,0,1,0],[0,0,1,1,1],[1,0,1,1,0],[0,0,1,0,1],[1,1,1,0,1],[1,1,1,1,1]],
+//                  mentors: [[0,0,1,1,1],[1,0,0,1,0],[0,0,1,0,1],[1,1,1,0,1],[0,0,1,1,1],[0,1,1,1,0],[1,0,1,1,0],[1,1,1,1,1]],
+//                  expected: 40)
+        }
     }
 
+    // https://leetcode-cn.com/contest/weekly-contest-251/problems/maximum-compatibility-score-sum/
+    func maxCompatibilitySum(_ students: [[Int]], _ mentors: [[Int]]) -> Int {
+        let rowCount = students.count
+        let columnCount = students[0].count
+        var permutations = [[Int]]()
+        do {
+            let n = rowCount
+            var output = [Int](0..<n)
+            func permute(first: Int) {
+                if first == n {
+                    permutations.append(output)
+                    return
+                }
+                for i in first..<n {
+                    output.swapAt(i, first)
+                    permute(first: first + 1)
+                    output.swapAt(i, first)
+                }
+            }
+            permute(first: 0)
+        }
 
+        func count(student: [Int], mentor: [Int]) -> Int {
+            (0..<columnCount).reduce(into: 0) { result, i in
+                result += (student[i] == mentor[i] ? 1 : 0)
+            }
+        }
+
+        var maxCount = 0
+        var cachedCount = [String: Int]()
+        for permutation in permutations {
+            var perCount = 0
+            for i in 0..<rowCount {
+                let student = students[i]
+                let mentorIndex = permutation[i]
+                let mentor = mentors[mentorIndex]
+                let key = i.description + mentorIndex.description
+                if let cached = cachedCount[key] {
+                    perCount += cached
+                    continue
+                }
+                let c = count(student: student, mentor: mentor)
+                cachedCount[key] = c
+                perCount += c
+//                perCount += count(student: student, mentor: mentor)
+            }
+            maxCount = max(perCount, maxCount)
+        }
+
+        return maxCount
+    }
+
+    // https://leetcode-cn.com/contest/weekly-contest-251/problems/largest-number-after-mutating-substring/
     func maximumNumber(_ num: String, _ change: [Int]) -> String {
         var temp = num
         let numStartIndex = num.startIndex
@@ -50,7 +124,7 @@ final class WeeklyContest251 {
                 }
                 // num.utf8.index(numStartIndex, offsetBy: index)
                 // num.index(numStartIndex, offsetBy: index)  -->  low performance !!!
-                let strIndex = num.index(numStartIndex, offsetBy: index)
+                let strIndex = num.utf8.index(numStartIndex, offsetBy: index)
                 temp.replaceSubrange(strIndex...strIndex, with: changes[changeIndex])
                 lastChangeIndex = index
             }
