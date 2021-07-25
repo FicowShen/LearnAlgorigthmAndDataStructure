@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6AB89D4B26A2748F00E295BA /* BacktrackProblems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AB89D4926A2748F00E295BA /* BacktrackProblems.cpp */; };
 		6AB89D4E26A2751C00E295BA /* Combine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AB89D4C26A2751C00E295BA /* Combine.cpp */; };
+		6ACE5CBE26AD920E004A24A0 /* DynamicProgrammingProblems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ACE5CBC26AD920E004A24A0 /* DynamicProgrammingProblems.cpp */; };
+		6ACE5CC126AD953F004A24A0 /* ClimbStairs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ACE5CBF26AD953F004A24A0 /* ClimbStairs.cpp */; };
 		6AD94FAC269AAAFD00AA35B4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94FAB269AAAFD00AA35B4 /* main.cpp */; };
 		6AD94FB5269ACB3400AA35B4 /* TreeProblems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94FB3269ACB3400AA35B4 /* TreeProblems.cpp */; };
 		6AD94FB8269ACB8D00AA35B4 /* DataStructures.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94FB6269ACB8D00AA35B4 /* DataStructures.cpp */; };
@@ -31,6 +33,10 @@
 		6AB89D4A26A2748F00E295BA /* BacktrackProblems.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BacktrackProblems.hpp; sourceTree = "<group>"; };
 		6AB89D4C26A2751C00E295BA /* Combine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Combine.cpp; sourceTree = "<group>"; };
 		6AB89D4D26A2751C00E295BA /* Combine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Combine.hpp; sourceTree = "<group>"; };
+		6ACE5CBC26AD920E004A24A0 /* DynamicProgrammingProblems.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DynamicProgrammingProblems.cpp; sourceTree = "<group>"; };
+		6ACE5CBD26AD920E004A24A0 /* DynamicProgrammingProblems.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DynamicProgrammingProblems.hpp; sourceTree = "<group>"; };
+		6ACE5CBF26AD953F004A24A0 /* ClimbStairs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ClimbStairs.cpp; sourceTree = "<group>"; };
+		6ACE5CC026AD953F004A24A0 /* ClimbStairs.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ClimbStairs.hpp; sourceTree = "<group>"; };
 		6AD94FA8269AAAFD00AA35B4 /* LeetCodeProblems-C++ */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "LeetCodeProblems-C++"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD94FAB269AAAFD00AA35B4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		6AD94FB3269ACB3400AA35B4 /* TreeProblems.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TreeProblems.cpp; sourceTree = "<group>"; };
@@ -62,6 +68,17 @@
 			path = BacktrackProblems;
 			sourceTree = "<group>";
 		};
+		6ACE5CBB26AD91F4004A24A0 /* DynamicProgrammingProblems */ = {
+			isa = PBXGroup;
+			children = (
+				6ACE5CBC26AD920E004A24A0 /* DynamicProgrammingProblems.cpp */,
+				6ACE5CBD26AD920E004A24A0 /* DynamicProgrammingProblems.hpp */,
+				6ACE5CBF26AD953F004A24A0 /* ClimbStairs.cpp */,
+				6ACE5CC026AD953F004A24A0 /* ClimbStairs.hpp */,
+			);
+			path = DynamicProgrammingProblems;
+			sourceTree = "<group>";
+		};
 		6AD94F9F269AAAFD00AA35B4 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +98,7 @@
 		6AD94FAA269AAAFD00AA35B4 /* LeetCodeProblems-C++ */ = {
 			isa = PBXGroup;
 			children = (
+				6ACE5CBB26AD91F4004A24A0 /* DynamicProgrammingProblems */,
 				6AB89D4826A2743800E295BA /* BacktrackProblems */,
 				6AD94FB2269ACB1100AA35B4 /* TreeProblems */,
 				6AD94FAB269AAAFD00AA35B4 /* main.cpp */,
@@ -157,8 +175,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AB89D4B26A2748F00E295BA /* BacktrackProblems.cpp in Sources */,
+				6ACE5CC126AD953F004A24A0 /* ClimbStairs.cpp in Sources */,
 				6AD94FB8269ACB8D00AA35B4 /* DataStructures.cpp in Sources */,
 				6AB89D4E26A2751C00E295BA /* Combine.cpp in Sources */,
+				6ACE5CBE26AD920E004A24A0 /* DynamicProgrammingProblems.cpp in Sources */,
 				6AD94FAC269AAAFD00AA35B4 /* main.cpp in Sources */,
 				6AD94FB5269ACB3400AA35B4 /* TreeProblems.cpp in Sources */,
 			);

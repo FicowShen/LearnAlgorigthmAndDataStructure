@@ -57,20 +57,20 @@ vector<vector<int>> combine1(int n, int k) {
         // 寻找第一个 temp[j] + 1 != temp[j + 1] 的位置 t
         // 我们需要把 [0, t - 1] 区间内的每个位置重置成 [1, t]
         if (j < k && temp[j] + 1 == temp[j + 1]) {
-            cout << endl << "-      while" << endl;
+//            cout << endl << "-      while" << endl;
         }
         // 找到不连续的位置，然后增大
         while (j < k && temp[j] + 1 == temp[j + 1]) {
             temp[j] = j + 1;
-            printVector(temp);
+//            printVector(temp);
             ++j;
-            cout << "j = " << j << endl;
+//            cout << "j = " << j << endl;
         }
 //        cout << "j = " << j << endl;
         // j 是第一个 temp[j] + 1 != temp[j + 1] 的位置
         ++temp[j];
-        cout << endl << "-      increase j:" << j << endl;
-        printVector(temp);
+//        cout << endl << "-      increase j:" << j << endl;
+//        printVector(temp);
     }
     return ans;
 }

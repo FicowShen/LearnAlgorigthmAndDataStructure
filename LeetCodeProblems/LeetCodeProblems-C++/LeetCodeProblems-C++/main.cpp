@@ -8,9 +8,11 @@
 #include "Common.h"
 #include "TreeProblems.hpp"
 #include "BacktrackProblems.hpp"
+#include "DynamicProgrammingProblems.hpp"
 
 void runProblems() {
     BacktrackProblems().run();
+    DynamicProgrammingProblems().run();
     TreeProblems().run();
 }
 
