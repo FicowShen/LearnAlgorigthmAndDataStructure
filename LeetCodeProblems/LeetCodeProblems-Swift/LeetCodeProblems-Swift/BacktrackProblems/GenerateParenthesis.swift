@@ -15,11 +15,11 @@ import Foundation
 final class GenerateParenthesis {
 
     func run() {
-        printAndAssert(result: closureNumberSolution2(1),
+        printAndAssert(result: closureNumberSolution3(1),
                        expected: ["()"])
-        printAndAssert(result: Set(closureNumberSolution2(3)),
+        printAndAssert(result: Set(closureNumberSolution3(3)),
                        expected: Set(["((()))","(()())","(())()","()(())","()()()"]))
-        printAndAssert(result: Set(closureNumberSolution2(4)), expected: Set(["()()()()","(())()()","()(())()","(()())()","((()))()","()()(())","(())(())","()(()())","(()()())","((())())","()((()))","(()(()))","((()()))","(((())))"]))
+        printAndAssert(result: Set(closureNumberSolution3(4)), expected: Set(["()()()()","(())()()","()(())()","(()())()","((()))()","()()(())","(())(())","()(()())","(()()())","((())())","()((()))","(()(()))","((()()))","(((())))"]))
 
 //        benchmark(identifier: "backtrack") {
 //            _ = backtrackSolution1(13)
@@ -34,6 +34,38 @@ final class GenerateParenthesis {
 //            _ = closureNumberSolution1(13)
 //        }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     func backtrackSolution3(_ n: Int) -> [String] {
@@ -77,6 +109,46 @@ final class GenerateParenthesis {
         }
         return [String](results)
     }
+
+    func dpSolution3(_ n: Int) -> [String] {
+        if n <= 0 { return [] }
+        if n == 1 { return ["()"] }
+        var dp = [[String]](repeating: [], count: n + 1)
+        dp[0] = [""]
+        dp[1] = ["()"]
+        for i in 2...n {
+            for j in 0..<i {
+                for left in dp[j] {
+                    for right in dp[i - j - 1] {
+                        let s = "(" + left + ")" + right
+                        dp[i].append(s)
+                    }
+                }
+            }
+        }
+        return dp[n]
+    }
+
+    func closureNumberSolution3(_ n: Int) -> [String] {
+        var results = [Int: [String]]()
+        results[0] = [""]
+        func parenthesis(n: Int) -> [String] {
+            if let result = results[n] { return result }
+            var result = [String]()
+            for i in 0..<n {
+                for left in parenthesis(n: i) {
+                    for right in parenthesis(n: n - i - 1) {
+                        let s = "(" + left + ")" + right
+                        result.append(s)
+                    }
+                }
+            }
+            results[n] = result
+            return result
+        }
+        return parenthesis(n: n)
+    }
+
 
 
 
