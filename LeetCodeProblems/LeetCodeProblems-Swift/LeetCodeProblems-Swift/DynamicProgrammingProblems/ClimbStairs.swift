@@ -15,12 +15,12 @@ final class ClimbStairs {
         printAndAssert(result: dpSolution1(6), expected: 13)
         printAndAssert(result: dpSolution1(10), expected: 89)
 
-        benchmark(identifier: "dpSolution1") {
-            _ = dpSolution1(90)
-        }
-        benchmark(identifier: "memoSolution1") {
-            _ = memoSolution1(90)
-        }
+//        benchmark(identifier: "dpSolution1") {
+//            _ = dpSolution1(90)
+//        }
+//        benchmark(identifier: "memoSolution1") {
+//            _ = memoSolution1(90)
+//        }
     }
 
     func dpSolution1(_ n: Int) -> Int {
