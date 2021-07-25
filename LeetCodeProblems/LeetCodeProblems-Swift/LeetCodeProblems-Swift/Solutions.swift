@@ -10,12 +10,13 @@ import Foundation
 final class Solution {
 
     func run() {
-//        ArrayProblems().run()
+        ArrayProblems().run()
         BacktrackProblems.run()
-//        TreeProblems().run()
-//        MathProblems().run()
-//        RecursionProblems().run()
-//        WeeklyContest.run()
+        DynamicProgrammingProblems.run()
+        TreeProblems().run()
+        MathProblems().run()
+        RecursionProblems().run()
+        WeeklyContest.run()
     }
 
 }
