@@ -10,5 +10,6 @@ import Foundation
 final class DynamicProgrammingProblems {
     static func run() {
         ClimbStairs().run()
+        HouseRobber().run()
     }
 }
