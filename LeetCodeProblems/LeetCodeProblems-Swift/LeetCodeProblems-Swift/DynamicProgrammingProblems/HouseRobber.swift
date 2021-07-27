@@ -60,13 +60,11 @@ final class HouseRobber {
 
 
 
+    // https://leetcode.com/problems/house-robber/discuss/156523/From-good-to-great.-How-to-approach-most-of-DP-problems.
     func compressedDP3(_ nums: [Int]) -> Int {
-        if nums.count < 2 {
-            return nums.isEmpty ? 0 : nums.first!
-        }
-        let count = nums.count
-        var a = nums[0], b = max(nums[0], nums[1]), t = b
-        for i in 2..<count {
+        if nums.isEmpty { return 0 }
+        var a = 0, b = 0, t = b
+        for i in 0..<nums.count {
             t = b
             b = max(a + nums[i], b)
             a = t
