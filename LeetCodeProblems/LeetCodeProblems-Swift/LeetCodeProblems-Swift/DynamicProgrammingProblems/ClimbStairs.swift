@@ -27,9 +27,7 @@ final class ClimbStairs {
         if n < 3 { return n }
         var a = 1, b = 1
         for _ in 2...n {
-            let c = a + b
-            a = b
-            b = c
+            (b, a) = (a + b, b)
         }
         return b
     }
