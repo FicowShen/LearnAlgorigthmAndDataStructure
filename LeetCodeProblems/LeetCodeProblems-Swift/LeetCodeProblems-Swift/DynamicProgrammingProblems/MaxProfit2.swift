@@ -11,11 +11,43 @@ import Foundation
 final class MaxProfit2 {
     func run() {
         func judge(prices: [Int], expected: Int) {
-            printAndAssert(result: greedy2(prices), expected: expected)
+            printAndAssert(result: greedy3(prices), expected: expected)
         }
         judge(prices: [7,1,5,3,6,4], expected: 7)
         judge(prices: [1,2,3,4,5], expected: 4)
         judge(prices: [7,6,4,3,1], expected: 0)
+    }
+
+
+    func greedy3(_ prices: [Int]) -> Int {
+        var sum = 0
+        for i in 1..<prices.count {
+            sum += max(prices[i] - prices[i - 1], 0)
+        }
+        return sum
+    }
+
+    func compressedDP3(_ prices: [Int]) -> Int {
+        var noStock = 0, hasStock = -prices[0]
+        for price in prices.dropFirst() {
+            (noStock, hasStock) = (
+                max(noStock, hasStock + price),
+                max(hasStock, noStock - price)
+            )
+        }
+        return noStock
+    }
+
+    func rawDP3(_ prices: [Int]) -> Int {
+        var dp = [[Int]](repeating: [0, 0], count: prices.count)
+        dp[0][1] = -prices[0]
+        for i in 1..<prices.count {
+            (dp[i][0], dp[i][1]) = (
+                max(dp[i - 1][0], dp[i - 1][1] + prices[i]),
+                max(dp[i - 1][1], dp[i - 1][0] - prices[i])
+            )
+        }
+        return dp[prices.count - 1][0]
     }
 
 
@@ -50,12 +82,12 @@ final class MaxProfit2 {
 
 
 
-
-
     func greedy2(_ prices: [Int]) -> Int {
-        (1..<prices.count).reduce(into: 0) { sum, i in
+        var sum = 0
+        for i in 1..<prices.count {
             sum += max(prices[i] - prices[i - 1], 0)
         }
+        return sum
     }
 
     func compressedDP2(_ prices: [Int]) -> Int {
@@ -111,9 +143,11 @@ final class MaxProfit2 {
 
 
     func greedy1(_ prices: [Int]) -> Int {
-        (1..<prices.count).reduce(into: 0) { sum, i in
+        var sum = 0
+        for i in 1..<prices.count {
             sum += max(prices[i] - prices[i - 1], 0)
         }
+        return sum
     }
 
     func compressedDP1(_ prices: [Int]) -> Int {
