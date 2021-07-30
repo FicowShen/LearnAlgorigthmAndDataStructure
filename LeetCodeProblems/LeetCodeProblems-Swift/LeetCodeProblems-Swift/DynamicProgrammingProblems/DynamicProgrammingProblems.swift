@@ -13,5 +13,6 @@ final class DynamicProgrammingProblems {
         HouseRobber().run()
         MaxProfit1().run()
         MaxProfit2().run()
+        MaxProfitWithCooldown().run()
     }
 }
