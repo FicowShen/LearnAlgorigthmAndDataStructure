@@ -11,12 +11,76 @@ import Foundation
 final class MaxProfitWithCooldown {
     func run() {
         func judge(prices: [Int], expected: Int) {
-            printAndAssert(result: twoStatusesDP2(prices), expected: expected)
+            printAndAssert(result: twoStatusesDP3(prices), expected: expected)
         }
         judge(prices: [1,2,3,0,2], expected: 3)
         judge(prices: [1], expected: 0)
         judge(prices: [1,2], expected: 1)
     }
+
+
+
+    func twoStatusesDP3(_ prices: [Int]) -> Int {
+        let n = prices.count
+        var has = [Int](repeating: 0, count: n)
+        var no = has
+        has[0] = -prices[0]
+        if prices.count > 1 {
+            no[1] = max(0, prices[1] - prices[0])
+            has[1] = max(has[0], -prices[1])
+            for i in 2..<n {
+                no[i] = max(no[i - 1], has[i - 1] + prices[i])
+                has[i] = max(has[i - 1], no[i - 2] - prices[i])
+            }
+        }
+        return no[n - 1]
+    }
+
+    func compressedDP3(_ prices: [Int]) -> Int {
+        var hasStock = -prices[0], sellStock = 0, noStock = 0
+        for price in prices.dropFirst() {
+            (hasStock, sellStock, noStock) = (
+                max(hasStock, noStock - price),
+                hasStock + price,
+                max(noStock, sellStock)
+            )
+        }
+        return max(sellStock, noStock)
+    }
+
+    func dp3(_ prices: [Int]) -> Int {
+        let n = prices.count
+        var dp = [[Int]](repeating: [0, 0, 0], count: n)
+        dp[0][0] = -prices[0]
+        for i in 1..<n {
+            dp[i][0] = max(dp[i - 1][0], dp[i - 1][2] - prices[i])
+            dp[i][1] = dp[i - 1][0] + prices[i]
+            dp[i][2] = max(dp[i - 1][1], dp[i - 1][2])
+        }
+        return max(dp[n - 1][1], dp[n - 1][2])
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -87,7 +151,10 @@ final class MaxProfitWithCooldown {
 
 
 
-
+    func compressedTwoStatusesDP1(_ prices: [Int]) -> Int {
+        // TODO: <FICOW> compress the dp array
+        fatalError()
+    }
 
 
 
