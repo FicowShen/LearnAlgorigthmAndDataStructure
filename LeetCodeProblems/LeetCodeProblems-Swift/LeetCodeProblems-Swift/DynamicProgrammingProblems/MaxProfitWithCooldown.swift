@@ -9,14 +9,76 @@ import Foundation
 
 // https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/
 final class MaxProfitWithCooldown {
+
     func run() {
         func judge(prices: [Int], expected: Int) {
-            printAndAssert(result: twoStatusesDP3(prices), expected: expected)
+            printAndAssert(result: compressedTwoStatusesDP2(prices), expected: expected)
         }
         judge(prices: [1,2,3,0,2], expected: 3)
         judge(prices: [1], expected: 0)
         judge(prices: [1,2], expected: 1)
+
+//        let prices = [Int](0...Int(2e5)).shuffled()
+//        printMaxMemoryFootprint {
+//            _ = self.dp1(prices)
+//        }
+//        printMaxMemoryFootprint {
+//            _ = self.compressedTwoStatusesDP1(prices)
+//        }
     }
+
+    func twoStatusesDP4(_ prices: [Int]) -> Int {
+        fatalError()
+    }
+
+    func compressedDP4(_ prices: [Int]) -> Int {
+        fatalError()
+    }
+
+    func dp4(_ prices: [Int]) -> Int {
+        /* https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/discuss/75928/Share-my-DP-solution-(By-State-Machine-Thinking)/217892
+         s0:
+         [Consequence] State not immediate after selling; Doesn't have any stock;
+         [Action can take] Buy a new stock / Continue to take a rest
+
+         s1:
+         [Consequence] State with stock in hand;
+         [Action can take] Sell a stock / Continue to take a rest
+
+         s2:
+         [Consequence] State immediate after selling; Doesn't have any stock (since just sell one to enter this state)
+         [Action can take] Enters next state by taking a rest (since s2 is only for state immediate after selling, we cannot stay here.)
+         */
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
