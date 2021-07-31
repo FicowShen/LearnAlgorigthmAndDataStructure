@@ -12,7 +12,7 @@ final class MaxProfitWithCooldown {
 
     func run() {
         func judge(prices: [Int], expected: Int) {
-            printAndAssert(result: compressedTwoStatusesDP2(prices), expected: expected)
+            printAndAssert(result: compressedTwoStatusesDP3(prices), expected: expected)
         }
         judge(prices: [1,2,3,0,2], expected: 3)
         judge(prices: [1], expected: 0)
@@ -25,6 +25,11 @@ final class MaxProfitWithCooldown {
 //        printMaxMemoryFootprint {
 //            _ = self.compressedTwoStatusesDP1(prices)
 //        }
+    }
+
+
+    func compressedTwoStatusesDP4(_ prices: [Int]) -> Int {
+        fatalError()
     }
 
     func twoStatusesDP4(_ prices: [Int]) -> Int {
@@ -78,9 +83,17 @@ final class MaxProfitWithCooldown {
 
 
 
-
-
-
+    func compressedTwoStatusesDP3(_ prices: [Int]) -> Int {
+        var preSell = 0, noStock = 0,
+            preBuy = 0, hasStock = Int.min
+        prices.forEach { price in
+            preBuy = hasStock
+            hasStock = max(preBuy, preSell - price)
+            preSell = noStock
+            noStock = max(preSell, preBuy + price)
+        }
+        return noStock
+    }
 
     func twoStatusesDP3(_ prices: [Int]) -> Int {
         let n = prices.count
