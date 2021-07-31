@@ -81,7 +81,16 @@ final class MaxProfitWithCooldown {
 
 
 
-
+    func compressedTwoStatusesDP2(_ prices: [Int]) -> Int {
+        var noStock = 0, preSell = 0, hasStock = Int.min, preBuy = 0
+        prices.forEach { price in
+            preBuy = hasStock
+            hasStock = max(preBuy, preSell - price)
+            preSell = noStock
+            noStock = max(preBuy + price, preSell)
+        }
+        return noStock
+    }
 
 
     func twoStatusesDP2(_ prices: [Int]) -> Int {
@@ -150,10 +159,16 @@ final class MaxProfitWithCooldown {
 
 
 
-
+    // https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/discuss/75927/Share-my-thinking-process
     func compressedTwoStatusesDP1(_ prices: [Int]) -> Int {
-        // TODO: <FICOW> compress the dp array
-        fatalError()
+        var noStock = 0, preSell = 0, hasStock = Int.min, preBuy = 0
+        prices.forEach { price in
+            preBuy = hasStock
+            hasStock = max(preSell - price, preBuy)
+            preSell = noStock
+            noStock = max(preBuy + price, preSell)
+        }
+        return noStock
     }
 
 
