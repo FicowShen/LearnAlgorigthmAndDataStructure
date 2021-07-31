@@ -10,7 +10,7 @@ import Foundation
 final class DynamicProgrammingProblems {
     static func run() {
         ClimbStairs().run()
-        HouseRobber().run()
+        HouseRobber1().run()
         MaxProfit1().run()
         MaxProfit2().run()
         MaxProfitWithCooldown().run()

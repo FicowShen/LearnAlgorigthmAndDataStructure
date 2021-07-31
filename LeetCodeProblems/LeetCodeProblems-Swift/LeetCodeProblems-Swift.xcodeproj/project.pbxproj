@@ -19,7 +19,7 @@
 		6ACE5CB626ACEEFB004A24A0 /* DynamicProgrammingProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACE5CB526ACEEFB004A24A0 /* DynamicProgrammingProblems.swift */; };
 		6ACE5CB826ACEF75004A24A0 /* ClimbStairs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACE5CB726ACEF75004A24A0 /* ClimbStairs.swift */; };
 		6ACE5CBA26AD01E9004A24A0 /* WeeklyContest251.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACE5CB926AD01E9004A24A0 /* WeeklyContest251.swift */; };
-		6ACE5CC326AE33A8004A24A0 /* HouseRobber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACE5CC226AE33A8004A24A0 /* HouseRobber.swift */; };
+		6ACE5CC326AE33A8004A24A0 /* HouseRobber1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACE5CC226AE33A8004A24A0 /* HouseRobber1.swift */; };
 		6ACE5CC526AF9577004A24A0 /* MaxProfit1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACE5CC426AF9577004A24A0 /* MaxProfit1.swift */; };
 		6AD94F5F269AA99000AA35B4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94F5E269AA99000AA35B4 /* main.swift */; };
 		6AD94F79269AA9A000AA35B4 /* Solutions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD94F65269AA9A000AA35B4 /* Solutions.swift */; };
@@ -68,7 +68,7 @@
 		6ACE5CB526ACEEFB004A24A0 /* DynamicProgrammingProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicProgrammingProblems.swift; sourceTree = "<group>"; };
 		6ACE5CB726ACEF75004A24A0 /* ClimbStairs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClimbStairs.swift; sourceTree = "<group>"; };
 		6ACE5CB926AD01E9004A24A0 /* WeeklyContest251.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyContest251.swift; sourceTree = "<group>"; };
-		6ACE5CC226AE33A8004A24A0 /* HouseRobber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseRobber.swift; sourceTree = "<group>"; };
+		6ACE5CC226AE33A8004A24A0 /* HouseRobber1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseRobber1.swift; sourceTree = "<group>"; };
 		6ACE5CC426AF9577004A24A0 /* MaxProfit1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxProfit1.swift; sourceTree = "<group>"; };
 		6AD94F5B269AA99000AA35B4 /* LeetCodeProblems-Swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "LeetCodeProblems-Swift"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD94F5E269AA99000AA35B4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -104,6 +104,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6AB35B1326B594160026173D /* HouseRobber */ = {
+			isa = PBXGroup;
+			children = (
+				6ACE5CC226AE33A8004A24A0 /* HouseRobber1.swift */,
+			);
+			path = HouseRobber;
+			sourceTree = "<group>";
+		};
+		6AB35B1426B594320026173D /* BestTimeToBuyAndSellStock */ = {
+			isa = PBXGroup;
+			children = (
+				6ACE5CC426AF9577004A24A0 /* MaxProfit1.swift */,
+				6A59A56326B0DE3E00273E66 /* MaxProfit2.swift */,
+				6AB35B1126B22A4E0026173D /* MaxProfitWithCooldown.swift */,
+			);
+			path = BestTimeToBuyAndSellStock;
+			sourceTree = "<group>";
+		};
 		6AB89D4326A1067D00E295BA /* BacktrackProblems */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,12 +147,10 @@
 		6ACE5CB426ACEED9004A24A0 /* DynamicProgrammingProblems */ = {
 			isa = PBXGroup;
 			children = (
+				6AB35B1426B594320026173D /* BestTimeToBuyAndSellStock */,
+				6AB35B1326B594160026173D /* HouseRobber */,
 				6ACE5CB526ACEEFB004A24A0 /* DynamicProgrammingProblems.swift */,
 				6ACE5CB726ACEF75004A24A0 /* ClimbStairs.swift */,
-				6ACE5CC226AE33A8004A24A0 /* HouseRobber.swift */,
-				6ACE5CC426AF9577004A24A0 /* MaxProfit1.swift */,
-				6A59A56326B0DE3E00273E66 /* MaxProfit2.swift */,
-				6AB35B1126B22A4E0026173D /* MaxProfitWithCooldown.swift */,
 			);
 			path = DynamicProgrammingProblems;
 			sourceTree = "<group>";
@@ -281,7 +297,7 @@
 				6ACE5CB826ACEF75004A24A0 /* ClimbStairs.swift in Sources */,
 				6A59A56426B0DE3E00273E66 /* MaxProfit2.swift in Sources */,
 				6AD94F7A269AA9A000AA35B4 /* MathProblems.swift in Sources */,
-				6ACE5CC326AE33A8004A24A0 /* HouseRobber.swift in Sources */,
+				6ACE5CC326AE33A8004A24A0 /* HouseRobber1.swift in Sources */,
 				6AD94F85269AA9A000AA35B4 /* TreeLevelOrderTraversal.swift in Sources */,
 				6AD94F7C269AA9A000AA35B4 /* InvertTree.swift in Sources */,
 			);

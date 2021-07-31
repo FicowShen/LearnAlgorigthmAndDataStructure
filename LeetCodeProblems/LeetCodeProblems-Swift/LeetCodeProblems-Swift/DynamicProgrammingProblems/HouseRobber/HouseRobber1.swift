@@ -8,7 +8,7 @@
 import Foundation
 
 // https://leetcode-cn.com/problems/house-robber/
-final class HouseRobber {
+final class HouseRobber1 {
     func run() {
         func judge(nums: [Int], expected: Int) {
             printAndAssert(result: compressedDP3(nums), expected: expected)
