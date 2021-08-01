@@ -11,6 +11,7 @@ final class DynamicProgrammingProblems {
     static func run() {
         ClimbStairs().run()
         HouseRobber1().run()
+        HouseRobber2().run()
         MaxProfit1().run()
         MaxProfit2().run()
         MaxProfitWithCooldown().run()
