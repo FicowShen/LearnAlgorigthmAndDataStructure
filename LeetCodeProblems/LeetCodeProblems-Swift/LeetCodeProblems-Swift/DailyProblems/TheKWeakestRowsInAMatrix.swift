@@ -11,7 +11,7 @@ import Foundation
 final class TheKWeakestRowsInAMatrix {
     func run() {
         func judge(_ mat: [[Int]], _ k: Int, expected: [Int]) {
-            printAndAssert(result: kWeakestRows(mat, k),
+            printAndAssert(result: kWeakestRowsWithBinarySearch(mat, k),
                            expected: expected)
         }
         judge([[1,1,0,0,0],
@@ -24,6 +24,29 @@ final class TheKWeakestRowsInAMatrix {
                [1,1,1,1],
                [1,0,0,0],
                [1,0,0,0]], 2, expected: [0,2])
+    }
+
+    func kWeakestRowsWithBinarySearch(_ mat: [[Int]], _ k: Int) -> [Int] {
+        var indexCount = [(index: Int, oneCount: Int)]()
+        for (rowIndex, rowNums) in mat.enumerated() {
+            var l = 0, r = rowNums.count - 1, pos = -1
+            while l <= r {
+                let mid = l + (r - l) >> 1
+                if rowNums[mid] == 0 {
+                    r = mid - 1
+                } else {
+                    pos = mid
+                    l = mid + 1
+                }
+            }
+            indexCount.append((rowIndex, pos + 1))
+        }
+        let sortedIndexCount = indexCount.sorted { lhs, rhs in
+            return lhs.oneCount == rhs.oneCount
+                ? lhs.index < rhs.index
+                : lhs.oneCount < rhs.oneCount
+        }
+        return [Int](sortedIndexCount.prefix(k).map { $0.index })
     }
 
     func kWeakestRows(_ mat: [[Int]], _ k: Int) -> [Int] {
