@@ -16,6 +16,7 @@ final class Solution {
         TreeProblems().run()
         MathProblems().run()
         RecursionProblems().run()
+        DailyProblems.run()
         WeeklyContest.run()
     }
 
