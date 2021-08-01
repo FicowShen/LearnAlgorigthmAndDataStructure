@@ -11,7 +11,7 @@ import Foundation
 final class HouseRobber2 {
     func run() {
         func judge(nums: [Int], expected: Int) {
-            printAndAssert(result: dp3(nums), expected: expected)
+            printAndAssert(result: dp2(nums), expected: expected)
         }
         judge(nums: [2,3,2], expected: 3)
         judge(nums: [1,2,3,1], expected: 4)
