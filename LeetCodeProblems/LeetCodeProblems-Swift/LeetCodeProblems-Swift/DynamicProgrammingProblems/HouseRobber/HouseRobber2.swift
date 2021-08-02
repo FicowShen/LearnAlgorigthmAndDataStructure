@@ -11,15 +11,24 @@ import Foundation
 final class HouseRobber2 {
     func run() {
         func judge(nums: [Int], expected: Int) {
-            printAndAssert(result: dp2(nums), expected: expected)
+            printAndAssert(result: dp3(nums), expected: expected)
         }
         judge(nums: [2,3,2], expected: 3)
         judge(nums: [1,2,3,1], expected: 4)
         judge(nums: [0], expected: 0)
+        judge(nums: [1], expected: 1)
     }
 
     func dp3(_ nums: [Int]) -> Int {
-        fatalError()
+        if nums.count == 1 { return nums[0] }
+        func rob(_ nums: ArraySlice<Int>) -> Int {
+            var pre = 0, cur = 0
+            for num in nums {
+                (pre, cur) = (cur, max(pre + num, cur))
+            }
+            return cur
+        }
+        return max(rob(nums.dropFirst()), rob(nums.dropLast()))
     }
 
 
