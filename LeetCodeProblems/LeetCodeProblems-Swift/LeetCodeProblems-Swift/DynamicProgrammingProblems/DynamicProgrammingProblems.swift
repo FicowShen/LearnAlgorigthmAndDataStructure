@@ -12,6 +12,7 @@ final class DynamicProgrammingProblems {
         ClimbStairs().run()
         HouseRobber1().run()
         HouseRobber2().run()
+        HouseRobber3().run()
         MaxProfit1().run()
         MaxProfit2().run()
         MaxProfitWithCooldown().run()

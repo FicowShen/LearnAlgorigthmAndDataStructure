@@ -63,6 +63,13 @@ final class TreeNode: Equatable, CustomStringConvertible {
     }
 }
 
+// defining the dict key as ObjectIdentifier is better than TreeNode for performance
+//extension TreeNode: Hashable {
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(ObjectIdentifier(self))
+//    }
+//}
+
 final class Node {
     public var val: Int
     public var children: [Node]
