@@ -10,5 +10,6 @@ import Foundation
 final class DailyProblems {
     static func run() {
         TheKWeakestRowsInAMatrix().run()
+        PlusOne().run()
     }
 }
