@@ -20,14 +20,6 @@ final class Day2PlusOne {
         judge([0], expected: [1])
     }
 
-    func plusOne7(_ digits: [Int]) -> [Int] {
-        fatalError()
-    }
-
-    func plusOne6(_ digits: [Int]) -> [Int] {
-        fatalError()
-    }
-
     func plusOne5(_ digits: [Int]) -> [Int] {
         fatalError()
     }

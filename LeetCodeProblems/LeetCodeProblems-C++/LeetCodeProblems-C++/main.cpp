@@ -9,6 +9,7 @@
 #include "TreeProblems.hpp"
 #include "BacktrackProblems.hpp"
 #include "DynamicProgrammingProblems.hpp"
+#include "DailyProblems.hpp"
 
 void runProblems() {
     BacktrackProblems().run();
