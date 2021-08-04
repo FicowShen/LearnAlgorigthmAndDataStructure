@@ -154,7 +154,7 @@ final class HouseRobber3 {
 
 
 
-    // https://leetcode-cn.com/problems/house-robber-iii/solution/san-chong-fang-fa-jie-jue-shu-xing-dong-tai-gui-hu/
+    // https://leetcode.com/problems/house-robber-iii/discuss/79330/Step-by-step-tackling-of-the-problem
     func robWithDP1(_ root: TreeNode?) -> Int {
         func dp(_ root: TreeNode?) -> [Int] {
             guard let root = root else { return [0, 0] }

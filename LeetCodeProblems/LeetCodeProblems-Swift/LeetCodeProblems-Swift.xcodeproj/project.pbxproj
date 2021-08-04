@@ -143,13 +143,21 @@
 		6AB35B1926B6E7AB0026173D /* DailyProblems */ = {
 			isa = PBXGroup;
 			children = (
+				6AB35B3226BAD94D0026173D /* Week 1 */,
 				6AB35B1C26B6E7F40026173D /* DailyProblems.swift */,
 				6AB35B1A26B6E7D70026173D /* TheKWeakestRowsInAMatrix.swift */,
+			);
+			path = DailyProblems;
+			sourceTree = "<group>";
+		};
+		6AB35B3226BAD94D0026173D /* Week 1 */ = {
+			isa = PBXGroup;
+			children = (
 				6AB35B2426B9857F0026173D /* Day1 ClimbStairs.swift */,
 				6AB35B2226B8C51A0026173D /* Day2 PlusOne.swift */,
 				6AB35B3026BA0BD90026173D /* Day3 TwoSum.swift */,
 			);
-			path = DailyProblems;
+			path = "Week 1";
 			sourceTree = "<group>";
 		};
 		6AB89D4326A1067D00E295BA /* BacktrackProblems */ = {
