@@ -27,6 +27,31 @@ vector<int> plusOne2(vector<int>& digits) {
     return vector<int>{};
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 vector<int> plusOne1(vector<int>& digits) {
     for (int i = (int)digits.size() - 1; i >= 0; --i) {
         digits[i] = (digits[i] + 1) % 10;

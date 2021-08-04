@@ -12,5 +12,6 @@ final class DailyProblems {
         TheKWeakestRowsInAMatrix().run()
         Day2PlusOne().run()
         Day1ClimbStairs().run()
+        Day3TwoSum().run()
     }
 }
