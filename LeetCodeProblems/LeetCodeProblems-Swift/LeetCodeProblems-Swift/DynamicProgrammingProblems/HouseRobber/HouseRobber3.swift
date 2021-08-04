@@ -11,7 +11,7 @@ final class HouseRobber3 {
     func run() {
         func judge(_ nodes: [Int?], expected: Int) {
             let tree = perfectBinaryTreeFromLevelTraversal(nodes)
-            printAndAssert(result: robWithDP2(tree), expected: expected)
+            printAndAssert(result: robWithDP3(tree), expected: expected)
         }
         judge([3,2,3,nil,3,nil,1], expected: 7)
         judge([3,4,5,1,3,nil,1], expected: 9)
@@ -39,16 +39,31 @@ final class HouseRobber3 {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func robWithDP3(_ root: TreeNode?) -> Int {
-
-
-
-
-
-
-
-
-        fatalError()
+        func rob(_ node: TreeNode?) -> (Int, Int) {
+            guard let node = node else { return (0, 0) }
+            let left = rob(node.left)
+            let right = rob(node.right)
+            let children = max(left.0, left.1) + max(right.0, right.1)
+            let current = node.val + left.0 + right.0
+            return (children, current)
+        }
+        let result = rob(root)
+        return max(result.0, result.1)
     }
 
 
