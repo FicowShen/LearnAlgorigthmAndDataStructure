@@ -7,6 +7,7 @@
 
 import Foundation
 
+// https://leetcode-cn.com/problems/two-sum/
 final class Day3TwoSum {
     func run() {
         printAndAssert(result: twoSum3([2,7,11,15], 9), expected: [0,1])
