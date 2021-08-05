@@ -12,7 +12,7 @@ final class Day4SwapNodesInPairs {
         func judge(list: [Int], expected: [Int]) {
             let listNode = ListNode.fromList(list)
             let listNode2 = ListNode.fromList(expected)
-            printAndAssert(result: swapPairsRecursive1(listNode), expected: listNode2)
+            printAndAssert(result: swapPairsOneTwoThree2(listNode), expected: listNode2)
         }
         judge(list: [1,2,3,4], expected: [2,1,4,3])
         judge(list: [], expected: [])
@@ -47,16 +47,55 @@ final class Day4SwapNodesInPairs {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
     func swapPairsOneTwoThree2(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        var one = head, two = one?.next, three = two?.next
+        let newHead = two ?? one
+        while one != nil, two != nil {
+            two?.next = one
+            one?.next = three?.next ?? three
+            one = three;
+            two = one?.next
+            three = two?.next
+        }
+        return newHead
     }
 
     func swapPairsWithDummy2(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        guard let head = head else { return nil }
+        let dummy = ListNode()
+        dummy.next = head
+        var temp: ListNode? = dummy
+        while temp?.next != nil, temp?.next!.next != nil {
+            let one = temp?.next, two = temp?.next?.next
+            one?.next = two?.next
+            two?.next = one
+            temp?.next = two
+            temp = one
+        }
+        return dummy.next
     }
 
     func swapPairsRecursive2(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        func swapped(_ head: ListNode?) -> ListNode? {
+            guard let head = head,
+                  let next = head.next
+            else { return head }
+            head.next = swapped(next.next)
+            next.next = head
+            return next
+        }
+        return swapped(head)
     }
 
 
