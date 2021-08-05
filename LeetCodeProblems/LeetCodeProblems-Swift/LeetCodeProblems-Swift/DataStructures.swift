@@ -79,6 +79,44 @@ final class Node {
     }
 }
 
+
+/// Definition for singly-linked list.
+public class ListNode: Equatable, CustomStringConvertible {
+    public var val: Int
+    public var next: ListNode?
+    public init() { self.val = 0; self.next = nil }
+    public init(_ val: Int) { self.val = val; self.next = nil }
+    public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next }
+
+    public var description: String {
+        var node: ListNode? = self
+        var s = ""
+        while node != nil {
+            s += node!.val.description
+            node = node?.next
+            if node != nil { s += " -> " }
+        }
+        return s
+    }
+
+    static func fromList(_ list: [Int]) -> ListNode? {
+        var head: ListNode?, cur: ListNode?
+        for num in list {
+            let node = ListNode(num)
+            if head == nil { head = node }
+            cur?.next = node
+            cur = node
+        }
+        return head
+    }
+
+    public static func == (lhs: ListNode, rhs: ListNode) -> Bool {
+        if lhs.val != rhs.val { return false }
+        return lhs.next == rhs.next
+    }
+}
+
+
 struct Queue<Element> {
     private var enqueueStack = [Element]()
     private var dequeueStack = [Element]()

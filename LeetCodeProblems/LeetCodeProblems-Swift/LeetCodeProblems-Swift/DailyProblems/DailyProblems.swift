@@ -9,9 +9,10 @@ import Foundation
 
 final class DailyProblems {
     static func run() {
-        TheKWeakestRowsInAMatrix().run()
+        Day4SwapNodesInPairs().run()
+        Day3TwoSum().run()
         Day2PlusOne().run()
         Day1ClimbStairs().run()
-        Day3TwoSum().run()
+        TheKWeakestRowsInAMatrix().run()
     }
 }
