@@ -9,6 +9,7 @@ import Foundation
 
 final class DailyProblems {
     static func run() {
+        Week1ContainerWithMostWater().run()
         Week1MoveZeroes().run()
         Day4SwapNodesInPairs().run()
         Day3TwoSum().run()
