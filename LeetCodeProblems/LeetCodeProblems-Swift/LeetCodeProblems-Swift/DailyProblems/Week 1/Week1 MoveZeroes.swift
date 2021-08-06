@@ -12,16 +12,17 @@ final class Week1MoveZeroes {
     func run() {
         func judge(_ nums: [Int], expected: [Int]) {
             var nums = nums
-            moveZeroesSnowball2(&nums)
+            moveZeroesSnowball3(&nums)
             printAndAssert(result: nums, expected: expected)
         }
         judge([0], expected: [0])
+        judge([1,1,0,3,12], expected: [1,1,3,12,0])
         judge([0,1,0,3,12], expected: [1,3,12,0,0])
     }
 
 
     func moveZeroesSnowball4(_ nums: inout [Int]) {
-
+        fatalError()
     }
 
     func moveZeroesFastSlowPointers4(_ nums: inout [Int]) {
@@ -29,12 +30,45 @@ final class Week1MoveZeroes {
     }
 
 
-    func moveZeroesSnowball3(_ nums: inout [Int]) {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    func moveZeroesSnowball3(_ nums: inout [Int]) {
+        var snowballSize = 0
+        for i in 0..<nums.count {
+            if nums[i] == 0 {
+                snowballSize += 1
+            } else if snowballSize > 0 {
+                nums[i - snowballSize] = nums[i]
+                nums[i] = 0
+            }
+        }
     }
 
     func moveZeroesFastSlowPointers3(_ nums: inout [Int]) {
-        fatalError()
+        var slow = 0
+        for fast in 0..<nums.count {
+            if nums[fast] == 0 { continue }
+            if fast != slow { nums.swapAt(slow, fast) }
+            slow += 1
+        }
     }
 
 

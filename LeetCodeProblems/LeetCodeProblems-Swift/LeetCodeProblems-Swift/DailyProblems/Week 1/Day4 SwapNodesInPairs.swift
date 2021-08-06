@@ -13,7 +13,7 @@ final class Day4SwapNodesInPairs {
         func judge(list: [Int], expected: [Int]) {
             let listNode = ListNode.fromList(list)
             let listNode2 = ListNode.fromList(expected)
-            printAndAssert(result: swapPairsOneTwoThree2(listNode), expected: listNode2)
+            printAndAssert(result: swapPairsOneTwoThree3(listNode), expected: listNode2)
         }
         judge(list: [1,2,3,4], expected: [2,1,4,3])
         judge(list: [], expected: [])
@@ -35,16 +35,56 @@ final class Day4SwapNodesInPairs {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func swapPairsOneTwoThree3(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        var one = head, two = one?.next, three = two?.next
+        let newHead = two ?? one
+        while two != nil {
+            two?.next = one
+            one?.next = three?.next ?? three // 4 or 3
+            one = three
+            two = one?.next
+            three = two?.next
+        }
+        return newHead
     }
 
     func swapPairsWithDummy3(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        let dummy = ListNode(0, head)
+        var temp: ListNode? = dummy
+        while temp?.next != nil, temp?.next?.next != nil {
+            let one = temp?.next, two = temp?.next?.next
+            one?.next = two?.next
+            two?.next = one
+            temp?.next = two
+            temp = one
+        }
+        return dummy.next
     }
 
     func swapPairsRecursive3(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        func swapped(_ head: ListNode?) -> ListNode? {
+            guard let head = head, let next = head.next else {
+                return head
+            }
+            head.next = swapped(next.next)
+            next.next = head
+            return next
+        }
+        return swapped(head)
     }
 
 
@@ -62,7 +102,7 @@ final class Day4SwapNodesInPairs {
     func swapPairsOneTwoThree2(_ head: ListNode?) -> ListNode? {
         var one = head, two = one?.next, three = two?.next
         let newHead = two ?? one
-        while one != nil, two != nil {
+        while two != nil {
             two?.next = one
             one?.next = three?.next ?? three
             one = three;
