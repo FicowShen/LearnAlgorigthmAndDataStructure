@@ -14,7 +14,7 @@ final class DailyProblems {
 
     static func week1() {
         Week1ContainerWithMostWater().run()
-        Week1MoveZeroes().run()
+        Day6MoveZeroes().run()
         Day5MergeTwoSortedLists().run()
         Day4SwapNodesInPairs().run()
         Day3TwoSum().run()

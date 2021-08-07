@@ -8,7 +8,7 @@
 import Foundation
 
 // https://leetcode-cn.com/problems/move-zeroes/
-final class Week1MoveZeroes {
+final class Day6MoveZeroes {
     func run() {
         func judge(_ nums: [Int], expected: [Int]) {
             var nums = nums
