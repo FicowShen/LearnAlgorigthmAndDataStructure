@@ -25,6 +25,33 @@ final class Week1ContainerWithMostWater {
         fatalError()
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func maxArea3(_ height: [Int]) -> Int {
         var i = 0, j = height.count - 1, area = 0
         while i < j {

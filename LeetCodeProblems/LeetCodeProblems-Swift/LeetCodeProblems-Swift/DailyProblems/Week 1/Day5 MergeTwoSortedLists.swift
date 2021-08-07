@@ -14,7 +14,7 @@ final class Day5MergeTwoSortedLists {
             let node1 = ListNode.fromList(l1)
             let node2 = ListNode.fromList(l2)
             let node3 = ListNode.fromList(expected)
-            printAndAssert(result: mergeTwoListsWithIteration2(node1, node2), expected: node3)
+            printAndAssert(result: mergeTwoListsWithRecursion3(node1, node2), expected: node3)
         }
         judge([5], [1,2,4], expected: [1,2,4,5])
         judge([1,2,4], [1,3,4], expected: [1,1,2,3,4,4])
@@ -30,6 +30,9 @@ final class Day5MergeTwoSortedLists {
         fatalError()
     }
 
+
+
+
     func mergeTwoListsWithRecursion4(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         fatalError()
     }
@@ -38,12 +41,41 @@ final class Day5MergeTwoSortedLists {
         fatalError()
     }
 
+
+
+
+
+
+
     func mergeTwoListsWithRecursion3(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
-        fatalError()
+        func merged(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+            if l1 == nil { return l2 }
+            if l2 == nil { return l1 }
+            if l1!.val <= l2!.val {
+                l1?.next = merged(l1?.next, l2)
+                return l1
+            }
+            l2?.next = merged(l1, l2?.next)
+            return l2
+        }
+        return merged(l1, l2)
     }
 
     func mergeTwoListsWithIteration3(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
-        fatalError()
+        let newHead = ListNode()
+        var l1 = l1, l2 = l2, cur: ListNode? = newHead
+        while l1 != nil, l2 != nil {
+            if l1!.val < l2!.val {
+                cur?.next = l1
+                l1 = l1?.next
+            } else {
+                cur?.next = l2
+                l2 = l2?.next
+            }
+            cur = cur?.next
+        }
+        cur?.next = l1 == nil ? l2 : l1
+        return newHead.next
     }
 
 

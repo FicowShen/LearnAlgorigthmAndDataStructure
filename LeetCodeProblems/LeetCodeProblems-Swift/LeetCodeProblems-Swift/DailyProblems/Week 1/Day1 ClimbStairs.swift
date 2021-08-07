@@ -7,21 +7,57 @@
 
 import Foundation
 
-// https://leetcode-cn.com/problems/climbing-stairs/#
+// https://leetcode-cn.com/problems/climbing-stairs/
 final class Day1ClimbStairs {
     func run() {
-        printAndAssert(result: climbStairs4(2), expected: 2)
-        printAndAssert(result: climbStairs4(3), expected: 3)
-        printAndAssert(result: climbStairs4(6), expected: 13)
-        printAndAssert(result: climbStairs4(10), expected: 89)
+        printAndAssert(result: climbStairs5(2), expected: 2)
+        printAndAssert(result: climbStairs5(3), expected: 3)
+        printAndAssert(result: climbStairs5(6), expected: 13)
+        printAndAssert(result: climbStairs5(10), expected: 89)
     }
 
     func climbStairs6(_ n: Int) -> Int {
         fatalError()
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func climbStairs5(_ n: Int) -> Int {
-        fatalError()
+        var a = 0, b = 0, c = 1
+        for _ in 1...n {
+            a = b; b = c; c = a + b
+        }
+        return c
     }
 
 
