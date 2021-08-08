@@ -110,6 +110,24 @@ public class ListNode: Equatable, CustomStringConvertible {
         return head
     }
 
+    /// link the tail node to a node at a specified position
+    /// - Parameter index: the index position where the tail node should linke to, index starts from 0
+    @discardableResult
+    func linkTailToNode(index: Int) -> ListNode? {
+        guard index >= 0 else { return nil }
+        var i = 0, node: ListNode? = self
+        while i < index {
+            node = node?.next
+            i += 1
+        }
+        var tail: ListNode? = self
+        while tail?.next != nil {
+            tail = tail?.next
+        }
+        tail?.next = node
+        return node
+    }
+
     public static func == (lhs: ListNode, rhs: ListNode) -> Bool {
         if lhs.val != rhs.val { return false }
         return lhs.next == rhs.next
