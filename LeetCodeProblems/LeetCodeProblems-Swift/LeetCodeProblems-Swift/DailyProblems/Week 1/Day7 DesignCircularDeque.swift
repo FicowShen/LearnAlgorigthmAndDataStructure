@@ -26,6 +26,7 @@ private class DoubleLinkedNode {
 }
 
 // https://leetcode-cn.com/problems/design-circular-deque/
+// Deque: Double-End Queue
 final class Day7DesignCircularDeque {
     func run() {
         func judge(Deque: CircularDequeConvertible.Type) {

@@ -13,6 +13,7 @@ final class DailyProblems {
     }
 
     static func week1() {
+        Week1ReverseLinkedList().run()
         Week1ContainerWithMostWater().run()
         Day7DesignCircularDeque().run()
         Day6MoveZeroes().run()
