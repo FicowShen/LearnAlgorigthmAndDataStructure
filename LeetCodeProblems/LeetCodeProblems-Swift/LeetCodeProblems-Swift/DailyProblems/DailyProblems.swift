@@ -13,6 +13,7 @@ final class DailyProblems {
     }
 
     static func week1() {
+        Week1ValidParentheses().run()
         Week1LinkedListCycleII().run()
         Week1LinkedListCycle().run()
         Week1ReverseLinkedList().run()
