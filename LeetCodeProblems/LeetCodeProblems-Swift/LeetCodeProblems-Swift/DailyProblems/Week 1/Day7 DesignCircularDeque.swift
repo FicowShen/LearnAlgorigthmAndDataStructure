@@ -19,6 +19,12 @@ protocol CircularDequeConvertible: AnyObject {
     func isFull() -> Bool
 }
 
+private class DoubleLinkedNode {
+    var value: Int
+    var pre: DoubleLinkedNode?, next: DoubleLinkedNode?
+    init(_ v: Int = 0) { value = v }
+}
+
 // https://leetcode-cn.com/problems/design-circular-deque/
 final class Day7DesignCircularDeque {
     func run() {
@@ -36,74 +42,182 @@ final class Day7DesignCircularDeque {
             (0...10).forEach { _ in _ = deque.deleteLast() }
             assert(deque.getRear() == -1)
         }
-        judge(Deque: CircularDequeWithArray2.self)
+        judge(Deque: CircularDequeWithArray3.self)
     }
 }
 
-private class DoubleLinkedNode {
-    var value: Int
-    var pre: DoubleLinkedNode?, next: DoubleLinkedNode?
-    init(_ v: Int = 0) { value = v }
+class CircularDequeWithArray4: CircularDequeConvertible {
+    required init(_ k: Int) {
+        fatalError()
+    }
+    func insertFront(_ value: Int) -> Bool {
+        fatalError()
+    }
+    func insertLast(_ value: Int) -> Bool {
+        fatalError()
+    }
+    func deleteFront() -> Bool {
+        fatalError()
+    }
+    func deleteLast() -> Bool {
+        fatalError()
+    }
+    func getFront() -> Int {
+        fatalError()
+    }
+    func getRear() -> Int {
+        fatalError()
+    }
+    func isEmpty() -> Bool {
+        fatalError()
+    }
+    func isFull() -> Bool {
+        fatalError()
+    }
 }
+
+class CircularDequeWithNodes4: CircularDequeConvertible {
+    required init(_ k: Int) {
+        fatalError()
+    }
+    func insertFront(_ value: Int) -> Bool {
+        fatalError()
+    }
+    func insertLast(_ value: Int) -> Bool {
+        fatalError()
+    }
+    func deleteFront() -> Bool {
+        fatalError()
+    }
+    func deleteLast() -> Bool {
+        fatalError()
+    }
+    func getFront() -> Int {
+        fatalError()
+    }
+    func getRear() -> Int {
+        fatalError()
+    }
+    func isEmpty() -> Bool {
+        fatalError()
+    }
+    func isFull() -> Bool {
+        fatalError()
+    }
+}
+
+
+
+
+
 
 
 class CircularDequeWithArray3: CircularDequeConvertible {
+    private var front = 0, rear = 0, list: [Int]
+    private let capacity: Int
+
     required init(_ k: Int) {
-        fatalError()
+        capacity = k + 1
+        list = [Int](repeating: 0, count: capacity)
     }
     func insertFront(_ value: Int) -> Bool {
-        fatalError()
+        if isFull() { return false }
+        front = (front - 1 + capacity) % capacity
+        list[front] = value
+        return true
     }
     func insertLast(_ value: Int) -> Bool {
-        fatalError()
+        if isFull() { return false }
+        list[rear] = value
+        rear = (rear + 1) % capacity
+        return true
     }
     func deleteFront() -> Bool {
-        fatalError()
+        if isEmpty() { return false }
+        front = (front + 1) % capacity
+        return true
     }
     func deleteLast() -> Bool {
-        fatalError()
+        if isEmpty() { return false }
+        rear = (rear - 1 + capacity) % capacity
+        return true
     }
     func getFront() -> Int {
-        fatalError()
+        if isEmpty() { return -1 }
+        return list[front]
     }
     func getRear() -> Int {
-        fatalError()
+        if isEmpty() { return -1 }
+        return list[(rear - 1 + capacity) % capacity]
     }
-    func isEmpty() -> Bool {
-        fatalError()
-    }
-    func isFull() -> Bool {
-        fatalError()
-    }
+    func isEmpty() -> Bool { rear == front }
+    func isFull() -> Bool { (rear + 1) % capacity == front }
 }
 
 class CircularDequeWithNodes3: CircularDequeConvertible {
+    private var front = DoubleLinkedNode(), rear = DoubleLinkedNode()
+    private var size = 0
+    private let capacity: Int
+
     required init(_ k: Int) {
-        fatalError()
+        capacity = k
+        front.next = rear
+        rear.pre = front
     }
+    private func increaseSize() { size += 1 }
+    private func decreaseSize() { size -= 1 }
+
     func insertFront(_ value: Int) -> Bool {
-        fatalError()
+        if isFull() { return false }
+        let node = DoubleLinkedNode(value)
+        let right = front.next
+        front.next = node
+        node.pre = front
+        node.next = right
+        right?.pre = node
+        increaseSize()
+        return true
     }
     func insertLast(_ value: Int) -> Bool {
-        fatalError()
+        if isFull() { return false }
+        let node = DoubleLinkedNode(value)
+        let left = rear.pre
+        left?.next = node
+        node.pre = left
+        node.next = rear
+        rear.pre = node
+        increaseSize()
+        return true
     }
     func deleteFront() -> Bool {
-        fatalError()
+        if isEmpty() { return false }
+        let right = front.next?.next
+        front.next = right
+        right?.pre = front
+        decreaseSize()
+        return true
     }
     func deleteLast() -> Bool {
-        fatalError()
+        if isEmpty() { return false }
+        let left = rear.pre?.pre
+        left?.next = rear
+        rear.pre = left
+        decreaseSize()
+        return true
     }
     func getFront() -> Int {
-        fatalError()
+        if isEmpty() { return -1 }
+        return front.next!.value
     }
     func getRear() -> Int {
-        fatalError()
+        if isEmpty() { return -1 }
+        return rear.pre!.value
     }
     func isEmpty() -> Bool {
-        fatalError()
+        size == 0
     }
     func isFull() -> Bool {
-        fatalError()
+        size == capacity
     }
 }
 
