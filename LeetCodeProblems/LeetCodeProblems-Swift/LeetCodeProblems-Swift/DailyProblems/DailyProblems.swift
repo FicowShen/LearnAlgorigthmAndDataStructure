@@ -13,6 +13,7 @@ final class DailyProblems {
     }
 
     static func week1() {
+        Week1ThreeSum().run()
         Week1MergeSortedArray().run()
         Week1ValidParentheses().run()
         Week1LinkedListCycleII().run()
