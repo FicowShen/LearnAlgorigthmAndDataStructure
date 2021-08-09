@@ -54,7 +54,7 @@ final class Week1ThreeSum {
 
     func threeSum2(_ nums: [Int]) -> [[Int]] {
         // use sorted array to skip repetitive nums
-        let n = nums.count, nums = nums.sorted()
+        let n = nums.count, nums = nums.sorted() // O(nlogn)
         var results = [[Int]]()
         for i in stride(from: 0, through: n - 2, by: 1) {
             if nums[i] > 0 { break } // skip invalid cases
