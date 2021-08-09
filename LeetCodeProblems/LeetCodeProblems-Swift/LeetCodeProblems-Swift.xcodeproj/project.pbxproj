@@ -29,6 +29,7 @@
 		6AB35B4626C018850026173D /* Week1 MergeSortedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B4526C018850026173D /* Week1 MergeSortedArray.swift */; };
 		6AB35B4826C0AF020026173D /* Week1 ThreeSum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B4726C0AF020026173D /* Week1 ThreeSum.swift */; };
 		6AB35B4A26C0B9AC0026173D /* Week1 ReverseNodesInKGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B4926C0B9AC0026173D /* Week1 ReverseNodesInKGroup.swift */; };
+		6AB35B4E26C1732A0026173D /* Day8 IntersectionOfTwoArraysII.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B4D26C1732A0026173D /* Day8 IntersectionOfTwoArraysII.swift */; };
 		6AB89D4526A106AC00E295BA /* BacktrackProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB89D4426A106AC00E295BA /* BacktrackProblems.swift */; };
 		6AB89D4726A106D700E295BA /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB89D4626A106D700E295BA /* Combine.swift */; };
 		6AB89D5126A4138100E295BA /* WeeklyContest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB89D5026A4138100E295BA /* WeeklyContest.swift */; };
@@ -98,6 +99,7 @@
 		6AB35B4526C018850026173D /* Week1 MergeSortedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week1 MergeSortedArray.swift"; sourceTree = "<group>"; };
 		6AB35B4726C0AF020026173D /* Week1 ThreeSum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week1 ThreeSum.swift"; sourceTree = "<group>"; };
 		6AB35B4926C0B9AC0026173D /* Week1 ReverseNodesInKGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week1 ReverseNodesInKGroup.swift"; sourceTree = "<group>"; };
+		6AB35B4D26C1732A0026173D /* Day8 IntersectionOfTwoArraysII.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day8 IntersectionOfTwoArraysII.swift"; sourceTree = "<group>"; };
 		6AB89D4426A106AC00E295BA /* BacktrackProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BacktrackProblems.swift; sourceTree = "<group>"; };
 		6AB89D4626A106D700E295BA /* Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combine.swift; sourceTree = "<group>"; };
 		6AB89D5026A4138100E295BA /* WeeklyContest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyContest.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 		6AB35B1926B6E7AB0026173D /* DailyProblems */ = {
 			isa = PBXGroup;
 			children = (
+				6AB35B4C26C172F50026173D /* Week 2 */,
 				6AB35B3226BAD94D0026173D /* Week 1 */,
 				6AB35B1C26B6E7F40026173D /* DailyProblems.swift */,
 				6AB35B1A26B6E7D70026173D /* TheKWeakestRowsInAMatrix.swift */,
@@ -194,6 +197,14 @@
 				6AB35B4926C0B9AC0026173D /* Week1 ReverseNodesInKGroup.swift */,
 			);
 			path = "Week 1";
+			sourceTree = "<group>";
+		};
+		6AB35B4C26C172F50026173D /* Week 2 */ = {
+			isa = PBXGroup;
+			children = (
+				6AB35B4D26C1732A0026173D /* Day8 IntersectionOfTwoArraysII.swift */,
+			);
+			path = "Week 2";
 			sourceTree = "<group>";
 		};
 		6AB89D4326A1067D00E295BA /* BacktrackProblems */ = {
@@ -375,6 +386,7 @@
 				6AB35B2326B8C51A0026173D /* Day2 PlusOne.swift in Sources */,
 				6AD94F82269AA9A000AA35B4 /* LowestCommonAncestor.swift in Sources */,
 				6AB89D5326A413BB00E295BA /* WeeklyContest250.swift in Sources */,
+				6AB35B4E26C1732A0026173D /* Day8 IntersectionOfTwoArraysII.swift in Sources */,
 				6AD94F87269AA9A000AA35B4 /* NaryTreePreorderTraversal.swift in Sources */,
 				6AD94F89269AA9A000AA35B4 /* Helpers.swift in Sources */,
 				6AB35B4826C0AF020026173D /* Week1 ThreeSum.swift in Sources */,

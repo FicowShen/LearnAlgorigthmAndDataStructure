@@ -9,7 +9,12 @@ import Foundation
 
 final class DailyProblems {
     static func run() {
+        week2()
         week1()
+    }
+
+    static func week2() {
+        Day8IntersectionOfTwoArraysII().run()
     }
 
     static func week1() {
