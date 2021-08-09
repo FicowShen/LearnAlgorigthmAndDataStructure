@@ -23,7 +23,7 @@ final class Week1LinkedListCycleII {
         func judge(_ list: [Int], cycleIndex: Int) {
             let head = ListNode.fromList(list)
             let cycleNode = head?.linkTailToNode(index: cycleIndex)
-            let result = detectCycleWithPointers2(head) // practice
+            let result = detectCycleWithPointers3(head) // practice
             removeCycle(cycleNode: cycleNode)
             printAndAssert(result: result, expected: cycleNode)
         }
@@ -33,33 +33,70 @@ final class Week1LinkedListCycleII {
     }
 
 
-    func detectCycleWithDict3(_ head: ListNode?) -> ListNode? {
+    func detectCycleWithDict5(_ head: ListNode?) -> ListNode? {
         fatalError()
+    }
+
+    func detectCycleWithPointers5(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+    func detectCycleWithDict4(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+    func detectCycleWithPointers4(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    func detectCycleWithDict3(_ head: ListNode?) -> ListNode? {
+        var dict = [ObjectIdentifier: ListNode]()
+        var node = head
+        while node != nil {
+            let id = ObjectIdentifier(node!)
+            if let cycle = dict[id] { return cycle }
+            dict[id] = node
+            node = node?.next
+        }
+        return nil
     }
 
     func detectCycleWithPointers3(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        var slow = head, fast = head
+        while fast != nil {
+            slow = slow?.next
+            if fast?.next == nil { return nil }
+            fast = fast?.next?.next
+            if slow !== fast { continue }
+            var node = head
+            while node !== slow {
+                node = node?.next
+                slow = slow?.next
+            }
+            return node
+        }
+        return nil
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     func detectCycleWithDict2(_ head: ListNode?) -> ListNode? {

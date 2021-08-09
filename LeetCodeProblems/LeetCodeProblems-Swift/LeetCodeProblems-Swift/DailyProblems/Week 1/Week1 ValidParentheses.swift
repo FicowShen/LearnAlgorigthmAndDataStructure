@@ -11,7 +11,7 @@ import Foundation
 final class Week1ValidParentheses {
     func run() {
         func judge(_ s: String, expected: Bool) {
-            printAndAssert(result: isValid2b(s), expected: expected)
+            printAndAssert(result: stackRightParenthesis3(s), expected: expected)
         }
         judge("()", expected: true)
         judge("()[]{}", expected: true)
@@ -21,16 +21,70 @@ final class Week1ValidParentheses {
     }
 
 
-    func isValid5(_ s: String) -> Bool {
+    func stackLeftParenthesis5(_ s: String) -> Bool {
         fatalError()
     }
 
-    func isValid4(_ s: String) -> Bool {
+    func stackRightParenthesis5(_ s: String) -> Bool {
         fatalError()
     }
 
-    func isValid3(_ s: String) -> Bool {
+    func stackLeftParenthesis4(_ s: String) -> Bool {
         fatalError()
+    }
+
+    func stackRightParenthesis4(_ s: String) -> Bool {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    func stackLeftParenthesis3(_ s: String) -> Bool {
+        var stack = [Unicode.Scalar]()
+        let dict: [Unicode.Scalar: Unicode.Scalar] = [
+            .init(")"): .init("("),
+            .init("]"): .init("["),
+            .init("}"): .init("{"),
+        ]
+        for scalar in s.unicodeScalars {
+            if let left = dict[scalar] {
+                if stack.last != left { return false }
+                _ = stack.popLast()
+            } else {
+                stack.append(scalar)
+            }
+        }
+        return stack.isEmpty
+    }
+
+    func stackRightParenthesis3(_ s: String) -> Bool {
+        var stack = [Unicode.Scalar]()
+        let dict: [Unicode.Scalar: Unicode.Scalar] = [
+            .init("("): .init(")"),
+            .init("["): .init("]"),
+            .init("{"): .init("}"),
+        ]
+        for scalar in s.unicodeScalars {
+            if let right = dict[scalar] {
+                stack.append(right)
+            } else if stack.isEmpty || stack.popLast() != scalar {
+                return false
+            }
+        }
+        return stack.isEmpty
     }
 
 
@@ -52,7 +106,7 @@ final class Week1ValidParentheses {
 
 
     // https://leetcode.com/problems/valid-parentheses/discuss/9178/Short-java-solution
-    func isValid2b(_ s: String) -> Bool {
+    func stackRightParenthesis2(_ s: String) -> Bool {
         var stack = [Unicode.Scalar]()
         let dict: [Unicode.Scalar: Unicode.Scalar] = [
             .init("("): .init(")"),
@@ -69,7 +123,7 @@ final class Week1ValidParentheses {
         return stack.isEmpty
     }
 
-    func isValid2a(_ s: String) -> Bool {
+    func stackLeftParenthesis2(_ s: String) -> Bool {
         var stack = [Unicode.Scalar]()
         let dict: [Unicode.Scalar: Unicode.Scalar] = [
             .init(")"): .init("("),
@@ -98,7 +152,7 @@ final class Week1ValidParentheses {
 
 
 
-    func isValid1(_ s: String) -> Bool {
+    func stackLeftParenthesis1(_ s: String) -> Bool {
         var stack = [Character]()
         let right: [Character: Character] = [")": "(", "]": "[", "}": "{"]
         for char in [Character](s) {
