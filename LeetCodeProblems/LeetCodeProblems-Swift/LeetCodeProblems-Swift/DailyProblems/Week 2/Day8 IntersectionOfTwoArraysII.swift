@@ -11,8 +11,9 @@ import Foundation
 final class Day8IntersectionOfTwoArraysII {
     func run() {
         func judge(_ nums1: [Int], _ nums2: [Int], expected: [Int]) {
-            printAndAssert(result: Set(intersectWithPointers2(nums1, nums2)),
-                           expected: Set(expected))
+            let result = intersectWithPointers3(nums1, nums2)
+            printAndAssert(result: result.count, expected: expected.count)
+            printAndAssert(result: Set(result), expected: Set(expected))
         }
         judge([1,2,2,1], [2,2], expected: [2,2])
         judge([4,9,5], [9,4,9,8,4], expected: [4,9])
@@ -34,12 +35,37 @@ final class Day8IntersectionOfTwoArraysII {
         fatalError()
     }
 
+
     func intersectWithPointers3(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
-        fatalError()
+        let nums1 = nums1.sorted(), nums2 = nums2.sorted()
+        var i1 = 0, i2 = 0, results = [Int]()
+        while i1 < nums1.count, i2 < nums2.count {
+            if nums1[i1] < nums2[i2] {
+                i1 += 1
+            } else if nums1[i1] > nums2[i2] {
+                i2 += 1
+            } else {
+                results.append(nums1[i1])
+                i1 += 1
+                i2 += 1
+            }
+        }
+        return results
     }
 
     func intersectWithDict3(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
-        fatalError()
+        var dict = [Int: Int]()
+        for num in nums1 {
+            dict[num, default: 0] += 1
+        }
+        var results = [Int]()
+        for num in nums2 {
+            if let count = dict[num], count > 0 {
+                dict[num] = count - 1
+                results.append(num)
+            }
+        }
+        return results
     }
 
 
@@ -48,7 +74,7 @@ final class Day8IntersectionOfTwoArraysII {
 
 
 
-    
+
     func intersectWithPointers2(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
         let nums1 = nums1.sorted(), nums2 = nums2.sorted()
         let l1 = nums1.count, l2 = nums2.count

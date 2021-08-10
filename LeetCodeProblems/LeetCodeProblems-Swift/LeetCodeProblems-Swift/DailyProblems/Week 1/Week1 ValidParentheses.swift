@@ -11,7 +11,7 @@ import Foundation
 final class Week1ValidParentheses {
     func run() {
         func judge(_ s: String, expected: Bool) {
-            printAndAssert(result: stackRightParenthesis3(s), expected: expected)
+            printAndAssert(result: stackRightParenthesis4(s), expected: expected)
         }
         judge("()", expected: true)
         judge("()[]{}", expected: true)
@@ -30,11 +30,37 @@ final class Week1ValidParentheses {
     }
 
     func stackLeftParenthesis4(_ s: String) -> Bool {
-        fatalError()
+        var stack = [Unicode.Scalar]()
+        let dict: [Unicode.Scalar: Unicode.Scalar] = [
+            .init(")"): .init("("),
+            .init("]"): .init("["),
+            .init("}"): .init("{"),
+        ]
+        for scalar in s.unicodeScalars {
+            if let left = dict[scalar] {
+                if stack.popLast() != left { return false }
+            } else {
+                stack.append(scalar)
+            }
+        }
+        return stack.isEmpty
     }
 
     func stackRightParenthesis4(_ s: String) -> Bool {
-        fatalError()
+        var stack = [Unicode.Scalar]()
+        let dict: [Unicode.Scalar: Unicode.Scalar] = [
+            .init("("): .init(")"),
+            .init("["): .init("]"),
+            .init("{"): .init("}"),
+        ]
+        for scalar in s.unicodeScalars {
+            if let right = dict[scalar] {
+                stack.append(right)
+            } else if stack.isEmpty || stack.popLast() != scalar {
+                return false
+            }
+        }
+        return stack.isEmpty
     }
 
 

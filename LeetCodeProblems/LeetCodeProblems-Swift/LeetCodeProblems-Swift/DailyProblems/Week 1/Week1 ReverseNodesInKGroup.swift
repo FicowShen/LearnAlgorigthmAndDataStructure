@@ -13,7 +13,7 @@ final class Week1ReverseNodesInKGroup {
         func judge(_ head: [Int], _ k: Int, expected: [Int]) {
             let h = ListNode.fromList(head)
             let e = ListNode.fromList(expected)
-            printAndAssert(result: reverseKGroup2(h, k), expected: e)
+            printAndAssert(result: reverseKGroup3(h, k), expected: e)
         }
         judge([1,2,3,4,5], 2, expected: [2,1,4,3,5])
         judge([1,2,3,4,5], 3, expected: [3,2,1,4,5])
@@ -31,7 +31,34 @@ final class Week1ReverseNodesInKGroup {
     }
 
     func reverseKGroup3(_ head: ListNode?, _ k: Int) -> ListNode? {
-        fatalError()
+        func reversed(_ head: ListNode?, _ tail: ListNode?) -> (ListNode?, ListNode?) {
+            var pre = tail?.next, cur = head
+            while pre !== tail { // stop at tail, compare address
+                let next = cur?.next
+                cur?.next = pre
+                pre = cur
+                cur = next
+            }
+            return (tail, head)
+        }
+
+        let newHead = ListNode()
+        var head = head, pre: ListNode? = newHead
+        newHead.next = head
+        while head != nil {
+            var tail = pre // start from pre
+            for _ in 0..<k {
+                tail = tail?.next
+                if tail == nil { return newHead.next }
+            }
+            let next = tail?.next
+            (head, tail) = reversed(head, tail)
+            pre?.next = head
+            tail?.next = next
+            pre = tail
+            head = tail?.next
+        }
+        return newHead.next
     }
 
 
