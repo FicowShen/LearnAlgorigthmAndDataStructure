@@ -14,6 +14,7 @@ final class DailyProblems {
     }
 
     static func week2() {
+        Day9SlidingWindowMaximum().run()
         Day8IntersectionOfTwoArraysII().run()
     }
 

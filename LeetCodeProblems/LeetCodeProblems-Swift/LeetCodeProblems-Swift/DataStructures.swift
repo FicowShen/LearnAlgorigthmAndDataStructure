@@ -162,6 +162,58 @@ struct Queue<Element> {
     }
 }
 
+struct CircularDeque {
+    private var _front = 0, _rear = 0, list: [Int]
+    private let capacity: Int
+
+    var isEmpty: Bool { _rear == _front }
+    var isFull: Bool { (_rear + 1) % capacity == _front }
+
+    var front: Int {
+        if isEmpty { fatalError() }
+        return list[_front]
+    }
+    var rear: Int {
+        if isEmpty { fatalError() }
+        return list[(_rear - 1 + capacity) % capacity]
+    }
+
+    init(_ capacity: Int) {
+        self.capacity = capacity + 1
+        list = [Int](repeating: 0, count: capacity)
+    }
+    @discardableResult
+    mutating func insertFront(_ value: Int) -> Bool {
+        if isFull { return false }
+        _front = (_front - 1 + capacity) % capacity
+        list[_front] = value
+        return true
+    }
+    @discardableResult
+    mutating func insertLast(_ value: Int) -> Bool {
+        if isFull { return false }
+        list[_rear] = value
+        _rear = (_rear + 1) % capacity
+        return true
+    }
+    @discardableResult
+    mutating func deleteFront() -> Bool {
+        if isEmpty { return false }
+        _front = (_front + 1) % capacity
+        return true
+    }
+    @discardableResult
+    mutating func deleteLast() -> Bool {
+        if isEmpty { return false }
+        _rear = (_rear - 1 + capacity) % capacity
+        return true
+    }
+}
+
+extension CircularDeque: CustomStringConvertible {
+    var description: String { list[_front..<_rear].description }
+}
+
 // MARK: - Create a tree
 
 func perfectBinaryTreeFromLevelTraversal(_ nodes: [Int?]) -> TreeNode? {
