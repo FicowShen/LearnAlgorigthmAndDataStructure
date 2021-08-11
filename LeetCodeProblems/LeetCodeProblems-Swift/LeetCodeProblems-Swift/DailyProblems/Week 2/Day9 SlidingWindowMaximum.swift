@@ -53,13 +53,14 @@ final class Day9SlidingWindowMaximum {
 
 
 
+    // https://leetcode.com/problems/sliding-window-maximum/discuss/65884/Java-O(n)-solution-using-deque-with-explanation
     func maxSlidingWindow3(_ nums: [Int], _ k: Int) -> [Int] {
         let n = nums.count
         var q = [Int](repeating: 0, count: n), res = [Int]()
         var head = 0, tail = -1
         for i in 0..<n {
             // remove invalid head
-            while head <= tail, q[head] < i - k + 1 {
+            while head <= tail, q[head] <= i - k {
                 head += 1
             }
             // remove smaller tail
