@@ -11,7 +11,7 @@ import Foundation
 final class Day9SlidingWindowMaximum {
     func run() {
         func judge(_ nums: [Int], _ k: Int, expected: [Int]) {
-            printAndAssert(result: maxSlidingWindow2(nums, k), expected: expected)
+            printAndAssert(result: maxSlidingWindow3(nums, k), expected: expected)
         }
         judge([1,3,-1,-3,5,3,6,7], 3, expected: [3,3,5,5,6,7])
         judge([1], 1, expected: [1])
@@ -29,26 +29,53 @@ final class Day9SlidingWindowMaximum {
         fatalError()
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func maxSlidingWindow3(_ nums: [Int], _ k: Int) -> [Int] {
-        fatalError()
+        let n = nums.count
+        var q = [Int](repeating: 0, count: n), res = [Int]()
+        var head = 0, tail = -1
+        for i in 0..<n {
+            // remove invalid head
+            while head <= tail, q[head] < i - k + 1 {
+                head += 1
+            }
+            // remove smaller tail
+            while head <= tail, nums[q[tail]] <= nums[i] {
+                tail -= 1
+            }
+            // append the current index to tail
+            tail += 1
+            q[tail] = i
+            // reach the min size of the window
+            if i >= k - 1 {
+                res.append(nums[q[head]])
+            }
+        }
+        return res
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     func maxSlidingWindow2(_ nums: [Int], _ k: Int) -> [Int] {
         let n = nums.count
