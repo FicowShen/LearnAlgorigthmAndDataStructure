@@ -14,6 +14,7 @@ final class DailyProblems {
     }
 
     static func week2() {
+        Week2ValidAnagram().run()
         Day10RemoveOutermostParentheses().run()
         Day9SlidingWindowMaximum().run()
         Day8IntersectionOfTwoArraysII().run()
