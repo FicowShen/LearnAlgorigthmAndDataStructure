@@ -11,7 +11,7 @@ import Foundation
 final class Day10RemoveOutermostParentheses {
     func run() {
         func judge(_ s: String, expected: String) {
-            printAndAssert(result: stack2(s), expected: expected)
+            printAndAssert(result: counte3(s), expected: expected)
         }
         judge("(()())(())", expected: "()()()")
         judge("(()())(())(()(()))", expected: "()()()()(())")
@@ -34,26 +34,46 @@ final class Day10RemoveOutermostParentheses {
         fatalError()
     }
 
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
     func counte3(_ s: String) -> String {
-        fatalError()
+        var open = String.Element("("),
+            close = String.Element(")"),
+            ans = ""
+        var level = 0
+        for c in s {
+            if c == close { level -= 1 }
+            if level > 0 { ans.append(c) }
+            if c == open { level += 1 }
+        }
+        return ans
     }
 
     func stack3(_ s: String) -> String {
-        fatalError()
+        var open = String.Element("("),
+            close = String.Element(")"),
+            ans = ""
+        var stack = [String.Element]()
+        for c in s {
+            if c == close { stack.removeLast() }
+            if !stack.isEmpty { ans.append(c) }
+            if c == open { stack.append(c) }
+        }
+        return ans
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
