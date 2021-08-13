@@ -10,26 +10,89 @@ import Foundation
 // https://leetcode-cn.com/problems/swap-nodes-in-pairs/
 final class Day4SwapNodesInPairs {
     func run() {
+        let f = swapPairsOneTwoThree5
         func judge(list: [Int], expected: [Int]) {
             let listNode = ListNode.fromList(list)
             let listNode2 = ListNode.fromList(expected)
-            printAndAssert(result: swapPairsOneTwoThree4(listNode), expected: listNode2)
+            printAndAssert(result: f(listNode), expected: listNode2)
         }
         judge(list: [1,2,3,4], expected: [2,1,4,3])
         judge(list: [], expected: [])
         judge(list: [1], expected: [1])
     }
 
-    func swapPairsOneTwoThree5(_ head: ListNode?) -> ListNode? {
+
+    func swapPairsOneTwoThree6(_ head: ListNode?) -> ListNode? {
         fatalError()
+    }
+
+    func swapPairsWithPseudoHead6(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+    func swapPairsRecursive6(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    func swapPairsOneTwoThree5(_ head: ListNode?) -> ListNode? {
+        if head?.next == nil { return head }
+        var one = head, two = one?.next
+        let newHead = two
+        while one != nil {
+            let three = two?.next
+            two?.next = one
+            one?.next = three?.next ?? three
+            one = three
+            two = three?.next
+        }
+        return newHead
     }
 
     func swapPairsWithPseudoHead5(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        if head?.next == nil { return head }
+        let newHead = ListNode()
+        newHead.next = head
+        var temp: ListNode? = newHead
+        while temp?.next?.next != nil {
+            let one = temp?.next, two = one?.next
+            one?.next = two?.next
+            two?.next = one
+            temp?.next = two
+            temp = one
+        }
+        return newHead.next
     }
 
     func swapPairsRecursive5(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        func f(_ head: ListNode?) -> ListNode? {
+            guard let head = head,
+                  let next = head.next else {
+                return head
+            }
+            head.next = f(next.next)
+            next.next = head
+            return next
+        }
+        return f(head)
     }
 
 
