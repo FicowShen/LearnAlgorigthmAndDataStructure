@@ -10,7 +10,7 @@ import Foundation
 extension TreeProblems {
     func testMaxDepth() {
         let levelNodes = [3,9,20,nil,nil,15,7]
-        let tree = perfectBinaryTreeFromLevelTraversal(levelNodes)
+        let tree = TreeNode.fromPerfectBinaryTreeLevelNodes(levelNodes)
         printAndAssert(result: maxDepth(tree), expected: 3)
     }
 

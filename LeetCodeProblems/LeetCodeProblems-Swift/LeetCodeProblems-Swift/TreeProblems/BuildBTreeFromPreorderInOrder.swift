@@ -13,7 +13,7 @@ extension TreeProblems {
 
         func judge(preorder: [Int], inorder: [Int], levelOrder: [Int?]) {
             printAndAssert(result: buildTree333(preorder, inorder),
-                           expected: perfectBinaryTreeFromLevelTraversal(levelOrder))
+                           expected: TreeNode.fromPerfectBinaryTreeLevelNodes(levelOrder))
         }
         judge(preorder: [1,2,4,5,3,6],
               inorder: [4,2,5,1,3,6],

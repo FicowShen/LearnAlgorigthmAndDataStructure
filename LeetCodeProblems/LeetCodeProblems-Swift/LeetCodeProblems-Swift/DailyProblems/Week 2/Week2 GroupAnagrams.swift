@@ -36,11 +36,11 @@ final class Week2GroupAnagrams {
     }
 
 
-    func groupAnagramsWithLetterCountKey2(_ strs: [String]) -> [[String]] {
+    func groupAnagramsWithLetterCountKey3(_ strs: [String]) -> [[String]] {
         fatalError()
     }
 
-    func groupAnagramsWithDictAndSort2(_ strs: [String]) -> [[String]] {
+    func groupAnagramsWithDictAndSort3(_ strs: [String]) -> [[String]] {
         fatalError()
     }
 

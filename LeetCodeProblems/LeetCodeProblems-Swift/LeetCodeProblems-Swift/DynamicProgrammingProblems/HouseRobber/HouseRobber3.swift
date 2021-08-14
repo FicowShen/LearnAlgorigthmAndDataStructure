@@ -10,7 +10,7 @@ import Foundation
 final class HouseRobber3 {
     func run() {
         func judge(_ nodes: [Int?], expected: Int) {
-            let tree = perfectBinaryTreeFromLevelTraversal(nodes)
+            let tree = TreeNode.fromPerfectBinaryTreeLevelNodes(nodes)
             printAndAssert(result: robWithDP3(tree), expected: expected)
         }
         judge([3,2,3,nil,3,nil,1], expected: 7)

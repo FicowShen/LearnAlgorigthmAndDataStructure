@@ -23,6 +23,31 @@ final class TreeNode: Equatable, CustomStringConvertible {
         return equal(left: lhs, right: rhs)
     }
 
+    /// Create from a perfect binary tree
+    static func fromPerfectBinaryTreeLevelNodes(_ nodes: [Int?]) -> TreeNode? {
+        guard let first = nodes.first,
+              let rootValue = first
+        else { return nil }
+        var queue = Queue<TreeNode>()
+        let root = TreeNode(rootValue)
+        var nodeIndex = 0
+        queue.enqueue(root)
+        while let node = queue.dequeue() {
+            nodeIndex += 1
+            if nodeIndex < nodes.count, let left = nodes[nodeIndex] {
+                node.left = TreeNode(left)
+                queue.enqueue(node.left!)
+            }
+            nodeIndex += 1
+            if nodeIndex < nodes.count, let right = nodes[nodeIndex] {
+                node.right = TreeNode(right)
+                queue.enqueue(node.right!)
+            }
+        }
+        return root
+    }
+
+
     public var val: Int
     public var left: TreeNode?
     public var right: TreeNode?
@@ -212,31 +237,4 @@ struct CircularDeque {
 
 extension CircularDeque: CustomStringConvertible {
     var description: String { list[_front..<_rear].description }
-}
-
-// MARK: - Create a tree
-
-func perfectBinaryTreeFromLevelTraversal(_ nodes: [Int?]) -> TreeNode? {
-    guard let first = nodes.first,
-          let rootValue = first
-    else { return nil }
-    var queue = Queue<TreeNode>()
-    let root = TreeNode(rootValue)
-    var nodeIndex = 0
-    queue.enqueue(root)
-    while let node = queue.dequeue() {
-        nodeIndex += 1
-        if nodeIndex < nodes.count, let left = nodes[nodeIndex] {
-            node.left = TreeNode(left)
-            queue.enqueue(node.left!)
-//                    DLog("left: \(left)")
-        }
-        nodeIndex += 1
-        if nodeIndex < nodes.count, let right = nodes[nodeIndex] {
-            node.right = TreeNode(right)
-            queue.enqueue(node.right!)
-//                    DLog("right: \(right)")
-        }
-    }
-    return root
 }

@@ -16,6 +16,7 @@ final class DailyProblems {
     static func week2() {
         Week2GroupAnagrams().run()
         Week2ValidAnagram().run()
+        Week2BinaryTreeInorderTraversal().run()
         Day13MaximumDepthOfBinaryTree().run()
         Day12AddDigits().run()
         Day11FizzBuzz().run()

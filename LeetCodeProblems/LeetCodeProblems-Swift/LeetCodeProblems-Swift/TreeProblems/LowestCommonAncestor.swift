@@ -10,7 +10,7 @@ import Foundation
 extension TreeProblems {
     func testLowestCommonAncestor() {
         func judge(nodes: [Int?], p: Int, q: Int, expected: Int) {
-            let tree = perfectBinaryTreeFromLevelTraversal(nodes)
+            let tree = TreeNode.fromPerfectBinaryTreeLevelNodes(nodes)
             // find the node with a specified value
             let pNode = tree?.findNode(value: p)
             let qNode = tree?.findNode(value: q)

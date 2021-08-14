@@ -10,8 +10,8 @@ import Foundation
 extension TreeProblems {
     func testInvertTree() {
         func judge(levelNodes: [Int?], expectedNodes: [Int?]) {
-            let tree = perfectBinaryTreeFromLevelTraversal(levelNodes)
-            let expectedTree = perfectBinaryTreeFromLevelTraversal(expectedNodes)
+            let tree = TreeNode.fromPerfectBinaryTreeLevelNodes(levelNodes)
+            let expectedTree = TreeNode.fromPerfectBinaryTreeLevelNodes(expectedNodes)
             printAndAssert(result: invertTree(tree), expected: expectedTree)
         }
         judge(levelNodes: [], expectedNodes: [])

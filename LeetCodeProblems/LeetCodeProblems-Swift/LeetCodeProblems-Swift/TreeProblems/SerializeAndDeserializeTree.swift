@@ -9,7 +9,7 @@ import Foundation
 
 extension TreeProblems {
     func testSerializeAndDeserializeTree() {
-        let tree = perfectBinaryTreeFromLevelTraversal([1,2,3,nil,nil,4,5])
+        let tree = TreeNode.fromPerfectBinaryTreeLevelNodes([1,2,3,nil,nil,4,5])
         printAndAssert(result: deserialize(serialize(tree)), expected: tree)
     }
 

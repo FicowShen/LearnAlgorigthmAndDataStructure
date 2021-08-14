@@ -12,7 +12,7 @@ final class Day13MaximumDepthOfBinaryTree {
     func run() {
         let f = maxDepthWithBFS2
         func judge(nodes: [Int?], expected: Int) {
-            let root = perfectBinaryTreeFromLevelTraversal(nodes)
+            let root = TreeNode.fromPerfectBinaryTreeLevelNodes(nodes)
             printAndAssert(result: f(root), expected: expected)
         }
         judge(nodes: [3,9,20,nil,nil,15,7], expected: 3)

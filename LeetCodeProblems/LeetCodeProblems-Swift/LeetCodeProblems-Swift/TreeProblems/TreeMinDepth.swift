@@ -10,11 +10,11 @@ import Foundation
 extension TreeProblems {
     func testMinDepth() {
         var levelNodes = [3,9,20,nil,nil,15,7]
-        var tree = perfectBinaryTreeFromLevelTraversal(levelNodes)
+        var tree = TreeNode.fromPerfectBinaryTreeLevelNodes(levelNodes)
         printAndAssert(result: minDepth(tree), expected: 2)
 
         levelNodes = [2,nil,3,nil,4,nil,5,nil,6]
-        tree = perfectBinaryTreeFromLevelTraversal(levelNodes)
+        tree = TreeNode.fromPerfectBinaryTreeLevelNodes(levelNodes)
         printAndAssert(result: minDepth(tree), expected: 5)
     }
 

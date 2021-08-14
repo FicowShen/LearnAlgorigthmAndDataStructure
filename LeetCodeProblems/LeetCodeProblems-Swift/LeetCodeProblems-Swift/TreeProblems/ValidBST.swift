@@ -10,7 +10,7 @@ import Foundation
 extension TreeProblems {
     func testIsValidBST() {
         func judge(levelNodes: [Int?], expected: Bool) {
-            let tree = perfectBinaryTreeFromLevelTraversal(levelNodes)
+            let tree = TreeNode.fromPerfectBinaryTreeLevelNodes(levelNodes)
             printAndAssert(result: isValidBST(tree), expected: expected)
         }
         judge(levelNodes: [2,1,3], expected: true)
