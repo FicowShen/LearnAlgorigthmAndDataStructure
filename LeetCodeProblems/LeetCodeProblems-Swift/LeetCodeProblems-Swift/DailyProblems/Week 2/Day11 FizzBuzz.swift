@@ -10,10 +10,112 @@ import Foundation
 // https://leetcode-cn.com/problems/fizz-buzz/
 final class Day11FizzBuzz {
     func run() {
-        let f = rewrite1
+        let f = concatenateWithPairs2
         printAndAssert(result: f(3), expected: ["1","2","Fizz"])
         printAndAssert(result: f(5), expected: ["1","2","Fizz","4","Buzz"])
     }
+
+
+    func concatenateWithPairs3(_ n: Int) -> [String] {
+        fatalError()
+    }
+
+    func concatenate3(_ n: Int) -> [String] {
+        fatalError()
+    }
+
+    func rewrite3(_ n: Int) -> [String] {
+        fatalError()
+    }
+
+    func counter3(_ n: Int) -> [String] {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    func concatenateWithPairs2(_ n: Int) -> [String] {
+        var ans = [String](), pairs = [
+            (3, "Fizz"), (5, "Buzz")
+        ]
+        for i in 1...n {
+            var s = ""
+            pairs.forEach { pair in
+                if i % pair.0 == 0 {
+                    s += pair.1
+                }
+            }
+            ans.append(s.isEmpty ? i.description : s)
+        }
+        return ans
+    }
+
+    func concatenate2(_ n: Int) -> [String] {
+        var ans = [String]()
+        for i in 1...n {
+            var s = ""
+            if i % 3 == 0 {
+                s += "Fizz"
+            }
+            if i % 5 == 0 {
+                s += "Buzz"
+            }
+            ans.append(s.isEmpty ? i.description : s)
+        }
+        return ans
+    }
+
+    func rewrite2(_ n: Int) -> [String] {
+        var ans = (1...n).map { $0.description }
+        for i in stride(from: 2, to: n, by: 3) {
+            ans[i] = "Fizz"
+        }
+        for i in stride(from: 4, to: n, by: 5) {
+            ans[i] = "Buzz"
+        }
+        for i in stride(from: 14, to: n, by: 15) {
+            ans[i] = "FizzBuzz"
+        }
+        return ans
+    }
+
+    func counter2(_ n: Int) -> [String] {
+        var ans = [String](), fizz = 0, buzz = 0
+        for i in 1...n {
+            fizz += 1; buzz += 1
+            if fizz == 3, buzz == 5 {
+                ans.append("FizzBuzz")
+                fizz = 0; buzz = 0
+            } else if fizz == 3 {
+                ans.append("Fizz")
+                fizz = 0
+            } else if buzz == 5 {
+                ans.append("Buzz")
+                buzz = 0
+            } else {
+                ans.append(i.description)
+            }
+        }
+        return ans
+    }
+
 
 
 
