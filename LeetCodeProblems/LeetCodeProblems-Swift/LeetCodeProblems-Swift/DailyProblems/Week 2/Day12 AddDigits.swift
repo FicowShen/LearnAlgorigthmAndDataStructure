@@ -10,23 +10,76 @@ import Foundation
 // https://leetcode-cn.com/problems/add-digits/
 final class Day12AddDigits {
     func run() {
-        let f = addDigitsMath2
+        let f = addDigitsMath3
         printAndAssert(result: f(38), expected: 2)
         printAndAssert(result: f(0), expected: 0)
     }
 
 
 
-    func addDigitsMath3(_ num: Int) -> Int {
+    func addDigitsMath4(_ num: Int) -> Int {
         fatalError()
+    }
+
+    func addDigitsRecursion4(_ num: Int) -> Int {
+        fatalError()
+    }
+
+    func addDigitsLoop4(_ num: Int) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    func addDigitsMath3(_ num: Int) -> Int {
+        (num - 1) % 9 + 1
     }
 
     func addDigitsRecursion3(_ num: Int) -> Int {
-        fatalError()
+        func f(_ n: Int) -> Int {
+            if n < 10 { return n }
+            var n = n, sum = 0
+            while n > 0 {
+                sum += n % 10
+                n /= 10
+            }
+            return f(sum)
+        }
+        return f(num)
     }
 
     func addDigitsLoop3(_ num: Int) -> Int {
-        fatalError()
+        var n = num
+        while n > 9 {
+            var sum = 0
+            while n > 0 {
+                sum += n % 10
+                n /= 10
+            }
+            n = sum
+        }
+        return n
     }
 
 
