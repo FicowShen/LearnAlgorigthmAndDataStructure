@@ -35,6 +35,7 @@
 		6AB35B5426C4A1480026173D /* Week2 ValidAnagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B5326C4A1480026173D /* Week2 ValidAnagram.swift */; };
 		6AB35B5626C564750026173D /* Day11 FizzBuzz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B5526C564750026173D /* Day11 FizzBuzz.swift */; };
 		6AB35B5826C5E9130026173D /* Day12 AddDigits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B5726C5E9130026173D /* Day12 AddDigits.swift */; };
+		6AB35B5A26C73F5C0026173D /* Day13 MaximumDepthOfBinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B5926C73F5C0026173D /* Day13 MaximumDepthOfBinaryTree.swift */; };
 		6AB89D4526A106AC00E295BA /* BacktrackProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB89D4426A106AC00E295BA /* BacktrackProblems.swift */; };
 		6AB89D4726A106D700E295BA /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB89D4626A106D700E295BA /* Combine.swift */; };
 		6AB89D5126A4138100E295BA /* WeeklyContest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB89D5026A4138100E295BA /* WeeklyContest.swift */; };
@@ -110,6 +111,7 @@
 		6AB35B5326C4A1480026173D /* Week2 ValidAnagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week2 ValidAnagram.swift"; sourceTree = "<group>"; };
 		6AB35B5526C564750026173D /* Day11 FizzBuzz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day11 FizzBuzz.swift"; sourceTree = "<group>"; };
 		6AB35B5726C5E9130026173D /* Day12 AddDigits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day12 AddDigits.swift"; sourceTree = "<group>"; };
+		6AB35B5926C73F5C0026173D /* Day13 MaximumDepthOfBinaryTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day13 MaximumDepthOfBinaryTree.swift"; sourceTree = "<group>"; };
 		6AB89D4426A106AC00E295BA /* BacktrackProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BacktrackProblems.swift; sourceTree = "<group>"; };
 		6AB89D4626A106D700E295BA /* Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combine.swift; sourceTree = "<group>"; };
 		6AB89D5026A4138100E295BA /* WeeklyContest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyContest.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				6AB35B5126C359ED0026173D /* Day10 RemoveOutermostParentheses.swift */,
 				6AB35B5526C564750026173D /* Day11 FizzBuzz.swift */,
 				6AB35B5726C5E9130026173D /* Day12 AddDigits.swift */,
+				6AB35B5926C73F5C0026173D /* Day13 MaximumDepthOfBinaryTree.swift */,
 				6AB35B5326C4A1480026173D /* Week2 ValidAnagram.swift */,
 			);
 			path = "Week 2";
@@ -418,6 +421,7 @@
 				6AB35B4426BFEBC80026173D /* Week1 ValidParentheses.swift in Sources */,
 				6ACE5CB826ACEF75004A24A0 /* ClimbStairs.swift in Sources */,
 				6AB35B5226C359ED0026173D /* Day10 RemoveOutermostParentheses.swift in Sources */,
+				6AB35B5A26C73F5C0026173D /* Day13 MaximumDepthOfBinaryTree.swift in Sources */,
 				6A59A56426B0DE3E00273E66 /* MaxProfit2.swift in Sources */,
 				6AB35B4226BFC7390026173D /* Week1 LinkedListCycleII.swift in Sources */,
 				6AB35B3C26BE1D780026173D /* Day7 DesignCircularDeque.swift in Sources */,
