@@ -10,7 +10,7 @@ import Foundation
 // https://leetcode-cn.com/problems/group-anagrams/
 final class Week2GroupAnagrams {
     func run() {
-        let f = groupAnagramsWithLetterCountKey2
+        let f = groupAnagramsWithDictAndSort3
         func judge(values: [String], expected: [[String]]) {
             let result = f(values)
             printAndAssert(result: result.count, expected: expected.count)
@@ -36,12 +36,44 @@ final class Week2GroupAnagrams {
     }
 
 
-    func groupAnagramsWithLetterCountKey3(_ strs: [String]) -> [[String]] {
+    func groupAnagramsWithLetterCountKey4(_ strs: [String]) -> [[String]] {
         fatalError()
     }
 
-    func groupAnagramsWithDictAndSort3(_ strs: [String]) -> [[String]] {
+    func groupAnagramsWithDictAndSort4(_ strs: [String]) -> [[String]] {
         fatalError()
+    }
+
+
+
+
+
+
+    func groupAnagramsWithLetterCountKey3(_ strs: [String]) -> [[String]] {
+        var dict = [String: [String]]()
+        for s in strs {
+            var times = [Int](repeating: 0, count: 26)
+            for c in s {
+                let i = Int(c.asciiValue! - 97)
+                times[i] += 1
+            }
+            var key = ""
+            for i in 0..<times.count {
+                key.append(Character(Unicode.Scalar(i + 97)!))
+                key.append(times[i].description)
+            }
+            dict[key, default: []].append(s)
+        }
+        return [[String]](dict.values)
+    }
+
+    func groupAnagramsWithDictAndSort3(_ strs: [String]) -> [[String]] {
+        var dict = [String: [String]]()
+        for s in strs {
+            let key = String(s.sorted())
+            dict[key, default: []].append(s)
+        }
+        return [[String]](dict.values)
     }
 
 

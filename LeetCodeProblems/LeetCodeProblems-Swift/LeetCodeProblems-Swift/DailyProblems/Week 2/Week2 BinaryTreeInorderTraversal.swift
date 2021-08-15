@@ -10,7 +10,7 @@ import Foundation
 // https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
 final class Week2BinaryTreeInorderTraversal {
     func run() {
-        let f = inorderTraversalWithMorris2
+        let f = inorderTraversalWithMorris3
         func judge(nodes: [Int?], expected: [Int]) {
             let root = TreeNode.fromPerfectBinaryTreeLevelNodes(nodes)
             printAndAssert(result: f(root), expected: expected)
@@ -45,24 +45,101 @@ final class Week2BinaryTreeInorderTraversal {
 
 
 
+
+
+
+
+
+
     func inorderTraversalWithMorris3(_ root: TreeNode?) -> [Int] {
-        fatalError()
+        guard let root = root else { return [] }
+        var ans = [Int](), p1: TreeNode! = root, p2: TreeNode!
+        while p1 != nil {
+            p2 = p1.left
+            if p2 == nil {
+                ans.append(p1.val)
+                p1 = p1.right
+                continue
+            }
+            while p2.right != nil, p2.right !== p1 {
+                p2 = p2.right
+            }
+            if p2.right == nil {
+                p2.right = p1
+                p1 = p1.left
+            } else {
+                p2.right = nil
+                ans.append(p1.val)
+                p1 = p1.right
+            }
+        }
+        return ans
     }
 
     func inorderTraversalWithMixedStack3(_ root: TreeNode?) -> [Int] {
-        fatalError()
+        guard let root = root else { return [] }
+        var ans = [Int](), stack: [Any] = [root]
+        while let element = stack.popLast() {
+            if let value = element as? Int {
+                ans.append(value)
+                continue
+            }
+            let node = element as! TreeNode
+            if let right = node.right {
+                stack.append(right)
+            }
+            stack.append(node.val)
+            if let left = node.left {
+                stack.append(left)
+            }
+        }
+        return ans
     }
 
     func inorderTraversalWithTaggedStack3(_ root: TreeNode?) -> [Int] {
-        fatalError()
+        guard let root = root else { return [] }
+        var ans = [Int](), stack = [(visited: false, node: root)]
+        while let node = stack.popLast() {
+            if node.visited {
+                ans.append(node.node.val)
+                continue
+            }
+            if let right = node.node.right {
+                stack.append((false, right))
+            }
+            stack.append((true, node.node))
+            if let left = node.node.left {
+                stack.append((false, left))
+            }
+        }
+        return ans
     }
 
     func inorderTraversalWithStack3(_ root: TreeNode?) -> [Int] {
-        fatalError()
+        guard let root = root else { return [] }
+        var ans = [Int](), stack = [TreeNode](), temp: TreeNode! = root
+        while !stack.isEmpty || temp != nil {
+            while temp != nil {
+                stack.append(temp)
+                temp = temp.left
+            }
+            let node = stack.popLast()!
+            ans.append(node.val)
+            temp = node.right
+        }
+        return ans
     }
 
     func inorderTraversalWithRecursion3(_ root: TreeNode?) -> [Int] {
-        fatalError()
+        var ans = [Int]()
+        func f(_ root: TreeNode?) {
+            guard let root = root else { return }
+            f(root.left)
+            ans.append(root.val)
+            f(root.right)
+        }
+        f(root)
+        return ans
     }
 
 
