@@ -102,6 +102,21 @@ final class Node {
         self.val = val
         self.children = children
     }
+
+    static func fromLevelValues(_ values: [Int?]) -> Node? {
+        var nodes = [Node](), cur = -1
+        for value in values {
+            guard let v = value else {
+                cur += 1
+                continue
+            }
+            let node = Node(v)
+            nodes.append(node)
+            if cur < 0 { continue }
+            nodes[cur].children.append(node)
+        }
+        return nodes.first
+    }
 }
 
 
