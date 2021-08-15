@@ -17,6 +17,7 @@ final class DailyProblems {
         Week2GroupAnagrams().run()
         Week2ValidAnagram().run()
         Week2BinaryTreeInorderTraversal().run()
+        Week2BinaryTreePreorderTraversal().run()
         Day13MaximumDepthOfBinaryTree().run()
         Day12AddDigits().run()
         Day11FizzBuzz().run()
