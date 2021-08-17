@@ -13,6 +13,10 @@ final class DailyProblems {
         week1()
     }
 
+    static func week3() {
+        Day16ReplaceSpace().run()
+    }
+
     static func week2() {
         Week2GroupAnagrams().run()
         Week2ValidAnagram().run()
