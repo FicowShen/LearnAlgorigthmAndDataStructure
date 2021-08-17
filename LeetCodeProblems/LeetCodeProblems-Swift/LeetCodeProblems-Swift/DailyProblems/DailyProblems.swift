@@ -21,6 +21,7 @@ final class DailyProblems {
         Week2NaryTreePostorderTraversal().run()
         Week2NaryTreePreorderTraversal().run()
         Week2NaryTreeLevelOrderTraversal().run()
+        Week2GetLeastNumbers().run()
         Day13MaximumDepthOfBinaryTree().run()
         Day12AddDigits().run()
         Day11FizzBuzz().run()

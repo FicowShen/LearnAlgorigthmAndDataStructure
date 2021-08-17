@@ -253,3 +253,82 @@ struct CircularDeque {
 extension CircularDeque: CustomStringConvertible {
     var description: String { list[_front..<_rear].description }
 }
+
+
+struct BinaryHeap {
+
+    var isEmpty: Bool { heapSize == 0 }
+
+    var isFull: Bool { heapSize == heap.count }
+
+    /// Returns the max value. To return min value, insert with the opposite numbers.
+    var top: Int {
+        if isEmpty { fatalError() }
+        return heap[0]
+    }
+
+    private let degree = 2
+    private var heap = [Int](), heapSize = 0
+
+    init(capacity: Int) {
+        heap = [Int](repeating: 0, count: capacity + 1)
+    }
+
+    /// O(log N)
+    mutating func insert(_ x: Int) {
+        if isFull { assertionFailure("heap is full") }
+        heap[heapSize] = x
+        heapSize += 1
+        heapifyUp(heapSize - 1)
+    }
+
+    /// O(log N)
+    @discardableResult
+    mutating func pop() -> Int { deleteAt(0) }
+
+    /// O(log N)
+    @discardableResult
+    mutating func deleteAt(_ index: Int) -> Int {
+        if isEmpty { assertionFailure("heap is empty") }
+        let maxElement = heap[index]
+        heap[index] = heap[heapSize - 1]
+        heapSize -= 1
+        heapifyDown(index)
+        return maxElement
+    }
+
+    private mutating func heapifyUp(_ index: Int) {
+        var i = index
+        let insertValue = heap[i]
+        while i > 0, insertValue > heap[parent(i)] {
+            heap[i] = heap[parent(i)]
+            i = parent(i)
+        }
+        heap[i] = insertValue
+    }
+
+    private mutating func heapifyDown(_ index: Int) {
+        var i = index, child = 0, temp = heap[i]
+        while kthChild(i, 1) < heapSize {
+            child = maxChild(i)
+            if temp >= heap[child] { break }
+            heap[i] = heap[child]
+            i = child
+        }
+        heap[i] = temp
+    }
+
+    private func parent(_ i: Int) -> Int {
+        return (i - 1) / degree
+    }
+
+    private func kthChild(_ i: Int, _ k: Int) -> Int {
+        return degree * i + k
+    }
+
+    private func maxChild(_ i: Int) -> Int {
+        let leftChild = kthChild(i, 1)
+        let rightChild = kthChild(i, 2)
+        return heap[leftChild] > heap[rightChild] ? leftChild : rightChild
+    }
+}
