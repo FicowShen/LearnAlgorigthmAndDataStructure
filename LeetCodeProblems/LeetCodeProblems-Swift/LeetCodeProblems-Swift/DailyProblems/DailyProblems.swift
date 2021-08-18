@@ -9,11 +9,13 @@ import Foundation
 
 final class DailyProblems {
     static func run() {
+        week3()
         week2()
         week1()
     }
 
     static func week3() {
+        Day17ReversePrint().run()
         Day16ReplaceSpace().run()
     }
 
