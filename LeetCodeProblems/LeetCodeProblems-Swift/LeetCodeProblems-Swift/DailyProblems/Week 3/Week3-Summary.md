@@ -59,7 +59,7 @@ func backtrackWithLeftRight(_ n: Int) -> [String] {
 ```
 
 ``` swift
-func dp2(_ n: Int) -> [String] {
+func dp(_ n: Int) -> [String] {
     if n <= 0 { return [] }
     if n == 1 { return ["()"] }
     var dp = [[String]](repeating: [], count: n + 1)
@@ -79,3 +79,47 @@ func dp2(_ n: Int) -> [String] {
 }
 ```
 
+
+
+* [二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+
+``` swift
+func dfs(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+    func f(_ node: TreeNode?) -> TreeNode? {
+        if node == nil || node === p || node === q { return node }
+        let l = f(node?.left), r = f(node?.right)
+        if l != nil, r != nil { return node }
+        return l == nil ? r : l
+    }
+    return f(root)
+}
+```
+
+``` swift
+func mapAndSet(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+    guard let r = root, let p = p, let q = q else { return nil }
+    var parents = [Int: TreeNode](), stack = [r]
+    while let node = stack.popLast() {
+        if parents[p.val] != nil, parents[q.val] != nil { break }
+        if let r = node.right {
+            parents[r.val] = node
+            stack.append(r)
+        }
+        if let l = node.left {
+            parents[l.val] = node
+            stack.append(l)
+        }
+    }
+    var visited = Set<Int>(), node: TreeNode? = p
+    while let n = node {
+        visited.insert(n.val)
+        node = parents[n.val]
+    }
+    node = q
+    while let n = node {
+        if visited.contains(n.val) { return n }
+        node = parents[n.val]
+    }
+    return nil
+}
+```

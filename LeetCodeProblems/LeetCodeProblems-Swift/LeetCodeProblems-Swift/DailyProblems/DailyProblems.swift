@@ -16,6 +16,7 @@ final class DailyProblems {
 
     static func week3() {
         Week3GenerateParentheses().run()
+        Day18LowestCommonAncestor().run()
         Day17ReversePrint().run()
         Day16ReplaceSpace().run()
     }
