@@ -197,6 +197,7 @@ func mapAndSet(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
 * [翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/description/)
 
 ``` swift
+// Time: O(n), Space: O(n)
 func bfs(_ root: TreeNode?) -> TreeNode? {
     guard let root = root else { return nil }
     var q = [root]
@@ -214,6 +215,7 @@ func bfs(_ root: TreeNode?) -> TreeNode? {
 ```
 
 ``` swift
+// Time: O(n), Space: O(n)
 func recurse(_ root: TreeNode?) -> TreeNode? {
 		// from top to bottom
     func f(_ root: TreeNode?) {
@@ -226,3 +228,36 @@ func recurse(_ root: TreeNode?) -> TreeNode? {
     return root
 }
 ```
+
+
+* [验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
+
+``` swift
+// Time: O(n), Space: O(1)
+func compareWithMinAndMax(_ root: TreeNode?) -> Bool {
+    func f(root: TreeNode?, min: Int?, max: Int?) -> Bool {
+        guard let root = root else { return true }
+        if let m = min, root.val <= m { return false }
+        if let m = max, root.val >= m { return false }
+        return f(root: root.left, min: min, max: root.val)
+            && f(root: root.right, min: root.val, max: max)
+    }
+    return f(root: root, min: nil, max: nil)
+}
+```
+
+``` swift
+// Time: O(n), Space: O(1)
+func compareWithPre(_ root: TreeNode?) -> Bool {
+    var pre: Int!
+    func f(root: TreeNode?) -> Bool {
+        guard let root = root else { return true }
+        if !f(root: root.left) { return false }
+        if let pre = pre, root.val <= pre { return false }
+        pre = root.val
+        return f(root: root.right)
+    }
+    return f(root: root)
+}
+```
+
