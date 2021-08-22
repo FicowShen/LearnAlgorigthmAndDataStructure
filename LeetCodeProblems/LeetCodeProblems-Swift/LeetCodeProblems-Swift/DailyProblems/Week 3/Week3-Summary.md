@@ -63,6 +63,9 @@ def divide_conquer(problem, param1, param2, ...):
 ```
 
 
+* （八皇后问题）高效判定对角线的方法：
+y = x, y = -x   `-->`  x - y,  x + y   `-->`  row - col, row + col
+
 
 
 ## 实战题目总结
@@ -349,5 +352,74 @@ func buildTreeWithStop(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
         return root
     }
     return build(stop: nil)
+}
+```
+
+
+* [组合](https://leetcode-cn.com/problems/combinations/)
+
+``` swift
+func iterate(_ n: Int, _ k: Int) -> [[Int]] {
+    // n=4, k=3
+    // 1, 2, 3, 5
+    //       ^
+    // 1, 2, 4, 5
+    //    ^
+    // 1, 3, 4, 5
+    //    ^
+    // 2, 3, 4, 5
+    // ^
+    // ----------
+    // 1, 3, 4, 5
+    //    ^
+    // 1, 2, 4, 5
+    //       ^
+    // 1, 2, 3, 5
+    //          ^
+    // ----------
+    // 1, 2, 3, 6
+    //          ^
+    var ans = [[Int]]()
+    var temp = [Int]()
+    for i in 1...k {
+        temp.append(i)
+    }
+    // allow j increase to k
+    temp.append(n+1)
+    var j = 0
+    while j < k {
+        ans.append(Array(temp[0...k-1]))
+        j = 0
+        // find the gap
+        while j < k, temp[j] + 1 == temp[j + 1] {
+            temp[j] = j + 1
+            j += 1
+        }
+        // increase the last gap to meet n
+        temp[j] += 1
+    }
+    return ans
+}
+```
+
+``` swift
+func backtrack(_ n: Int, _ k: Int) -> [[Int]] {
+    var ans = [[Int]]()
+    func backtrack(index: Int, output: inout [Int]) {
+        if output.count == k {
+            ans.append(output)
+            return
+        }
+        for i in index...n {
+        		// skip invalid cases
+            if k - output.count > n - i + 1 { return }
+            output.append(i)
+            backtrack(index: i+1, output: &output)
+            _ = output.popLast()
+        }
+    }
+    var output = [Int]()
+    backtrack(index: 1, output: &output)
+    return ans
 }
 ```
