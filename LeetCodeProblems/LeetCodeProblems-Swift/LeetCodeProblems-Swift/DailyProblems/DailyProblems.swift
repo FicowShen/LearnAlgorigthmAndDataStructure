@@ -15,6 +15,7 @@ final class DailyProblems {
     }
 
     static func week3() {
+        Week3Combine().run()
         Week3BuildTree().run()
         Week3BinaryTreeMaxDepth().run()
         Week3ValidateBinarySearchTree().run()
