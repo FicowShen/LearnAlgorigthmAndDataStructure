@@ -305,3 +305,49 @@ func shortRecurse(_ root: TreeNode?) -> Int {
     return f(root)
 }
 ```
+
+
+* [从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+
+``` swift
+// Time: O(n), Space: O(n)
+func buildTreeWithIndex(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+    var inMap = [Int: Int]()
+    for (i, v) in inorder.enumerated() { inMap[v] = i }
+    func build(preStart: Int, preEnd: Int, inStart: Int, inEnd: Int) -> TreeNode? {
+        if preStart > preEnd || inStart > inEnd { return nil }
+        let rootValue = preorder[preStart]
+        let root = TreeNode(rootValue)
+        let inPos = inMap[rootValue]!
+        let preNodeCount = inPos - inStart
+        root.left = build(preStart: preStart + 1, preEnd: preStart + preNodeCount,
+                          inStart: inStart, inEnd: inPos - 1)
+        root.right = build(preStart: preStart + preNodeCount + 1, preEnd: preEnd,
+                           inStart: inPos + 1, inEnd: inEnd)
+        return root
+    }
+    return build(preStart: 0, preEnd: preorder.count-1,
+                 inStart: 0, inEnd: inorder.count-1)
+}
+```
+
+``` swift
+// Time: O(n), Space: O(n)
+func buildTreeWithStop(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+    var preIndex = 0, inIndex = 0
+    func build(stop: Int?) -> TreeNode? {
+        if preIndex == preorder.count { return nil }
+        if inorder[inIndex] == stop {
+            inIndex += 1
+            return nil
+        }
+        let rootValue = preorder[preIndex]
+        preIndex += 1
+        let root = TreeNode(rootValue)
+        root.left = build(stop: rootValue)
+        root.right = build(stop: stop)
+        return root
+    }
+    return build(stop: nil)
+}
+```
