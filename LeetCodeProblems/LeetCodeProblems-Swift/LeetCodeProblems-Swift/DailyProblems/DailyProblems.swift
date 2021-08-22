@@ -15,6 +15,7 @@ final class DailyProblems {
     }
 
     static func week3() {
+        Week3InvertBinaryTree().run()
         Week3GenerateParentheses().run()
         Day21GetKthMagicNumber().run()
         Day18LowestCommonAncestor().run()

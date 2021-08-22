@@ -192,3 +192,37 @@ func mapAndSet(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
     return nil
 }
 ```
+
+
+* [翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/description/)
+
+``` swift
+func bfs(_ root: TreeNode?) -> TreeNode? {
+    guard let root = root else { return nil }
+    var q = [root]
+    while !q.isEmpty {
+        let nodes = q
+        q = []
+        nodes.forEach { node in
+            (node.left, node.right) = (node.right, node.left)
+            if let l = node.left { q.append(l) }
+            if let r = node.right { q.append(r) }
+        }
+    }
+    return root
+}
+```
+
+``` swift
+func recurse(_ root: TreeNode?) -> TreeNode? {
+		// from top to bottom
+    func f(_ root: TreeNode?) {
+        guard let root = root else { return }
+        (root.left, root.right) = (root.right, root.left)
+        f(root.left)
+        f(root.right)
+    }
+    f(root)
+    return root
+}
+```
