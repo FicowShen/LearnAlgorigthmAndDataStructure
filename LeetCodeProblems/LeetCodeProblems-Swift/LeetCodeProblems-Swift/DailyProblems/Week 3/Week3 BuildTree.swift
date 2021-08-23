@@ -7,10 +7,14 @@
 
 import Foundation
 
-// https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+/*
+ https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+ 1. build with index
+ 2. build with inorder stop flag
+ */
 final class Week3BuildTree {
     func run() {
-        let f = buildTreeWithStop2
+        let f = buildTreeWithStop3
         func judge(_ pre: [Int], _ in: [Int], expected: [Int?]) {
             let tree = TreeNode.fromPerfectBinaryTreeLevelNodes(expected)
             printAndAssert(result: f(pre, `in`), expected: tree)
@@ -22,12 +26,66 @@ final class Week3BuildTree {
 
 
 
-    func buildTreeWithIndex3(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+
+
+    func buildTreeWithIndex5(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
         fatalError()
     }
 
-    func buildTreeWithStop3(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+    func buildTreeWithStop5(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
         fatalError()
+    }
+
+
+
+
+    func buildTreeWithIndex4(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+        fatalError()
+    }
+
+    func buildTreeWithStop4(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+        fatalError()
+    }
+
+
+
+
+
+    func buildTreeWithIndex3(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+        var inMap = [Int: Int]()
+        inorder.enumerated().forEach { inMap[$1] = $0 }
+        func build(preStart: Int, preEnd: Int, inStart: Int, inEnd: Int) -> TreeNode? {
+            if preStart > preEnd || inStart > inEnd { return nil }
+            let rootValue = preorder[preStart]
+            let root = TreeNode(rootValue)
+            let inPos = inMap[rootValue]!
+            let preNodesCount = inPos - inStart
+            root.left = build(preStart: preStart + 1, preEnd: preStart + preNodesCount,
+                              inStart: inStart, inEnd: inPos - 1)
+            root.right = build(preStart: preStart + preNodesCount + 1, preEnd: preEnd,
+                               inStart: inPos + 1, inEnd: inEnd)
+            return root
+        }
+        return build(preStart: 0, preEnd: preorder.count - 1,
+                     inStart: 0, inEnd: inorder.count - 1)
+    }
+
+    func buildTreeWithStop3(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+        var preIndex = 0, inIndex = 0
+        func build(stop: Int?) -> TreeNode? {
+            if preIndex == preorder.count { return nil }
+            if inorder[inIndex] == stop {
+                inIndex += 1
+                return nil
+            }
+            let rootValue = preorder[preIndex]
+            preIndex += 1
+            let root = TreeNode(rootValue)
+            root.left = build(stop: rootValue)
+            root.right = build(stop: stop)
+            return root
+        }
+        return build(stop: nil)
     }
 
 
