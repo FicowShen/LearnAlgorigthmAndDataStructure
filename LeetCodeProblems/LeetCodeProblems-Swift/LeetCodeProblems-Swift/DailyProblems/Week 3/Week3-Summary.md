@@ -450,3 +450,69 @@ func backtrack(_ n: Int, _ k: Int) -> [[Int]] {
     return ans
 }
 ```
+
+
+
+- [全排列](https://leetcode-cn.com/problems/permutations/)
+
+``` swift
+// Time: O(n * n!), Space: O(n!)
+func backtrackWithSet(_ nums: [Int]) -> [[Int]] {
+    var elements = Set(nums), ans = [[Int]](), output = [Int]()
+    func f() {
+        if output.count == nums.count {
+            ans.append(output)
+            return
+        }
+        for element in elements {
+            // remove used elements
+            elements.remove(element)
+            output.append(element)
+            f()
+            _ = output.popLast()
+            _ = elements.insert(element)
+        }
+    }
+    f()
+    return ans
+}
+
+// Time: O(n * n!), Space: O(n!)
+// 递归 n! 次，每次复制元素 n 个
+func swapWithFirst(_ nums: [Int]) -> [[Int]] {
+    var ans = [[Int]](), nums = nums
+    func f(first: Int) {
+        if first == nums.count {
+            ans.append(nums)
+            return
+        }
+        for i in first..<nums.count {
+            nums.swapAt(first, i)
+            f(first: first + 1) // first!
+            nums.swapAt(first, i)
+        }
+    }
+    f(first: 0)
+    return ans
+}
+
+// Time: O(n * n!), Space: O(n!)
+// 插入元素 n! 次，每次平均 O(n)
+func insert(_ nums: [Int]) -> [[Int]] {
+    guard let first = nums.first else { return [] }
+    var ans = [[Int]]()
+    ans.append([first])
+    for i in 1..<nums.count { // O(n)
+        let oldResult = ans
+        ans.removeAll(keepingCapacity: true)
+        oldResult.forEach { old in
+            for j in 0...i { // O(n)
+                var new = old
+                new.insert(nums[i], at: j) // O(n)
+                ans.append(new)
+            }
+        }
+    }
+    return ans
+}
+```
