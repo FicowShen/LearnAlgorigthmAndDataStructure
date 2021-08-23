@@ -9,9 +9,14 @@ import Foundation
 
 final class DailyProblems {
     static func run() {
+        week4()
         week3()
         week2()
         week1()
+    }
+
+    static func week4() {
+        Day22Permutations().run()
     }
 
     static func week3() {
