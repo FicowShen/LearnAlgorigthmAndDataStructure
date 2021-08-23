@@ -6,7 +6,7 @@
 * 递归终止条件
 * 处理当前层的逻辑
 * 深入下一层
-* 如有必要，恢复当前层的状态
+* 如有必要（使用了全局变量或改动了引用的参数），恢复当前层的状态
 
 ``` python
 # Python
@@ -28,7 +28,7 @@ self.recursion(level + 1, p1, ...) 
 #### 思维要点
 * 避免人肉递归和递归树
 * 找最近重复性
-* 数学归纳法思维
+* 数学归纳法思维（base case, n -> n + 1）
 
 
 
@@ -64,6 +64,7 @@ def divide_conquer(problem, param1, param2, ...):
 
 
 * （八皇后问题）高效判定对角线的方法：
+
 y = x, y = -x   `-->`  x - y,  x + y   `-->`  row - col, row + col
 
 
@@ -114,13 +115,17 @@ func recurseWithMemo(_ n: Int) -> Int {
 func backtrackWithLeftRight(_ n: Int) -> [String] {
     var ans = [String]()
     func backtrack(l: Int, r: Int, s: String) {
+    		// terminator
         if l > r || l < 0 || r < 0 { return }
+        // process the current level
         if l == 0, r == 0 {
             ans.append(s)
             return
         }
+        // drill down
         backtrack(l: l - 1, r: r, s: s + "(")
         backtrack(l: l, r: r - 1, s: s + ")")
+        // rollback states
     }
     backtrack(l: n, r: n, s: "")
     return ans
@@ -133,12 +138,14 @@ func dp(_ n: Int) -> [String] {
     if n <= 0 { return [] }
     if n == 1 { return ["()"] }
     var dp = [[String]](repeating: [], count: n + 1)
+    // base cases
     dp[0] = [""]
     dp[1] = ["()"]
     for i in 2...n {
         for j in 0..<i {
             for left in dp[j] {
                 for right in dp[i - j - 1] {
+                		// new state
                     let s = "(" + left + ")" + right
                     dp[i].append(s)
                 }
@@ -157,7 +164,9 @@ func dp(_ n: Int) -> [String] {
 // Time: O(n), Space: (n)
 func dfs(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
     func f(_ node: TreeNode?) -> TreeNode? {
+    		// terminator
         if node == nil || node === p || node === q { return node }
+        // process current level & drill down
         let l = f(node?.left), r = f(node?.right)
         if l != nil, r != nil { return node }
         return l == nil ? r : l
@@ -171,6 +180,7 @@ func dfs(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
 func mapAndSet(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
     guard let r = root, let p = p, let q = q else { return nil }
     var parents = [Int: TreeNode](), stack = [r]
+    // go down the tree and find q, p
     while let node = stack.popLast() {
         if parents[p.val] != nil, parents[q.val] != nil { break }
         if let r = node.right {
@@ -182,12 +192,14 @@ func mapAndSet(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
             stack.append(l)
         }
     }
+    // traverse parents for p
     var visited = Set<Int>(), node: TreeNode? = p
     while let n = node {
         visited.insert(n.val)
         node = parents[n.val]
     }
     node = q
+    // traverse parents for q and find the parent
     while let n = node {
         if visited.contains(n.val) { return n }
         node = parents[n.val]
@@ -207,8 +219,11 @@ func bfs(_ root: TreeNode?) -> TreeNode? {
     while !q.isEmpty {
         let nodes = q
         q = []
+        // iterate current level
         nodes.forEach { node in
+        		// exchange
             (node.left, node.right) = (node.right, node.left)
+            // get the nodes in next level
             if let l = node.left { q.append(l) }
             if let r = node.right { q.append(r) }
         }
@@ -222,10 +237,14 @@ func bfs(_ root: TreeNode?) -> TreeNode? {
 func recurse(_ root: TreeNode?) -> TreeNode? {
 		// from top to bottom
     func f(_ root: TreeNode?) {
+    		// terminator
         guard let root = root else { return }
+        // process the current level
         (root.left, root.right) = (root.right, root.left)
+        // drill down
         f(root.left)
         f(root.right)
+        // rollback
     }
     f(root)
     return root
@@ -239,9 +258,12 @@ func recurse(_ root: TreeNode?) -> TreeNode? {
 // Time: O(n), Space: O(1)
 func compareWithMinAndMax(_ root: TreeNode?) -> Bool {
     func f(root: TreeNode?, min: Int?, max: Int?) -> Bool {
+    		// terminator
         guard let root = root else { return true }
+        // process current level
         if let m = min, root.val <= m { return false }
         if let m = max, root.val >= m { return false }
+        // drill down
         return f(root: root.left, min: min, max: root.val)
             && f(root: root.right, min: root.val, max: max)
     }
@@ -358,6 +380,8 @@ func buildTreeWithStop(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
 
 * [组合](https://leetcode-cn.com/problems/combinations/)
 
+- Time: O( $C_n^k$ * k), Space: O(n)
+
 ``` swift
 func iterate(_ n: Int, _ k: Int) -> [[Int]] {
     // n=4, k=3
@@ -401,6 +425,9 @@ func iterate(_ n: Int, _ k: Int) -> [[Int]] {
     return ans
 }
 ```
+
+
+- Time: O( $C_n^k$ * k), Space: O(n)
 
 ``` swift
 func backtrack(_ n: Int, _ k: Int) -> [[Int]] {
