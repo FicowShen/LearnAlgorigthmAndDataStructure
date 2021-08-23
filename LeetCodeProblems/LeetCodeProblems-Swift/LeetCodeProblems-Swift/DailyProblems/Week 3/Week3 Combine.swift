@@ -7,10 +7,14 @@
 
 import Foundation
 
-// https://leetcode-cn.com/problems/combinations/
+/*
+ https://leetcode-cn.com/problems/combinations/
+ 1. backtrack with index
+ 2. increase the gap
+ */
 final class Week3Combine {
     func run() {
-        let f = iterate1
+        let f = iterate3
         func judge(n: Int, k: Int, expected: [[Int]]) {
             printAndAssert(result: Set(f(n, k).map { $0 }),
                            expected: Set(expected.map { $0 }))
@@ -33,6 +37,104 @@ final class Week3Combine {
             [2, 3, 4],
         ])
     }
+
+
+    func backtrack5(_ n: Int, _ k: Int) -> [[Int]] {
+        fatalError()
+    }
+
+    func iterate5(_ n: Int, _ k: Int) -> [[Int]] {
+        fatalError()
+    }
+
+
+    func backtrack4(_ n: Int, _ k: Int) -> [[Int]] {
+        fatalError()
+    }
+
+    func iterate4(_ n: Int, _ k: Int) -> [[Int]] {
+        fatalError()
+    }
+
+
+
+
+    func backtrack3(_ n: Int, _ k: Int) -> [[Int]] {
+        var ans = [[Int]](), res = [Int]()
+        func backtrack(index: Int) {
+            if res.count == k {
+                ans.append(res)
+                return
+            }
+            for i in index...n {
+                if res.count + n - i + 1 < k { return }
+                res.append(i)
+                backtrack(index: i + 1)
+                _ = res.popLast()
+            }
+        }
+        backtrack(index: 1)
+        return ans
+    }
+
+    func iterate3(_ n: Int, _ k: Int) -> [[Int]] {
+        var ans = [[Int]](), i = 0
+        var nums = [Int](1...k) + [n + 1] // end flag: n + 1
+        while i < k {
+            ans.append(Array(nums[0...k-1]))
+            i = 0
+            // go from start to the gap
+            while i < k, nums[i] + 1 == nums[i + 1] {
+                nums[i] = i + 1
+                i += 1
+            }
+            // increase the gap
+            nums[i] += 1
+        }
+        return ans
+    }
+
+
+
+
+    func backtrack2(_ n: Int, _ k: Int) -> [[Int]] {
+        var ans = [[Int]](), output = [Int]()
+        func backtrack(index: Int) {
+            if output.count == k {
+                ans.append(output)
+                return
+            }
+            for i in index...n {
+                if output.count + n - i + 1 < k { return }
+                output.append(i)
+                backtrack(index: i + 1)
+                _ = output.popLast()
+            }
+        }
+        backtrack(index: 1)
+        return ans
+    }
+
+    func iterate2(_ n: Int, _ k: Int) -> [[Int]] {
+        var ans = [[Int]](), nums = [Int](1...k) + [n + 1]
+        var i = 0
+        while i < k {
+            ans.append(Array(nums[0...k-1]))
+            i = 0
+            while i < k, nums[i] + 1 == nums[i + 1] {
+                nums[i] = i + 1
+                i += 1
+            }
+            nums[i] += 1
+        }
+        return ans
+    }
+
+
+
+
+
+
 
     func iterate1(_ n: Int, _ k: Int) -> [[Int]] {
         var ans = [[Int]]()
