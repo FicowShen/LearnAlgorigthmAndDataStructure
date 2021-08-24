@@ -9,7 +9,10 @@ import Foundation
 /*
  https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
  1. BFS
+ Time: O(n), Space: O(n)
+
  2. DFS with level
+ Time: O(n), Space: O(n)
  */
 final class Week4BinaryTreeLevelOrderTraversal {
     func run() {
