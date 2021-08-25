@@ -16,6 +16,7 @@ final class DailyProblems {
     }
 
     static func week4() {
+        Week4FindLargestValueInEachTreeRow().run()
         Week4BestTimeToBuyAndSellStockII().run()
         Week4MinimumGeneticMutation().run()
         Week4BinaryTreeLevelOrderTraversal().run()
