@@ -7,10 +7,14 @@
 
 import Foundation
 
-// https://leetcode-cn.com/problems/generate-parentheses/#/description
+/*
+ https://leetcode-cn.com/problems/generate-parentheses/#/description
+ 1.backtrack
+ 2.dp
+ */
 final class Week3GenerateParentheses {
     func run() {
-        let f = dp2
+        let f = dp3
         func judge(n: Int, expected: [String]) {
             printAndAssert(result: Set(f(n)), expected: Set(expected))
         }
@@ -18,12 +22,70 @@ final class Week3GenerateParentheses {
         judge(n: 1, expected: ["()"])
     }
 
-    func dp3(_ n: Int) -> [String] {
+
+
+    func dp4(_ n: Int) -> [String] {
         fatalError()
     }
 
-    func backtrackWithLeftRight3(_ n: Int) -> [String] {
+    func backtrackWithLeftRight4(_ n: Int) -> [String] {
         fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    func dp3(_ n: Int) -> [String] {
+        if n < 2 { return n == 1 ? ["()"] : [] }
+        var dp = [[String]](repeating: [], count: n + 1)
+        dp[0] = [""]
+        dp[1] = ["()"]
+        for i in 2...n { // start from 2
+            for j in 0..<i {
+                for left in dp[j] {
+                    for right in dp[i - j - 1] {
+                        let s = "(" + left + ")" + right
+                        dp[i].append(s)
+                    }
+                }
+            }
+        }
+        return dp[n]
+    }
+
+    func backtrackWithLeftRight3(_ n: Int) -> [String] {
+        var ans = [String]()
+        func f(left: Int, right: Int, output: String) {
+            if left > right || left < 0 || right < 0 { return }
+            if left == 0, right == 0 {
+                ans.append(output)
+                return
+            }
+            f(left: left - 1, right: right, output: output + "(")
+            f(left: left, right: right - 1, output: output + ")")
+        }
+        f(left: n, right: n, output: "")
+        return ans
     }
 
 
