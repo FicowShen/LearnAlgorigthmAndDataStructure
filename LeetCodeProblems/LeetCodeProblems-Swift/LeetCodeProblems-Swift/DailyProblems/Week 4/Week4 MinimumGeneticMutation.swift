@@ -10,15 +10,15 @@ import Foundation
 /*
  https://leetcode-cn.com/problems/minimum-genetic-mutation/
  n: length of gene, k: number of choices, m: length of bank
- 1. BFS
+ 1. BFS: returns the result as soon as it finds a result
  Time: O(n * k * m), Space: O(n)
 
- 2. DFS
+ 2. DFS: traverse all the possible paths and get the min value
  Time: O(m * n), Space: O(n)
  */
 final class Week4MinimumGeneticMutation {
     func run() {
-        let f = minMutationWithDFS2
+        let f = minMutationWithDFS3
         func judge(_ start: String, _ end: String, _ bank: [String], _ expected: Int) {
             printAndAssert(result: f(start, end, bank), expected: expected)
         }
@@ -32,12 +32,85 @@ final class Week4MinimumGeneticMutation {
     }
 
 
-    func minMutationWithDFS3(_ start: String, _ end: String, _ bank: [String]) -> Int {
+    func minMutationWithDFS5(_ start: String, _ end: String, _ bank: [String]) -> Int {
         fatalError()
     }
 
-    func minMutationWithBFS3(_ start: String, _ end: String, _ bank: [String]) -> Int {
+    func minMutationWithBFS5(_ start: String, _ end: String, _ bank: [String]) -> Int {
         fatalError()
+    }
+
+    
+
+    func minMutationWithDFS4(_ start: String, _ end: String, _ bank: [String]) -> Int {
+        fatalError()
+    }
+
+    func minMutationWithBFS4(_ start: String, _ end: String, _ bank: [String]) -> Int {
+        fatalError()
+    }
+
+
+
+
+    func minMutationWithDFS3(_ start: String, _ end: String, _ bank: [String]) -> Int {
+        if start == end { return 0 }
+        if !bank.contains(end) { return -1 }
+        var mutations: Int?, valid = Set(bank), visited = Set<String>()
+        func dfs(s: String, e: String, m: Int) {
+            if s == e {
+                mutations = min(mutations ?? .max, m)
+                return
+            }
+            for v in valid {
+                var diff = 0
+                for (a, b) in zip(v, s) {
+                    if a != b { diff += 1 }
+                    if diff > 1 { break }
+                }
+                if diff == 1, !visited.contains(v) {
+                    visited.insert(v)
+                    defer { visited.remove(v) }
+                    dfs(s: v, e: e, m: m + 1)
+                }
+            }
+        }
+        dfs(s: start, e: end, m: 0)
+        return mutations ?? -1
+    }
+
+    func minMutationWithBFS3(_ start: String, _ end: String, _ bank: [String]) -> Int {
+        if start == end { return 0 }
+        if !bank.contains(end) { return -1 }
+        let length = end.count, choices = ["A", "C", "G", "T"]
+        var valid = Set(bank)
+        func bfs(starts: Set<String>, ends: Set<String>, m: Int) -> Int {
+            if starts.isEmpty { return -1 } // start vs starts !!!
+            if starts.count > ends.count {
+                return bfs(starts: ends, ends: starts, m: m)
+            }
+            var next = Set<String>()
+            for s in starts {
+                let startIndex = s.utf8.startIndex
+                for offset in 0..<length {
+                    for choice in choices {
+                        let i = s.utf8.index(startIndex, offsetBy: offset)
+                        if s[i...i] == choice { continue }
+                        let new = s.replacingCharacters(in: i...i, with: choice)
+                        if ends.contains(new) { return m + 1 }
+                        if valid.contains(new) {
+                            valid.remove(new)
+                            next.insert(new)
+                        }
+                    }
+                }
+            }
+            return bfs(starts: next, ends: ends, m: m + 1) // pass next!!
+        }
+        var s = Set<String>(), e = Set<String>()
+        s.insert(start)
+        e.insert(end)
+        return bfs(starts: s, ends: e, m: 0)
     }
 
 
