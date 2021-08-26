@@ -16,11 +16,12 @@ final class DailyProblems {
     }
 
     static func week4() {
-        Day25LemonadeChange().run()
+        Week4SqrtX().run()
         Week4FindLargestValueInEachTreeRow().run()
         Week4BestTimeToBuyAndSellStockII().run()
         Week4MinimumGeneticMutation().run()
         Week4BinaryTreeLevelOrderTraversal().run()
+        Day25LemonadeChange().run()
         Day22Permutations().run()
     }
 

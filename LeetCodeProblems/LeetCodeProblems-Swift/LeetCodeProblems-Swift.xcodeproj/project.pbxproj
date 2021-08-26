@@ -23,6 +23,7 @@
 		6A42EFCD26D5D0160030EE32 /* Week4 BestTimeToBuyAndSellStockII.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFCC26D5D0160030EE32 /* Week4 BestTimeToBuyAndSellStockII.swift */; };
 		6A42EFCF26D68A750030EE32 /* Week4 FindLargestValueInEachTreeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFCE26D68A750030EE32 /* Week4 FindLargestValueInEachTreeRow.swift */; };
 		6A42EFD126D70F660030EE32 /* Day25 LemonadeChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFD026D70F660030EE32 /* Day25 LemonadeChange.swift */; };
+		6A42EFD326D7D5A60030EE32 /* Week4 SqrtX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFD226D7D5A60030EE32 /* Week4 SqrtX.swift */; };
 		6A59A56426B0DE3E00273E66 /* MaxProfit2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59A56326B0DE3E00273E66 /* MaxProfit2.swift */; };
 		6AB35B1226B22A4E0026173D /* MaxProfitWithCooldown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B1126B22A4E0026173D /* MaxProfitWithCooldown.swift */; };
 		6AB35B1626B594970026173D /* HouseRobber2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B1526B594970026173D /* HouseRobber2.swift */; };
@@ -122,6 +123,7 @@
 		6A42EFCC26D5D0160030EE32 /* Week4 BestTimeToBuyAndSellStockII.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week4 BestTimeToBuyAndSellStockII.swift"; sourceTree = "<group>"; };
 		6A42EFCE26D68A750030EE32 /* Week4 FindLargestValueInEachTreeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week4 FindLargestValueInEachTreeRow.swift"; sourceTree = "<group>"; };
 		6A42EFD026D70F660030EE32 /* Day25 LemonadeChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day25 LemonadeChange.swift"; sourceTree = "<group>"; };
+		6A42EFD226D7D5A60030EE32 /* Week4 SqrtX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week4 SqrtX.swift"; sourceTree = "<group>"; };
 		6A59A56326B0DE3E00273E66 /* MaxProfit2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxProfit2.swift; sourceTree = "<group>"; };
 		6AB35B1126B22A4E0026173D /* MaxProfitWithCooldown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxProfitWithCooldown.swift; sourceTree = "<group>"; };
 		6AB35B1526B594970026173D /* HouseRobber2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseRobber2.swift; sourceTree = "<group>"; };
@@ -225,11 +227,12 @@
 			isa = PBXGroup;
 			children = (
 				6A42EFC626D323A60030EE32 /* Day22 Permutations.swift */,
+				6A42EFD026D70F660030EE32 /* Day25 LemonadeChange.swift */,
 				6A42EFC826D4675E0030EE32 /* Week4 BinaryTreeLevelOrderTraversal.swift */,
 				6A42EFCA26D46CA10030EE32 /* Week4 MinimumGeneticMutation.swift */,
 				6A42EFCC26D5D0160030EE32 /* Week4 BestTimeToBuyAndSellStockII.swift */,
 				6A42EFCE26D68A750030EE32 /* Week4 FindLargestValueInEachTreeRow.swift */,
-				6A42EFD026D70F660030EE32 /* Day25 LemonadeChange.swift */,
+				6A42EFD226D7D5A60030EE32 /* Week4 SqrtX.swift */,
 			);
 			path = "Week 4";
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 				6AB89D5126A4138100E295BA /* WeeklyContest.swift in Sources */,
 				6AB35B3126BA0BD90026173D /* Day3 TwoSum.swift in Sources */,
 				6A42EFB226CBFC0F0030EE32 /* Day16 ReplaceSpace.swift in Sources */,
+				6A42EFD326D7D5A60030EE32 /* Week4 SqrtX.swift in Sources */,
 				6AD94F8B269AA9A000AA35B4 /* ArrayProblems.swift in Sources */,
 				6A42EFBA26D1D2C60030EE32 /* Day21 GetKthMagicNumber.swift in Sources */,
 				6AD94F7D269AA9A000AA35B4 /* TreeProblems.swift in Sources */,
