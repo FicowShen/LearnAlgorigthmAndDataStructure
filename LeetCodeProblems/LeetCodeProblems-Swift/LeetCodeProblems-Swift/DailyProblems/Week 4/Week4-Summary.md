@@ -96,6 +96,29 @@ void bfs(Node* root) {
 
 ## 二分查找的实现、特性及实战题目解析
 
+### 前提条件
+1. 目标函数单调性（单调递增或递减）
+2. 存在上下界
+3. 能够通过索引访问
+
+### 代码模板
+``` c++
+int binarySearch(const vector<int>& nums, int target) {
+    int left = 0, right = (int)nums.size()-1;
+    while (left <= right) {
+        int mid = left + (right - left)/ 2;
+        if (nums[mid] == target) return mid;
+        else if (nums[mid] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1;
+}
+```
+
+## 思考题
+
+> 如何使用二分查找，寻找一个半有序数组 [4, 5, 6, 7, 0, 1, 2] 中间无序的地方？
+
 
 
 ## 实战题目总结
