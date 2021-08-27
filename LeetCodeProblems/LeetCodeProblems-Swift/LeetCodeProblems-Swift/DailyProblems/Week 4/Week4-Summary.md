@@ -103,6 +103,7 @@ void bfs(Node* root) {
 
 ### 代码模板
 ``` c++
+// Time: O(logn), Space: O(1)
 int binarySearch(const vector<int>& nums, int target) {
     int left = 0, right = (int)nums.size()-1;
     while (left <= right) {
@@ -123,10 +124,12 @@ int binarySearch(const vector<int>& nums, int target) {
 
 ## 实战题目总结
 
-* [柠檬水找零](https://leetcode-cn.com/problems/lemonade-change/description/)
 
-> 解题思路：
-> 主要是贪心算法，20 -> (10+5, 5+5+5) 的情况下，优先找面额大的钱，留下的小面额钱越多越好
+
+- [柠檬水找零](https://leetcode-cn.com/problems/lemonade-change/description/)
+
+> 贪心法解题思路：
+> 20 -> (10+5, 5+5+5) 的情况下，优先找面额大的钱，留下的小面额钱越多越好，只要有足够多的小面额的钱，就一定可以找零；
 
 ``` swift
 //  Time: O(n), Space: O(1)
@@ -150,3 +153,84 @@ func lemonadeChange(_ bills: [Int]) -> Bool {
 
 
 
+- [买卖股票的最佳时机 II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)
+
+> DP法解题思路：
+> 状态分析：每天结束的时候，有2种状态：持有股票、不持有股票；
+> 选择：买入、卖出、维持原样；
+> 状态转移：1.当天不持有，从[之前就不持有]和[之前持有但是选择今天卖出]中选择最大值；2.当天持有，从[之前就持有]和[之前不持有但是选择今天买入]中选择最大值；
+> 状态压缩：做出当天的选择时，需要依赖前一天持有和不持有的结果，所以可以将其他多余的状态进行压缩。
+
+``` swift
+// Time: O(n), Space: O(n)
+func rawDp(_ prices: [Int]) -> Int {
+    let n = prices.count
+    var dp = [[Int]](repeating: [0, 0], count: n)
+    dp[0][1] = -prices[0]
+    for i in 1..<n {
+        dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])
+        dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i])
+    }
+    return dp[n - 1][0]
+}
+
+// Time: O(n), Space: O(1)
+func dp(_ prices: [Int]) -> Int {
+    var noStock = 0, hasStock = -prices[0]
+    for i in 1..<prices.count {
+        (noStock, hasStock) = (
+            max(noStock, hasStock + prices[i]),
+            max(hasStock, noStock - prices[i])
+        )
+    }
+    return noStock
+}
+```
+
+> 贪心法解题思路：
+> 只要能赚取差价，那就买入，到最后就是最大的收益；
+
+``` swift
+// Time: O(n), Space: O(1)
+func greedy(_ prices: [Int]) -> Int {
+    var sum = 0
+    for i in 1..<prices.count {
+        sum += max(0, prices[i] - prices[i - 1])
+    }
+    return sum
+}
+```
+
+
+
+- [岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
+
+> DFS解题思路：
+> 逐个遍历所有的网格元素，如果元素不为0，就采用DFS将相连的岛屿元素都置为0；
+> 在遍历上下左右相邻的位置时，使用方向数组简化操作；
+
+``` swift
+// Time: O(m * n), Space: O(1)
+func dfs(_ grid: [[Character]]) -> Int {
+    let directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
+    var count = 0, grid = grid
+    func clearIsland(row: Int, col: Int) {
+        if row < 0 || row >= grid.count { return }
+        if col < 0 || col >= grid[row].count { return }
+        if grid[row][col] == "0" { return }
+        grid[row][col] = "0"
+        for d in directions {
+            clearIsland(row: row + d[0], col: col + d[1])
+        }
+    }
+    for i in 0..<grid.count {
+        for j in 0..<grid[i].count {
+            let char = grid[i][j]
+            if char == "0" { continue }
+            count += 1
+            clearIsland(row: i, col: j)
+        }
+    }
+    return count
+}
+```
