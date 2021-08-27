@@ -11,7 +11,7 @@ import Foundation
 final class Week1ThreeSum {
     func run() {
         func judge(_ nums: [Int], expected: [[Int]]) {
-            printAndAssert(result: threeSum4(nums), expected: expected)
+            printAndAssert(result: threeSum5(nums), expected: expected)
         }
         judge([-1,0,1,2,-1,-4], expected: [[-1,-1,2],[-1,0,1]])
         judge([], expected: [])
@@ -19,7 +19,8 @@ final class Week1ThreeSum {
         judge([1,2,-2,-1], expected: [])
     }
 
-    func threeSum5(_ nums: [Int]) -> [[Int]] {
+
+    func threeSum6(_ nums: [Int]) -> [[Int]] {
         fatalError()
     }
 
@@ -42,6 +43,31 @@ final class Week1ThreeSum {
 
 
 
+
+
+
+
+
+
+
+    func threeSum5(_ nums: [Int]) -> [[Int]] {
+        if nums.count < 3 { return [] }
+        let n = nums.count, nums = nums.sorted()
+        var ans = [[Int]]()
+        for i in stride(from: 0, to: n - 2, by: 1) {
+            if nums[i] > 0 { break }
+            if i > 0, nums[i] == nums[i - 1] { continue }
+            var target = -nums[i], k = n - 1
+            for j in stride(from: i + 1, to: n - 1, by: 1) {
+                if j > i + 1, nums[j] == nums[j - 1] { continue }
+                while j < k, nums[j] + nums[k] > target { k -= 1 }
+                if j != k, nums[j] + nums[k] == target {
+                    ans.append([nums[i], nums[j], nums[k]])
+                }
+            }
+        }
+        return ans
+    }
 
 
 

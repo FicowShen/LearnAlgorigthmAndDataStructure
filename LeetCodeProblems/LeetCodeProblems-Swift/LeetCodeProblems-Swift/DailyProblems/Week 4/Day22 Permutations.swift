@@ -16,7 +16,7 @@ import Foundation
 */
 final class Day22Permutations {
     func run() {
-        let f = insert2
+        let f = swapWithFirst3
         func judge(nums: [Int], expected: [[Int]]) {
             printAndAssert(result: Set(f(nums)), expected: Set(expected))
         }
@@ -33,16 +33,75 @@ final class Day22Permutations {
               expected: [[1]])
     }
 
-    func backtrackWithSet3(_ nums: [Int]) -> [[Int]] {
+    func backtrackWithSet4(_ nums: [Int]) -> [[Int]] {
         fatalError()
+    }
+
+    func swapWithFirst4(_ nums: [Int]) -> [[Int]] {
+        fatalError()
+    }
+
+    func insert4(_ nums: [Int]) -> [[Int]] {
+        fatalError()
+    }
+
+
+
+
+
+
+    func backtrackWithSet3(_ nums: [Int]) -> [[Int]] {
+        var elements = Set(nums), ans = [[Int]](), output = [Int]()
+        func backtrack() {
+            if output.count == nums.count {
+                ans.append(output)
+                return
+            }
+            for element in elements {
+                output.append(element)
+                elements.remove(element)
+                backtrack()
+                elements.insert(element)
+                _ = output.popLast()
+            }
+        }
+        backtrack()
+        return ans
     }
 
     func swapWithFirst3(_ nums: [Int]) -> [[Int]] {
-        fatalError()
+        var ans = [[Int]](), nums = nums
+        func swap(first: Int) {
+            if first == nums.count {
+                ans.append(nums)
+                return
+            }
+            for i in first..<nums.count {
+                nums.swapAt(i, first)
+                swap(first: first + 1)
+                nums.swapAt(i, first)
+            }
+        }
+        swap(first: 0)
+        return ans
     }
 
     func insert3(_ nums: [Int]) -> [[Int]] {
-        fatalError()
+        var ans = [[Int]]()
+        guard let first = nums.first else { return ans }
+        ans.append([first])
+        for i in 1..<nums.count {
+            let pre = ans
+            ans.removeAll(keepingCapacity: true)
+            for old in pre {
+                for j in 0...i {
+                    var new = old
+                    new.insert(nums[i], at: j)
+                    ans.append(new)
+                }
+            }
+        }
+        return ans
     }
 
 
