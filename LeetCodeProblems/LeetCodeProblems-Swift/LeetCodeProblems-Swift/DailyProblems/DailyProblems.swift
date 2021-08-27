@@ -16,6 +16,7 @@ final class DailyProblems {
     }
 
     static func week4() {
+        Week4NumberOfIslands().run()
         Week4SqrtX().run()
         Week4FindLargestValueInEachTreeRow().run()
         Week4BestTimeToBuyAndSellStockII().run()
