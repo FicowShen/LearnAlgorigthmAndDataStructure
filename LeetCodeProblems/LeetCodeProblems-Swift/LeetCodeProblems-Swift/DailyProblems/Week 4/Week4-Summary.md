@@ -124,6 +124,86 @@ int binarySearch(const vector<int>& nums, int target) {
 
 ## 实战题目总结
 
+- [最小基因变化](https://leetcode-cn.com/problems/minimum-genetic-mutation/#/description)
+
+> 双向BFS解题思路：
+> 构建3个集合，开始集合、结束集合、有效结果集合。
+> 每次开始搜索时，检查开始集合是否为空，如果为空说明无解。
+> 如果开始集合比结束集合要大，交换二者，这样可以优先遍历小集合，如果最终无解，可以尽快结束搜索。
+> 搜索时，遍历开始集合中的所有元素，逐次尝试将每个元素的每个字符替换为A C G T。如果是相同的字符则跳过；
+> 否则，检查替换后的字符串：如果结束集合包含了替换后的字符串，则得到最终答案；（因为BFS在搜索到第一个可行解时，这个可行解就一定是最优解）
+> 否则，如果有效结果集合包含替换后的字符串，将该字符串加入到下一次的开始集合中，同时将该字符串从有效结果集合中移除，避免出现死循环。
+
+``` swift
+// Time: O(n * k * m), Space: O(n)
+func minMutationWithBFS(_ start: String, _ end: String, _ bank: [String]) -> Int {
+    if start == end { return 0 }
+    if !bank.contains(end) { return -1 }
+    let length = end.count, choices = ["A", "C", "G", "T"]
+    var valid = Set<String>(bank)
+    func bfs(start: Set<String>, end: Set<String>, mutations: Int) -> Int {
+        if start.isEmpty { return -1 } // no valid result
+        if start.count > end.count { // search from a smaller set for better performance
+            return bfs(start: end, end: start, mutations: mutations)
+        }
+        var next = Set<String>()
+        for s in start { // O(n)
+            let startIndex = s.utf8.startIndex
+            for index in 0..<length { // O(k)
+                for choice in choices { // O(m)
+                    let i = s.utf8.index(startIndex, offsetBy: index)
+                    if s[i...i] == choice { continue } // skip same chars
+                    var temp = s
+                    temp.replaceSubrange(i...i, with: choice)
+                    if end.contains(temp) { return mutations + 1} // find the result
+                    if valid.contains(temp) {
+                        valid.remove(temp) // avoid same paths
+                        next.insert(temp)
+                    }
+                }
+            }
+        }
+        return bfs(start: next, end: end, mutations: mutations + 1)
+    }
+    var s = Set<String>(), e = Set<String>()
+    s.insert(start)
+    e.insert(end)
+    return bfs(start: s, end: e, mutations: 0)
+}
+```
+
+> DFS解题思路：
+> 如果开始字符串等于结束字符串，就将当前的修改次数与全局的修改次数进行比较，取最小值。（因为DFS需要在搜索完所有可行解之后，才知道哪一个是最优解）
+> 否则，遍历有效结果集合中的字符串，逐个统计有效结果和开始字符串的字符差异数量，如果有效结果字符串和开始字符串的差异为1，而且该字符串不在已访问集合中，就将该字符串作为下一次搜索的开始字符串，然后将修改次数加1后传入下一次搜索。
+
+``` swift
+func minMutationWithDFS(_ start: String, _ end: String, _ bank: [String]) -> Int {
+    if start == end { return 0 }
+    if !bank.contains(end) { return -1 }
+    var mutations: Int?, valid = Set(bank), visited = Set<String>()
+    func dfs(s: String, e: String, m: Int) {
+        if s == e {
+            mutations = min(mutations ?? .max, m)
+            return
+        }
+        for v in valid {
+            var diff = 0
+            for (a, b) in zip(v, s) {
+                if a != b { diff += 1 }
+                if diff > 1 { break }
+            }
+            if diff == 1, !visited.contains(v) {
+                visited.insert(v)
+                defer { visited.remove(v) }
+                dfs(s: v, e: e, m: m + 1)
+            }
+        }
+    }
+    dfs(s: start, e: end, m: 0)
+    return mutations ?? -1
+}
+```
+
 
 
 - [柠檬水找零](https://leetcode-cn.com/problems/lemonade-change/description/)
