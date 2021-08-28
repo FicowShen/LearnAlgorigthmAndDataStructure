@@ -210,7 +210,7 @@ func greedy(_ prices: [Int]) -> Int {
 > 在遍历上下左右相邻的位置时，使用方向数组简化操作；
 
 ``` swift
-// Time: O(m * n), Space: O(1)
+// Time: O(m * n), Space: O(m * n)
 func dfs(_ grid: [[Character]]) -> Int {
     let directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
     var count = 0, grid = grid
@@ -234,3 +234,129 @@ func dfs(_ grid: [[Character]]) -> Int {
     return count
 }
 ```
+
+> BFS解题思路：
+> 逐个遍历所有的网格元素，如果元素不为0，就采用BFS将相连的岛屿元素都置为0；
+> 使用数组代替队列，在每次广度搜索时，收集下一次需要进行广度搜索的元素；
+> 使用方向数组遍历上下左右相邻的位置；
+
+``` swift
+// Time: O(m * n), Space: O(m * n)
+func bfs(_ grid: [[Character]]) -> Int {
+    let directions = [[-1, 0], [1, 0], [0, -1], [0, 1]],
+        rowCount = grid.count, colCount = grid[0].count
+    var count = 0, grid = grid
+    func isValid(row: Int, col: Int) -> Bool {
+        row >= 0 && col >= 0 && row < rowCount && col < colCount
+    }
+    func clearIsland(pos: (Int, Int)) {
+        var q = [pos]
+        while !q.isEmpty {
+            var newPos = [(Int, Int)]()
+            for p in q {
+                for d in directions {
+                    let row = p.0 + d[0], col = p.1 + d[1]
+                    if isValid(row: row, col: col) && grid[row][col] != "0" {
+                        grid[row][col] = "0" // to avoid revists, set to 0 first
+                        newPos.append((row, col))
+                    }
+                }
+            }
+            q = newPos
+        }
+    }
+    for i in 0..<grid.count {
+        for j in 0..<grid[i].count {
+            if grid[i][j] == "0" { continue }
+            grid[i][j] = "0"
+            clearIsland(pos: (i, j))
+            count += 1
+        }
+    }
+    return count
+}
+```
+
+> 并查集解题思路：
+> 逐个遍历所有的网格元素，如果元素不为0，就将元素置为0，然后在并查集中将相连的岛屿连接起来，同时减少连通分量的数目；最终，并查集中记录的连通分量个数就是岛屿的数量；
+> 使用并查集的注意事项：
+> 初始化时，根据岛屿的值（1）来统计连通分量个数，也就是每个岛屿最初各自独立，尚未连通（parent都要指向自身的索引位置）；
+> 平衡优化：总是将小的树连接到大的树(size更大的树)上面，避免出现链表这种极端情况，代码中使用了 size 来记录每个树的大小；
+> 路径压缩：在查找 parent 的过程中，将 parent[x] 置为 parent[parent[x]]，树会变矮、变宽，时之后的查找操作的时间复杂度接近 O(1)；
+
+``` swift
+// Time: O(m * n), Space: O(m * n)
+func unionFind(_ grid: [[Character]]) -> Int {
+    let directions = [[-1, 0], [1, 0], [0, -1], [0, 1]],
+        rowCount = grid.count, colCount = grid[0].count
+    var grid = grid, uf = UnionFind(grid: grid)
+    func connect(row: Int, col: Int) {
+        for d in directions {
+            let r = row + d[0], c = col + d[1]
+            if r < 0 || r >= rowCount || c < 0 || c >= colCount { continue }
+            if grid[r][c] == "0" { continue }
+            // 查看连通分量的连接过程
+            // print("unite:", row, col, "with:", r, c)
+            uf.unite(row * colCount + col, r * colCount + c)
+        }
+    }
+    for i in 0..<grid.count {
+        for j in 0..<grid[i].count {
+            if grid[i][j] == "0" { continue }
+            grid[i][j] = "0"
+            connect(row: i, col: j)
+        }
+    }
+    return uf.count
+}
+
+struct UnionFind {
+    private var parent: [Int]
+    /// The size of trees
+    private var size: [Int]
+
+    /// The number of connected components
+    private(set) var count: Int = 0
+
+    init(grid: [[Character]]) {
+        self.parent = [Int](repeating: 0, count: grid.count * grid[0].count)
+        self.size = parent
+        for i in 0..<grid.count {
+            for j in 0..<grid[i].count {
+                if grid[i][j] == "1" { count += 1 }
+                let index = i * grid[i].count + j
+                parent[index] = index // parents point to self
+                size[index] = 1 // no children, size is 1
+            }
+        }
+    }
+    mutating func unite(_ p: Int, _ q: Int) {
+        let a = parent(p), b = parent(q)
+        if a == b { return } // connected
+        // small trees should connect to a bigger tree
+        if size[a] > size[b] {
+            parent[b] = a
+            size[a] += size[b]
+        } else {
+            parent[a] = b
+            size[b] += size[a]
+        }
+        count -= 1
+    }
+    mutating func isConnected(_ p: Int, _ q: Int) -> Bool {
+        let rootP = parent(p), rootQ = parent(q)
+        return rootP == rootQ
+    }
+    private mutating func parent(_ x: Int) -> Int {
+        var x = x
+        while parent[x] != x {
+            parent[x] = parent[parent[x]] // compress long paths
+            x = parent[x]
+        }
+        return x
+    }
+}
+```
+
+
+
