@@ -27,6 +27,7 @@
 		6A42EFD526D86ECC0030EE32 /* Week4 NumberOfIslands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFD426D86ECC0030EE32 /* Week4 NumberOfIslands.swift */; };
 		6A42EFD726D918B90030EE32 /* Week4 ValidPerfectSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFD626D918B90030EE32 /* Week4 ValidPerfectSquare.swift */; };
 		6A42EFD926D9D7880030EE32 /* Week4 AssignCookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFD826D9D7880030EE32 /* Week4 AssignCookies.swift */; };
+		6A42EFDB26D9E4640030EE32 /* Week4 WalkingRobotSimulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFDA26D9E4640030EE32 /* Week4 WalkingRobotSimulation.swift */; };
 		6A59A56426B0DE3E00273E66 /* MaxProfit2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59A56326B0DE3E00273E66 /* MaxProfit2.swift */; };
 		6AB35B1226B22A4E0026173D /* MaxProfitWithCooldown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B1126B22A4E0026173D /* MaxProfitWithCooldown.swift */; };
 		6AB35B1626B594970026173D /* HouseRobber2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B1526B594970026173D /* HouseRobber2.swift */; };
@@ -130,6 +131,7 @@
 		6A42EFD426D86ECC0030EE32 /* Week4 NumberOfIslands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week4 NumberOfIslands.swift"; sourceTree = "<group>"; };
 		6A42EFD626D918B90030EE32 /* Week4 ValidPerfectSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week4 ValidPerfectSquare.swift"; sourceTree = "<group>"; };
 		6A42EFD826D9D7880030EE32 /* Week4 AssignCookies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week4 AssignCookies.swift"; sourceTree = "<group>"; };
+		6A42EFDA26D9E4640030EE32 /* Week4 WalkingRobotSimulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week4 WalkingRobotSimulation.swift"; sourceTree = "<group>"; };
 		6A59A56326B0DE3E00273E66 /* MaxProfit2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxProfit2.swift; sourceTree = "<group>"; };
 		6AB35B1126B22A4E0026173D /* MaxProfitWithCooldown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxProfitWithCooldown.swift; sourceTree = "<group>"; };
 		6AB35B1526B594970026173D /* HouseRobber2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseRobber2.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				6A42EFD426D86ECC0030EE32 /* Week4 NumberOfIslands.swift */,
 				6A42EFD626D918B90030EE32 /* Week4 ValidPerfectSquare.swift */,
 				6A42EFD826D9D7880030EE32 /* Week4 AssignCookies.swift */,
+				6A42EFDA26D9E4640030EE32 /* Week4 WalkingRobotSimulation.swift */,
 			);
 			path = "Week 4";
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				6A42EFB626CD48F20030EE32 /* Week3 GenerateParentheses.swift in Sources */,
 				6AD94F81269AA9A000AA35B4 /* TreeMaxDepth.swift in Sources */,
 				6A42EFCF26D68A750030EE32 /* Week4 FindLargestValueInEachTreeRow.swift in Sources */,
+				6A42EFDB26D9E4640030EE32 /* Week4 WalkingRobotSimulation.swift in Sources */,
 				6AB35B3E26BFB4B80026173D /* Week1 ReverseLinkedList.swift in Sources */,
 				6AB89D4526A106AC00E295BA /* BacktrackProblems.swift in Sources */,
 				6AB35B3826BCB4210026173D /* Week1 ContainerWithMostWater.swift in Sources */,
