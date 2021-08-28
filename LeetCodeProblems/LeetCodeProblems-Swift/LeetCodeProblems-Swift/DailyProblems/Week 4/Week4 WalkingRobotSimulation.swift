@@ -51,6 +51,8 @@ final class Week4WalkingRobotSimulation {
                     let _y = y + offset[dir][1]
                     if stays.contains([_x, _y]) { break }
                     (x, y) = (_x, _y)
+                    // avoid computing and comparing here
+                    // ans = max(ans, x * x + y * y)
                 }
                 ans = max(ans, x * x + y * y)
             }

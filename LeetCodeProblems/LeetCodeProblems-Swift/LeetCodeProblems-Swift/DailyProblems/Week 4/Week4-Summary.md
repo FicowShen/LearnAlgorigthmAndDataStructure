@@ -352,6 +352,44 @@ func sortAndGreedy(_ g: [Int], _ s: [Int]) -> Int {
 
 
 
+- [模拟行走机器人](https://leetcode-cn.com/problems/walking-robot-simulation/description/)
+
+> 贪心法解题思路：
+> 首先，需要注意 maximum Euclidean distance 这个关键点，否则最终结果就会出错！
+> 然后，做好预处理：
+> 1.定义各方向偏移量数组；
+> 2.将障碍物存入集合，提高之后的检测效率；
+> 3.记录x, y 以及移动方向 dir 和最终结果；
+> 要点：遍历命令时，只在2移动结束后去更新结果，因为移动过程中不会变向，所以移动结束时才有可能达到【最大值】。
+
+``` swift
+func robotSim(_ commands: [Int], _ obstacles: [[Int]]) -> Int {
+    let offset = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+    let stays = Set(obstacles)
+    var ans = 0, dir = 0, x = 0, y = 0
+    for command in commands {
+        switch command {
+        case -2: dir = (dir + 3) % 4
+        case -1: dir = (dir + 1) % 4
+        default:
+            for _ in 0..<command {
+                let _x = x + offset[dir][0]
+                let _y = y + offset[dir][1]
+                if stays.contains([_x, _y]) { break }
+                (x, y) = (_x, _y)
+                // avoid computing and comparing here
+                // ans = max(ans, x * x + y * y)
+            }
+            ans = max(ans, x * x + y * y)
+        }
+    }
+    return ans
+}
+```
+
+
+
+
 - [岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
 
 > DFS解题思路：
