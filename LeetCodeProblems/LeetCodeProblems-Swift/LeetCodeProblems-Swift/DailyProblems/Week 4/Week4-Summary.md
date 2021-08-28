@@ -203,6 +203,29 @@ func greedy(_ prices: [Int]) -> Int {
 
 
 
+- [分发饼干](https://leetcode-cn.com/problems/assign-cookies/description/)
+
+> 贪心法解题思路：
+> 把贪婪因子和饼干大小数组按升序进行排序，然后从前向后遍历2个数组，饼干大小能满足贪婪因子时，计数器就加1。只要其中一个数组遍历结束就返回计数器的值。时间复杂度主要由排序构成。
+
+``` swift
+// Time: O(mlogm + nlogn), Space: O(1)
+func sortAndGreedy(_ g: [Int], _ s: [Int]) -> Int {
+    var g = g.sorted(), s = s.sorted(), i = 0, j = 0, ans = 0
+    while i < g.count, j < s.count {
+        if g[i] <= s[j] {
+            i += 1
+            j += 1
+            ans += 1
+            continue
+        }
+        j += 1
+    }
+    return ans
+}
+```
+
+
 - [岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
 
 > DFS解题思路：
