@@ -124,6 +124,9 @@ int binarySearch(const vector<int>& nums, int target) {
 
 ## 实战题目总结
 
+
+
+
 - [最小基因变化](https://leetcode-cn.com/problems/minimum-genetic-mutation/#/description)
 
 > 双向BFS解题思路：
@@ -206,6 +209,45 @@ func minMutationWithDFS(_ start: String, _ end: String, _ bank: [String]) -> Int
 
 
 
+
+
+- [x的平方根](https://leetcode-cn.com/problems/sqrtx/)
+
+> 二分法
+
+``` swift
+// Time: O(logn), Space: O(1)
+func binarySearch(_ x: Int) -> Int {
+    var l = 0, r = x, ans = -1
+    while l <= r {
+        let mid = l + (r - l) >> 1
+        if mid * mid <= x {
+            ans = mid
+            l = mid + 1
+        } else {
+            r = mid - 1
+        }
+    }
+    return ans
+}
+```
+
+> 牛顿迭代法
+
+``` swift
+// Time: O(logn), Space: O(1)
+func newtonIteration(_ x: Int) -> Int {
+    var r = x
+    while r * r > x {
+        r = (r + x/r) >> 1
+    }
+    return r
+}
+```
+
+
+
+
 - [柠檬水找零](https://leetcode-cn.com/problems/lemonade-change/description/)
 
 > 贪心法解题思路：
@@ -230,6 +272,7 @@ func lemonadeChange(_ bills: [Int]) -> Bool {
     return true
 }
 ```
+
 
 
 
@@ -283,6 +326,7 @@ func greedy(_ prices: [Int]) -> Int {
 
 
 
+
 - [分发饼干](https://leetcode-cn.com/problems/assign-cookies/description/)
 
 > 贪心法解题思路：
@@ -304,6 +348,8 @@ func sortAndGreedy(_ g: [Int], _ s: [Int]) -> Int {
     return ans
 }
 ```
+
+
 
 
 - [岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
