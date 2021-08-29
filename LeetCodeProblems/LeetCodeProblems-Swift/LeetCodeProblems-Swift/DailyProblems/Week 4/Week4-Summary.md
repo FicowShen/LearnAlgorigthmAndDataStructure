@@ -547,3 +547,43 @@ struct UnionFind {
 
 
 
+
+
+- [多数元素](https://leetcode-cn.com/problems/majority-element/description/)
+
+> 解题思路：
+> 1. 排序，多数元素一定会占据最中间的索引位置；
+> 2. 字典计数，然后取计数最高的数；
+> 3. 多数元素出现的次数一定超过其他元素，而且它的出现次数高于其他元素出现次数的总和
+
+``` swift
+// Time: O(logn), Space: O(1)
+func sort(_ nums: [Int]) -> Int {
+    let nums = nums.sorted()
+    return nums[nums.count / 2]
+}
+
+// Time: O(n), Space: O(n)
+func dict(_ nums: [Int]) -> Int {
+    var dict = [Int: Int](), most = (num: 0, count:0)
+    for num in nums { dict[num, default: 0] += 1 }
+    for (k, v) in dict {
+        if v > most.count { most = (k, v) }
+    }
+    return most.num
+}
+
+// Time: O(n), Space: O(1)
+func boyerMoore(_ nums: [Int]) -> Int {
+    var count = 0, candidate = 0
+    for num in nums {
+        if count == 0 { candidate = num }
+        count += (num == candidate) ? 1 : -1
+    }
+    return candidate
+}
+```
+
+
+
+

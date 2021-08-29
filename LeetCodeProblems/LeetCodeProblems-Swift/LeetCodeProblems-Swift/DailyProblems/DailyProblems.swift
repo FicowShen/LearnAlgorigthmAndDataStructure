@@ -25,6 +25,7 @@ final class DailyProblems {
         Week4BestTimeToBuyAndSellStockII().run()
         Week4MinimumGeneticMutation().run()
         Week4BinaryTreeLevelOrderTraversal().run()
+        Day28MajorityElement().run()
         Day25LemonadeChange().run()
         Day22Permutations().run()
     }
