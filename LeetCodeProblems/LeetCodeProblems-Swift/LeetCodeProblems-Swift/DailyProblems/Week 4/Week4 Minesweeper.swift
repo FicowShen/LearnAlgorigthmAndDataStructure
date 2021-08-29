@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week4Minesweeper {
     func run() {
-        let f = updateBoard2
+        let f = updateBoardWithBFS2
         func judge(_ board: [[Character]], _ click: [Int], _ expected: [[Character]]) {
             printAndAssert(result: f(board, click), expected: expected)
         }
@@ -39,7 +39,21 @@ final class Week4Minesweeper {
     }
 
 
-    func updateBoard2(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
+
+    func updateBoardWithBFS3(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
+        fatalError()
+    }
+
+
+    func updateBoardWithDFS3(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
+        fatalError()
+    }
+
+
+
+
+
+    func updateBoardWithBFS2(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
         let x = click[0], y = click[1]
         var board = board
         if board[x][y] == "M" { // rule 1
@@ -70,7 +84,6 @@ final class Week4Minesweeper {
                         let x = pos.0 + dirX[i], y = pos.1 + dirY[i]
                         if x < 0 || y < 0 || x >= Row || y >= Col { continue }
                         if board[x][y] != "E" || visited[x][y] { continue }
-                        board[x][y] = "B"
                         newQ.append((x, y))
                         visited[x][y] = true
                     }
@@ -93,11 +106,45 @@ final class Week4Minesweeper {
 
 
 
+    func updateBoardWithDFS1(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
+        let row = click[0], col = click[1]
+        var board = board
+        if board[row][col] == "M" { // rule 1
+            board[row][col] = "X"
+            return board
+        }
+        let Row = board.count, Col = board[0].count
+        let dirX = [0, 1, 0, -1, 1, 1, -1, -1]
+        let dirY = [1, 0, -1, 0, 1, -1, 1, -1]
+
+        func dfs(board: inout [[Character]], x: Int, y: Int) {
+            var count = 0
+            for i in 0..<dirX.count {
+                let _x = x + dirX[i], _y = y + dirY[i]
+                if _x < 0 || _y < 0 || _x >= Row || _y >= Col { continue }
+                count += (board[_x][_y] == "M" ? 1 : 0)
+            }
+            if count > 0 {
+                // rule 3, replace with bomb count
+                board[x][y] = Character(count.description)
+                return
+            }
+            // rule 2, search adjacent squares for blank
+            board[x][y] = Character("B")
+            for i in 0..<dirX.count {
+                let _x = x + dirX[i], _y = y + dirY[i]
+                if _x < 0 || _y < 0 || _x >= Row || _y >= Col { continue }
+                if board[_x][_y] != "E" { continue }
+                dfs(board: &board, x: _x, y: _y)
+            }
+        }
+        dfs(board: &board, x: row, y: col)
+        return board
+    }
 
 
 
-
-    func updateBoard1(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
+    func updateBoardWithBFS1(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
         let row = click[0], col = click[1]
         var board = board
         if board[row][col] == "M" { // rule 1, replace and return

@@ -643,6 +643,10 @@ func bidirectionalBFS(_ beginWord: String, _ endWord: String, _ wordList: [Strin
 > 如果格子周围没有炸弹，就需要继续搜索所有相连未揭开的格子；
 > 另外，搜索周围的格子时，使用2个方向数组会更清晰易懂；
 
+> DFS解题思路：
+> 因为格子被访问后会被修改，所以不在需要使用 visited 数组/集合来记录访问状态；
+> 如果需要搜索空白格子周围的格子，直接调用 dfs 函数，传入 board 和 x,y 即可；
+
 ``` swift
 // Time: O(m * n), Space: O(m * n)
 func updateBoardWithBFS(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
@@ -676,7 +680,6 @@ func updateBoardWithBFS(_ board: [[Character]], _ click: [Int]) -> [[Character]]
                     let x = pos.0 + dirX[i], y = pos.1 + dirY[i]
                     if x < 0 || y < 0 || x >= Row || y >= Col { continue }
                     if board[x][y] != "E" || visited[x][y] { continue }
-                    board[x][y] = "B"
                     newQ.append((x, y))
                     visited[x][y] = true
                 }
