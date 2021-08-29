@@ -16,6 +16,7 @@ final class DailyProblems {
     }
 
     static func week4() {
+        Week4Minesweeper().run()
         Week4WordLadder().run()
         Week4WalkingRobotSimulation().run()
         Week4AssignCookies().run()

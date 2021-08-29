@@ -631,3 +631,60 @@ func bidirectionalBFS(_ beginWord: String, _ endWord: String, _ wordList: [Strin
     return 0
 }
 ```
+
+
+
+
+- [扫雷游戏](https://leetcode-cn.com/problems/minesweeper/description/)
+
+> BFS解题思路：
+> 主要是搞清楚进行BFS的2个规则：
+> 如果某个格子周围有炸弹，就统计并显示周围的炸弹数目，搜索下一个格子；
+> 如果格子周围没有炸弹，就需要继续搜索所有相连未揭开的格子；
+> 另外，搜索周围的格子时，使用2个方向数组会更清晰易懂；
+
+``` swift
+// Time: O(m * n), Space: O(m * n)
+func updateBoardWithBFS(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
+    let x = click[0], y = click[1]
+    var board = board
+    if board[x][y] == "M" { // rule 1
+        board[x][y] = "X"
+        return board
+    }
+    let Row = board.count, Col = board[0].count
+    let dirX = [0, 1, 0, -1, 1, 1, -1, -1]
+    let dirY = [1, 0, -1, 0, 1, -1, -1, 1]
+    func bfs(board: inout [[Character]], x _x: Int, y _y: Int) {
+        var q = [(_x, _y)], visited = [[Bool]](repeating: [Bool](repeating: false, count: Col), count: Row)
+        while !q.isEmpty {
+            var newQ = [(Int, Int)]()
+            for pos in q {
+                var count = 0
+                for i in 0..<dirX.count {
+                    let x = pos.0 + dirX[i], y = pos.1 + dirY[i]
+                    if x < 0 || y < 0 || x >= Row || y >= Col { continue }
+                    count += (board[x][y] == "M" ? 1 : 0)
+                }
+                if count > 0 { // rule 3
+                    board[pos.0][pos.1] = Character(count.description)
+                    continue
+                }
+                // rule 2
+                board[pos.0][pos.1] = Character("B")
+                for i in 0..<dirX.count {
+                    let x = pos.0 + dirX[i], y = pos.1 + dirY[i]
+                    if x < 0 || y < 0 || x >= Row || y >= Col { continue }
+                    if board[x][y] != "E" || visited[x][y] { continue }
+                    board[x][y] = "B"
+                    newQ.append((x, y))
+                    visited[x][y] = true
+                }
+            }
+            q = newQ
+        }
+    }
+    bfs(board: &board, x: x, y: y)
+    return board
+}
+```

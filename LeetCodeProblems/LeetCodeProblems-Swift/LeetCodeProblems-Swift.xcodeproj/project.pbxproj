@@ -28,8 +28,9 @@
 		6A42EFD726D918B90030EE32 /* Week4 ValidPerfectSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFD626D918B90030EE32 /* Week4 ValidPerfectSquare.swift */; };
 		6A42EFD926D9D7880030EE32 /* Week4 AssignCookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFD826D9D7880030EE32 /* Week4 AssignCookies.swift */; };
 		6A42EFDB26D9E4640030EE32 /* Week4 WalkingRobotSimulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFDA26D9E4640030EE32 /* Week4 WalkingRobotSimulation.swift */; };
-		6A42EFDF26DAFDD40030EE32 /* Day28 MajorityElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFDE26DAFDD40030EE32 /* Day28 MajorityElement.swift */; };
 		6A42EFDD26DA7F410030EE32 /* Week4 WordLadder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFDC26DA7F410030EE32 /* Week4 WordLadder.swift */; };
+		6A42EFDF26DAFDD40030EE32 /* Day28 MajorityElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFDE26DAFDD40030EE32 /* Day28 MajorityElement.swift */; };
+		6A42EFE126DB6CE80030EE32 /* Week4 Minesweeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFE026DB6CE80030EE32 /* Week4 Minesweeper.swift */; };
 		6A59A56426B0DE3E00273E66 /* MaxProfit2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59A56326B0DE3E00273E66 /* MaxProfit2.swift */; };
 		6AB35B1226B22A4E0026173D /* MaxProfitWithCooldown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B1126B22A4E0026173D /* MaxProfitWithCooldown.swift */; };
 		6AB35B1626B594970026173D /* HouseRobber2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B1526B594970026173D /* HouseRobber2.swift */; };
@@ -134,8 +135,9 @@
 		6A42EFD626D918B90030EE32 /* Week4 ValidPerfectSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week4 ValidPerfectSquare.swift"; sourceTree = "<group>"; };
 		6A42EFD826D9D7880030EE32 /* Week4 AssignCookies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week4 AssignCookies.swift"; sourceTree = "<group>"; };
 		6A42EFDA26D9E4640030EE32 /* Week4 WalkingRobotSimulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week4 WalkingRobotSimulation.swift"; sourceTree = "<group>"; };
-		6A42EFDE26DAFDD40030EE32 /* Day28 MajorityElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day28 MajorityElement.swift"; sourceTree = "<group>"; };
 		6A42EFDC26DA7F410030EE32 /* Week4 WordLadder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week4 WordLadder.swift"; sourceTree = "<group>"; };
+		6A42EFDE26DAFDD40030EE32 /* Day28 MajorityElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day28 MajorityElement.swift"; sourceTree = "<group>"; };
+		6A42EFE026DB6CE80030EE32 /* Week4 Minesweeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week4 Minesweeper.swift"; sourceTree = "<group>"; };
 		6A59A56326B0DE3E00273E66 /* MaxProfit2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxProfit2.swift; sourceTree = "<group>"; };
 		6AB35B1126B22A4E0026173D /* MaxProfitWithCooldown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxProfitWithCooldown.swift; sourceTree = "<group>"; };
 		6AB35B1526B594970026173D /* HouseRobber2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseRobber2.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				6A42EFD826D9D7880030EE32 /* Week4 AssignCookies.swift */,
 				6A42EFDA26D9E4640030EE32 /* Week4 WalkingRobotSimulation.swift */,
 				6A42EFDC26DA7F410030EE32 /* Week4 WordLadder.swift */,
+				6A42EFE026DB6CE80030EE32 /* Week4 Minesweeper.swift */,
 			);
 			path = "Week 4";
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				6ACE5CC326AE33A8004A24A0 /* HouseRobber1.swift in Sources */,
 				6AD94F85269AA9A000AA35B4 /* TreeLevelOrderTraversal.swift in Sources */,
 				6AD94F7C269AA9A000AA35B4 /* InvertTree.swift in Sources */,
+				6A42EFE126DB6CE80030EE32 /* Week4 Minesweeper.swift in Sources */,
 				6AB35B6426C93D5D0026173D /* Week2 NaryTreePreorderTraversal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
