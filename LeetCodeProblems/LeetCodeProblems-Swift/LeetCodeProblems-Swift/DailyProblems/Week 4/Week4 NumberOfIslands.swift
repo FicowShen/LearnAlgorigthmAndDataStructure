@@ -61,6 +61,8 @@ final class Week4NumberOfIslands {
 
 
     func unionFind3(_ grid: [[Character]]) -> Int {
+        // https://leetcode.com/problems/number-of-islands/discuss/56354/1D-Union-Find-Java-solution-easily-generalized-to-other-problems/205951
+        // only need to check forward and downward directions instead of 4 directions
         fatalError()
     }
 

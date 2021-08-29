@@ -587,3 +587,47 @@ func boyerMoore(_ nums: [Int]) -> Int {
 
 
 
+- [单词接龙](https://leetcode-cn.com/problems/word-ladder/)
+
+> 双向BFS法解题思路：
+> 求最短路径问题，优先选择采用BFS，而双向BFS可以有效地降低时间和空间复杂度；
+> 其实本题与【最小基因变化】问题很相似，但是每次的选择从 A C G T 扩展到了 26 个字母，因此时间复杂度会变大。那么，在处理字符串选择时，就还需要考虑采用检测算法和系统API是否足够高效。
+
+``` swift
+// Time: O(n * c * k), Space: O(n)
+// n is the length of wordList;
+// c is the length of beginWord;
+// k is 26;
+func bidirectionalBFS(_ beginWord: String, _ endWord: String, _ wordList: [String]) -> Int {
+    if beginWord == endWord { return 0 }
+    var valid = Set(wordList)
+    if !valid.contains(endWord) { return 0 }
+    let letters = (0..<26).map { String.Element(Unicode.Scalar(97 + $0)) }
+    var begin: Set = [beginWord], end: Set = [endWord], ans = 1
+    while !begin.isEmpty { // <= sizeOf(wordList)
+        if begin.count > end.count {
+            (begin, end) = (end, begin)
+        }
+        var next = Set<String>()
+        for b in begin { // <= sizeOf(wordList)
+            let beginChars = Array(b)
+            for i in 0..<beginChars.count { // <= 10
+                for j in 0..<letters.count { // 26
+                    if beginChars[i] == letters[j] { continue }
+                    var temp = beginChars
+                    temp[i] = letters[j]
+                    let new = String(temp)
+                    if end.contains(new) { return ans + 1 }
+                    if valid.contains(new) {
+                        next.insert(new)
+                        valid.remove(new)
+                    }
+                }
+            }
+        }
+        ans += 1
+        begin = next
+    }
+    return 0
+}
+```
