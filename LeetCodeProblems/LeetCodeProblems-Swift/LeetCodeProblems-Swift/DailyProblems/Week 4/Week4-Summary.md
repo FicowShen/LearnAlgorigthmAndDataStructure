@@ -1,5 +1,8 @@
 # 第四周总结
 
+
+
+
 ## 深度优先搜索、广度优先搜索的实现和特性
 
 ### 特性
@@ -77,6 +80,7 @@ void bfs(Node* root) {
 
 
 
+
 ## 贪心的实现、特性及实战题目解析
 
 ### 贪心算法
@@ -91,6 +95,7 @@ void bfs(Node* root) {
 ### 特征
 如果最终结果为最优解，贪心往往是最好的解法；
 如果最终结果比较接近最优解，可以作为高效的辅助算法或者计算不太精确的结果；
+
 
 
 
@@ -116,9 +121,44 @@ int binarySearch(const vector<int>& nums, int target) {
 }
 ```
 
+
+
+
 ## 思考题
 
 > 如何使用二分查找，寻找一个半有序数组 [4, 5, 6, 7, 0, 1, 2] 中间无序的地方？
+
+核心思想：
+用 mid 元素和第一个元素进行比较，确定有序的部分在左边还是右边。
+如果 mid 元素大于等于第一个元素，说明 mid 仍然处于有序的部分，需要去右边找；
+否则，mid 处于无序的部分，需要去左边找。
+
+示例代码：
+二分查找循环结束时，l 指向右边升序部分的开端，r 指向左边升序部分的末端。
+
+``` swift
+func findDisorder() {
+    func f(_ nums: [Int]) -> Int {
+        let n = nums.count
+        var l = 0, r = n - 1
+        while l <= r {
+            let m = (l + r) >> 1
+            if nums[0] <= nums[m] {
+                l = m + 1
+            } else {
+                r = m - 1
+            }
+        }
+        return l
+    }
+    assert(f([5,2,3,4]) == 1)
+    assert(f([4,5,1,2,3]) == 2)
+    assert(f([2,3,4,5,1]) == 4)
+    assert(f([4,5,6,7,0,1,2]) == 4)
+}
+```
+
+
 
 
 
@@ -689,5 +729,44 @@ func updateBoardWithBFS(_ board: [[Character]], _ click: [Int]) -> [[Character]]
     }
     bfs(board: &board, x: x, y: y)
     return board
+}
+```
+
+
+
+
+- [搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
+
+> 二分法解题思路：
+> 首先比较第一个元素与 mid 元素的关系，以确定 mid 处于有序部分还是无序部分。
+> 如果处于有序部分，按照正常的二分法查找 target 即可；
+> 如果处于无序部分，则要检测 target 是否在处于无序部分中的有序部分；
+
+``` swift
+// Time: O(logn), Space: O(1)
+func binarySearch(_ nums: [Int], _ target: Int) -> Int {
+    let n = nums.count
+    if n == 1 {
+        return nums[0] == target ? 0 : -1
+    }
+    var l = 0, r = n - 1
+    while l <= r {
+        let mid = (l + r) >> 1
+        if nums[mid] == target { return mid }
+        if nums[0] <= nums[mid] {
+            if nums[0] <= target, target < nums[mid] {
+                r = mid - 1
+            } else {
+                l = mid + 1
+            }
+        } else {
+            if nums[mid] < target, target <= nums[n - 1] {
+                l = mid + 1
+            } else {
+                r = mid - 1
+            }
+        }
+    }
+    return -1
 }
 ```
