@@ -10,13 +10,19 @@ import Foundation
 // https://leetcode-cn.com/problems/two-sum/
 final class Day3TwoSum {
     func run() {
-        let f = twoSum5
+        let f = twoSum6
         printAndAssert(result: f([2,7,11,15], 9), expected: [0,1])
         printAndAssert(result: f([3,2,4], 6), expected: [1,2])
         printAndAssert(result: f([3,3], 6), expected: [0,1])
     }
 
-    func twoSum6(_ nums: [Int], _ target: Int) -> [Int] {
+
+    func twoSum8(_ nums: [Int], _ target: Int) -> [Int] {
+        fatalError()
+    }
+
+
+    func twoSum7(_ nums: [Int], _ target: Int) -> [Int] {
         fatalError()
     }
 
@@ -44,6 +50,16 @@ final class Day3TwoSum {
 
 
 
+
+    func twoSum6(_ nums: [Int], _ target: Int) -> [Int] {
+        var dict = [Int: Int]()
+        for (i, num) in nums.enumerated() {
+            let x = target - num
+            if let j = dict[x] { return [j, i] }
+            dict[num] = i
+        }
+        fatalError()
+    }
 
 
 
