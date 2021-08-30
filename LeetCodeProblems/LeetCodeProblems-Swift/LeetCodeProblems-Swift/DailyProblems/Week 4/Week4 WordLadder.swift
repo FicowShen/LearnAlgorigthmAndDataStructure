@@ -17,7 +17,7 @@ import Foundation
  */
 final class Week4WordLadder {
     func run() {
-        let f = bfs2
+        let f = bfs3
         func judge(_ begin: String, _ end: String, _ list: [String], expected: Int) {
             printAndAssert(result: f(begin, end, list), expected: expected)
         }
@@ -27,6 +27,68 @@ final class Week4WordLadder {
         judge("hot", "dog", ["hot","cog","dog","tot","hog","hop","pot","dot"], expected: 3)
         judge("qa", "sq", ["si","go","se","cm","so","ph","mt","db","mb","sb","kr","ln","tm","le","av","sm","ar","ci","ca","br","ti","ba","to","ra","fa","yo","ow","sn","ya","cr","po","fe","ho","ma","re","or","rn","au","ur","rh","sr","tc","lt","lo","as","fr","nb","yb","if","pb","ge","th","pm","rb","sh","co","ga","li","ha","hz","no","bi","di","hi","qa","pi","os","uh","wm","an","me","mo","na","la","st","er","sc","ne","mn","mi","am","ex","pt","io","be","fm","ta","tb","ni","mr","pa","he","lr","sq","ye"], expected: 5)
     }
+
+
+
+    func bfs4(_ beginWord: String, _ endWord: String, _ wordList: [String]) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    func bfs3(_ beginWord: String, _ endWord: String, _ wordList: [String]) -> Int {
+        if beginWord == endWord || !wordList.contains(endWord) { return 0 }
+        var valid = Set(wordList), ans = 1, // count the begin word
+            begin: Set = [beginWord], end: Set = [endWord]
+        let letters = (0..<26).map { String.Element(Unicode.Scalar(97 + $0)) }
+        while !begin.isEmpty {
+            if begin.count > end.count {
+                (begin, end) = (end, begin)
+            }
+            var next = Set<String>()
+            for b in begin {
+                let beginChars = Array(b)
+                for i in 0..<beginChars.count {
+                    for j in 0..<letters.count {
+                        if beginChars[i] == letters[j] { continue }
+                        var temp = beginChars
+                        temp[i] = letters[j]
+                        let new = String(temp)
+                        if end.contains(new) { return ans + 1 }
+                        if valid.contains(new) {
+                            valid.remove(new) // avoid revisits
+                            next.insert(new)
+                        }
+                    }
+                }
+            }
+            ans += 1
+            begin = next
+        }
+        return 0 // no answer
+    }
+
+
+
 
 
     // https://leetcode.com/problems/word-ladder/discuss/40711/Two-end-BFS-in-Java-31ms.
