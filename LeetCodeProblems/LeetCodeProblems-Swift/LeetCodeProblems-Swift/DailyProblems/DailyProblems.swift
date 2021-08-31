@@ -16,6 +16,7 @@ final class DailyProblems {
     }
 
     static func week4() {
+        Week4JumpGame().run()
         Week4SearchInRotatedSortedArray().run()
         Week4Minesweeper().run()
         Week4WordLadder().run()
