@@ -13,7 +13,7 @@ import Foundation
  Time: O(n), Space: O(1)
 
  2. DP
- Time: O(n), Space: O(n)
+ Time: O(n), Space: O(n)/O(1)
 
  3. Going backwards
  Time: O(n), Space: O(1)
