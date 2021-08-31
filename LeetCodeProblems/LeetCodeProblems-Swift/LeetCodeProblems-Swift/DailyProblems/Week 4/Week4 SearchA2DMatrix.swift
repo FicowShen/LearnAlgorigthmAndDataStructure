@@ -15,11 +15,26 @@ import Foundation
  */
 final class Week4SearchA2DMatrix {
     func run() {
-        let f = binarySearch2
+        let f = binarySearch3
         printAndAssert(result: f([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 3),
                        expected: true)
         printAndAssert(result: f([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 13),
                        expected: false)
+    }
+
+
+    func binarySearch3(_ matrix: [[Int]], _ target: Int) -> Bool {
+        let row = matrix.count, col = matrix[0].count
+        var l = 0, r = row * col - 1
+        while l < r {
+            let mid = l + (r - l) >> 1
+            if matrix[mid / col][mid % col] < target {
+                l = mid + 1
+            } else {
+                r = mid
+            }
+        }
+        return matrix[r / col][r % col] == target
     }
 
 
