@@ -772,3 +772,154 @@ func binarySearch(_ nums: [Int], _ target: Int) -> Int {
     return -1
 }
 ```
+
+
+
+
+- [跳跃游戏](https://leetcode-cn.com/problems/jump-game/)
+
+> 动态规划法解题思路：
+> 状态：当前位置可以跳跃到的最远位置
+> 选择：1. 采用之前的最大跳跃步数、2. 从当前位置向后跳跃
+> base case：dp[0] = nums[0]
+> 处理特殊情况：
+> 如果只有一个元素（第一个位置就是最后一个位置，直接返回 true）、多个元素，但是第一个元素为0（无法跳到后面）；
+> 提前结束：如果发现之前的最大跳跃步数无法到达当前位置，提前停止循环；
+> 状态压缩：其实压缩之后，就是最终的贪心算法，每次只取局部最大值，最终就可以获得全局最优解；
+
+``` swift
+// Time: O(n), Space: O(n)
+func canJumpWithRawDP(_ nums: [Int]) -> Bool {
+    // edge cases
+    if nums.count == 1 { return true }
+    if nums[0] == 0 { return false }
+    let n = nums.count
+    var dp = [Int](repeating: 0, count: n)
+    // base case
+    dp[0] = nums[0]
+    for i in 1..<n {
+        // cannot arrive at current index
+        if dp[i - 1] < i { return false }
+        dp[i] = max(dp[i - 1], i + nums[i])
+    }
+    return true
+}
+```
+
+> 从后往前跳跃法解题思路：
+> 只要能够从前面的位置跳跃到当前位置，就将目标设为那个位置，然后继续检查能否从更前的位置跳跃到这个新的目标位置；
+> 注意事项：
+> 无法提前终止循环，必须检测到第一个位置才能确定最终结果；
+> 而且，如果比较靠前的位置有0，这个算法就非常低效；
+
+``` swift
+// Time: O(n), Space: O(1)
+func canJumpWithGoingBackwards3(_ nums: [Int]) -> Bool {
+    var n = nums.count - 1, goal = n
+    for i in stride(from: goal, through: 0, by: -1) {
+        if i + nums[i] >= goal { goal = i }
+    }
+    return goal == 0
+}
+```
+
+> 贪心法解题思路：
+> 每次只取能够到达的最远位置；
+> 实际上，将之前的 DP 解法进行状态压缩之后也可以得到这个解法。
+
+``` swift
+//  Time: O(n), Space: O(1)
+func canJumpWithGreedy3(_ nums: [Int]) -> Bool {
+    var k = 0
+    for i in 0..<nums.count {
+        if i > k { return false }
+        k = max(k, i + nums[i])
+    }
+    return true
+}
+```
+
+
+
+
+- [搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/)
+
+> 一次二分查找的解题思路：
+> 把二维矩阵看作一维数组，运算时只需要注意行和列的转换即可；
+> 如果二维矩阵各行的元素数目不同，则不能使用这个算法，而是采用两次二分查找；
+
+``` swift
+func oneBinarySearch(_ matrix: [[Int]], _ target: Int) -> Bool {
+    let row = matrix.count, col = matrix[0].count
+    var l = 0, r = row * col - 1
+    while l < r {
+        let mid = l + (r - l) >> 1
+        if matrix[mid / col][mid % col] < target {
+            l = mid + 1
+        } else {
+            r = mid
+        }
+    }
+    return matrix[r / col][r % col] == target
+}
+```
+
+
+> 两次二分查找的解题思路：
+> 第一次二分查找，先通过各行第一个元素确定目标在哪一行；
+> 第二次二分查找，在目标所在行中搜索目标；
+
+``` swift
+func twoBinarySearches(_ matrix: [[Int]], _ target: Int) -> Bool {
+    var top = 0, bottom = matrix.count - 1, row = 0
+    while top <= bottom {
+        let mid = top + (bottom - top) >> 1
+        if matrix[mid][0] <= target {
+            row = mid
+            top = mid + 1
+        } else {
+            bottom = mid - 1
+        }
+    }
+    var l = 0, r = matrix[0].count - 1, nums = matrix[row]
+    while l <= r {
+        let mid = l + (r - l) >> 1
+        if nums[mid] == target { return true }
+        if nums[mid] < target {
+            l = mid + 1
+        } else {
+            r = mid - 1
+        }
+    }
+    return false
+}
+```
+
+
+
+
+- [寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/)
+
+> 二分法解题思路：
+> 如果 mid 处的元素小于 right 处的元素，说明 mid 到 right 是递增区间，而且最小值在 mid 处或左侧，此时 right 需要左移到 mid ；
+> 否则，说明 mid 位于值更大的递增区间。此时，left 需要移动到 mid 右侧，即  mid + 1；
+> 最终，right 处的元素即为最小值；
+
+``` swift
+func binarySearch(_ nums: [Int]) -> Int {
+    var l = 0, r = nums.count - 1
+    while l < r {
+        let mid = l + (r - l) >> 1
+        if nums[mid] < nums[r] {
+            r = mid
+        } else {
+            l = mid + 1
+        }
+    }
+    return nums[r]
+}
+```
+
+
+
+

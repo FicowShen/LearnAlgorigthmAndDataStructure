@@ -13,7 +13,7 @@ import Foundation
  */
 final class Week4FindMinimumInRotatedSortedArray {
     func run() {
-        let f = findMin2
+        let f = findMin3
         printAndAssert(result: f([3,4,5,1,2]), expected: 1)
         printAndAssert(result: f([4,5,6,7,0,1,2]), expected: 0)
         printAndAssert(result: f([11,13,15,17]), expected: 11)
@@ -31,8 +31,44 @@ final class Week4FindMinimumInRotatedSortedArray {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func findMin3(_ nums: [Int]) -> Int {
-        fatalError()
+        var l = 0, r = nums.count - 1
+        while l < r {
+            let mid = l + (r - l) >> 1
+            if nums[mid] < nums[r] {
+                r = mid
+            } else {
+                l = mid + 1
+            }
+        }
+        return nums[r]
     }
 
 
@@ -48,29 +84,7 @@ final class Week4FindMinimumInRotatedSortedArray {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/solution/xun-zhao-xuan-zhuan-pai-xu-shu-zu-zhong-5irwp/878001
     func findMin2(_ nums: [Int]) -> Int {
         var l = 0, r = nums.count - 1
         while l < r {
