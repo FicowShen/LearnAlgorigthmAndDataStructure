@@ -7,17 +7,27 @@
 
 import Foundation
 
-// https://leetcode-cn.com/problems/container-with-most-water
+/*
+ https://leetcode-cn.com/problems/container-with-most-water
+ 1. left/right pointers
+ */
 final class Week1ContainerWithMostWater {
     func run() {
+        let f = leftRightPointers5
         func judge(_ height: [Int], expected: Int) {
-            printAndAssert(result: maxArea4(height), expected: expected)
+            printAndAssert(result: f(height), expected: expected)
         }
         judge([1,8,6,2,5,4,8,3,7], expected: 49)
         judge([1,1], expected: 1)
     }
 
-    func maxArea5(_ height: [Int]) -> Int {
+
+    func leftRightPointers7(_ height: [Int]) -> Int {
+        fatalError()
+    }
+
+
+    func leftRightPointers6(_ height: [Int]) -> Int {
         fatalError()
     }
 
@@ -47,6 +57,19 @@ final class Week1ContainerWithMostWater {
 
 
 
+
+
+
+    func leftRightPointers5(_ height: [Int]) -> Int {
+        var i = 0, j = height.count - 1, area = 0
+        while i < j {
+            let h = min(height[i], height[j])
+            area = max(area, (j - i) * h)
+            while height[i] <= h, i < j { i += 1 }
+            while height[j] <= h, i < j { j -= 1 }
+        }
+        return area
+    }
 
 
 

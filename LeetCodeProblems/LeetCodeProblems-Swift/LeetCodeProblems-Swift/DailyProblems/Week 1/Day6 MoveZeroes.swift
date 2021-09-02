@@ -7,12 +7,18 @@
 
 import Foundation
 
-// https://leetcode-cn.com/problems/move-zeroes/
+/*
+ https://leetcode-cn.com/problems/move-zeroes/
+ Time: O(n), Space: O(1)
+ 1. slow/fast pointers
+ 2. snowball
+ */
 final class Day6MoveZeroes {
     func run() {
+        let f = moveZeroesSnowball5
         func judge(_ nums: [Int], expected: [Int]) {
             var nums = nums
-            moveZeroesSnowball4(&nums)
+            f(&nums)
             printAndAssert(result: nums, expected: expected)
         }
         judge([0], expected: [0])
@@ -21,32 +27,68 @@ final class Day6MoveZeroes {
     }
 
 
-    
+
+    func moveZeroesSnowball7(_ nums: inout [Int]) {
+        fatalError()
+    }
+
+    func moveZeroesFastSlowPointers7(_ nums: inout [Int]) {
+        fatalError()
+    }
+
+
+
+    func moveZeroesSnowball6(_ nums: inout [Int]) {
+        fatalError()
+    }
+
+    func moveZeroesFastSlowPointers6(_ nums: inout [Int]) {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     func moveZeroesSnowball5(_ nums: inout [Int]) {
-        fatalError()
+        var snowballSize = 0
+        for i in 0..<nums.count {
+            if nums[i] == 0 {
+                snowballSize += 1
+                continue
+            }
+            if snowballSize > 0 {
+                nums[i - snowballSize] = nums[i]
+                nums[i] = 0
+            }
+        }
     }
 
     func moveZeroesFastSlowPointers5(_ nums: inout [Int]) {
-        fatalError()
+        var j = 0
+        for i in 0..<nums.count {
+            if nums[i] == 0 { continue }
+            if i != j { nums.swapAt(i, j) }
+            j += 1
+        }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
