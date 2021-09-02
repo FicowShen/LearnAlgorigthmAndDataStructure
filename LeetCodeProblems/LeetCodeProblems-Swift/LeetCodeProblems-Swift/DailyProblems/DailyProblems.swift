@@ -9,10 +9,15 @@ import Foundation
 
 final class DailyProblems {
     static func run() {
+        week5()
         week4()
         week3()
         week2()
         week1()
+    }
+
+    static func week5() {
+        Day32MaximumSubarray().run()
     }
 
     static func week4() {
