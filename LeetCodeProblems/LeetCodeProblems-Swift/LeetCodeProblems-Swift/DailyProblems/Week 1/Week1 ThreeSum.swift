@@ -7,11 +7,16 @@
 
 import Foundation
 
-// https://leetcode-cn.com/problems/3sum/
+/*
+ https://leetcode-cn.com/problems/3sum/
+ 1. left/right pointers
+ Time: O(n^2), Space: O(n)
+ */
 final class Week1ThreeSum {
     func run() {
+        let f = threeSum6
         func judge(_ nums: [Int], expected: [[Int]]) {
-            printAndAssert(result: threeSum5(nums), expected: expected)
+            printAndAssert(result: f(nums), expected: expected)
         }
         judge([-1,0,1,2,-1,-4], expected: [[-1,-1,2],[-1,0,1]])
         judge([], expected: [])
@@ -20,7 +25,7 @@ final class Week1ThreeSum {
     }
 
 
-    func threeSum6(_ nums: [Int]) -> [[Int]] {
+    func threeSum7(_ nums: [Int]) -> [[Int]] {
         fatalError()
     }
 
@@ -45,6 +50,29 @@ final class Week1ThreeSum {
 
 
 
+
+
+
+
+
+    func threeSum6(_ nums: [Int]) -> [[Int]] {
+        if nums.count < 3 { return [] }
+        let nums = nums.sorted(), n = nums.count
+        var ans = [[Int]]()
+        for i in stride(from: 0, to: n - 2, by: 1) {
+            if nums[i] > 0 { break }
+            if i > 0, nums[i] == nums[i - 1] { continue }
+            var target = -nums[i], k = n - 1
+            for j in stride(from: i + 1, to: n - 1, by: 1) {
+                if j > i + 1, nums[j] == nums[j - 1] { continue }
+                while j < k, nums[j] + nums[k] > target { k -= 1 }
+                if j != k, nums[j] + nums[k] == target {
+                    ans.append([nums[i], nums[j], nums[k]])
+                }
+            }
+        }
+        return ans
+    }
 
 
 
