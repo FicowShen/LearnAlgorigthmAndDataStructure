@@ -17,11 +17,26 @@ import Foundation
  */
 final class Day32MaximumSubarray {
     func run() {
-        let f = divideAndConquer2
+        let f = divideAndConquer3
         printAndAssert(result: f([-2,1,-3,4,-1,2,1,-5,4]), expected: 6)
         printAndAssert(result: f([-1]), expected: -1)
         printAndAssert(result: f([5,4,-1,7,8]), expected: 23)
     }
+
+
+
+    func divideAndConquer5(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+    func dp5(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+    func rawDP5(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
 
 
     func divideAndConquer4(_ nums: [Int]) -> Int {
@@ -32,15 +47,54 @@ final class Day32MaximumSubarray {
         fatalError()
     }
 
+    func rawDP4(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+
 
 
 
     func divideAndConquer3(_ nums: [Int]) -> Int {
-        fatalError()
+        struct Status {
+            let lSum: Int, rSum: Int, mSum: Int, iSum: Int
+        }
+        func pushUp(l: Status, r: Status) -> Status {
+            let iSum = l.iSum + r.iSum
+            let lSum = max(l.lSum, l.iSum + r.lSum)
+            let rSum = max(r.rSum, l.rSum + r.iSum)
+            let mSum = max(max(l.mSum, r.mSum), l.rSum + r.lSum)
+            return Status(lSum: lSum, rSum: rSum, mSum: mSum, iSum: iSum)
+        }
+        func get(l: Int, r: Int) -> Status {
+            if l == r {
+                let x = nums[l]
+                return Status(lSum: x, rSum: x, mSum: x, iSum: x)
+            }
+            let mid = (l + r) >> 1
+            let ls = get(l: l, r: mid)
+            let rs = get(l: mid + 1, r: r)
+            return pushUp(l: ls, r: rs)
+        }
+        return get(l: 0, r: nums.count - 1).mSum
     }
 
     func dp3(_ nums: [Int]) -> Int {
-        fatalError()
+        var sum = 0, ans = nums[0]
+        for x in nums {
+            sum = max(sum, 0) + x
+            ans = max(ans, sum)
+        }
+        return ans
+    }
+
+    func rawDP3(_ nums: [Int]) -> Int {
+        var dp = nums, ans = dp[0]
+        for i in 1..<nums.count {
+            dp[i] = max(dp[i - 1], 0) + nums[i]
+            ans = max(ans, dp[i])
+        }
+        return ans
     }
 
 
