@@ -17,6 +17,7 @@ final class DailyProblems {
     }
 
     static func week5() {
+        Day33LongestCommonSubsequence().run()
         Day32MaximumSubarray().run()
     }
 
