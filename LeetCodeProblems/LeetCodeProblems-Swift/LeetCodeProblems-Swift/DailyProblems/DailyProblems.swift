@@ -74,6 +74,7 @@ final class DailyProblems {
     }
 
     static func week1() {
+        Week1MinStack().run()
         Week1ReverseNodesInKGroup().run()
         Week1ThreeSum().run()
         Week1MergeSortedArray().run()
