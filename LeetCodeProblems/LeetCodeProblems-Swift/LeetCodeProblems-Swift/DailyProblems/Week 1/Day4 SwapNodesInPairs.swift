@@ -7,10 +7,20 @@
 
 import Foundation
 
-// https://leetcode-cn.com/problems/swap-nodes-in-pairs/
+/*
+ https://leetcode-cn.com/problems/swap-nodes-in-pairs/
+ 1. one, two, three
+ Time: O(n), Space: O(1)
+
+ 2. pseudo head
+ Time: O(n), Space: O(1)
+
+ 3. recurse
+ Time: O(n), Space: O(n)
+ */
 final class Day4SwapNodesInPairs {
     func run() {
-        let f = swapPairsOneTwoThree5
+        let f = swapPairsRecursive6
         func judge(list: [Int], expected: [Int]) {
             let listNode = ListNode.fromList(list)
             let listNode2 = ListNode.fromList(expected)
@@ -22,31 +32,73 @@ final class Day4SwapNodesInPairs {
     }
 
 
-    func swapPairsOneTwoThree6(_ head: ListNode?) -> ListNode? {
+    func swapPairsOneTwoThree7(_ head: ListNode?) -> ListNode? {
         fatalError()
+    }
+
+    func swapPairsWithPseudoHead7(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+    func swapPairsRecursive7(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    func swapPairsOneTwoThree6(_ head: ListNode?) -> ListNode? {
+        var one = head, two = head?.next, three = two?.next
+        let newHead = two ?? one
+        while two != nil {
+            two?.next = one
+            one?.next = three?.next ?? three
+            one = three
+            two = three?.next
+            three = three?.next?.next
+        }
+        return newHead
     }
 
     func swapPairsWithPseudoHead6(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        if head?.next == nil { return head }
+        let newHead = ListNode()
+        newHead.next = head
+        var temp: ListNode? = newHead
+        while temp?.next?.next != nil {
+            let one = temp?.next, two = one?.next
+            temp?.next = two
+            one?.next = two?.next
+            two?.next = one
+            temp = one
+        }
+        return newHead.next
     }
 
     func swapPairsRecursive6(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        func swapped(_ head: ListNode?) -> ListNode? {
+            guard let next = head?.next else {
+                return head
+            }
+            head?.next = swapped(next.next)
+            next.next = head
+            return next
+        }
+        return swapped(head)
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

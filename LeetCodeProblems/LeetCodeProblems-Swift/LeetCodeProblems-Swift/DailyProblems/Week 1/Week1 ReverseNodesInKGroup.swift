@@ -7,13 +7,19 @@
 
 import Foundation
 
-// https://leetcode-cn.com/problems/reverse-nodes-in-k-group/
+/*
+ https://leetcode-cn.com/problems/reverse-nodes-in-k-group/
+ 1. newHead, temp, head, tail, reversed
+ Time: O(n), Space: O(1)
+ */
+
 final class Week1ReverseNodesInKGroup {
     func run() {
+        let f = reverseKGroup4
         func judge(_ head: [Int], _ k: Int, expected: [Int]) {
             let h = ListNode.fromList(head)
             let e = ListNode.fromList(expected)
-            printAndAssert(result: reverseKGroup3(h, k), expected: e)
+            printAndAssert(result: f(h, k), expected: e)
         }
         judge([1,2,3,4,5], 2, expected: [2,1,4,3,5])
         judge([1,2,3,4,5], 3, expected: [3,2,1,4,5])
@@ -22,13 +28,93 @@ final class Week1ReverseNodesInKGroup {
     }
 
 
+    func reverseKGroup6(_ head: ListNode?, _ k: Int) -> ListNode? {
+        fatalError()
+    }
+
+
     func reverseKGroup5(_ head: ListNode?, _ k: Int) -> ListNode? {
         fatalError()
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func reverseKGroup4(_ head: ListNode?, _ k: Int) -> ListNode? {
-        fatalError()
+        let newHead = ListNode()
+        newHead.next = head
+        var temp: ListNode? = newHead
+        func reversed(head: ListNode?, tail: ListNode?) -> (ListNode?, ListNode?) {
+            var pre: ListNode?, cur = head
+            while pre !== tail {
+                let next = cur?.next
+                cur?.next = pre
+                pre = cur
+                cur = next
+            }
+            return (tail, head)
+        }
+        while temp?.next != nil {
+            var head = temp?.next, tail = head
+            for _ in 1..<k {
+                tail = tail?.next
+                if tail == nil { return newHead.next }
+            }
+            let next = tail?.next
+            (head, tail) = reversed(head: head, tail: tail)
+            temp?.next = head
+            tail?.next = next
+            temp = tail
+        }
+        return newHead.next
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     func reverseKGroup3(_ head: ListNode?, _ k: Int) -> ListNode? {
         func reversed(_ head: ListNode?, _ tail: ListNode?) -> (ListNode?, ListNode?) {

@@ -7,9 +7,17 @@
 
 import Foundation
 
-// https://leetcode-cn.com/problems/linked-list-cycle-ii/
+/*
+ https://leetcode-cn.com/problems/linked-list-cycle-ii/
+ 1. dict
+ Time: O(n), Space: O(n)
+
+ 2. slow/fast pointers, then move step by step from head
+ Time: O(n), Space: O(1)
+ */
 final class Week1LinkedListCycleII {
     func run() {
+        let f = detectCycleWithPointers4
         func removeCycle(cycleNode: ListNode?) {
             var node = cycleNode
             while node != nil {
@@ -23,7 +31,7 @@ final class Week1LinkedListCycleII {
         func judge(_ list: [Int], cycleIndex: Int) {
             let head = ListNode.fromList(list)
             let cycleNode = head?.linkTailToNode(index: cycleIndex)
-            let result = detectCycleWithPointers3(head) // practice
+            let result = f(head)
             removeCycle(cycleNode: cycleNode)
             printAndAssert(result: result, expected: cycleNode)
         }
@@ -31,6 +39,16 @@ final class Week1LinkedListCycleII {
         judge([1,2], cycleIndex: 0)
         judge([1], cycleIndex: -1)
     }
+
+
+    func detectCycleWithDict6(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+    func detectCycleWithPointers6(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
 
 
     func detectCycleWithDict5(_ head: ListNode?) -> ListNode? {
@@ -41,25 +59,47 @@ final class Week1LinkedListCycleII {
         fatalError()
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func detectCycleWithDict4(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        var dict = [ObjectIdentifier: ListNode](), head = head
+        while head != nil {
+            let id = ObjectIdentifier(head!)
+            if let node = dict[id] { return node }
+            dict[id] = head
+            head = head?.next
+        }
+        return nil
     }
 
     func detectCycleWithPointers4(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        var slow = head, fast = head
+        while fast != nil {
+            slow = slow?.next
+            fast = fast?.next?.next
+            if fast == nil { return nil }
+            if slow !== fast { continue }
+            var node = head // move from head to slow step by step
+            while node !== slow {
+                slow = slow?.next
+                node = node?.next
+            }
+            return node
+        }
+        return nil
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
