@@ -23,7 +23,7 @@ import Foundation
  */
 final class Week1MinStack {
     func run() {
-        let stack = MinStackWithNode2()
+        let stack = MinStackWithOneStacks3()
         stack.push(-2)
         stack.push(0)
         stack.push(-3)
@@ -35,27 +35,94 @@ final class Week1MinStack {
 
 
 
+    class MinStackWithOneStacks4 {
+        func push(_ val: Int) {}
+        func pop() {}
+        func top() -> Int { fatalError() }
+        func getMin() -> Int { fatalError() }
+    }
+
+    class MinStackWithDoubleStacks4 {
+        func push(_ val: Int) {}
+        func pop() {}
+        func top() -> Int { fatalError() }
+        func getMin() -> Int { fatalError() }
+    }
+
+    class MinStackWithNode4 {
+        func push(_ val: Int) {}
+        func pop() {}
+        func top() -> Int { fatalError() }
+        func getMin() -> Int { fatalError() }
+    }
+
+
+
+
+
+
+
+
 
 
     class MinStackWithOneStacks3 {
-        func push(_ val: Int) {}
-        func pop() {}
-        func top() -> Int { fatalError() }
-        func getMin() -> Int { fatalError() }
+        var stack = [Int](), minValue = 0
+        // 3, 2 -> last = -1
+        // 2, 3 -> last = 1
+        func push(_ val: Int) {
+            if stack.isEmpty {
+                stack.append(0)
+                minValue = val
+            } else {
+                let diff = val - minValue
+                stack.append(diff)
+                minValue = diff < 0 ? val : minValue
+            }
+        }
+        func pop() {
+            let diff = stack.popLast()!
+            if diff < 0 {
+                minValue -= diff
+            }
+        }
+        func top() -> Int { stack.last! < 0 ? minValue : minValue + stack.last! }
+        func getMin() -> Int { minValue }
     }
 
     class MinStackWithDoubleStacks3 {
-        func push(_ val: Int) {}
-        func pop() {}
-        func top() -> Int { fatalError() }
-        func getMin() -> Int { fatalError() }
+        var stack = [Int](), minStack = [Int]()
+        func push(_ val: Int) {
+            stack.append(val)
+            minStack.append(minStack.isEmpty ? val : min(val, minStack.last!))
+        }
+        func pop() {
+            _ = stack.popLast()
+            _ = minStack.popLast()
+        }
+        func top() -> Int { stack.last! }
+        func getMin() -> Int { minStack.last! }
     }
 
     class MinStackWithNode3 {
-        func push(_ val: Int) {}
-        func pop() {}
-        func top() -> Int { fatalError() }
-        func getMin() -> Int { fatalError() }
+        class Node {
+            let val: Int, min: Int; var next: Node?
+            init(v: Int, m: Int, n: Node?) {
+                val = v; min = m; next = n
+            }
+        }
+        var head: Node!
+        func push(_ val: Int) {
+            if head == nil {
+                head = Node(v: val, m: val, n: nil)
+            } else {
+                head = Node(v: val, m: min(val, head.min), n: head)
+            }
+        }
+        func pop() {
+            head = head.next
+        }
+        func top() -> Int { head.val }
+        func getMin() -> Int { head.min }
     }
 
 
