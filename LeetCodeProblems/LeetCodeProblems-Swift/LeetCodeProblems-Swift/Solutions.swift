@@ -18,6 +18,7 @@ final class Solution {
         RecursionProblems().run()
         DailyProblems.run()
         WeeklyContest.run()
+        TestProblems.run()
     }
 
 }
