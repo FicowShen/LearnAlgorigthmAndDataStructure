@@ -18,6 +18,7 @@ final class DailyProblems {
 
     /// dynamic programming
     static func week5And6() {
+        Week6MinimumPathSum().run()
         Week5JumpGameII().run()
         Day33LongestCommonSubsequence().run()
         Day32MaximumSubarray().run()
