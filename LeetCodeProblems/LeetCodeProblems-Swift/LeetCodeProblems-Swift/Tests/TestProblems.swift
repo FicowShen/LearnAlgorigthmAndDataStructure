@@ -10,6 +10,5 @@ import Foundation
 final class TestProblems {
     static func run() {
         FourSum().run()
-        Jump().run()
     }
 }

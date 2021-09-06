@@ -15,14 +15,15 @@ import Foundation
  2. bfs
  Time: O(n), Space: O(1)
 
- 3. dp
+ 3. dp backwards
  Time: O(n^2), Space: O(n)
  */
-final class Jump {
+final class Week5JumpGameII {
     func run() {
-        let f = bfs2
+        let f = dpBackwards3
         printAndAssert(result: f([0]), expected: 0)
         printAndAssert(result: f([1,0]), expected: 1)
+        printAndAssert(result: f([2,1]), expected: 1)
         printAndAssert(result: f([2,3,1,1,4]), expected: 2)
         printAndAssert(result: f([2,3,0,1,4]), expected: 2)
         printAndAssert(result: f([3,1,4,1,1,6,2,1,2,0,1,2]), expected: 3)
@@ -30,13 +31,75 @@ final class Jump {
     }
 
 
-    func greedy3(_ nums: [Int]) -> Int {
+
+
+    func greedy4(_ nums: [Int]) -> Int {
         fatalError()
     }
 
-    func bfs3(_ nums: [Int]) -> Int {
+    func bfs4(_ nums: [Int]) -> Int {
         fatalError()
     }
+
+    func dpBackwards4(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+
+
+
+    func greedy3(_ nums: [Int]) -> Int {
+        var jumps = 0, curMax = 0, nextMax = 0
+        for i in 0..<nums.count-1 {
+            nextMax = max(nextMax, i + nums[i])
+            if i == curMax {
+                curMax = nextMax
+                jumps += 1
+            }
+        }
+        return jumps
+    }
+
+    func bfs3(_ nums: [Int]) -> Int {
+        if nums.count == 1 { return 0 }
+        var jump = 0, curMax = 0, nextMax = 0, i = 0
+        while curMax - i + 1 > 0 {
+            jump += 1
+            while i <= curMax {
+                nextMax = max(nextMax, i + nums[i])
+                if nextMax >= nums.count - 1 { return jump }
+                i += 1
+            }
+            curMax = nextMax
+        }
+        return 0
+    }
+
+    func dpBackwards3(_ nums: [Int]) -> Int {
+        let n = nums.count
+        var dp = [Int](repeating: Int(1e6), count: n)
+        dp[n - 1] = 0
+        for i in stride(from: n - 2, through: 0, by: -1) {
+            for j in stride(from: i + 1, through: min(i + nums[i], n - 1), by: 1) {
+                dp[i] = min(dp[i], dp[j] + 1)
+            }
+        }
+        return dp[0]
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -67,7 +130,17 @@ final class Jump {
         return 0
     }
 
-
+    func dp2(_ nums: [Int]) -> Int {
+        let n = nums.count
+        var dp = [Int](repeating: Int(1e6), count: n)
+        dp[n - 1] = 0
+        for i in stride(from: n - 2, through: 0, by: -1) {
+            for j in stride(from: i + 1, through: min(i + nums[i], n - 1), by: 1) {
+                dp[i] = min(dp[i], 1 + dp[j])
+            }
+        }
+        return dp[0]
+    }
 
 
 

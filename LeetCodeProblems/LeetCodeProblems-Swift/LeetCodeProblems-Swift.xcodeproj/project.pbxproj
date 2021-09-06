@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6A10BA4F26E45C57006CE7AC /* FourSum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA4E26E45C57006CE7AC /* FourSum.swift */; };
-		6A10BA5226E46009006CE7AC /* Jump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA5126E46009006CE7AC /* Jump.swift */; };
+		6A10BA5226E46009006CE7AC /* Week5 JumpGameII.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA5126E46009006CE7AC /* Week5 JumpGameII.swift */; };
 		6A10BA5426E46025006CE7AC /* TestProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA5326E46025006CE7AC /* TestProblems.swift */; };
 		6A42EFB226CBFC0F0030EE32 /* Day16 ReplaceSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB126CBFC0F0030EE32 /* Day16 ReplaceSpace.swift */; };
 		6A42EFB426CC8BF20030EE32 /* Day17 ReversePrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB326CC8BF20030EE32 /* Day17 ReversePrint.swift */; };
@@ -127,7 +127,7 @@
 
 /* Begin PBXFileReference section */
 		6A10BA4E26E45C57006CE7AC /* FourSum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSum.swift; sourceTree = "<group>"; };
-		6A10BA5126E46009006CE7AC /* Jump.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jump.swift; sourceTree = "<group>"; };
+		6A10BA5126E46009006CE7AC /* Week5 JumpGameII.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week5 JumpGameII.swift"; sourceTree = "<group>"; };
 		6A10BA5326E46025006CE7AC /* TestProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProblems.swift; sourceTree = "<group>"; };
 		6A42EFB126CBFC0F0030EE32 /* Day16 ReplaceSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day16 ReplaceSpace.swift"; sourceTree = "<group>"; };
 		6A42EFB326CC8BF20030EE32 /* Day17 ReversePrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day17 ReversePrint.swift"; sourceTree = "<group>"; };
@@ -247,7 +247,6 @@
 		6A10BA5026E45FF3006CE7AC /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				6A10BA5126E46009006CE7AC /* Jump.swift */,
 				6A10BA4E26E45C57006CE7AC /* FourSum.swift */,
 				6A10BA5326E46025006CE7AC /* TestProblems.swift */,
 			);
@@ -300,6 +299,7 @@
 		6A42EFEC26E057820030EE32 /* Week 5-6 */ = {
 			isa = PBXGroup;
 			children = (
+				6A10BA5126E46009006CE7AC /* Week5 JumpGameII.swift */,
 				6A42EFED26E057AA0030EE32 /* Day32 MaximumSubarray.swift */,
 				6A42EFEF26E197DE0030EE32 /* Day33 LongestCommonSubsequence.swift */,
 			);
@@ -598,7 +598,7 @@
 				6A42EFE326DBC6990030EE32 /* Week4 SearchInRotatedSortedArray.swift in Sources */,
 				6A42EFE526DDA1090030EE32 /* Week4 JumpGame.swift in Sources */,
 				6A42EFE926DDB6120030EE32 /* Week4 FindMinimumInRotatedSortedArray.swift in Sources */,
-				6A10BA5226E46009006CE7AC /* Jump.swift in Sources */,
+				6A10BA5226E46009006CE7AC /* Week5 JumpGameII.swift in Sources */,
 				6AB89D5326A413BB00E295BA /* WeeklyContest250.swift in Sources */,
 				6AB35B4E26C1732A0026173D /* Day8 IntersectionOfTwoArraysII.swift in Sources */,
 				6AD94F87269AA9A000AA35B4 /* NaryTreePreorderTraversal.swift in Sources */,

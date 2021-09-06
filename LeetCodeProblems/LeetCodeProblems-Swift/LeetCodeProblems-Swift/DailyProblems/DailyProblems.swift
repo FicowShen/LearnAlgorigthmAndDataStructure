@@ -9,18 +9,22 @@ import Foundation
 
 final class DailyProblems {
     static func run() {
-        week5()
+        week5And6()
         week4()
         week3()
         week2()
         week1()
     }
 
-    static func week5() {
+    /// dynamic programming
+    static func week5And6() {
+        Week5JumpGameII().run()
         Day33LongestCommonSubsequence().run()
         Day32MaximumSubarray().run()
     }
 
+    /// depth first search, breadth first search
+    /// greedy, binary search
     static func week4() {
         Week4WordLadderII().run()
         Week4FindMinimumInRotatedSortedArray().run()
@@ -43,6 +47,7 @@ final class DailyProblems {
         Day22Permutations().run()
     }
 
+    /// recursion, tree recursion, divider and conquer, backtrack
     static func week3() {
         Week3Combine().run()
         Week3BuildTree().run()
@@ -56,6 +61,10 @@ final class DailyProblems {
         Day16ReplaceSpace().run()
     }
 
+
+    /// hashmap, mapping, set,
+    /// tree, binary tree, binary search tree,
+    /// heap, binary heap, graph
     static func week2() {
         Week2GroupAnagrams().run()
         Week2ValidAnagram().run()
@@ -73,6 +82,8 @@ final class DailyProblems {
         Day8IntersectionOfTwoArraysII().run()
     }
 
+    /// array, linked list, skip list,
+    /// stack, queue, priority queue, deque
     static func week1() {
         Week1LargestRectangleInHistogram().run()
         Week1MinStack().run()
