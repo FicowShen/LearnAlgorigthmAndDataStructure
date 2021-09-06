@@ -10,11 +10,11 @@ import Foundation
 /*
  https://leetcode-cn.com/problems/minimum-path-sum/
  1. dp
- Time: O(m * n), Space: O(m * n)
+ Time: O(m * n), Space: O(m * n) / O(n)
  */
 final class Week6MinimumPathSum {
     func run() {
-        let f = dp2
+        let f = dp3
         printAndAssert(result: f([[4]]), expected: 4)
         printAndAssert(result: f([[1,3,1]]), expected: 5)
         printAndAssert(result: f([[1],[4]]), expected: 5)
@@ -43,12 +43,44 @@ final class Week6MinimumPathSum {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     func dp3(_ grid: [[Int]]) -> Int {
-        fatalError()
+        let m = grid.count, n = grid[0].count
+        var dp = grid[0]
+        for i in 0..<m {
+            for j in 0..<n {
+                if j > 0 {
+                    dp[j] = grid[i][j] + (i > 0 ? min(dp[j], dp[j - 1]) : dp[j - 1])
+                } else {
+                    dp[j] = grid[i][j] + (i > 0 ? dp[j] : 0 )
+                }
+            }
+        }
+        return dp[n - 1]
     }
 
     func rawDP3(_ grid: [[Int]]) -> Int {
-        fatalError()
+        let m = grid.count, n = grid[0].count
+        var dp = grid
+        for i in 1..<m { dp[i][0] += dp[i - 1][0] }
+        for j in 1..<n { dp[0][j] += dp[0][j - 1] }
+        for i in 1..<m {
+            for j in 1..<n {
+                dp[i][j] += min(dp[i - 1][j], dp[i][j - 1])
+            }
+        }
+        return dp[m - 1][n - 1]
     }
 
 
