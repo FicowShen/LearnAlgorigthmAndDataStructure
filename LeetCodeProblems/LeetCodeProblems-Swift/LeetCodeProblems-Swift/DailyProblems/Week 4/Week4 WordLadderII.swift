@@ -9,10 +9,12 @@ import Foundation
 
 /*
  https://leetcode-cn.com/problems/word-ladder-ii/description/
+ 1. bfs with the path, instead of words:
+ https://leetcode.com/problems/word-ladder-ii/discuss/40434/C++-solution-using-standard-BFS-method-no-DFS-or-backtracking/812423
  */
 final class Week4WordLadderII {
     func run() {
-        let f = bfs3
+        let f = bfs4
         func judge(_ begin: String, _ end: String, _ wordList: [String], expected: [[String]]) {
             printAndAssert(result: Set(f(begin, end, wordList)), expected: Set(expected))
         }
@@ -28,8 +30,48 @@ final class Week4WordLadderII {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     func bfs4(_ beginWord: String, _ endWord: String, _ wordList: [String]) -> [[String]] {
-        fatalError()
+        let letters = (0..<26).map { Character(UnicodeScalar($0 + 97)) }
+        var q = [[beginWord]], ans = [[String]](),
+            visited = Set<String>(), valid = Set<String>(wordList)
+        while !q.isEmpty {
+            var newQ = [[String]]()
+            for path in q {
+                let pathLast = Array(path.last!)
+                for i in 0..<pathLast.count {
+                    for letter in letters {
+                        if pathLast[i] == letter { continue }
+                        var temp = pathLast
+                        temp[i] = letter
+                        let new = String(temp)
+                        if !valid.contains(new) { continue }
+                        visited.insert(new)
+                        var newPath = path
+                        newPath.append(new)
+                        if new == endWord {
+                            ans.append(newPath)
+                        } else {
+                            newQ.append(newPath)
+                        }
+                    }
+                }
+            }
+            visited.forEach { valid.remove($0) }
+            q = newQ
+        }
+        return ans
     }
 
 

@@ -17,7 +17,7 @@ import Foundation
  */
 final class Day32MaximumSubarray {
     func run() {
-        let f = divideAndConquer3
+        let f = rawDP4
         printAndAssert(result: f([-2,1,-3,4,-1,2,1,-5,4]), expected: 6)
         printAndAssert(result: f([-1]), expected: -1)
         printAndAssert(result: f([5,4,-1,7,8]), expected: 23)
@@ -47,12 +47,28 @@ final class Day32MaximumSubarray {
         fatalError()
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func rawDP4(_ nums: [Int]) -> Int {
-        fatalError()
+        var dp = nums, ans = dp[0]
+        for i in 1..<nums.count {
+            dp[i] = max(dp[i - 1], 0) + nums[i]
+            ans = max(ans, dp[i])
+        }
+        return ans
     }
-
-
-
 
 
     func divideAndConquer3(_ nums: [Int]) -> Int {
