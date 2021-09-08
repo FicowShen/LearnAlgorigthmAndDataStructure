@@ -10,13 +10,79 @@ import Foundation
 // https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/
 final class MaxProfit2 {
     func run() {
+        let f = greedy4
         func judge(prices: [Int], expected: Int) {
-            printAndAssert(result: greedy3(prices), expected: expected)
+            printAndAssert(result: f(prices), expected: expected)
         }
         judge(prices: [7,1,5,3,6,4], expected: 7)
         judge(prices: [1,2,3,4,5], expected: 4)
         judge(prices: [7,6,4,3,1], expected: 0)
     }
+
+
+    func greedy5(_ prices: [Int]) -> Int {
+        fatalError()
+    }
+
+    func compressedDP5(_ prices: [Int]) -> Int {
+        fatalError()
+    }
+
+    func rawDP5(_ prices: [Int]) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+    func greedy4(_ prices: [Int]) -> Int {
+        var sum = 0
+        for i in 1..<prices.count {
+            sum += max(prices[i] - prices[i - 1], 0)
+        }
+        return sum
+    }
+
+    func compressedDP4(_ prices: [Int]) -> Int {
+        var noStock = 0, hasStock = -prices[0]
+        for i in 1..<prices.count {
+            (noStock, hasStock) = (
+                max(noStock, hasStock + prices[i]),
+                max(hasStock, noStock - prices[i])
+            )
+        }
+        return noStock
+    }
+
+    func rawDP4(_ prices: [Int]) -> Int {
+        let n = prices.count
+        var dp = [[Int]](repeating: [0, -prices[0]], count: n)
+        for i in 1..<n {
+            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])
+            dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i])
+        }
+        return dp[n - 1][0]
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     func greedy3(_ prices: [Int]) -> Int {

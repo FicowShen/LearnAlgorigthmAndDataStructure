@@ -21,37 +21,52 @@ final class Week4FindMinimumInRotatedSortedArray {
 
 
 
+    func findMin6(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+
+
     func findMin5(_ nums: [Int]) -> Int {
         fatalError()
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func findMin4(_ nums: [Int]) -> Int {
-        fatalError()
+        var l = 0, r = nums.count - 1
+        while l < r {
+            let mid = l + (r - l) >> 1
+            if nums[mid] < nums[r] {
+                r = mid
+            } else {
+                l = mid + 1
+            }
+        }
+        return nums[r]
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
