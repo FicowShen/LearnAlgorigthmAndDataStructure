@@ -67,18 +67,17 @@ final class Week6HouseRobberII {
 
 
 
-
+    // https://leetcode.com/problems/house-robber-ii/discuss/59921/9-lines-0ms-O(1)-Space-C++-solution
     func dp2(_ nums: [Int]) -> Int {
         func f(l: Int, r: Int) -> Int {
-            var p1 = nums[l], p2 = max(nums[l], nums[l + 1])
-            for i in stride(from: l + 2, through: r, by: 1) {
-                (p1, p2) = (p2, max(p1 + nums[i], p2))
+            var pre = 0, cur = 0
+            for i in l...r {
+                (pre, cur) = (cur, max(pre + nums[i], cur))
             }
-            return p2
+            return cur
         }
         let n = nums.count
         if n == 1 { return nums[0] }
-        if n == 2 { return max(nums[0], nums[1]) }
         return max(f(l: 0, r: n - 2), f(l: 1, r: n - 1))
     }
 
