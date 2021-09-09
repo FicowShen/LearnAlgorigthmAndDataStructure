@@ -10,7 +10,7 @@ import Foundation
 // https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/
 final class Week2GetLeastNumbers {
     func run() {
-        let f = quickSort3
+        let f = quickSort4
         func judge(_ arr: [Int], _ k: Int, expected: [Int]) {
             printAndAssert(result: Set(f(arr, k)), expected: Set(expected))
         }
@@ -20,14 +20,48 @@ final class Week2GetLeastNumbers {
     }
 
 
-    func quickSort4(_ arr: [Int], _ k: Int) -> [Int] {
+
+
+    func heap5(_ arr: [Int], _ k: Int) -> [Int] {
         fatalError()
     }
+
+    func quickSort5(_ arr: [Int], _ k: Int) -> [Int] {
+        fatalError()
+    }
+
+
 
     func heap4(_ arr: [Int], _ k: Int) -> [Int] {
         fatalError()
     }
 
+    func quickSort4(_ arr: [Int], _ k: Int) -> [Int] {
+        if arr.isEmpty || k == 0 { return [] }
+        var arr = arr
+        func partition(low: Int, high: Int) -> Int {
+            var i = low, j = high + 1, pivot = arr[low]
+            while true {
+                i += 1
+                while i < high, arr[i] <= pivot { i += 1 }
+                j -= 1
+                while j > low, arr[j] >= pivot { j -= 1 }
+                if i >= j { break }
+                arr.swapAt(i, j)
+            }
+            arr[low] = arr[j]
+            arr[j] = pivot
+            return j
+        }
+        func search(low: Int, high: Int) -> [Int] {
+            let j = partition(low: low, high: high)
+            if j == k - 1 { return Array(arr[0...j]) }
+            return j > k - 1
+            ? search(low: low, high: j)
+            : search(low: j + 1, high: high)
+        }
+        return search(low: 0, high: arr.count - 1)
+    }
 
 
 

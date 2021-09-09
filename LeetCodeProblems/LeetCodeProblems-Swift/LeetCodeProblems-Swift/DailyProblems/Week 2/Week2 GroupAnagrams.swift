@@ -10,7 +10,7 @@ import Foundation
 // https://leetcode-cn.com/problems/group-anagrams/
 final class Week2GroupAnagrams {
     func run() {
-        let f = groupAnagramsWithDictAndSort3
+        let f = groupAnagramsWithLetterCountKey4
         func judge(values: [String], expected: [[String]]) {
             let result = f(values)
             printAndAssert(result: result.count, expected: expected.count)
@@ -36,12 +36,60 @@ final class Week2GroupAnagrams {
     }
 
 
-    func groupAnagramsWithLetterCountKey4(_ strs: [String]) -> [[String]] {
+
+    func groupAnagramsWithLetterCountKey6(_ strs: [String]) -> [[String]] {
         fatalError()
     }
 
-    func groupAnagramsWithDictAndSort4(_ strs: [String]) -> [[String]] {
+    func groupAnagramsWithDictAndSort6(_ strs: [String]) -> [[String]] {
         fatalError()
+    }
+
+
+
+    func groupAnagramsWithLetterCountKey5(_ strs: [String]) -> [[String]] {
+        fatalError()
+    }
+
+    func groupAnagramsWithDictAndSort5(_ strs: [String]) -> [[String]] {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+    func groupAnagramsWithLetterCountKey4(_ strs: [String]) -> [[String]] {
+        let letters = (0..<26).map { Character(UnicodeScalar(97 + $0)) }
+        var dict = [String: [String]]()
+        for s in strs {
+            let chars = Array(s)
+            var counter = [Character: Int]()
+            for c in chars {
+                counter[c, default: 0] += 1
+            }
+            var key = ""
+            for letter in letters {
+                guard let count = counter[letter] else { continue }
+                key.append(letter)
+                key.append(count.description)
+            }
+            dict[key, default: [String]()].append(s)
+        }
+        return [[String]](dict.values)
+    }
+
+    func groupAnagramsWithDictAndSort4(_ strs: [String]) -> [[String]] {
+        var dict = [String: [String]]()
+        for s in strs {
+            let key = String(s.sorted())
+            dict[key, default: [String]()].append(s)
+        }
+        return [[String]](dict.values)
     }
 
 
