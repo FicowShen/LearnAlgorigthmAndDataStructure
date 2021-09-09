@@ -7,10 +7,16 @@
 
 import Foundation
 
-// https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/
+/*
+ https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/
+ Time: O(n), Space: O(n)
+ 1. recursion
+ 2. generic stack
+ 3. reversed stack
+ */
 final class Week2NaryTreePreorderTraversal {
     func run() {
-        let f = genericStack1
+        let f = recursion2
         func judge(_ nodes: [Int?], expected: [Int]) {
             let node = Node.fromLevelValues(nodes)
             printAndAssert(result: f(node), expected: expected)
@@ -20,16 +26,55 @@ final class Week2NaryTreePreorderTraversal {
               expected: [1,2,3,6,7,11,14,4,8,12,5,9,13,10])
     }
 
-    func genericStack2(_ root: Node?) -> [Int] {
+
+    func recursion3(_ root: Node?) -> [Int] {
         fatalError()
+    }
+
+    func genericStack3(_ root: Node?) -> [Int] {
+        fatalError()
+    }
+
+    func reversedStack3(_ root: Node?) -> [Int] {
+        fatalError()
+    }
+
+
+
+    func recursion2(_ root: Node?) -> [Int] {
+        var ans = [Int]()
+        func f(_ root: Node?) {
+            guard let root = root else { return }
+            ans.append(root.val)
+            root.children.forEach { f($0) }
+        }
+        f(root)
+        return ans
+    }
+
+    func genericStack2(_ root: Node?) -> [Int] {
+        guard let root = root else { return [] }
+        var stack: [Any] = [root], ans = [Int]()
+        while let last = stack.popLast() {
+            if let value = last as? Int {
+                ans.append(value)
+                continue
+            }
+            let node = last as! Node
+            stack.append(contentsOf: node.children.reversed())
+            stack.append(node.val)
+        }
+        return ans
     }
 
     func reversedStack2(_ root: Node?) -> [Int] {
-        fatalError()
-    }
-
-    func recursion2(_ root: Node?) -> [Int] {
-        fatalError()
+        guard let root = root else { return [] }
+        var stack = [root], ans = [Int]()
+        while let last = stack.popLast() {
+            ans.append(last.val)
+            stack.append(contentsOf: last.children.reversed())
+        }
+        return ans
     }
 
 
