@@ -19,6 +19,7 @@
 		6A10BA6226E8FDC8006CE7AC /* Week6 UniquePathsII.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA6126E8FDC8006CE7AC /* Week6 UniquePathsII.swift */; };
 		6A10BA6426E995D8006CE7AC /* Week6 Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA6326E995D8006CE7AC /* Week6 Triangle.swift */; };
 		6A10BA6626E99B5B006CE7AC /* Week6 MaximumProductSubarray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA6526E99B5B006CE7AC /* Week6 MaximumProductSubarray.swift */; };
+		6A10BA6826EACFD4006CE7AC /* Day40 MaxSumOfRectangleNoLargerThanK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA6726EACFD4006CE7AC /* Day40 MaxSumOfRectangleNoLargerThanK.swift */; };
 		6A42EFB226CBFC0F0030EE32 /* Day16 ReplaceSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB126CBFC0F0030EE32 /* Day16 ReplaceSpace.swift */; };
 		6A42EFB426CC8BF20030EE32 /* Day17 ReversePrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB326CC8BF20030EE32 /* Day17 ReversePrint.swift */; };
 		6A42EFB626CD48F20030EE32 /* Week3 GenerateParentheses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB526CD48F20030EE32 /* Week3 GenerateParentheses.swift */; };
@@ -147,6 +148,7 @@
 		6A10BA6126E8FDC8006CE7AC /* Week6 UniquePathsII.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week6 UniquePathsII.swift"; sourceTree = "<group>"; };
 		6A10BA6326E995D8006CE7AC /* Week6 Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week6 Triangle.swift"; sourceTree = "<group>"; };
 		6A10BA6526E99B5B006CE7AC /* Week6 MaximumProductSubarray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week6 MaximumProductSubarray.swift"; sourceTree = "<group>"; };
+		6A10BA6726EACFD4006CE7AC /* Day40 MaxSumOfRectangleNoLargerThanK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day40 MaxSumOfRectangleNoLargerThanK.swift"; sourceTree = "<group>"; };
 		6A42EFB126CBFC0F0030EE32 /* Day16 ReplaceSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day16 ReplaceSpace.swift"; sourceTree = "<group>"; };
 		6A42EFB326CC8BF20030EE32 /* Day17 ReversePrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day17 ReversePrint.swift"; sourceTree = "<group>"; };
 		6A42EFB526CD48F20030EE32 /* Week3 GenerateParentheses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 GenerateParentheses.swift"; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				6A10BA6126E8FDC8006CE7AC /* Week6 UniquePathsII.swift */,
 				6A10BA6326E995D8006CE7AC /* Week6 Triangle.swift */,
 				6A10BA6526E99B5B006CE7AC /* Week6 MaximumProductSubarray.swift */,
+				6A10BA6726EACFD4006CE7AC /* Day40 MaxSumOfRectangleNoLargerThanK.swift */,
 			);
 			path = "Week 5-6";
 			sourceTree = "<group>";
@@ -659,6 +662,7 @@
 				6AB35B3C26BE1D780026173D /* Day7 DesignCircularDeque.swift in Sources */,
 				6A42EFD926D9D7880030EE32 /* Week4 AssignCookies.swift in Sources */,
 				6AB35B1626B594970026173D /* HouseRobber2.swift in Sources */,
+				6A10BA6826EACFD4006CE7AC /* Day40 MaxSumOfRectangleNoLargerThanK.swift in Sources */,
 				6AB35B4A26C0B9AC0026173D /* Week1 ReverseNodesInKGroup.swift in Sources */,
 				6AD94F7A269AA9A000AA35B4 /* MathProblems.swift in Sources */,
 				6A42EFB426CC8BF20030EE32 /* Day17 ReversePrint.swift in Sources */,
