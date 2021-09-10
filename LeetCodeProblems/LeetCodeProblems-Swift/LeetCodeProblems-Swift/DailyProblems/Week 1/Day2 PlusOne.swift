@@ -11,7 +11,7 @@ import Foundation
 final class Day2PlusOne {
     func run() {
         func judge(_ digits: [Int], expected: [Int]) {
-            printAndAssert(result: plusOne6(digits), expected: expected)
+            printAndAssert(result: plusOne7(digits), expected: expected)
         }
         judge([9], expected: [1, 0])
         judge([9, 9], expected: [1, 0, 0])
@@ -20,7 +20,8 @@ final class Day2PlusOne {
         judge([0], expected: [1])
     }
 
-    func plusOne7(_ digits: [Int]) -> [Int] {
+
+    func plusOne8(_ digits: [Int]) -> [Int] {
         fatalError()
     }
 
@@ -48,6 +49,17 @@ final class Day2PlusOne {
 
 
 
+
+    func plusOne7(_ digits: [Int]) -> [Int] {
+        var nums = digits, n = nums.count
+        for i in stride(from: n - 1, through: 0, by: -1) {
+            nums[i] = (nums[i] + 1) % 10
+            if nums[i] != 0 { return nums }
+        }
+        nums = [Int](repeating: 0, count: n + 1)
+        nums[0] = 1
+        return nums
+    }
 
 
 

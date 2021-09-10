@@ -13,7 +13,7 @@ final class Week1MergeSortedArray {
         func judge(_ nums1: inout [Int], _ m: Int,
                    _ nums2: [Int], _ n: Int,
                    expected: [Int]) {
-            merge4(&nums1, m, nums2, n)
+            merge5(&nums1, m, nums2, n)
             printAndAssert(result: nums1, expected: expected)
         }
         var nums = [1,2,3,0,0,0]
@@ -24,7 +24,8 @@ final class Week1MergeSortedArray {
         judge(&nums, 0, [1], 1, expected: [1])
     }
 
-    func merge5(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
+
+    func merge6(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
         fatalError()
     }
 
@@ -49,6 +50,22 @@ final class Week1MergeSortedArray {
 
 
 
+
+
+
+    func merge5(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
+        var tail = nums1.count - 1, p1 = m - 1, p2 = n - 1
+        while p2 >= 0 {
+            if p1 < 0 || nums1[p1] < nums2[p2] {
+                nums1[tail] = nums2[p2]
+                p2 -= 1
+            } else {
+                nums1[tail] = nums1[p1]
+                p1 -= 1
+            }
+            tail -= 1
+        }
+    }
 
 
 
