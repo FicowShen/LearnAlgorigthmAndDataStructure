@@ -21,10 +21,16 @@ final class Day9SlidingWindowMaximum {
         judge([7,2,4], 2, expected: [7,4])
     }
 
+    func maxSlidingWindow6(_ nums: [Int], _ k: Int) -> [Int] {
+        fatalError()
+    }
+
+
     func maxSlidingWindow5(_ nums: [Int], _ k: Int) -> [Int] {
         fatalError()
     }
 
+    
     func maxSlidingWindow4(_ nums: [Int], _ k: Int) -> [Int] {
         fatalError()
     }

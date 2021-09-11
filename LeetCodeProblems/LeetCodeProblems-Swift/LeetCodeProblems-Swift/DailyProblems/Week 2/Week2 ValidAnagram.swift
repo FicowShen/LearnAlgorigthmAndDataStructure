@@ -10,7 +10,7 @@ import Foundation
 // https://leetcode-cn.com/problems/valid-anagram/
 final class Week2ValidAnagram {
     func run() {
-        let f = isAnagramWithLetterArray3
+        let f = isAnagramWithDict4
         printAndAssert(result: f("anagram", "nagaram"), expected: true)
         printAndAssert(result: f("rat", "car"), expected: false)
     }
@@ -26,7 +26,16 @@ final class Week2ValidAnagram {
     }
 
     func isAnagramWithDict4(_ s: String, _ t: String) -> Bool {
-        fatalError()
+        if s.count != t.count { return false }
+        var dict = [Character: Int]()
+        for c in s {
+            dict[c, default: 0] += 1
+        }
+        for c in t {
+            dict[c, default: 0] -= 1
+            if dict[c]! < 0 { return false }
+        }
+        return true
     }
 
 

@@ -14,10 +14,12 @@ import Foundation
  */
 final class Week4SearchInRotatedSortedArray {
     func run() {
-        let f = binarySearch3
+        let f = binarySearch4
         printAndAssert(result: f([4,5,6,7,0,1,2], 0), expected: 4)
         printAndAssert(result: f([4,5,6,7,0,1,2], 3), expected: -1)
         printAndAssert(result: f([1], 0), expected: -1)
+        printAndAssert(result: f([1], 1), expected: 0)
+        printAndAssert(result: f([3,1], 1), expected: 1)
         printAndAssert(result: f([5,1,3], 3), expected: 2)
         findDisorder()
     }
@@ -55,7 +57,26 @@ final class Week4SearchInRotatedSortedArray {
 
 
     func binarySearch4(_ nums: [Int], _ target: Int) -> Int {
-        fatalError()
+        var n = nums.count - 1, l = 0, r = n
+        while l <= r {
+            let mid = l + (r - l) >> 1
+            let pivot = nums[mid]
+            if pivot == target { return mid }
+            if nums[0] <= pivot { // Note: <=
+                if nums[0] <= target, target < pivot {
+                    r = mid - 1
+                } else {
+                    l = mid + 1
+                }
+            } else {
+                if pivot < target, target <= nums[n] {
+                    l = mid + 1
+                } else {
+                    r = mid - 1
+                }
+            }
+        }
+        return -1
     }
 
 
