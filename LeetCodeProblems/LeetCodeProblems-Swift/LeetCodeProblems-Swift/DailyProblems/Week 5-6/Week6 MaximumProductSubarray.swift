@@ -12,22 +12,28 @@ import Foundation
  1. dp
  Time: O(n), Space: O(n) / O(1)
 
- 2.
+ 2. multiply from both sides
+ Time: O(n), Space: O(1)
+ Notes: use () for ?:
  https://leetcode.com/problems/maximum-product-subarray/discuss/183483/Easy-and-Concise-Python
 
  3. https://leetcode.com/problems/maximum-product-subarray/discuss/48230/Possibly-simplest-solution-with-O(n)-time-complexity
  */
 final class Week6MaximumProductSubarray {
     func run() {
-        let f = dp2
+        let f = multiplyFromBothSides3
         printAndAssert(result: f([2,3,-2,4]), expected: 6)
         printAndAssert(result: f([-2,0,-1]), expected: 0)
+        printAndAssert(result: f([-2]), expected: -2)
+        printAndAssert(result: f([3,-1,4]), expected: 4)
     }
 
 
 
 
-
+    func multiplyFromBothSides5(_ nums: [Int]) -> Int {
+        fatalError()
+    }
 
     func dp5(_ nums: [Int]) -> Int {
         fatalError()
@@ -41,7 +47,9 @@ final class Week6MaximumProductSubarray {
 
 
 
-
+    func multiplyFromBothSides4(_ nums: [Int]) -> Int {
+        fatalError()
+    }
 
     func dp4(_ nums: [Int]) -> Int {
         fatalError()
@@ -57,18 +65,67 @@ final class Week6MaximumProductSubarray {
 
 
 
+
+
+
+
+
+
+
+
+
+
+    func multiplyFromBothSides3(_ nums: [Int]) -> Int {
+        let n = nums.count
+        var l = 0, r = 0, ans = nums[0]
+        for i in 0..<n {
+            l = (l == 0 ? 1 : l) * nums[i]
+            r = (r == 0 ? 1 : r) * nums[n - 1 - i]
+            ans = max(ans, max(l, r))
+        }
+        return ans
+    }
+
     func dp3(_ nums: [Int]) -> Int {
-        fatalError()
+        let n = nums.count
+        var fmin = nums[0], fmax = fmin, ans = fmin
+        for i in 1..<n {
+            let x = nums[i]
+            (fmax, fmin) = (
+                max(x, max(x * fmax, x * fmin)),
+                min(x, min(x * fmax, x * fmin))
+            )
+            ans = max(ans, fmax)
+        }
+        return ans
     }
 
     func rawDP3(_ nums: [Int]) -> Int {
-        fatalError()
+        let n = nums.count
+        var fmin = nums, fmax = nums, ans = nums[0]
+        for i in 1..<n {
+            let x = nums[i]
+            fmax[i] = max(x, max(x * fmax[i - 1], x * fmin[i - 1]))
+            fmin[i] = min(x, min(x * fmax[i - 1], x * fmin[i - 1]))
+            ans = max(ans, fmax[i])
+        }
+        return ans
     }
 
 
 
 
 
+    func multiplyFromBothSides2(_ nums: [Int]) -> Int {
+        let n = nums.count
+        var l = 0, r = 0, ans = nums[0]
+        for i in 0..<n {
+            l = (l == 0 ? 1 : l) * nums[i] // use () to wrap ?:
+            r = (r == 0 ? 1 : r) * nums[n - 1 - i]
+            ans = max(ans, max(l, r))
+        }
+        return ans
+    }
 
 
     func dp2(_ nums: [Int]) -> Int {
@@ -97,6 +154,19 @@ final class Week6MaximumProductSubarray {
 
 
 
+
+
+
+    func multiplyFromBothSides1(_ nums: [Int]) -> Int {
+        let n = nums.count
+        var l = 0, r = 0, ans = nums[0]
+        for i in 0..<n {
+            l = (l == 0 ? 1 : l) * nums[i]
+            r = (r == 0 ? 1 : r) * nums[n - 1 - i]
+            ans = max(ans, max(l, r))
+        }
+        return ans
+    }
 
 
 

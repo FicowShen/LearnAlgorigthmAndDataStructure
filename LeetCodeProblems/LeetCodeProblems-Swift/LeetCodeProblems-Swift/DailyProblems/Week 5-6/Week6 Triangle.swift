@@ -18,7 +18,7 @@ import Foundation
  */
 final class Week6Triangle {
     func run() {
-        let f = dp2
+        let f = dp3
         printAndAssert(result: f([[2],[3,4]]), expected: 5)
         printAndAssert(result: f([[2],[3,4],[6,5,7],[4,1,8,3]]), expected: 11)
         printAndAssert(result: f([[-10]]), expected: -10)
@@ -35,20 +35,38 @@ final class Week6Triangle {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func dp3(_ triangle: [[Int]]) -> Int {
-        fatalError()
+        let n = triangle.count
+        var dp = triangle[n - 1]
+        for i in stride(from: n - 2, through: 0, by: -1) {
+            for j in 0..<triangle[i].count {
+                dp[j] = triangle[i][j] + min(dp[j], dp[j + 1])
+            }
+        }
+        return dp[0]
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
