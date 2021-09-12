@@ -83,6 +83,7 @@ final class DailyProblems {
     /// tree, binary tree, binary search tree,
     /// heap, binary heap, graph
     static func week2() {
+        Week2NthUglyNumber().run()
         Week2GroupAnagrams().run()
         Week2ValidAnagram().run()
         Week2BinaryTreeInorderTraversal().run()
