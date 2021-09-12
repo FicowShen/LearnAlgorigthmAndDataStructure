@@ -18,6 +18,7 @@ final class DailyProblems {
 
     /// dynamic programming
     static func week5And6() {
+        Week6BestTimeToBuyAndSellStockIII().run()
         Week6BestTimeToBuyAndSellStockWithTransactionFee().run()
         Week6BestTimeToBuyAndSellStockWithCooldown().run()
         Week6BestTimeToBuyandSellStock().run()

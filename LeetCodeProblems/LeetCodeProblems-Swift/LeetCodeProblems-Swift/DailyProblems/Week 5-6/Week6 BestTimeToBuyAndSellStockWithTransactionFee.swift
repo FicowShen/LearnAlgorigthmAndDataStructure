@@ -11,6 +11,9 @@ import Foundation
  https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/
  1. dp
  Time: O(n), Space: O(n) / O(1)
+
+ 2. greedy
+ Time: O(n), Space: O(1)
  */
 final class Week6BestTimeToBuyAndSellStockWithTransactionFee {
     func run() {
