@@ -23,6 +23,7 @@
 		6A10BA6A26ECF0FD006CE7AC /* Week6 BestTimeToBuyandSellStock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA6926ECF0FD006CE7AC /* Week6 BestTimeToBuyandSellStock.swift */; };
 		6A10BA6C26ECF7A5006CE7AC /* Week6 BestTimeToBuyAndSellStockWithCooldown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA6B26ECF7A5006CE7AC /* Week6 BestTimeToBuyAndSellStockWithCooldown.swift */; };
 		6A10BA6E26ED9C5C006CE7AC /* Day42 WordSearchII.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA6D26ED9C5C006CE7AC /* Day42 WordSearchII.swift */; };
+		6A10BA7026EDCE11006CE7AC /* Week6 BestTimeToBuyAndSellStockWithTransactionFee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA6F26EDCE11006CE7AC /* Week6 BestTimeToBuyAndSellStockWithTransactionFee.swift */; };
 		6A42EFB226CBFC0F0030EE32 /* Day16 ReplaceSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB126CBFC0F0030EE32 /* Day16 ReplaceSpace.swift */; };
 		6A42EFB426CC8BF20030EE32 /* Day17 ReversePrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB326CC8BF20030EE32 /* Day17 ReversePrint.swift */; };
 		6A42EFB626CD48F20030EE32 /* Week3 GenerateParentheses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB526CD48F20030EE32 /* Week3 GenerateParentheses.swift */; };
@@ -155,6 +156,7 @@
 		6A10BA6926ECF0FD006CE7AC /* Week6 BestTimeToBuyandSellStock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week6 BestTimeToBuyandSellStock.swift"; sourceTree = "<group>"; };
 		6A10BA6B26ECF7A5006CE7AC /* Week6 BestTimeToBuyAndSellStockWithCooldown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week6 BestTimeToBuyAndSellStockWithCooldown.swift"; sourceTree = "<group>"; };
 		6A10BA6D26ED9C5C006CE7AC /* Day42 WordSearchII.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day42 WordSearchII.swift"; sourceTree = "<group>"; };
+		6A10BA6F26EDCE11006CE7AC /* Week6 BestTimeToBuyAndSellStockWithTransactionFee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week6 BestTimeToBuyAndSellStockWithTransactionFee.swift"; sourceTree = "<group>"; };
 		6A42EFB126CBFC0F0030EE32 /* Day16 ReplaceSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day16 ReplaceSpace.swift"; sourceTree = "<group>"; };
 		6A42EFB326CC8BF20030EE32 /* Day17 ReversePrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day17 ReversePrint.swift"; sourceTree = "<group>"; };
 		6A42EFB526CD48F20030EE32 /* Week3 GenerateParentheses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 GenerateParentheses.swift"; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				6A10BA6526E99B5B006CE7AC /* Week6 MaximumProductSubarray.swift */,
 				6A10BA6926ECF0FD006CE7AC /* Week6 BestTimeToBuyandSellStock.swift */,
 				6A10BA6B26ECF7A5006CE7AC /* Week6 BestTimeToBuyAndSellStockWithCooldown.swift */,
+				6A10BA6F26EDCE11006CE7AC /* Week6 BestTimeToBuyAndSellStockWithTransactionFee.swift */,
 			);
 			path = "Week 5-6";
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				6AD94F8A269AA9A000AA35B4 /* RecursionProblems.swift in Sources */,
 				6AB35B5E26C7AD600026173D /* Week2 BinaryTreeInorderTraversal.swift in Sources */,
 				6AB89D4726A106D700E295BA /* Combine.swift in Sources */,
+				6A10BA7026EDCE11006CE7AC /* Week6 BestTimeToBuyAndSellStockWithTransactionFee.swift in Sources */,
 				6AB35B3626BC28730026173D /* Day6 MoveZeroes.swift in Sources */,
 				6A42EFB626CD48F20030EE32 /* Week3 GenerateParentheses.swift in Sources */,
 				6AD94F81269AA9A000AA35B4 /* TreeMaxDepth.swift in Sources */,
