@@ -10,7 +10,7 @@ import Foundation
 // https://leetcode-cn.com/problems/validate-binary-search-tree/
 final class Week3ValidateBinarySearchTree {
     func run() {
-        let f = compareWithMinAndMax2
+        let f = compareWithPre3
         func judge(_ nodes: [Int?], expected: Bool) {
             let tree = TreeNode.fromPerfectBinaryTreeLevelNodes(nodes)
             printAndAssert(result: f(tree), expected: expected)
@@ -22,32 +22,63 @@ final class Week3ValidateBinarySearchTree {
 
 
 
+
+    func compareWithMinAndMax4(_ root: TreeNode?) -> Bool {
+        fatalError()
+    }
+
+
+
+
+
+    func compareWithPre4(_ root: TreeNode?) -> Bool {
+        fatalError()
+    }
+
+
+
+
     func compareWithMinAndMax3(_ root: TreeNode?) -> Bool {
         fatalError()
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func compareWithPre3(_ root: TreeNode?) -> Bool {
-        fatalError()
+        var pre: Int?
+        func f(_ root: TreeNode?) -> Bool {
+            guard let root = root else { return true }
+            if !f(root.left) { return false }
+            if let pre = pre, root.val <= pre { return false }
+            pre = root.val
+            return f(root.right)
+        }
+        return f(root)
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
