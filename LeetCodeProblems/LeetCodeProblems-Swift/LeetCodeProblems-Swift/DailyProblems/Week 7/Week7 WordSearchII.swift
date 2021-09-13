@@ -1,8 +1,8 @@
 //
-//  Day42 WordSearchII.swift
+//  Week7 WordSearchII.swift
 //  LeetCodeProblems-Swift
 //
-//  Created by Ficow on 2021/9/12.
+//  Created by Ficow on 2021/9/13.
 //
 
 import Foundation
@@ -13,9 +13,9 @@ import Foundation
  Time: O(M*4*(3^(L-1))), M: grid count, L: word length
  Space: O(n), word count
  */
-final class Day42WordSearchII {
+final class Week7WordSearchII {
     func run() {
-        let f = findWordsWithTrie2
+        let f = findWordsWithTrie3
         func judge(board: [[Character]], words: [String], expected: [String]) {
             printAndAssert(result: Set(f(board, words)),
                            expected: Set(expected))
@@ -41,9 +41,83 @@ final class Day42WordSearchII {
     }
 
 
+    func findWordsWithTrie5(_ board: [[Character]], _ words: [String]) -> [String] {
+        fatalError()
+    }
 
 
-    
+
+    func findWordsWithTrie4(_ board: [[Character]], _ words: [String]) -> [String] {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    func findWordsWithTrie3(_ board: [[Character]], _ words: [String]) -> [String] {
+        final class TrieNode {
+            var word = "", children = [Character: TrieNode]()
+        }
+        let root = TrieNode(), Row = board.count, Col = board[0].count
+        for word in words {
+            var node = root
+            for c in word {
+                if let n = node.children[c] {
+                    node = n
+                }
+                else {
+                    let new = TrieNode()
+                    node.children[c] = new
+                    node = new
+                }
+            }
+            node.word = word
+        }
+        let drow = [-1, 0, 1, 0], dcol = [0, 1, 0, -1]
+        var board = board, ans = [String]()
+        func backtrack(row: Int, col: Int, parent: TrieNode) {
+            let letter = board[row][col], curNode = parent.children[letter]!
+            // find a word
+            if !curNode.word.isEmpty {
+                ans.append(curNode.word)
+                curNode.word = ""
+            }
+            // dfs
+            board[row][col] = "#"
+            for i in 0..<drow.count {
+                let r = row + drow[i], c = col + dcol[i]
+                if r < 0 || c < 0 || r >= Row || c >= Col { continue }
+                if curNode.children[board[r][c]] == nil { continue }
+                backtrack(row: r, col: c, parent: curNode)
+            }
+            board[row][col] = letter
+            // remove leaf nodes
+            if curNode.children.isEmpty {
+                parent.children[letter] = nil
+            }
+        }
+        for r in 0..<Row {
+            for c in 0..<Col {
+                if root.children[board[r][c]] == nil { continue }
+                backtrack(row: r, col: c, parent: root)
+            }
+        }
+        return ans
+    }
+
+
+
 
 
 
