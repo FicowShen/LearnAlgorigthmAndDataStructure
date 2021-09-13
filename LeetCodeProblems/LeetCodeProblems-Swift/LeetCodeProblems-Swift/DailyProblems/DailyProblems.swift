@@ -9,11 +9,17 @@ import Foundation
 
 final class DailyProblems {
     static func run() {
+        week7()
         week5And6()
         week4()
         week3()
         week2()
         week1()
+    }
+
+    static func week7() {
+        Week7ImplementTrieOrPrefixTree().run()
+        Week7WordSearchII().run()
     }
 
     /// dynamic programming
