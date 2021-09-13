@@ -15,7 +15,7 @@ import Foundation
  */
 final class Week6BestTimeToBuyAndSellStockIII {
     func run() {
-        let f = dp2
+        let f = dp3
         func judgee(prices: [Int], expected: Int) {
             printAndAssert(result: f(prices), expected: expected)
         }
@@ -23,6 +23,16 @@ final class Week6BestTimeToBuyAndSellStockIII {
         judgee(prices: [1,2,3,4,5], expected: 4)
         judgee(prices: [7,6,4,3,1], expected: 0)
         judgee(prices: [1], expected: 0)
+    }
+
+
+    func dp7(_ prices: [Int]) -> Int {
+        fatalError()
+    }
+
+
+    func dp6(_ prices: [Int]) -> Int {
+        fatalError()
     }
 
 
@@ -37,20 +47,38 @@ final class Week6BestTimeToBuyAndSellStockIII {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func dp3(_ prices: [Int]) -> Int {
-        fatalError()
+        var buy1 = -prices[0], sell1 = 0, buy2 = buy1, sell2 = 0
+        for i in 1..<prices.count {
+            buy1 = max(buy1, -prices[i])
+            sell1 = max(sell1, buy1 + prices[i])
+            buy2 = max(buy2, sell1 - prices[i])
+            sell2 = max(sell2, buy2 + prices[i])
+        }
+        return sell2
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

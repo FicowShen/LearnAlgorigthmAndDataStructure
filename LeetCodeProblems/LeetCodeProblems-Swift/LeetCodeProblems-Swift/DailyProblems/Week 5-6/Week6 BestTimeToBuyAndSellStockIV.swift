@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week6BestTimeToBuyAndSellStockIV {
     func run() {
-        let f = dp2
+        let f = dp3
         func judge(k: Int, prices: [Int], expected: Int) {
             printAndAssert(result: f(k, prices), expected: expected)
         }
@@ -52,8 +52,18 @@ final class Week6BestTimeToBuyAndSellStockIV {
 
 
 
+    // https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/solution/5xing-dai-ma-gao-ding-suo-you-gu-piao-ma-j6zo/
     func dp3(_ k: Int, _ prices: [Int]) -> Int {
-        fatalError()
+        let k = min(k, prices.count / 2)
+        var buy = [Int](repeating: Int.min/2, count: k + 1)
+        var sell = [Int](repeating: 0, count: k + 1)
+        for p in prices {
+            for i in 1..<k+1 {
+                buy[i] = max(buy[i], sell[i - 1] - p)
+                sell[i] = max(sell[i], buy[i] + p)
+            }
+        }
+        return sell.last!
     }
 
 

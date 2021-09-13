@@ -17,7 +17,7 @@ import Foundation
  */
 final class Week6BestTimeToBuyAndSellStockWithCooldown {
     func run() {
-        let f = dpWithTwoStatuses2
+        let f = rawDPWithThreeStatuses3
         printAndAssert(result: f([1,2,3,0,2]), expected: 3)
         printAndAssert(result: f([1]), expected: 0)
     }
@@ -81,7 +81,17 @@ final class Week6BestTimeToBuyAndSellStockWithCooldown {
     }
 
     func rawDPWithThreeStatuses3(_ prices: [Int]) -> Int {
-        fatalError()
+        let n = prices.count
+        var noStock = [Int](repeating: 0, count: n),
+            hasStock = noStock,
+            cooldown = noStock
+        hasStock[0] = -prices[0]
+        for i in 1..<n {
+            noStock[i] = max(noStock[i - 1], cooldown[i - 1])
+            hasStock[i] = max(hasStock[i - 1], noStock[i - 1] - prices[i])
+            cooldown[i] = hasStock[i - 1] + prices[i]
+        }
+        return max(noStock[n - 1], cooldown[n - 1])
     }
 
 
