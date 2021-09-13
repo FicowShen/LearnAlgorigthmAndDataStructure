@@ -18,6 +18,7 @@ final class DailyProblems {
     }
 
     static func week7() {
+        Week7NumberOfIslands().run()
         Week7ImplementTrieOrPrefixTree().run()
         Week7WordSearchII().run()
     }
