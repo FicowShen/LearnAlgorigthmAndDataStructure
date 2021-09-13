@@ -12,7 +12,7 @@ import Foundation
  */
 final class Week7ImplementTrieOrPrefixTree {
     func run() {
-        let trie = Trie2()
+        let trie = Trie3()
         trie.insert("apple")
         printAndAssert(result: trie.search("apple"), expected: true)
         printAndAssert(result: trie.search("app"), expected: false)
@@ -20,6 +20,28 @@ final class Week7ImplementTrieOrPrefixTree {
         trie.insert("app")
         printAndAssert(result: trie.search("app"), expected: true)
     }
+
+
+
+    final class Trie5 {
+        init() {
+
+        }
+
+        func insert(_ word: String) {
+
+        }
+
+        func search(_ word: String) -> Bool {
+            fatalError()
+        }
+
+        func startsWith(_ prefix: String) -> Bool {
+            fatalError()
+        }
+    }
+
+
 
 
     final class Trie4 {
@@ -43,21 +65,47 @@ final class Week7ImplementTrieOrPrefixTree {
 
 
 
-    final class Trie3 {
-        init() {
 
+
+    final class Trie3 {
+        final class TrieNode {
+            var word = "", children = [Character: TrieNode]()
         }
 
-        func insert(_ word: String) {
+        private let root = TrieNode()
 
+        func insert(_ word: String) {
+            var node = root
+            for c in word {
+                if let n = node.children[c] {
+                    node = n
+                } else {
+                    let new = TrieNode()
+                    node.children[c] = new
+                    node = new
+                }
+            }
+            node.word = word
+        }
+
+        private func lastNode(_ s: String) -> TrieNode? {
+            var node = root
+            for c in s {
+                if let n = node.children[c] {
+                    node = n
+                } else {
+                    return nil
+                }
+            }
+            return node
         }
 
         func search(_ word: String) -> Bool {
-            fatalError()
+            lastNode(word)?.word == word
         }
 
         func startsWith(_ prefix: String) -> Bool {
-            fatalError()
+            lastNode(prefix) != nil
         }
     }
 
