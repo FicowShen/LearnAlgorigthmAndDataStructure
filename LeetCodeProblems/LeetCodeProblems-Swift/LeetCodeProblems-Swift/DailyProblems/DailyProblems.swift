@@ -18,6 +18,8 @@ final class DailyProblems {
     }
 
     static func week7() {
+        Week7GenerateParentheses().run()
+        Week7ClimbStairs().run()
         Week7SurroundedRegions().run()
         Week7NumberOfIslands().run()
         Week7ImplementTrieOrPrefixTree().run()

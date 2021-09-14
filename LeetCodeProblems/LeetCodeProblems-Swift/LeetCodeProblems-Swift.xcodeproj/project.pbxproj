@@ -32,6 +32,8 @@
 		6A10BA7D26EECD87006CE7AC /* Week7 ImplementTrieOrPrefixTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA7C26EECD87006CE7AC /* Week7 ImplementTrieOrPrefixTree.swift */; };
 		6A10BA7F26EED428006CE7AC /* Week7 NumberOfIslands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA7E26EED428006CE7AC /* Week7 NumberOfIslands.swift */; };
 		6A10BA8126F02D40006CE7AC /* Week7 SurroundedRegions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA8026F02D40006CE7AC /* Week7 SurroundedRegions.swift */; };
+		6A10BA8326F0E35D006CE7AC /* Week7 ClimbStairs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA8226F0E35D006CE7AC /* Week7 ClimbStairs.swift */; };
+		6A10BA8526F0E3BD006CE7AC /* Week7 GenerateParentheses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA8426F0E3BD006CE7AC /* Week7 GenerateParentheses.swift */; };
 		6A42EFB226CBFC0F0030EE32 /* Day16 ReplaceSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB126CBFC0F0030EE32 /* Day16 ReplaceSpace.swift */; };
 		6A42EFB426CC8BF20030EE32 /* Day17 ReversePrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB326CC8BF20030EE32 /* Day17 ReversePrint.swift */; };
 		6A42EFB626CD48F20030EE32 /* Week3 GenerateParentheses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB526CD48F20030EE32 /* Week3 GenerateParentheses.swift */; };
@@ -173,6 +175,8 @@
 		6A10BA7C26EECD87006CE7AC /* Week7 ImplementTrieOrPrefixTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 ImplementTrieOrPrefixTree.swift"; sourceTree = "<group>"; };
 		6A10BA7E26EED428006CE7AC /* Week7 NumberOfIslands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 NumberOfIslands.swift"; sourceTree = "<group>"; };
 		6A10BA8026F02D40006CE7AC /* Week7 SurroundedRegions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 SurroundedRegions.swift"; sourceTree = "<group>"; };
+		6A10BA8226F0E35D006CE7AC /* Week7 ClimbStairs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 ClimbStairs.swift"; sourceTree = "<group>"; };
+		6A10BA8426F0E3BD006CE7AC /* Week7 GenerateParentheses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Week7 GenerateParentheses.swift"; sourceTree = "<group>"; };
 		6A42EFB126CBFC0F0030EE32 /* Day16 ReplaceSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day16 ReplaceSpace.swift"; sourceTree = "<group>"; };
 		6A42EFB326CC8BF20030EE32 /* Day17 ReversePrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day17 ReversePrint.swift"; sourceTree = "<group>"; };
 		6A42EFB526CD48F20030EE32 /* Week3 GenerateParentheses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 GenerateParentheses.swift"; sourceTree = "<group>"; };
@@ -304,6 +308,8 @@
 				6A10BA7C26EECD87006CE7AC /* Week7 ImplementTrieOrPrefixTree.swift */,
 				6A10BA7E26EED428006CE7AC /* Week7 NumberOfIslands.swift */,
 				6A10BA8026F02D40006CE7AC /* Week7 SurroundedRegions.swift */,
+				6A10BA8226F0E35D006CE7AC /* Week7 ClimbStairs.swift */,
+				6A10BA8426F0E3BD006CE7AC /* Week7 GenerateParentheses.swift */,
 			);
 			path = "Week 7";
 			sourceTree = "<group>";
@@ -612,6 +618,7 @@
 				6A10BA7026EDCE11006CE7AC /* Week6 BestTimeToBuyAndSellStockWithTransactionFee.swift in Sources */,
 				6AB35B3626BC28730026173D /* Day6 MoveZeroes.swift in Sources */,
 				6A42EFB626CD48F20030EE32 /* Week3 GenerateParentheses.swift in Sources */,
+				6A10BA8526F0E3BD006CE7AC /* Week7 GenerateParentheses.swift in Sources */,
 				6AD94F81269AA9A000AA35B4 /* TreeMaxDepth.swift in Sources */,
 				6A42EFCF26D68A750030EE32 /* Week4 FindLargestValueInEachTreeRow.swift in Sources */,
 				6A10BA6426E995D8006CE7AC /* Week6 Triangle.swift in Sources */,
@@ -730,6 +737,7 @@
 				6AD94F85269AA9A000AA35B4 /* TreeLevelOrderTraversal.swift in Sources */,
 				6A10BA5E26E8494B006CE7AC /* Week6 ClimbStairs.swift in Sources */,
 				6AD94F7C269AA9A000AA35B4 /* InvertTree.swift in Sources */,
+				6A10BA8326F0E35D006CE7AC /* Week7 ClimbStairs.swift in Sources */,
 				6A42EFE126DB6CE80030EE32 /* Week4 Minesweeper.swift in Sources */,
 				6AB35B6426C93D5D0026173D /* Week2 NaryTreePreorderTraversal.swift in Sources */,
 			);

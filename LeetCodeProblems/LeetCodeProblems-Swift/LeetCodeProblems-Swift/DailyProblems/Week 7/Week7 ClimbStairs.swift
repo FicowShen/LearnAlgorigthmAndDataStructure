@@ -1,19 +1,18 @@
 //
-//  Week6 ClimbStairs.swift
+//  Week7 ClimbStairs.swift
 //  LeetCodeProblems-Swift
 //
-//  Created by Ficow on 2021/9/8.
+//  Created by Ficow on 2021/9/14.
 //
 
 import Foundation
 
 // https://leetcode-cn.com/problems/climbing-stairs/description/
-final class Week6ClimbStairs {
+final class Week7ClimbStairs {
     func run() {
-        printAndAssert(result: climbStairs2(1), expected: 1)
-        printAndAssert(result: climbStairs2(10), expected: 89)
+        printAndAssert(result: climbStairs(1), expected: 1)
+        printAndAssert(result: climbStairs(10), expected: 89)
     }
-
 
     func climbStairs5(_ n: Int) -> Int {
         fatalError()
@@ -31,13 +30,7 @@ final class Week6ClimbStairs {
 
 
     func climbStairs2(_ n: Int) -> Int {
-        var dp = [Int](repeating: 0, count: n + 1)
-        dp[0] = 1
-        dp[1] = 1
-        for i in stride(from: 2, through: n, by: 1) {
-            dp[i] = dp[i - 1] + dp[i - 2]
-        }
-        return dp[n]
+        fatalError()
     }
 
     func climbStairs(_ n: Int) -> Int {
