@@ -15,9 +15,11 @@ import Foundation
  traverse the board, restoring # to 0, update 0 to X
 
  3. union-find
+ Time: O(row * col), Space: O(row * col)
  build a union-find with a pseudo head index,
  traverse the board, connecting edge grids with this pseudo head,
  traverse the board again, setting O grids to X if not connected to the pseudo head
+ https://leetcode.com/problems/surrounded-regions/discuss/41617/Solve-it-using-Union-Find
  */
 final class Week7SurroundedRegions {
     func run() {

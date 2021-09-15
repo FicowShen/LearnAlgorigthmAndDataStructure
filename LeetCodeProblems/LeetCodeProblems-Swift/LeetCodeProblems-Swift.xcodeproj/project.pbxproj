@@ -35,6 +35,7 @@
 		6A10BA8326F0E35D006CE7AC /* Week7 ClimbStairs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA8226F0E35D006CE7AC /* Week7 ClimbStairs.swift */; };
 		6A10BA8526F0E3BD006CE7AC /* Week7 GenerateParentheses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA8426F0E3BD006CE7AC /* Week7 GenerateParentheses.swift */; };
 		6A10BA8726F0E5E6006CE7AC /* Week7 WordLadder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA8626F0E5E6006CE7AC /* Week7 WordLadder.swift */; };
+		6A10BA8926F0E958006CE7AC /* Week7 MinimumGeneticMutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA8826F0E958006CE7AC /* Week7 MinimumGeneticMutation.swift */; };
 		6A42EFB226CBFC0F0030EE32 /* Day16 ReplaceSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB126CBFC0F0030EE32 /* Day16 ReplaceSpace.swift */; };
 		6A42EFB426CC8BF20030EE32 /* Day17 ReversePrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB326CC8BF20030EE32 /* Day17 ReversePrint.swift */; };
 		6A42EFB626CD48F20030EE32 /* Week3 GenerateParentheses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB526CD48F20030EE32 /* Week3 GenerateParentheses.swift */; };
@@ -179,6 +180,7 @@
 		6A10BA8226F0E35D006CE7AC /* Week7 ClimbStairs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 ClimbStairs.swift"; sourceTree = "<group>"; };
 		6A10BA8426F0E3BD006CE7AC /* Week7 GenerateParentheses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Week7 GenerateParentheses.swift"; sourceTree = "<group>"; };
 		6A10BA8626F0E5E6006CE7AC /* Week7 WordLadder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 WordLadder.swift"; sourceTree = "<group>"; };
+		6A10BA8826F0E958006CE7AC /* Week7 MinimumGeneticMutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Week7 MinimumGeneticMutation.swift"; sourceTree = "<group>"; };
 		6A42EFB126CBFC0F0030EE32 /* Day16 ReplaceSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day16 ReplaceSpace.swift"; sourceTree = "<group>"; };
 		6A42EFB326CC8BF20030EE32 /* Day17 ReversePrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day17 ReversePrint.swift"; sourceTree = "<group>"; };
 		6A42EFB526CD48F20030EE32 /* Week3 GenerateParentheses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 GenerateParentheses.swift"; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				6A10BA8226F0E35D006CE7AC /* Week7 ClimbStairs.swift */,
 				6A10BA8426F0E3BD006CE7AC /* Week7 GenerateParentheses.swift */,
 				6A10BA8626F0E5E6006CE7AC /* Week7 WordLadder.swift */,
+				6A10BA8826F0E958006CE7AC /* Week7 MinimumGeneticMutation.swift */,
 			);
 			path = "Week 7";
 			sourceTree = "<group>";
@@ -726,6 +729,7 @@
 				6A59A56426B0DE3E00273E66 /* MaxProfit2.swift in Sources */,
 				6AB35B4226BFC7390026173D /* Week1 LinkedListCycleII.swift in Sources */,
 				6AB35B3C26BE1D780026173D /* Day7 DesignCircularDeque.swift in Sources */,
+				6A10BA8926F0E958006CE7AC /* Week7 MinimumGeneticMutation.swift in Sources */,
 				6A42EFD926D9D7880030EE32 /* Week4 AssignCookies.swift in Sources */,
 				6AB35B1626B594970026173D /* HouseRobber2.swift in Sources */,
 				6A10BA6826EACFD4006CE7AC /* Day40 MaxSumOfRectangleNoLargerThanK.swift in Sources */,
