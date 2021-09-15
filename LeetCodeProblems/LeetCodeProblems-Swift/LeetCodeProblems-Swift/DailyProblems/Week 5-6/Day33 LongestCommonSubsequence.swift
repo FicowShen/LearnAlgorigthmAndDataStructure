@@ -14,11 +14,21 @@ import Foundation
  */
 final class Day33LongestCommonSubsequence {
     func run() {
-        let f = rawDp4
+        let f = dp4
         printAndAssert(result: f("abcde","ace"), expected: 3)
         printAndAssert(result: f("abc", "abc"), expected: 3)
         printAndAssert(result: f("abc", "def"), expected: 0)
         printAndAssert(result: f("bsbininm", "jmjkbkjkv"), expected: 1)
+    }
+
+
+
+
+    func dp6(_ text1: String, _ text2: String) -> Int {
+        fatalError()
+    }
+    func rawDp6(_ text1: String, _ text2: String) -> Int {
+        fatalError()
     }
 
 
@@ -43,7 +53,22 @@ final class Day33LongestCommonSubsequence {
 
 
     func dp4(_ text1: String, _ text2: String) -> Int {
-        fatalError()
+        var a = Array(text1), b = Array(text2)
+        if a.count > b.count { (a, b) = (b, a) }
+        var dp = [Int](repeating: 0, count: b.count + 1)
+        for i in 0..<a.count {
+            var topLeft = 0
+            for j in 1...b.count {
+                let preTopLeft = dp[j]
+                if a[i] == b[j - 1] {
+                    dp[j] = topLeft + 1
+                } else {
+                    dp[j] = max(dp[j], dp[j - 1])
+                }
+                topLeft = preTopLeft
+            }
+        }
+        return dp[b.count]
     }
 
 

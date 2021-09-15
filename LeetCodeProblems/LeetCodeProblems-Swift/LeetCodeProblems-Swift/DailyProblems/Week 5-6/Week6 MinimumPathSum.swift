@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week6MinimumPathSum {
     func run() {
-        let f = dp3
+        let f = rawDP4
         printAndAssert(result: f([[4]]), expected: 4)
         printAndAssert(result: f([[1,3,1]]), expected: 5)
         printAndAssert(result: f([[1],[4]]), expected: 5)
@@ -37,8 +37,20 @@ final class Week6MinimumPathSum {
         fatalError()
     }
 
+
+
+
     func rawDP4(_ grid: [[Int]]) -> Int {
-        fatalError()
+        let m = grid.count, n = grid[0].count
+        var dp = grid
+        for i in 1..<m { dp[i][0] += dp[i - 1][0] }
+        for j in 1..<n { dp[0][j] += dp[0][j - 1] }
+        for i in 1..<m {
+            for j in 1..<n {
+                dp[i][j] += min(dp[i - 1][j], dp[i][j - 1])
+            }
+        }
+        return dp[m - 1][n - 1]
     }
 
 

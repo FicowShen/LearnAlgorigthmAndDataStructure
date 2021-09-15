@@ -12,6 +12,7 @@ import Foundation
  1. Union-Find
  Time: O(n), Space: O(n)
  Traverse only the half of the grid, connecting elements respectively with the Union-Find
+ // https://leetcode-cn.com/problems/bLyHh0/solution/bing-cha-ji-ya-suo-lu-jing-dong-tai-ping-kd2i/
  */
 final class Week7FriendCircles {
     func run() {

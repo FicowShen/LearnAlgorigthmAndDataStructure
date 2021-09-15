@@ -19,7 +19,7 @@ import Foundation
  */
 final class Week6CoinChange {
     func run() {
-        let f = dp3
+        let f = dp4
         printAndAssert(result: f([1,2,5], 11), expected: 3)
         printAndAssert(result: f([2], 3), expected: -1)
         printAndAssert(result: f([1], 0), expected: 0)
@@ -28,6 +28,17 @@ final class Week6CoinChange {
         printAndAssert(result: f([1,2,5], 100), expected: 20)
     }
 
+
+
+
+
+    func dp6(_ coins: [Int], _ amount: Int) -> Int {
+        fatalError()
+    }
+
+    func dfsWithMemo6(_ coins: [Int], _ amount: Int) -> Int {
+        fatalError()
+    }
 
 
 
@@ -42,12 +53,23 @@ final class Week6CoinChange {
 
 
 
-    func dp4(_ coins: [Int], _ amount: Int) -> Int {
+    func dfsWithMemo4(_ coins: [Int], _ amount: Int) -> Int {
         fatalError()
     }
 
-    func dfsWithMemo4(_ coins: [Int], _ amount: Int) -> Int {
-        fatalError()
+
+
+
+    func dp4(_ coins: [Int], _ amount: Int) -> Int {
+        var dp = [Int](repeating: amount + 1, count: amount + 1)
+        dp[0] = 0
+        for i in stride(from: 1, through: amount, by: 1) {
+            for coin in coins {
+                if i < coin { continue }
+                dp[i] = min(dp[i], dp[i - coin] + 1)
+            }
+        }
+        return dp[amount] > amount ? -1 : dp[amount]
     }
 
 

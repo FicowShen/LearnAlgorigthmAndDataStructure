@@ -20,7 +20,7 @@ import Foundation
  */
 final class Week5JumpGameII {
     func run() {
-        let f = greedy4
+        let f = bfs4
         printAndAssert(result: f([0]), expected: 0)
         printAndAssert(result: f([1,0]), expected: 1)
         printAndAssert(result: f([2,1]), expected: 1)
@@ -31,6 +31,22 @@ final class Week5JumpGameII {
     }
 
 
+
+    func bfs6(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+    func greedy6(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+    func dpBackwards6(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+
+
+    
 
     func bfs5(_ nums: [Int]) -> Int {
         fatalError()
@@ -49,8 +65,24 @@ final class Week5JumpGameII {
 
 
 
+
+
+
+
+
     func bfs4(_ nums: [Int]) -> Int {
-        fatalError()
+        if nums.count == 1 { return 0 }
+        var jump = 0, curMax = 0, nextMax = 0, i = 0
+        while curMax - i + 1 > 0 {
+            jump += 1
+            while i <= curMax {
+                nextMax = max(nextMax, i + nums[i])
+                if nextMax >= nums.count - 1 { return jump }
+                i += 1
+            }
+            curMax = nextMax
+        }
+        return 0
     }
 
 
