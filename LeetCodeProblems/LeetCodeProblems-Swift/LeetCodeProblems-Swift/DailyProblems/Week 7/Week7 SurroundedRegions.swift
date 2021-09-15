@@ -23,7 +23,7 @@ import Foundation
  */
 final class Week7SurroundedRegions {
     func run() {
-        let f = unionFind1
+        let f = unionFind2
         func judge(board: [[Character]], expected: [[Character]]) {
             var board = board
             f(&board)
@@ -31,20 +31,186 @@ final class Week7SurroundedRegions {
         }
         judge(board: [["X","X","X","X"],["X","O","O","X"],["X","X","O","X"],["X","O","X","X"]], expected: [["X","X","X","X"],["X","X","X","X"],["X","X","X","X"],["X","O","X","X"]])
         judge(board: [["X"]], expected: [["X"]])
+        judge(board: [["O","X","X","O","X"],["X","O","O","X","O"],["X","O","X","O","X"],["O","X","O","O","O"],["X","X","O","X","O"]], expected: [["O","X","X","O","X"],["X","X","X","X","O"],["X","X","X","O","X"],["O","X","O","O","O"],["X","X","O","X","O"]])
     }
+
+
+
+    func unionFind5(_ board: inout [[Character]]) {
+
+    }
+
+    func bfs5(_ board: inout [[Character]]) {
+
+    }
+
+    func dfs5(_ board: inout [[Character]]) {
+
+    }
+
+
+
+    func unionFind4(_ board: inout [[Character]]) {
+
+    }
+
+    func bfs4(_ board: inout [[Character]]) {
+
+    }
+
+    func dfs4(_ board: inout [[Character]]) {
+
+    }
+
+
 
     func unionFind3(_ board: inout [[Character]]) {
 
     }
 
+    func bfs3(_ board: inout [[Character]]) {
 
+    }
 
-
-    func unionFind2(_ board: inout [[Character]]) {
+    func dfs3(_ board: inout [[Character]]) {
 
     }
 
 
+
+
+
+
+
+
+
+
+    func unionFind2(_ board: inout [[Character]]) {
+        struct UnionFind {
+            private(set) var count: Int
+            private var parent: [Int]
+            private var size: [Int]
+            init(n: Int) {
+                count = n
+                parent = [Int](repeating: 0, count: n)
+                size = parent
+                for i in 0..<n { parent[i] = i }
+            }
+            mutating func unite(_ p: Int, _ q: Int) {
+                let a = parent(p), b = parent(q)
+                if a == b { return }
+                if size[a] > size[b] {
+                    parent[b] = a
+                    size[a] += size[b]
+                } else {
+                    parent[a] = b
+                    size[b] += size[a]
+                }
+                count -= 1
+            }
+            mutating func isConnected(_ p: Int, _ q: Int) -> Bool {
+                parent(p) == parent(q)
+            }
+            private mutating func parent(_ x: Int) -> Int {
+                var x = x
+                while parent[x] != x {
+                    parent[x] = parent[parent[x]]
+                    x = parent[x]
+                }
+                return x
+            }
+        }
+        let Row = board.count, Col = board[0].count
+        let x: Character = "X", o: Character = "O"
+        let drow = [-1, 0, 1, 0], dcol = [0, 1, 0, -1], headIndex = Row * Col
+        var uf = UnionFind(n: headIndex + 1)
+        for row in 0..<Row {
+            for col in 0..<Col {
+                if board[row][col] != o { continue }
+                if row == 0 || col == 0 || row == Row - 1 || col == Col - 1 {
+                    uf.unite(row * Col + col, headIndex)
+                    continue
+                }
+                for i in 0..<drow.count {
+                    let r = row + drow[i], c = col + dcol[i]
+                    if r < 0 || c < 0 || r >= Row || c >= Col { continue }
+                    if board[r][c] != o { continue }
+                    uf.unite(row * Col + col, r * Col + c)
+                }
+            }
+        }
+        for row in 0..<Row {
+            for col in 0..<Col {
+                board[row][col] = (uf.isConnected(row * Col + col, headIndex) ? o : x)
+            }
+        }
+    }
+
+    func bfs2(_ board: inout [[Character]]) {
+        let Row = board.count, Col = board[0].count
+        let x: Character = "X", o: Character = "O", flag: Character = "#"
+        let drow = [-1, 0, 1, 0], dcol = [0, 1, 0, -1]
+        func bfs(row: Int, col: Int) {
+            if board[row][col] != o { return }
+            board[row][col] = flag
+            var q = [[row, col]]
+            while !q.isEmpty {
+                var next = [[Int]]()
+                for pos in q {
+                    let row = pos[0], col = pos[1]
+                    for i in 0..<drow.count {
+                        let r = row + drow[i], c = col + dcol[i]
+                        if r < 0 || c < 0 || r >= Row || c >= Col { continue }
+                        if board[r][c] != o { continue }
+                        board[r][c] = flag
+                        next.append([r, c])
+                    }
+                }
+                q = next
+            }
+        }
+        for row in 0..<Row {
+            bfs(row: row, col: 0)
+            bfs(row: row, col: Col - 1)
+        }
+        for col in 0..<Col {
+            bfs(row: 0, col: col)
+            bfs(row: Row - 1, col: col)
+        }
+        for row in 0..<Row {
+            for col in 0..<Col {
+                board[row][col] = (board[row][col] == flag ? o : x)
+            }
+        }
+    }
+
+    func dfs2(_ board: inout [[Character]]) {
+        let Row = board.count, Col = board[0].count
+        let x: Character = "X", o: Character = "O", flag: Character = "#"
+        let drow = [-1, 0, 1, 0], dcol = [0, 1, 0, -1]
+        func dfs(row: Int, col: Int) {
+            if board[row][col] != o { return }
+            board[row][col] = flag
+            for i in 0..<drow.count {
+                let r = row + drow[i], c = col + dcol[i]
+                if r < 0 || c < 0 || r >= Row || c >= Col { continue }
+                dfs(row: r, col: c)
+            }
+        }
+        for row in 0..<Row {
+            dfs(row: row, col: 0)
+            dfs(row: row, col: Col - 1)
+        }
+        for col in 0..<Col {
+            dfs(row: 0, col: col)
+            dfs(row: Row - 1, col: col)
+        }
+        for row in 0..<Row {
+            for col in 0..<Col {
+                board[row][col] = (board[row][col] == flag ? o : x)
+            }
+        }
+    }
 
 
 
