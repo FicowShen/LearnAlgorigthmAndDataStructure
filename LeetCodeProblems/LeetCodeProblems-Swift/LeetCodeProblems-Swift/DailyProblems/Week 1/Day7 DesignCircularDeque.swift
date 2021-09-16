@@ -43,7 +43,7 @@ final class Day7DesignCircularDeque {
             (0...10).forEach { _ in _ = deque.deleteLast() }
             assert(deque.getRear() == -1)
         }
-        judge(Deque: CircularDequeWithArray3.self)
+        judge(Deque: CircularDequeWithNodes4.self)
     }
 }
 
@@ -78,32 +78,66 @@ class CircularDequeWithArray4: CircularDequeConvertible {
 }
 
 class CircularDequeWithNodes4: CircularDequeConvertible {
+    private var front = DoubleLinkedNode(), rear = DoubleLinkedNode()
+    private var size = 0, capacity = 0
     required init(_ k: Int) {
-        fatalError()
+        capacity = k
+        front.next = rear
+        rear.pre = front
     }
+    private func increaseSize() { size += 1 }
+    private func decreaseSize() { size -= 1 }
     func insertFront(_ value: Int) -> Bool {
-        fatalError()
+        if isFull() { return false }
+        let right = front.next
+        let new = DoubleLinkedNode(value)
+        front.next = new
+        new.pre = front
+        new.next = right
+        right?.pre = new
+        increaseSize()
+        return true
     }
     func insertLast(_ value: Int) -> Bool {
-        fatalError()
+        if isFull() { return false }
+        let left = rear.pre
+        let new = DoubleLinkedNode(value)
+        left?.next = new
+        new.pre = left
+        new.next = rear
+        rear.pre = new
+        increaseSize()
+        return true
     }
     func deleteFront() -> Bool {
-        fatalError()
+        if isEmpty() { return false }
+        let right = front.next?.next
+        right?.pre = front
+        front.next = right
+        decreaseSize()
+        return true
     }
     func deleteLast() -> Bool {
-        fatalError()
+        if isEmpty() { return false }
+        let left = rear.pre?.pre
+        left?.next = rear
+        rear.pre = left
+        decreaseSize()
+        return true
     }
     func getFront() -> Int {
-        fatalError()
+        if isEmpty() { return -1 }
+        return front.next!.value
     }
     func getRear() -> Int {
-        fatalError()
+        if isEmpty() { return -1 }
+        return rear.pre!.value
     }
     func isEmpty() -> Bool {
-        fatalError()
+        size == 0
     }
     func isFull() -> Bool {
-        fatalError()
+        size == capacity
     }
 }
 

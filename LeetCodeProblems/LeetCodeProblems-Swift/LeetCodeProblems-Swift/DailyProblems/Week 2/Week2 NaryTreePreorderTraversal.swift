@@ -16,7 +16,7 @@ import Foundation
  */
 final class Week2NaryTreePreorderTraversal {
     func run() {
-        let f = recursion2
+        let f = recursion3
         func judge(_ nodes: [Int?], expected: [Int]) {
             let node = Node.fromLevelValues(nodes)
             printAndAssert(result: f(node), expected: expected)
@@ -26,10 +26,23 @@ final class Week2NaryTreePreorderTraversal {
               expected: [1,2,3,6,7,11,14,4,8,12,5,9,13,10])
     }
 
+    
 
-    func recursion3(_ root: Node?) -> [Int] {
+    func recursion4(_ root: Node?) -> [Int] {
         fatalError()
     }
+
+    func genericStack4(_ root: Node?) -> [Int] {
+        fatalError()
+    }
+
+    func reversedStack4(_ root: Node?) -> [Int] {
+        fatalError()
+    }
+
+
+
+
 
     func genericStack3(_ root: Node?) -> [Int] {
         fatalError()
@@ -38,6 +51,21 @@ final class Week2NaryTreePreorderTraversal {
     func reversedStack3(_ root: Node?) -> [Int] {
         fatalError()
     }
+
+    func recursion3(_ root: Node?) -> [Int] {
+        var ans = [Int]()
+        func postorder(_ root: Node?) {
+            guard let root = root else { return }
+            ans.append(root.val)
+            root.children.forEach { postorder($0) }
+        }
+        postorder(root)
+        return ans
+    }
+
+
+
+
 
 
 

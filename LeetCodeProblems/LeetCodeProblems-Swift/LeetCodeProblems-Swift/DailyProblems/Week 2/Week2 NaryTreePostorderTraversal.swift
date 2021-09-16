@@ -10,7 +10,7 @@ import Foundation
 // https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/
 final class Week2NaryTreePostorderTraversal {
     func run() {
-        let f = genericStack2
+        let f = recursion3
         func judge(_ nodes: [Int?], expected: [Int]) {
             let node = Node.fromLevelValues(nodes)
             printAndAssert(result: f(node), expected: expected)
@@ -19,6 +19,22 @@ final class Week2NaryTreePostorderTraversal {
         judge([1,nil,2,3,4,5,nil,nil,6,7,nil,8,nil,9,10,nil,nil,11,nil,12,nil,13,nil,nil,14],
               expected: [2,6,14,11,7,3,12,8,4,13,9,10,5,1])
     }
+
+
+
+
+    func genericStack4(_ root: Node?) -> [Int] {
+        fatalError()
+    }
+
+    func reversedPreorder4(_ root: Node?) -> [Int] {
+        fatalError()
+    }
+
+    func recursion4(_ root: Node?) -> [Int] {
+        fatalError()
+    }
+
 
 
 
@@ -32,7 +48,14 @@ final class Week2NaryTreePostorderTraversal {
     }
 
     func recursion3(_ root: Node?) -> [Int] {
-        fatalError()
+        var ans = [Int]()
+        func postorder(_ root: Node?) {
+            guard let root = root else { return }
+            root.children.forEach { postorder($0) }
+            ans.append(root.val)
+        }
+        postorder(root)
+        return ans
     }
 
 

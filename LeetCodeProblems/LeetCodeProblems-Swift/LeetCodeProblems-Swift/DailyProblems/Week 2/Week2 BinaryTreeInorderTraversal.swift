@@ -10,7 +10,7 @@ import Foundation
 // https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
 final class Week2BinaryTreeInorderTraversal {
     func run() {
-        let f = inorderTraversalWithMorris3
+        let f = inorderTraversalWithRecursion4
         func judge(nodes: [Int?], expected: [Int]) {
             let root = TreeNode.fromPerfectBinaryTreeLevelNodes(nodes)
             printAndAssert(result: f(root), expected: expected)
@@ -20,6 +20,30 @@ final class Week2BinaryTreeInorderTraversal {
         judge(nodes: [1], expected: [1])
         judge(nodes: [1,2,3], expected: [2,1,3])
     }
+
+
+
+    func inorderTraversalWithMorris5(_ root: TreeNode?) -> [Int] {
+        fatalError()
+    }
+
+    func inorderTraversalWithMixedStack5(_ root: TreeNode?) -> [Int] {
+        fatalError()
+    }
+
+    func inorderTraversalWithTaggedStack5(_ root: TreeNode?) -> [Int] {
+        fatalError()
+    }
+
+    func inorderTraversalWithStack5(_ root: TreeNode?) -> [Int] {
+        fatalError()
+    }
+
+    func inorderTraversalWithRecursion5(_ root: TreeNode?) -> [Int] {
+        fatalError()
+    }
+
+
 
 
 
@@ -40,7 +64,15 @@ final class Week2BinaryTreeInorderTraversal {
     }
 
     func inorderTraversalWithRecursion4(_ root: TreeNode?) -> [Int] {
-        fatalError()
+        var ans = [Int]()
+        func inorder(_ root: TreeNode?) {
+            guard let root = root else { return }
+            inorder(root.left)
+            ans.append(root.val)
+            inorder(root.right)
+        }
+        inorder(root)
+        return ans
     }
 
 
