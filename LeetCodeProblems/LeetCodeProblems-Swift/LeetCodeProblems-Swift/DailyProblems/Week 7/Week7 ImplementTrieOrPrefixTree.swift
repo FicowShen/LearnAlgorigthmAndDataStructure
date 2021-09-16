@@ -9,10 +9,25 @@ import Foundation
 
 /*
  https://leetcode-cn.com/problems/implement-trie-prefix-tree/
+ Solution:
+ https://leetcode.com/problems/implement-trie-prefix-tree/solution/
+
+ Complexity:
+ - Time: O(m), the length of the searching word
+ - Space: O(1) 
+
+ Properties:
+ - isEnd: Bool
+ - children: [Character: Trie]
+
+ Use cases:
+ - search autocomplete
+ - spell checker
+ - IP routing
  */
 final class Week7ImplementTrieOrPrefixTree {
     func run() {
-        let trie = Trie3()
+        let trie = Trie4.Trie()
         trie.insert("apple")
         printAndAssert(result: trie.search("apple"), expected: true)
         printAndAssert(result: trie.search("app"), expected: false)
@@ -23,42 +38,82 @@ final class Week7ImplementTrieOrPrefixTree {
 
 
 
-    final class Trie5 {
-        init() {
+    enum Trie6 {
+        final class Trie {
+            init() {
 
-        }
+            }
 
-        func insert(_ word: String) {
+            func insert(_ word: String) {
 
-        }
+            }
 
-        func search(_ word: String) -> Bool {
-            fatalError()
-        }
+            func search(_ word: String) -> Bool {
+                fatalError()
+            }
 
-        func startsWith(_ prefix: String) -> Bool {
-            fatalError()
+            func startsWith(_ prefix: String) -> Bool {
+                fatalError()
+            }
         }
     }
 
 
+    enum Trie5 {
+        final class Trie {
+            init() {
 
+            }
 
-    final class Trie4 {
-        init() {
+            func insert(_ word: String) {
 
+            }
+
+            func search(_ word: String) -> Bool {
+                fatalError()
+            }
+
+            func startsWith(_ prefix: String) -> Bool {
+                fatalError()
+            }
         }
+    }
 
-        func insert(_ word: String) {
 
-        }
+    enum Trie4 {
+        final class Trie {
+            var isEnd = false, children = [Character: Trie]()
+            func insert(_ word: String) {
+                var node = self
+                for c in word {
+                    if let n = node.children[c] {
+                        node = n
+                    } else {
+                        let new = Trie()
+                        node.children[c] = new
+                        node = new
+                    }
+                }
+                node.isEnd = true
+            }
+            private func lastNode(_ s: String) -> Trie? {
+                var node = self
+                for c in s {
+                    if let n = node.children[c] {
+                        node = n
+                    } else {
+                        return nil
+                    }
+                }
+                return node
+            }
+            func search(_ word: String) -> Bool {
+                lastNode(word)?.isEnd ?? false
+            }
 
-        func search(_ word: String) -> Bool {
-            fatalError()
-        }
-
-        func startsWith(_ prefix: String) -> Bool {
-            fatalError()
+            func startsWith(_ prefix: String) -> Bool {
+                lastNode(prefix) != nil
+            }
         }
     }
 
