@@ -13,10 +13,16 @@ import Foundation
  Time: O(n!), Space: O(n)
  https://leetcode-cn.com/problems/n-queens/solution/nhuang-hou-by-leetcode-solution/
 
+ 2. backtrack with bit operation
+ Time: O(n!), Space: O(n)
+
+ x & (−x) 可以获得 x 的二进制表示中的最低位的 1 的位置；
+ x & (x−1) 可以将 x 的二进制表示中的最低位的 1 置成 0。
+ 负数的补码：https://blog.csdn.net/qq20004604/article/details/50130921
  */
 final class Week7NQueens {
     func run() {
-        let f = backtrackWithSet2
+        let f = backtrackWithBitOperation1
         func judge(n: Int, expected: [[String]]) {
             printAndAssert(result: Set(f(n)), expected: Set(expected))
         }
@@ -91,7 +97,42 @@ final class Week7NQueens {
 
 
     func backtrackWithSet3(_ n: Int) -> [[String]] {
-        fatalError()
+        var cols = Set<Int>(), diagonals1 = cols, diagonals2 = cols
+        var ans = [[String]](), queens = [Int](repeating: -1, count: n)
+        let rawBoardRow = [Character](repeating: ".", count: n)
+        func makeBoard() -> [String] {
+            var board = [String]()
+            for i in 0..<n {
+                var row = rawBoardRow
+                row[queens[i]] = "Q"
+                board.append(String(row))
+            }
+            return board
+        }
+        func backtrack(row: Int) {
+            if row == n {
+                ans.append(makeBoard())
+                return
+            }
+            for col in 0..<n {
+                if cols.contains(col) { continue }
+                let d1 = row - col
+                if diagonals1.contains(d1) { continue }
+                let d2 = row + col
+                if diagonals2.contains(d2) { continue }
+                queens[row] = col
+                cols.insert(col)
+                diagonals1.insert(d1)
+                diagonals2.insert(d2)
+                backtrack(row: row + 1)
+                queens[row] = -1
+                cols.remove(col)
+                diagonals1.remove(d1)
+                diagonals2.remove(d2)
+            }
+        }
+        backtrack(row: 0)
+        return ans
     }
 
 
@@ -161,7 +202,44 @@ final class Week7NQueens {
 
 
     func backtrackWithBitOperation1(_ n: Int) -> [[String]] {
-        fatalError()
+        var queens = [Int](repeating: -1, count: n), ans = [[String]]()
+        func makeBoard() -> [String] {
+            var res = [String]()
+            for i in 0..<n {
+                var row = [Character](repeating: ".", count: n)
+                row[queens[i]] = "Q"
+                res.append(String(row))
+            }
+            return res
+        }
+        func bitCount(_ x: Int) -> Int {
+            var x = x, count = 0
+            while x != 0 {
+                x &= (x - 1)
+                count += 1
+            }
+            return count
+        }
+        func backtrack(row: Int, columns: Int, diagonals1: Int, diagonals2: Int) {
+            if row == n {
+                ans.append(makeBoard())
+                return
+            }
+            var availablePositions = ((1 << n) - 1) & (~(columns | diagonals1 | diagonals2))
+            while availablePositions != 0 {
+                let pos = availablePositions & (-availablePositions)
+                availablePositions = availablePositions & (availablePositions - 1)
+                let column = bitCount(pos - 1)
+                queens[row] = column
+                backtrack(row: row + 1,
+                          columns: columns | pos,
+                          diagonals1: (diagonals1 | pos) << 1,
+                          diagonals2: (diagonals2 | pos) >> 1)
+                queens[row] = -1
+            }
+        }
+        backtrack(row: 0, columns: 0, diagonals1: 0, diagonals2: 0)
+        return ans
     }
 
 
