@@ -1,24 +1,28 @@
 //
-//  Week3 BinaryTreeMaxDepth.swift
+//  Week3 BinaryTreeMinDepth.swift
 //  LeetCodeProblems-Swift
 //
-//  Created by Ficow on 2021/8/22.
+//  Created by FicowShen on 2021/9/18.
 //
 
 import Foundation
 
 /*
- https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
+ https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/
  1. recursion
  2. dfs with level
  3. bfs
  */
-final class Week3BinaryTreeMaxDepth {
+final class Week3BinaryTreeMinDepth {
     func run() {
-        let f = recurse2
-        let nodes = [3,9,20,nil,nil,15,7]
-        let tree = TreeNode.fromPerfectBinaryTreeLevelNodes(nodes)
-        printAndAssert(result: f(tree), expected: 3)
+        let f = dfsWithLevel1
+        var levelNodes = [3,9,20,nil,nil,15,7]
+        var tree = TreeNode.fromPerfectBinaryTreeLevelNodes(levelNodes)
+        printAndAssert(result: f(tree), expected: 2)
+
+        levelNodes = [2,nil,3,nil,4,nil,5,nil,6]
+        tree = TreeNode.fromPerfectBinaryTreeLevelNodes(levelNodes)
+        printAndAssert(result: f(tree), expected: 5)
     }
 
 
@@ -76,10 +80,7 @@ final class Week3BinaryTreeMaxDepth {
     }
 
     func recurse2(_ root: TreeNode?) -> Int {
-        func f(_ root: TreeNode?) -> Int {
-            root == nil ? 0 : max(f(root?.left), f(root?.right)) + 1
-        }
-        return f(root)
+        fatalError()
     }
 
 
@@ -87,35 +88,35 @@ final class Week3BinaryTreeMaxDepth {
 
 
     func bfs1(_ root: TreeNode?) -> Int {
-        guard let r = root else { return 0 }
-        var q = [r], level = 0
-        while !q.isEmpty {
-            let nodes = q
-            q = []
-            for node in nodes {
-                if let l = node.left { q.append(l) }
-                if let r = node.right { q.append(r) }
-            }
-            level += 1
-        }
-        return level
+        fatalError()
     }
 
     func dfsWithLevel1(_ root: TreeNode?) -> Int {
-        var maxLevel = 0
+        if root == nil { return 0 }
+        var ans = Int.max
         func f(_ root: TreeNode?, level: Int) {
             guard let root = root else { return }
-            maxLevel = max(level, maxLevel)
-            f(root.left, level: level + 1)
-            f(root.right, level: level + 1)
+            if let left = root.left {
+                f(left, level: level + 1)
+            }
+            if let right = root.right {
+                f(right, level: level + 1)
+            }
+            if root.left == nil && root.right == nil {
+                ans = min(ans, level)
+            }
         }
         f(root, level: 1)
-        return maxLevel
+        return ans
     }
 
     func recurse1(_ root: TreeNode?) -> Int {
         func f(_ root: TreeNode?) -> Int {
-            root == nil ? 0 : max(f(root?.left), f(root?.right)) + 1
+            guard let root = root else { return 0 }
+            guard let left = root.left, let right = root.right else {
+                return (root.left != nil ? f(root.left) : f(root.right)) + 1
+            }
+            return min(f(left), f(right)) + 1
         }
         return f(root)
     }

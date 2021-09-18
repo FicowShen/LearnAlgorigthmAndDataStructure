@@ -16,6 +16,10 @@ extension TreeProblems {
         levelNodes = [2,nil,3,nil,4,nil,5,nil,6]
         tree = TreeNode.fromPerfectBinaryTreeLevelNodes(levelNodes)
         printAndAssert(result: minDepth(tree), expected: 5)
+
+        levelNodes = []
+        tree = TreeNode.fromPerfectBinaryTreeLevelNodes(levelNodes)
+        printAndAssert(result: minDepth(tree), expected: 0)
     }
 
     // https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/
