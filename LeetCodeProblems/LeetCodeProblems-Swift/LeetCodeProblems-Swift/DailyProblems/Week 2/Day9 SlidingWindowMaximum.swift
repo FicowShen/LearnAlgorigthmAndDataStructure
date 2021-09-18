@@ -10,7 +10,7 @@ import Foundation
 // https://leetcode-cn.com/problems/sliding-window-maximum/
 final class Day9SlidingWindowMaximum {
     func run() {
-        let f = maxSlidingWindow4
+        let f = maxSlidingWindow5
         func judge(_ nums: [Int], _ k: Int, expected: [Int]) {
             printAndAssert(result: f(nums, k), expected: expected)
         }
@@ -20,6 +20,27 @@ final class Day9SlidingWindowMaximum {
         judge([9,11], 2, expected: [11])
         judge([4,-2], 2, expected: [4])
         judge([7,2,4], 2, expected: [7,4])
+    }
+
+
+
+
+    func maxSlidingWindow10(_ nums: [Int], _ k: Int) -> [Int] {
+        fatalError()
+    }
+
+
+
+
+    func maxSlidingWindow9(_ nums: [Int], _ k: Int) -> [Int] {
+        fatalError()
+    }
+
+
+
+
+    func maxSlidingWindow8(_ nums: [Int], _ k: Int) -> [Int] {
+        fatalError()
     }
 
 
@@ -36,34 +57,48 @@ final class Day9SlidingWindowMaximum {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func maxSlidingWindow5(_ nums: [Int], _ k: Int) -> [Int] {
-        fatalError()
+        let n = nums.count
+        var head = 0, tail = -1
+        var q = [Int](repeating: 0, count: n), ans = [Int]()
+        for i in 0..<n {
+            // remove invalid values from head
+            while head <= tail, q[head] <= i - k { head += 1 }
+            // remove smaller values from tail, ensure the head is the biggest
+            while head <= tail, nums[i] >= nums[q[tail]] { tail -= 1 }
+            // insert current value to the tail
+            tail += 1
+            q[tail] = i
+            // add the head to the result
+            if i >= k - 1 { ans.append(nums[q[head]]) }
+        }
+        return ans
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

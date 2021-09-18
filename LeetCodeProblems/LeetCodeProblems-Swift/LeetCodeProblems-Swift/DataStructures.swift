@@ -297,6 +297,8 @@ struct BinaryHeap {
         return maxElement
     }
 
+    /// Adjusts the last number, move it up if it's bigger than its children.
+    /// - Parameter index: The end index of the heap
     private mutating func heapifyUp(_ index: Int) {
         var i = index
         let insertValue = heap[i]
@@ -307,6 +309,8 @@ struct BinaryHeap {
         heap[i] = insertValue
     }
 
+    /// Adjusts the first number, move it down if it's smaller than its children.
+    /// - Parameter index: The start index of the heap
     private mutating func heapifyDown(_ index: Int) {
         var i = index, child = 0, temp = heap[i]
         while kthChild(i, 1) < heapSize {

@@ -7,16 +7,47 @@
 
 import Foundation
 
-// https://leetcode-cn.com/problems/remove-outermost-parentheses/
+/*
+ https://leetcode-cn.com/problems/remove-outermost-parentheses/
+ 1. stack
+
+ 2. counter
+ */
 final class Day10RemoveOutermostParentheses {
     func run() {
+        let f = stack4
         func judge(_ s: String, expected: String) {
-            printAndAssert(result: counte3(s), expected: expected)
+            printAndAssert(result: f(s), expected: expected)
         }
         judge("(()())(())", expected: "()()()")
         judge("(()())(())(()(()))", expected: "()()()()(())")
         judge("()()", expected: "")
     }
+
+
+
+
+    func counter7(_ s: String) -> String {
+        fatalError()
+    }
+
+    func stack7(_ s: String) -> String {
+        fatalError()
+    }
+
+
+
+
+    func counter6(_ s: String) -> String {
+        fatalError()
+    }
+
+    func stack6(_ s: String) -> String {
+        fatalError()
+    }
+
+
+
 
     func counter5(_ s: String) -> String {
         fatalError()
@@ -26,12 +57,24 @@ final class Day10RemoveOutermostParentheses {
         fatalError()
     }
 
+
+
+
     func counter4(_ s: String) -> String {
         fatalError()
     }
 
     func stack4(_ s: String) -> String {
-        fatalError()
+        var open = Character("("),
+            close = Character(")"),
+            ans = ""
+        var stack = [Character]()
+        for c in s {
+            if c == close { stack.removeLast() }
+            if !stack.isEmpty { ans.append(c) }
+            if c == open { stack.append(c) }
+        }
+        return ans
     }
 
 

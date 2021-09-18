@@ -7,16 +7,51 @@
 
 import Foundation
 
-// https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/
+/*
+ https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/
+ 1. sort and get first k numbers
+ Time: O(nlogn), Space: O(1)
+
+ 2. priority queue
+ insert k numbers into the priority queue,
+ then iterate the rest and compare those with the top value of the priority queue,
+ finally, return the least k numbers
+ Time: O(nlogk), Space: O(k)
+
+ 3. partition(quick sort)
+ Time: O(n), Space: O(logn)
+ */
 final class Week2GetLeastNumbers {
     func run() {
-        let f = quickSort4
+        let f = heap4
         func judge(_ arr: [Int], _ k: Int, expected: [Int]) {
             printAndAssert(result: Set(f(arr, k)), expected: Set(expected))
         }
         judge([], 0, expected: [])
+        judge([3,2,1], 2, expected: [2,1])
         judge([3,1,5,4,3,0,9], 2, expected: [0,1])
         judge([3,1,5,4,3,0,9], 4, expected: [0,1,3,3])
+    }
+
+
+
+
+    func heap7(_ arr: [Int], _ k: Int) -> [Int] {
+        fatalError()
+    }
+
+    func quickSort7(_ arr: [Int], _ k: Int) -> [Int] {
+        fatalError()
+    }
+
+
+
+    func heap6(_ arr: [Int], _ k: Int) -> [Int] {
+        fatalError()
+    }
+
+    func quickSort6(_ arr: [Int], _ k: Int) -> [Int] {
+        fatalError()
     }
 
 
@@ -32,8 +67,72 @@ final class Week2GetLeastNumbers {
 
 
 
+
+
     func heap4(_ arr: [Int], _ k: Int) -> [Int] {
-        fatalError()
+        struct BinaryHeap {
+            private var size = 0, capacity = 0, heap = [Int]()
+            private var last: Int { size - 1 } // heap[size] is invalid
+            var top: Int { heap[0] }
+            var isEmpty: Bool { size == 0 }
+            var isFull: Bool { size == capacity }
+            init(capacity: Int) {
+                self.capacity = capacity
+                // one more position for validating the full status
+                self.heap = [Int](repeating: 0, count: capacity + 1)
+            }
+            mutating func insert(_ x: Int) {
+                if isFull { fatalError() }
+                heap[size] = x
+                size += 1
+                heapifyUp(last)
+            }
+            mutating func pop() -> Int {
+                if isEmpty { fatalError() }
+                let top = top
+                heap[0] = heap[last]
+                size -= 1
+                heapifyDown()
+                return top
+            }
+            private mutating func heapifyUp(_ index: Int) {
+                func parent(_ i: Int) -> Int { (i - 1) >> 1 }
+                var i = index, v = heap[i]
+                while i > 0, heap[parent(i)] < v {
+                    heap[i] = heap[parent(i)]
+                    i = parent(i)
+                }
+                heap[i] = v
+            }
+            private mutating func heapifyDown() {
+                func nthChild(_ i: Int, _ k: Int) -> Int { i << 1 + k }
+                func maxChild(_ i: Int) -> Int {
+                    let l = nthChild(i, 1), r = nthChild(i, 2)
+                    return heap[l] > heap[r] ? l : r
+                }
+                var i = 0, v = top
+                while nthChild(i, 1) < size {
+                    let child = maxChild(i)
+                    if v >= heap[child] { break }
+                    heap[i] = heap[child]
+                    i = child
+                }
+                heap[i] = v
+            }
+        }
+        if arr.isEmpty || k == 0 { return [] }
+        var q = BinaryHeap(capacity: k)
+        for i in 0..<k {
+            q.insert(arr[i])
+        }
+        for i in k..<arr.count {
+            let num = arr[i]
+            if num < q.top {
+                _ = q.pop()
+                q.insert(num)
+            }
+        }
+        return (0..<k).map { _ in q.pop() }
     }
 
     func quickSort4(_ arr: [Int], _ k: Int) -> [Int] {

@@ -10,18 +10,35 @@ import Foundation
 // https://leetcode-cn.com/problems/fizz-buzz/
 final class Day11FizzBuzz {
     func run() {
-        let f = concatWithPairs3
+        let f = concat4
         printAndAssert(result: f(3), expected: ["1","2","Fizz"])
         printAndAssert(result: f(5), expected: ["1","2","Fizz","4","Buzz"])
     }
 
 
 
-    func concatenateWithPairs4(_ n: Int) -> [String] {
+
+    func concatenateWithPairs5(_ n: Int) -> [String] {
         fatalError()
     }
 
-    func concatenate4(_ n: Int) -> [String] {
+    func rewrite5(_ n: Int) -> [String] {
+        fatalError()
+    }
+
+    func countFizzBuzz5(_ n: Int) -> [String] {
+        fatalError()
+    }
+
+    func concat5(_ n: Int) -> [String] {
+        fatalError()
+    }
+
+
+
+
+
+    func concatenateWithPairs4(_ n: Int) -> [String] {
         fatalError()
     }
 
@@ -32,6 +49,21 @@ final class Day11FizzBuzz {
     func countFizzBuzz4(_ n: Int) -> [String] {
         fatalError()
     }
+
+    func concat4(_ n: Int) -> [String] {
+        var ans = [String]()
+        for i in 1...n {
+            var s = ""
+            if i % 3 == 0 { s += "Fizz" }
+            if i % 5 == 0 { s += "Buzz" }
+            ans.append(s.isEmpty ? i.description : s)
+        }
+        return ans
+    }
+
+
+
+
 
 
 

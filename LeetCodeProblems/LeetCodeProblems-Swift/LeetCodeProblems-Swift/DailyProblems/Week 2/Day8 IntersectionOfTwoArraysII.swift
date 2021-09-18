@@ -7,17 +7,46 @@
 
 import Foundation
 
-// https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/
+/*
+ https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/
+ 1. use dict to count numbers for nums1, then reduce for nums2 and get the result
+ Time: O(n), Space: O(n)
+ */
 final class Day8IntersectionOfTwoArraysII {
     func run() {
+        let f = intersectWithDict4
         func judge(_ nums1: [Int], _ nums2: [Int], expected: [Int]) {
-            let result = intersectWithPointers3(nums1, nums2)
+            let result = f(nums1, nums2)
             printAndAssert(result: result.count, expected: expected.count)
             printAndAssert(result: Set(result), expected: Set(expected))
         }
         judge([1,2,2,1], [2,2], expected: [2,2])
         judge([4,9,5], [9,4,9,8,4], expected: [4,9])
     }
+
+
+
+    func intersectWithPointers7(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        fatalError()
+    }
+
+    func intersectWithDict7(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        fatalError()
+    }
+
+
+
+    func intersectWithPointers6(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        fatalError()
+    }
+
+    func intersectWithDict6(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        fatalError()
+    }
+
+
+
+
 
     func intersectWithPointers5(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
         fatalError()
@@ -27,13 +56,26 @@ final class Day8IntersectionOfTwoArraysII {
         fatalError()
     }
 
+
+
+
     func intersectWithPointers4(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
         fatalError()
     }
 
     func intersectWithDict4(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
-        fatalError()
+        var dict = [Int: Int](), ans = [Int]()
+        for num in nums1 { dict[num, default: 0] += 1 }
+        for num in nums2 {
+            if let count = dict[num], count > 0 {
+                dict[num] = count - 1
+                ans.append(num)
+            }
+        }
+        return ans
     }
+
+
 
 
     func intersectWithPointers3(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
