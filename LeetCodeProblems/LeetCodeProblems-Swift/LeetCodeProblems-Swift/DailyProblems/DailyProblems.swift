@@ -18,6 +18,7 @@ final class DailyProblems {
     }
 
     static func week7() {
+        Week7ValidSudoku().run()
         Week7NQueens().run()
         Week7FriendCircles().run()
         Week7MinimumGeneticMutation().run()
