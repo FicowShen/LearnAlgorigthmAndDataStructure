@@ -12,17 +12,20 @@ import Foundation
  1. backtrack with set
  Time: O(n!), Space: O(n)
  https://leetcode-cn.com/problems/n-queens/solution/nhuang-hou-by-leetcode-solution/
+ Note:
+ diagonal1 = row - col
+ diagonal2 = row + col
 
  2. backtrack with bit operation
  Time: O(n!), Space: O(n)
-
+ Note:
  x & (−x) 可以获得 x 的二进制表示中的最低位的 1 的位置；
  x & (x−1) 可以将 x 的二进制表示中的最低位的 1 置成 0。
  负数的补码：https://blog.csdn.net/qq20004604/article/details/50130921
  */
 final class Week7NQueens {
     func run() {
-        let f = backtrackWithBitOperation1
+        let f = backtrackWithBitOperation3
         func judge(n: Int, expected: [[String]]) {
             printAndAssert(result: Set(f(n)), expected: Set(expected))
         }
@@ -92,7 +95,46 @@ final class Week7NQueens {
 
 
     func backtrackWithBitOperation3(_ n: Int) -> [[String]] {
-        fatalError()
+        var queens = [Int](repeating: -1, count: n), ans = [[String]]()
+        let rawBoardRow = [Character](repeating: ".", count: n)
+        func makeBoard() -> [String] {
+            var board = [String]()
+            for i in 0..<n {
+                var row = rawBoardRow
+                row[queens[i]] = "Q"
+                board.append(String(row))
+            }
+            return board
+        }
+        func bitCount(_ x: Int) -> Int {
+            var x = x, count = 0
+            while x > 0 {
+                x &= (x - 1)
+                count += 1
+            }
+            return count
+        }
+        func backtrack(row: Int, cols: Int, diagonals1: Int, diagonals2: Int) {
+            if row == n {
+                ans.append(makeBoard())
+                return
+            }
+            let d1 = diagonals1, d2 = diagonals2
+            var validPos = ((1 << n) - 1) & (~(cols | d1 | d2))
+            while validPos != 0 {
+                let pos = validPos & (-validPos)
+                validPos &= (validPos - 1)
+                let col = bitCount(pos - 1)
+                queens[row] = col
+                backtrack(row: row + 1,
+                          cols: cols | pos,
+                          diagonals1: (d1 | pos) << 1,
+                          diagonals2: (d2 | pos) >> 1)
+                queens[row] = -1
+            }
+        }
+        backtrack(row: 0, cols: 0, diagonals1: 0, diagonals2: 0)
+        return ans
     }
 
 
@@ -147,7 +189,47 @@ final class Week7NQueens {
 
 
     func backtrackWithBitOperation2(_ n: Int) -> [[String]] {
-        fatalError()
+        var queens = [Int](repeating: -1, count: n), ans = [[String]]()
+        let rawBoardRow = [Character](repeating: ".", count: n)
+        func makeBoard() -> [String] {
+            var board = [String]()
+            for i in 0..<n {
+                var row = rawBoardRow
+                row[queens[i]] = "Q"
+                board.append(String(row))
+            }
+            return board
+        }
+        func bitCount(_ x: Int) -> Int {
+            var x = x, count = 0
+            while x > 0 {
+                x &= (x - 1)
+                count += 1
+            }
+            return count
+        }
+        func backtrack(row: Int, cols: Int, diagonals1: Int, diagonals2: Int) {
+            if row == n {
+                ans.append(makeBoard())
+                return
+            }
+            let d1 = diagonals1, d2 = diagonals2
+            var validPos = ((1 << n) - 1) & (~(cols | d1 | d2))
+            while validPos != 0 {
+                let pos = validPos & (-validPos) // pos: the last binary 1
+                validPos &= (validPos - 1) // remove the last binary 1
+                let col = bitCount(pos - 1) // get the index of the pos
+                queens[row] = col
+                // record this new pos and move diagonals for the next row
+                backtrack(row: row + 1,
+                          cols: cols | pos,
+                          diagonals1: (d1 | pos) << 1,
+                          diagonals2: (d2 | pos) >> 1)
+                queens[row] = -1
+            }
+        }
+        backtrack(row: 0, cols: 0, diagonals1: 0, diagonals2: 0)
+        return ans
     }
 
 
