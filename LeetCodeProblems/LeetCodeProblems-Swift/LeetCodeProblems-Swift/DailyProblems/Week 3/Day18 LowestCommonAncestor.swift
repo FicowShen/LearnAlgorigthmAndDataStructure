@@ -7,10 +7,17 @@
 
 import Foundation
 
-// https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/
+/*
+ https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/
+ 1. dfs
+ Time: O(n), Space: O(n)
+
+ 2. map and set
+ Time: O(n), Space: O(n)
+ */
 final class Day18LowestCommonAncestor {
     func run() {
-        let f = mapAndSet3
+        let f = dfs4
         func judge(nodes: [Int?], p: Int, q: Int, expected: Int) {
             let tree = TreeNode.fromPerfectBinaryTreeLevelNodes(nodes)
             // find the node with a specified value
@@ -26,12 +33,41 @@ final class Day18LowestCommonAncestor {
 
 
 
-    func dfs4(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+    func dfs6(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
         fatalError()
     }
 
+    func mapAndSet6(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+        fatalError()
+    }
+
+
+
+    func dfs5(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+        fatalError()
+    }
+
+    func mapAndSet5(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+        fatalError()
+    }
+
+
+
+
+
     func mapAndSet4(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
         fatalError()
+    }
+
+    func dfs4(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+        func f(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+            if root == nil || root === p || root === q { return root }
+            let l = f(root!.left, p, q)
+            let r = f(root!.right, p, q)
+            if l != nil, r != nil { return root }
+            return l == nil ? r : l
+        }
+        return f(root, p, q)
     }
 
 
