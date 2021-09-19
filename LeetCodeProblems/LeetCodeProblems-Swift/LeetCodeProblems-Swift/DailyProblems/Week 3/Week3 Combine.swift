@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week3Combine {
     func run() {
-        let f = iterate3
+        let f = iterate4
         func judge(n: Int, k: Int, expected: [[Int]]) {
             printAndAssert(result: Set(f(n, k).map { $0 }),
                            expected: Set(expected.map { $0 }))
@@ -39,6 +39,23 @@ final class Week3Combine {
     }
 
 
+
+
+
+
+    func backtrack6(_ n: Int, _ k: Int) -> [[Int]] {
+        fatalError()
+    }
+
+    func iterate6(_ n: Int, _ k: Int) -> [[Int]] {
+        fatalError()
+    }
+
+
+
+
+
+
     func backtrack5(_ n: Int, _ k: Int) -> [[Int]] {
         fatalError()
     }
@@ -48,13 +65,51 @@ final class Week3Combine {
     }
 
 
+
+
+
+
+
+
+
     func backtrack4(_ n: Int, _ k: Int) -> [[Int]] {
-        fatalError()
+        var ans = [[Int]](), output = [Int]()
+        func backtrack(index: Int) {
+            if output.count == k {
+                ans.append(output)
+                return
+            }
+            for i in index...n {
+                if output.count + n - i + 1 < k { return }
+                output.append(i)
+                backtrack(index: i + 1)
+                _ = output.popLast()
+            }
+        }
+        backtrack(index: 1)
+        return ans
     }
 
     func iterate4(_ n: Int, _ k: Int) -> [[Int]] {
-        fatalError()
+        var ans = [[Int]](), i = 0
+        // end flag: n + 1
+        // [1, 2, 3, 5]
+        var nums = [Int](1...k) + [n + 1]
+        while i < k {
+            ans.append(Array(nums[0...k-1]))
+            i = 0
+            // stops when i == 2
+            while i < k, nums[i] + 1 == nums[i + 1] {
+                nums[i] = i + 1
+                i += 1
+            }
+            // i == 2, [1, 2, 4, 5]
+            nums[i] += 1
+        }
+        return ans
     }
+
+
 
 
 
@@ -79,11 +134,13 @@ final class Week3Combine {
 
     func iterate3(_ n: Int, _ k: Int) -> [[Int]] {
         var ans = [[Int]](), i = 0
-        var nums = [Int](1...k) + [n + 1] // end flag: n + 1
+        // end flag: n + 1
+        var nums = [Int](1...k) + [n + 1]
         while i < k {
+            // append valid numbers into the result
             ans.append(Array(nums[0...k-1]))
+            // go from the start to the gap
             i = 0
-            // go from start to the gap
             while i < k, nums[i] + 1 == nums[i + 1] {
                 nums[i] = i + 1
                 i += 1
