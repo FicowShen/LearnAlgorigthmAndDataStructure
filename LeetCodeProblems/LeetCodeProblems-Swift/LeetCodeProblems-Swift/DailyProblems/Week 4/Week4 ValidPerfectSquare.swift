@@ -23,7 +23,7 @@ import Foundation
  */
 final class Week4ValidPerfectSquare {
     func run() {
-        let f = arithmeticProgression3
+        let f = arithmeticProgression4
         (1...5).map { $0 * $0 }.forEach {
             printAndAssert(result: f($0), expected: true)
             printAndAssert(result: f($0 + 1), expected: false)
@@ -31,17 +31,77 @@ final class Week4ValidPerfectSquare {
     }
 
 
-    func binarySearch4(_ num: Int) -> Bool {
+
+
+
+    func binarySearch(_ num: Int) -> Bool {
         fatalError()
+    }
+
+    func newtonIteration6(_ num: Int) -> Bool {
+        fatalError()
+    }
+
+    func arithmeticProgression6(_ num: Int) -> Bool {
+        fatalError()
+    }
+
+
+
+
+    func binarySearch5(_ num: Int) -> Bool {
+        fatalError()
+    }
+
+    func newtonIteration5(_ num: Int) -> Bool {
+        fatalError()
+    }
+
+    func arithmeticProgression5(_ num: Int) -> Bool {
+        fatalError()
+    }
+
+
+
+
+
+
+
+    func binarySearch4(_ num: Int) -> Bool {
+        var l = 0, r = num
+        while l < r {
+            let mid = l + (r - l) >> 1
+            if mid * mid >= num {
+                r = mid
+            } else {
+                l = mid + 1
+            }
+        }
+        return r * r == num
     }
 
     func newtonIteration4(_ num: Int) -> Bool {
-        fatalError()
+        var x = num
+        while x * x > num {
+            x = (x + num/x) >> 1
+        }
+        return x * x == num
     }
 
     func arithmeticProgression4(_ num: Int) -> Bool {
-        fatalError()
+        var num = num, x = 1
+        while num > 0 {
+            num -= x
+            x += 2
+        }
+        return num == 0
     }
+
+
+
+
+
+
 
 
 
