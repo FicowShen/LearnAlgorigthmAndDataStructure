@@ -16,7 +16,7 @@ import Foundation
 */
 final class Day22Permutations {
     func run() {
-        let f = swapWithFirst3
+        let f = insert4
         func judge(nums: [Int], expected: [[Int]]) {
             printAndAssert(result: Set(f(nums)), expected: Set(expected))
         }
@@ -33,16 +33,96 @@ final class Day22Permutations {
               expected: [[1]])
     }
 
-    func backtrackWithSet4(_ nums: [Int]) -> [[Int]] {
+
+
+
+
+    func backtrackWithSet6(_ nums: [Int]) -> [[Int]] {
         fatalError()
+    }
+
+    func swapWithFirst6(_ nums: [Int]) -> [[Int]] {
+        fatalError()
+    }
+
+    func insert6(_ nums: [Int]) -> [[Int]] {
+        fatalError()
+    }
+
+
+
+
+
+    func backtrackWithSet5(_ nums: [Int]) -> [[Int]] {
+        fatalError()
+    }
+
+    func swapWithFirst5(_ nums: [Int]) -> [[Int]] {
+        fatalError()
+    }
+
+    func insert5(_ nums: [Int]) -> [[Int]] {
+        fatalError()
+    }
+
+
+
+
+    
+
+
+    func backtrackWithSet4(_ nums: [Int]) -> [[Int]] {
+        var ans = [[Int]](), choices = Set(nums), output = [Int]()
+        func backtrack() {
+            if output.count == nums.count {
+                ans.append(output)
+                return
+            }
+            for n in choices {
+                choices.remove(n)
+                output.append(n)
+                backtrack()
+                _ = output.popLast()
+                choices.insert(n)
+            }
+        }
+        backtrack()
+        return ans
     }
 
     func swapWithFirst4(_ nums: [Int]) -> [[Int]] {
-        fatalError()
+        var ans = [[Int]](), output = nums
+        func backtrack(first: Int) {
+            if first == nums.count {
+                ans.append(output)
+                return
+            }
+            for i in first..<nums.count {
+                output.swapAt(first, i)
+                backtrack(first: first + 1)
+                output.swapAt(first, i)
+            }
+        }
+        backtrack(first: 0)
+        return ans
     }
 
     func insert4(_ nums: [Int]) -> [[Int]] {
-        fatalError()
+        var ans = [[Int]]()
+        guard let first = nums.first else { return ans }
+        ans.append([first])
+        for i in 1..<nums.count {
+            let pre = ans
+            ans.removeAll(keepingCapacity: true)
+            for j in 0...i {
+                for old in pre {
+                    var new = old
+                    new.insert(nums[i], at: j)
+                    ans.append(new)
+                }
+            }
+        }
+        return ans
     }
 
 
