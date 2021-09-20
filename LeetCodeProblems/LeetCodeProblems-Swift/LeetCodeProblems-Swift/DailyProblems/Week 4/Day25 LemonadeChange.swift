@@ -15,13 +15,62 @@ import Foundation
  */
 final class Day25LemonadeChange {
     func run() {
-        let f = lemonadeChange2
+        let f = lemonadeChange3
         printAndAssert(result: f([5,5,5,10,20]), expected: true)
         printAndAssert(result: f([5,5,10,10,20]), expected: false)
         printAndAssert(result: f([5,5,10]), expected: true)
         printAndAssert(result: f([10,10]), expected: false)
         printAndAssert(result: f([5,5,10,20,5,5,5,5,5,5,5,5,5,10,5,5,20,5,20,5]), expected: true)
     }
+
+
+
+
+    func lemonadeChange6(_ bills: [Int]) -> Bool {
+        fatalError()
+    }
+
+
+
+
+    func lemonadeChange5(_ bills: [Int]) -> Bool {
+        fatalError()
+    }
+
+
+
+
+    func lemonadeChange4(_ bills: [Int]) -> Bool {
+        fatalError()
+    }
+
+
+
+
+    func lemonadeChange3(_ bills: [Int]) -> Bool {
+        let n = bills.count
+        var five = 0, ten = 0
+        for i in 0..<n {
+            switch bills[i] {
+            case 5: five += 1
+            case 10:
+                ten += 1
+                five -= 1
+            default:
+                if ten > 0 {
+                    ten -= 1
+                    five -= 1
+                } else {
+                    five -= 3
+                }
+            }
+            if five < 0 { return false }
+        }
+        return true
+    }
+
+
+
 
 
     func lemonadeChange2(_ bills: [Int]) -> Bool {
