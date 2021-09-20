@@ -22,7 +22,7 @@ import Foundation
  */
 final class Week7ValidSudoku {
     func run() {
-        let f  = bitsWithIndice1
+        let f  = bitsWithIndice3
         func judge(board: [[Character]], expected: Bool) {
             printAndAssert(result: f(board), expected: expected)
         }
@@ -50,11 +50,21 @@ final class Week7ValidSudoku {
 
 
 
+
+    func bitsWithIndice5(_ board: [[Character]]) -> Bool {
+        fatalError()
+    }
+
     func hashWithIndice5(_ board: [[Character]]) -> Bool {
         fatalError()
     }
 
 
+
+
+    func bitsWithIndice4(_ board: [[Character]]) -> Bool {
+        fatalError()
+    }
 
     func hashWithIndice4(_ board: [[Character]]) -> Bool {
         fatalError()
@@ -62,11 +72,88 @@ final class Week7ValidSudoku {
 
 
 
+    func bitsWithIndice3(_ board: [[Character]]) -> Bool {
+        let n = 9, nums = [Int](repeating: 0, count: n)
+        let zero = Character("0").asciiValue!
+        var rows = nums, cols = nums, subboxes = nums // 9 boxes
+        func used(_ value: Int, index: Int) -> Bool {
+            ((value >> index) & 1) == 1
+        }
+        func save(_ index: Int, at pos: Int, in list: inout [Int]) {
+            list[pos] |= (1 << index)
+        }
+        for row in 0..<n {
+            for col in 0..<n {
+                let c = board[row][col]
+                if c == "." { continue }
+                let i = Int(c.asciiValue! - zero)
+                if used(rows[row], index: i)
+                    || used(cols[col], index: i)
+                    || used(subboxes[row/3*3 + col/3], index: i) {
+                    return false
+                }
+                save(i, at: row, in: &rows)
+                save(i, at: col, in: &cols)
+                save(i, at: row/3*3 + col/3, in: &subboxes)
+            }
+        }
+        return true
+    }
+
     func hashWithIndice3(_ board: [[Character]]) -> Bool {
-        fatalError()
+        let n = 9, nums = [Int](repeating: 0, count: n)
+        let zero = Character("0").asciiValue!
+        var rows = [[Int]](repeating: nums, count: n),
+            cols = rows,
+            subboxes = [[[Int]]](repeating: [[Int]](repeating: nums, count: 3), count: 3)
+        for row in 0..<9 {
+            for col in 0..<9 {
+                let c = board[row][col]
+                if c == "." { continue }
+                let i = Int(c.asciiValue! - zero - 1) // numbers are greater than 0
+                rows[row][i] += 1
+                cols[i][col] += 1
+                subboxes[row/3][col/3][i] += 1
+                if rows[row][i] > 1
+                    || cols[i][col] > 1
+                    || subboxes[row/3][col/3][i] > 1 {
+                    return false
+                }
+            }
+        }
+        return true
     }
 
 
+
+
+    func bitsWithIndice2(_ board: [[Character]]) -> Bool {
+        let n = 9, nums = [Int](repeating: 0, count: 9)
+        let zero = Character("0").asciiValue!
+        var rows = nums, cols = nums, subboxes = nums
+        func isIndex(_ i: Int, savedIn value: Int) -> Bool {
+            ((value >> i) & 1) == 1
+        }
+        func saveIndex(_ i: Int, at pos: Int, in list: inout [Int]) {
+            list[pos] |= (1 << i)
+        }
+        for row in 0..<n {
+            for col in 0..<n {
+                let c = board[row][col]
+                if c == "." { continue }
+                let i = Int(c.asciiValue! - zero)
+                if isIndex(i, savedIn: rows[row])
+                    || isIndex(i, savedIn: cols[col])
+                    || isIndex(i, savedIn: subboxes[row/3*3 + col/3]) {
+                    return false
+                }
+                saveIndex(i, at: row, in: &rows)
+                saveIndex(i, at: col, in: &cols)
+                saveIndex(i, at: row/3*3 + col/3, in: &subboxes)
+            }
+        }
+        return true
+    }
 
     func hashWithIndice2(_ board: [[Character]]) -> Bool {
         let n = 9, m = 3, nums = [Int](repeating: 0, count: n)
