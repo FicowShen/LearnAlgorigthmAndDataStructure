@@ -15,7 +15,7 @@ import Foundation
  */
 final class Day42WordSearchII {
     func run() {
-        let f = findWordsWithTrie2
+        let f = findWordsWithTrie3
         func judge(board: [[Character]], words: [String], expected: [String]) {
             printAndAssert(result: Set(f(board, words)),
                            expected: Set(expected))
@@ -43,12 +43,79 @@ final class Day42WordSearchII {
 
 
 
+
+    func findWordsWithTrie6(_ board: [[Character]], _ words: [String]) -> [String] {
+        fatalError()
+    }
+
+
+
+    func findWordsWithTrie5(_ board: [[Character]], _ words: [String]) -> [String] {
+        fatalError()
+    }
     
 
 
+    func findWordsWithTrie4(_ board: [[Character]], _ words: [String]) -> [String] {
+        fatalError()
+    }
 
 
 
+    func findWordsWithTrie3(_ board: [[Character]], _ words: [String]) -> [String] {
+        final class Trie {
+            var word = "", children = [Character: Trie]()
+            func insert(_ word: String) {
+                var node = self
+                for c in word {
+                    if let n = node.children[c] {
+                        node = n
+                    } else {
+                        let new = Trie()
+                        node.children[c] = new
+                        node = new
+                    }
+                }
+                node.word = word
+            }
+        }
+        let Row = board.count, Col = board[0].count, root = Trie()
+        let drow = [-1, 0, 1, 0], dcol = [0, 1, 0, -1]
+        // build a Trie
+        for word in words { root.insert(word) }
+        var ans = [String](), board = board
+        func backtrack(row: Int, col: Int, parent: Trie) {
+            let letter = board[row][col], node = parent.children[letter]!
+            if !node.word.isEmpty {
+                ans.append(node.word)
+                node.word = ""
+            }
+            // mark visited
+            board[row][col] = "#"
+            for i in 0..<drow.count {
+                let r = row + drow[i], c = col + dcol[i]
+                if r < 0 || c < 0 || r >= Row || c >= Col { continue }
+                if node.children[board[r][c]] == nil { continue }
+                backtrack(row: r, col: c, parent: node)
+            }
+            // reset
+            board[row][col] = letter
+            // clear empty leaf nodes
+            if node.children.isEmpty {
+                parent.children[letter] = nil
+            }
+        }
+        // traverse the board
+        for row in 0..<Row {
+            for col in 0..<Col {
+                let c = board[row][col]
+                if root.children[c] != nil {
+                    backtrack(row: row, col: col, parent: root)
+                }
+            }
+        }
+        return ans
+    }
 
 
 
