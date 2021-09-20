@@ -9,12 +9,14 @@ import Foundation
 
 /*
  https://leetcode-cn.com/problems/subsets/
- 1. backtrack
+ 1. backtrack, backtrack with the index, append/ignore current number
+ 2. bits mask, enumerate mask [0,1 << n), check every index with the masks
+ 3. enumeration, append each number into every previous result
  Time: O(n * 2^n), Space: O(n)
  */
 final class Week3Subsets {
     func run() {
-        let f = enumeration2
+        let f = enumeration3
         func judge(nums: [Int], expected: [[Int]]) {
             printAndAssert(result: Set(f(nums)),
                            expected: Set(expected))
@@ -76,15 +78,47 @@ final class Week3Subsets {
 
 
     func enumeration3(_ nums: [Int]) -> [[Int]] {
-        fatalError()
+        var ans = [[Int]]()
+        ans.append([])
+        for i in 0..<nums.count {
+            for old in ans {
+                var new = old
+                new.append(nums[i])
+                ans.append(new)
+            }
+        }
+        return ans
     }
 
     func bitsMask3(_ nums: [Int]) -> [[Int]] {
-        fatalError()
+        let n = nums.count
+        var ans = [[Int]](), t = [Int]()
+        for mask in 0..<(1 << n) {
+            t.removeAll(keepingCapacity: true)
+            for i in 0..<n {
+                if (mask >> i) & 1 == 1 {
+                    t.append(nums[i])
+                }
+            }
+            ans.append(t)
+        }
+        return ans
     }
 
     func backtrackAllCases3(_ nums: [Int]) -> [[Int]] {
-        fatalError()
+        var ans = [[Int]](), t = [Int]()
+        func backtrack(_ i: Int) {
+            if i == nums.count {
+                ans.append(t)
+                return
+            }
+            t.append(nums[i])
+            backtrack(i + 1)
+            _ = t.popLast()
+            backtrack(i + 1)
+        }
+        backtrack(0)
+        return ans
     }
 
 
