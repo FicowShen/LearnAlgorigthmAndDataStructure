@@ -74,6 +74,7 @@
 		6A81919426F2C3FF0000188C /* Week7 NQueens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919326F2C3FF0000188C /* Week7 NQueens.swift */; };
 		6A81919626F601920000188C /* Week7 ValidSudoku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919526F601920000188C /* Week7 ValidSudoku.swift */; };
 		6A81919826F7764A0000188C /* Week3 Subsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919726F7764A0000188C /* Week3 Subsets.swift */; };
+		6A81919A26F832450000188C /* Week7 SudokuSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919926F832450000188C /* Week7 SudokuSolver.swift */; };
 		6A9B0B0A26F5B78B00FA12DC /* Week3 BinaryTreeMinDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9B0B0926F5B78B00FA12DC /* Week3 BinaryTreeMinDepth.swift */; };
 		6AB35B1226B22A4E0026173D /* MaxProfitWithCooldown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B1126B22A4E0026173D /* MaxProfitWithCooldown.swift */; };
 		6AB35B1626B594970026173D /* HouseRobber2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B1526B594970026173D /* HouseRobber2.swift */; };
@@ -224,6 +225,7 @@
 		6A81919326F2C3FF0000188C /* Week7 NQueens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 NQueens.swift"; sourceTree = "<group>"; };
 		6A81919526F601920000188C /* Week7 ValidSudoku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 ValidSudoku.swift"; sourceTree = "<group>"; };
 		6A81919726F7764A0000188C /* Week3 Subsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 Subsets.swift"; sourceTree = "<group>"; };
+		6A81919926F832450000188C /* Week7 SudokuSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 SudokuSolver.swift"; sourceTree = "<group>"; };
 		6A9B0B0926F5B78B00FA12DC /* Week3 BinaryTreeMinDepth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 BinaryTreeMinDepth.swift"; sourceTree = "<group>"; };
 		6AB35B1126B22A4E0026173D /* MaxProfitWithCooldown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxProfitWithCooldown.swift; sourceTree = "<group>"; };
 		6AB35B1526B594970026173D /* HouseRobber2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseRobber2.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				6A10BA8A26F17880006CE7AC /* Week7 FriendCircles.swift */,
 				6A81919326F2C3FF0000188C /* Week7 NQueens.swift */,
 				6A81919526F601920000188C /* Week7 ValidSudoku.swift */,
+				6A81919926F832450000188C /* Week7 SudokuSolver.swift */,
 			);
 			path = "Week 7";
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 				6A10BA6426E995D8006CE7AC /* Week6 Triangle.swift in Sources */,
 				6A42EFDB26D9E4640030EE32 /* Week4 WalkingRobotSimulation.swift in Sources */,
 				6AB35B3E26BFB4B80026173D /* Week1 ReverseLinkedList.swift in Sources */,
+				6A81919A26F832450000188C /* Week7 SudokuSolver.swift in Sources */,
 				6A10BA7F26EED428006CE7AC /* Week7 NumberOfIslands.swift in Sources */,
 				6AB89D4526A106AC00E295BA /* BacktrackProblems.swift in Sources */,
 				6A42EFEE26E057AA0030EE32 /* Day32 MaximumSubarray.swift in Sources */,
