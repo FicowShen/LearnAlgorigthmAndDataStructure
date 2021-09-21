@@ -18,7 +18,7 @@ import Foundation
  */
 final class Week4MinimumGeneticMutation {
     func run() {
-        let f = minMutationWithDFS3
+        let f = minMutationWithDFS4
         func judge(_ start: String, _ end: String, _ bank: [String], _ expected: Int) {
             printAndAssert(result: f(start, end, bank), expected: expected)
         }
@@ -43,11 +43,60 @@ final class Week4MinimumGeneticMutation {
     
 
     func minMutationWithDFS4(_ start: String, _ end: String, _ bank: [String]) -> Int {
-        fatalError()
+        if start == end { return 0 }
+        if !bank.contains(end) { return -1 }
+        var valid = Set(bank), visited = Set<String>(), ans: Int?
+        func dfs(s: String, e: String, m: Int) {
+            if s == e {
+                ans = min(ans ?? .max, m)
+                return
+            }
+            for v in valid {
+                var diff = 0
+                for (a, b) in zip(s, v) {
+                    if a != b { diff += 1 }
+                    if diff > 1 { break }
+                }
+                if diff == 1, !visited.contains(v) {
+                    visited.insert(v)
+                    dfs(s: v, e: e, m: m + 1)
+                    visited.remove(v)
+                }
+            }
+        }
+        dfs(s: start, e: end, m: 0)
+        return ans ?? -1
     }
 
     func minMutationWithBFS4(_ start: String, _ end: String, _ bank: [String]) -> Int {
-        fatalError()
+        if !bank.contains(end) { return -1 }
+        let options: [Character] = ["A", "C", "G", "T"]
+        var start = Set([start]), end = Set([end]), valid = Set(bank)
+        var ans = 0
+        while !start.isEmpty {
+            if start.count > end.count {
+                (start, end) = (end, start)
+            }
+            var next = Set<String>()
+            for s in start {
+                let chars = Array(s)
+                for i in 0..<s.count {
+                    for option in options {
+                        if chars[i] == option { continue }
+                        var temp = chars
+                        temp[i] = option
+                        let new = String(temp)
+                        if end.contains(new) { return ans + 1 }
+                        if !valid.contains(new) { continue }
+                        next.insert(new)
+                        valid.remove(new)
+                    }
+                }
+            }
+            start = next
+            ans += 1
+        }
+        return -1
     }
 
 

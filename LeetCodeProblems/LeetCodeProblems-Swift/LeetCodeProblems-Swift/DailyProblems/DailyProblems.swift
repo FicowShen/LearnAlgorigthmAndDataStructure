@@ -18,6 +18,7 @@ final class DailyProblems {
     }
 
     static func week7() {
+//        Week7ShortestPathInBinaryMatrix().run()
         Week7SudokuSolver().run()
         Week7ValidSudoku().run()
         Week7NQueens().run()
