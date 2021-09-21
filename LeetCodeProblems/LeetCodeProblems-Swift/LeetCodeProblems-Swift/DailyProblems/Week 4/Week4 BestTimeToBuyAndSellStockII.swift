@@ -21,7 +21,7 @@ import Foundation
  */
 final class Week4BestTimeToBuyAndSellStockII {
     func run() {
-        let f = greedy4
+        let f = greedy5
         printAndAssert(result: f([7,1,5,3,6,4]), expected: 7)
         printAndAssert(result: f([7,6,4,3,1]), expected: 0)
     }
@@ -30,17 +30,76 @@ final class Week4BestTimeToBuyAndSellStockII {
 
 
 
-    func greedy5(_ prices: [Int]) -> Int {
+
+
+    func greedy7(_ prices: [Int]) -> Int {
         fatalError()
+    }
+
+
+    func dp7(_ prices: [Int]) -> Int {
+        fatalError()
+    }
+
+    func rawDP7(_ prices: [Int]) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+
+    func greedy6(_ prices: [Int]) -> Int {
+        fatalError()
+    }
+
+
+    func dp6(_ prices: [Int]) -> Int {
+        fatalError()
+    }
+
+    func rawDP6(_ prices: [Int]) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+    func greedy5(_ prices: [Int]) -> Int {
+        var sum = 0
+        for i in 1..<prices.count {
+            sum += max(0, prices[i] - prices[i - 1])
+        }
+        return sum
     }
 
 
     func dp5(_ prices: [Int]) -> Int {
-        fatalError()
+        var hasStock = -prices[0], noStock = 0
+        for i in 1..<prices.count {
+            (noStock, hasStock) = (
+                max(noStock, hasStock + prices[i]),
+                max(hasStock, noStock - prices[i])
+            )
+        }
+        return noStock
     }
 
     func rawDP5(_ prices: [Int]) -> Int {
-        fatalError()
+        let n = prices.count
+        var hasStock = [Int](repeating: 0, count: n), noStock = hasStock
+        hasStock[0] = -prices[0]
+        for i in 1..<n {
+            noStock[i] = max(noStock[i - 1], hasStock[i - 1] + prices[i])
+            hasStock[i] = max(hasStock[i - 1], noStock[i - 1] - prices[i])
+        }
+        return noStock[n - 1]
     }
 
 
