@@ -96,3 +96,7 @@ func printAndAssert<T: Equatable>(result: T, expected: T) {
     }
     assert(result == expected)
 }
+
+extension Int {
+    var bits: String { String(self, radix: 2, uppercase: false) }
+}
