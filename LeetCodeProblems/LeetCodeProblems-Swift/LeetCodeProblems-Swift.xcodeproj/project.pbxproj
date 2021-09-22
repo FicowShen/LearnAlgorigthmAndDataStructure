@@ -75,6 +75,7 @@
 		6A81919626F601920000188C /* Week7 ValidSudoku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919526F601920000188C /* Week7 ValidSudoku.swift */; };
 		6A81919826F7764A0000188C /* Week3 Subsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919726F7764A0000188C /* Week3 Subsets.swift */; };
 		6A81919A26F832450000188C /* Week7 SudokuSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919926F832450000188C /* Week7 SudokuSolver.swift */; };
+		6A81919F26FAA4990000188C /* Week8 NumberOf1Bits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919E26FAA4990000188C /* Week8 NumberOf1Bits.swift */; };
 		6A9B0B0A26F5B78B00FA12DC /* Week3 BinaryTreeMinDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9B0B0926F5B78B00FA12DC /* Week3 BinaryTreeMinDepth.swift */; };
 		6AB35B1226B22A4E0026173D /* MaxProfitWithCooldown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B1126B22A4E0026173D /* MaxProfitWithCooldown.swift */; };
 		6AB35B1626B594970026173D /* HouseRobber2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B1526B594970026173D /* HouseRobber2.swift */; };
@@ -226,6 +227,7 @@
 		6A81919526F601920000188C /* Week7 ValidSudoku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 ValidSudoku.swift"; sourceTree = "<group>"; };
 		6A81919726F7764A0000188C /* Week3 Subsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 Subsets.swift"; sourceTree = "<group>"; };
 		6A81919926F832450000188C /* Week7 SudokuSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 SudokuSolver.swift"; sourceTree = "<group>"; };
+		6A81919E26FAA4990000188C /* Week8 NumberOf1Bits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week8 NumberOf1Bits.swift"; sourceTree = "<group>"; };
 		6A9B0B0926F5B78B00FA12DC /* Week3 BinaryTreeMinDepth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 BinaryTreeMinDepth.swift"; sourceTree = "<group>"; };
 		6AB35B1126B22A4E0026173D /* MaxProfitWithCooldown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxProfitWithCooldown.swift; sourceTree = "<group>"; };
 		6AB35B1526B594970026173D /* HouseRobber2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseRobber2.swift; sourceTree = "<group>"; };
@@ -408,6 +410,14 @@
 			path = "Week 5-6";
 			sourceTree = "<group>";
 		};
+		6A81919D26FAA4640000188C /* Week8 */ = {
+			isa = PBXGroup;
+			children = (
+				6A81919E26FAA4990000188C /* Week8 NumberOf1Bits.swift */,
+			);
+			path = Week8;
+			sourceTree = "<group>";
+		};
 		6AB35B1326B594160026173D /* HouseRobber */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +441,7 @@
 		6AB35B1926B6E7AB0026173D /* DailyProblems */ = {
 			isa = PBXGroup;
 			children = (
+				6A81919D26FAA4640000188C /* Week8 */,
 				6A10BA7926EECC2C006CE7AC /* Week 7 */,
 				6A42EFEC26E057820030EE32 /* Week 5-6 */,
 				6A42EFC526D323870030EE32 /* Week 4 */,
@@ -741,6 +752,7 @@
 				6AB35B5426C4A1480026173D /* Week2 ValidAnagram.swift in Sources */,
 				6AB35B1826B6360A0026173D /* WeeklyContest252.swift in Sources */,
 				6AB35B1226B22A4E0026173D /* MaxProfitWithCooldown.swift in Sources */,
+				6A81919F26FAA4990000188C /* Week8 NumberOf1Bits.swift in Sources */,
 				6A42EFCB26D46CA10030EE32 /* Week4 MinimumGeneticMutation.swift in Sources */,
 				6AB35B5826C5E9130026173D /* Day12 AddDigits.swift in Sources */,
 				6AB35B4426BFEBC80026173D /* Week1 ValidParentheses.swift in Sources */,
