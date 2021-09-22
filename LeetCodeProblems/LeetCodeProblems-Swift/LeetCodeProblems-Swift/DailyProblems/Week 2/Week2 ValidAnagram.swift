@@ -10,19 +10,51 @@ import Foundation
 // https://leetcode-cn.com/problems/valid-anagram/
 final class Week2ValidAnagram {
     func run() {
-        let f = isAnagramWithDict4
+        let f = isAnagramWithASCIIArray4
         printAndAssert(result: f("anagram", "nagaram"), expected: true)
         printAndAssert(result: f("rat", "car"), expected: false)
     }
 
 
 
-    func isAnagramWithLetterArray4(_ s: String, _ t: String) -> Bool {
+
+    func isAnagramWithASCIIArray6(_ s: String, _ t: String) -> Bool {
         fatalError()
     }
 
-    func isAnagramWithASCIIArray4(_ s: String, _ t: String) -> Bool {
+    func isAnagramWithDict6(_ s: String, _ t: String) -> Bool {
         fatalError()
+    }
+
+
+
+
+
+    func isAnagramWithASCIIArray5(_ s: String, _ t: String) -> Bool {
+        fatalError()
+    }
+
+    func isAnagramWithDict5(_ s: String, _ t: String) -> Bool {
+        fatalError()
+    }
+
+
+
+
+
+    func isAnagramWithASCIIArray4(_ s: String, _ t: String) -> Bool {
+        if s.count != t.count { return false }
+        var counter = [Int](repeating: 0, count: 26)
+        func index(_ c: Character) -> Int { Int(c.asciiValue! - 97) }
+        for c in s {
+            counter[index(c)] += 1
+        }
+        for c in t {
+            let i = index(c)
+            counter[i] -= 1
+            if counter[i] < 0 { return false }
+        }
+        return true
     }
 
     func isAnagramWithDict4(_ s: String, _ t: String) -> Bool {
