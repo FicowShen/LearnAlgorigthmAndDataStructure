@@ -17,20 +17,113 @@ import Foundation
  */
 final class Week6HouseRobber {
     func run() {
-        let f = recurseWithMemo2
+        let f = recurseWithMemo3
+        printAndAssert(result: f([1,1]), expected: 1)
         printAndAssert(result: f([1,2,3,1]), expected: 4)
         printAndAssert(result: f([2,7,9,3,1]), expected: 12)
     }
 
 
 
-    func dp3(_ nums: [Int]) -> Int {
+
+
+    func rawDp6(_ nums: [Int]) -> Int {
         fatalError()
     }
 
-    func recurseWithMemo3(_ nums: [Int]) -> Int {
+    func dp6(_ nums: [Int]) -> Int {
         fatalError()
     }
+
+    func recurseWithMemo6(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+    func rawDp5(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+    func dp5(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+    func recurseWithMemo5(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+    func rawDp4(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+    func dp4(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+    func recurseWithMemo4(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+    func dp3(_ nums: [Int]) -> Int {
+        var pre = 0, cur = 0
+        for i in 0..<nums.count {
+            (pre, cur) = (cur, max(cur, pre + nums[i]))
+        }
+        return cur
+    }
+
+    func rawDp3(_ nums: [Int]) -> Int {
+        let n = nums.count
+        var rob = [Int](repeating: 0, count: n)
+        rob[0] = nums[0]
+        if n > 1 {
+            rob[1] = max(nums[0], nums[1])
+            for i in 2..<nums.count {
+                rob[i] = max(rob[i - 1], rob[i - 2] + nums[i])
+            }
+        }
+        return rob[n - 1]
+    }
+
+    func recurseWithMemo3(_ nums: [Int]) -> Int {
+        let n = nums.count
+        var memo = [Int: Int]()
+        func f(_ i: Int) -> Int {
+            if i < 0 { return 0 }
+            if let v = memo[i] { return v }
+            let v = max(f(i - 1), f(i - 2) + nums[i])
+            memo[i] = v
+            return v
+        }
+        return f(n - 1)
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
