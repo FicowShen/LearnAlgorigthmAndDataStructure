@@ -19,6 +19,7 @@ final class DailyProblems {
     }
 
     static func week8() {
+        Week8RelativeSortArray().run()
         Week8LRUCache().run()
         Week8ReverseBits().run()
         Week8PowerOfTwo().run()
