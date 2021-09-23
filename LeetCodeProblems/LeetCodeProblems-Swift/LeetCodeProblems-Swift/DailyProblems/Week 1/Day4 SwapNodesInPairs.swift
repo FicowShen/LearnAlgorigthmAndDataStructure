@@ -20,7 +20,7 @@ import Foundation
  */
 final class Day4SwapNodesInPairs {
     func run() {
-        let f = swapPairsRecursive6
+        let f = swapPairsOneTwoThree7
         func judge(list: [Int], expected: [Int]) {
             let listNode = ListNode.fromList(list)
             let listNode2 = ListNode.fromList(expected)
@@ -32,16 +32,68 @@ final class Day4SwapNodesInPairs {
     }
 
 
-    func swapPairsOneTwoThree7(_ head: ListNode?) -> ListNode? {
+
+    func swapPairsOneTwoThree8(_ head: ListNode?) -> ListNode? {
         fatalError()
+    }
+
+    func swapPairsWithPseudoHead8(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+    func swapPairsRecursive8(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+    func swapPairsOneTwoThree7(_ head: ListNode?) -> ListNode? {
+        var one = head, two = one?.next
+        let newHead = two ?? one
+        while two != nil {
+            let three = two?.next
+            two?.next = one
+            one?.next = three?.next ?? three
+            one = three
+            two = one?.next
+        }
+        return newHead
     }
 
     func swapPairsWithPseudoHead7(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        guard let head = head, let _ = head.next else {
+            return head
+        }
+        let newHead = ListNode()
+        newHead.next = head
+        var temp: ListNode? = newHead
+        while temp != nil {
+            let one = temp?.next, two = one?.next
+            temp?.next = two ?? one
+            one?.next = two?.next
+            two?.next = one
+            temp = one
+        }
+        return newHead.next
     }
 
     func swapPairsRecursive7(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        func swapped(_ head: ListNode?) -> ListNode? {
+            guard let head = head, let next = head.next else {
+                return head
+            }
+            head.next = swapped(next.next)
+            next.next = head
+            return next
+        }
+        return swapped(head)
     }
 
 
