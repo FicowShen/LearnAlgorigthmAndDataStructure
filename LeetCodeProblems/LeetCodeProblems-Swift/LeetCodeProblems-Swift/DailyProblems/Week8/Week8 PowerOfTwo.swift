@@ -17,7 +17,7 @@ import Foundation
  */
 final class Week8PowerOfTwo {
     func run() {
-        let f = isPowerOfTwo2c
+        let f = isPowerOfTwo3c
         printAndAssert(result: f(0), expected: false)
         printAndAssert(result: f(1), expected: true)
         printAndAssert(result: f(16), expected: true)
@@ -45,6 +45,9 @@ final class Week8PowerOfTwo {
 
 
 
+
+
+
     func isPowerOfTwo4a(_ n: Int) -> Bool {
         fatalError()
     }
@@ -61,16 +64,19 @@ final class Week8PowerOfTwo {
 
 
 
+
+
+
     func isPowerOfTwo3a(_ n: Int) -> Bool {
-        fatalError()
+        n > 0 && n & (n - 1) == 0
     }
 
     func isPowerOfTwo3b(_ n: Int) -> Bool {
-        fatalError()
+        n > 0 && n & -n == n
     }
 
     func isPowerOfTwo3c(_ n: Int) -> Bool {
-        fatalError()
+        n > 0 && (1 << 30) % n == 0
     }
 
 

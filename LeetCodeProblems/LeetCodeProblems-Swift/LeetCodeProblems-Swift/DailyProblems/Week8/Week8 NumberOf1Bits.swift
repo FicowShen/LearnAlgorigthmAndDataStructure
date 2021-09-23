@@ -18,13 +18,19 @@ import Foundation
  */
 final class Week8NumberOf1Bits {
     func run() {
-        let f = hammingWeight2_1
+        let f = hammingWeight3
         printAndAssert(result: f(0b00000000000000000000000000001011),
                        expected: 3)
         printAndAssert(result: f(0b00000000000000000000000010000000),
                        expected: 1)
         printAndAssert(result: f(0b11111111111111111111111111111101),
                        expected: 31)
+    }
+
+
+
+    func hammingWeight6(_ n: Int) -> Int {
+        fatalError()
     }
 
 
@@ -41,8 +47,25 @@ final class Week8NumberOf1Bits {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     func hammingWeight3(_ n: Int) -> Int {
-        fatalError()
+        var ans = 0, n = n
+        while n != 0 {
+            n &= (n - 1)
+            ans += 1
+        }
+        return ans
     }
 
 
