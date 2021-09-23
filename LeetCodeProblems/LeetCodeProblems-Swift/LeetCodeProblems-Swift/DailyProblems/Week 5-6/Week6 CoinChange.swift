@@ -19,7 +19,7 @@ import Foundation
  */
 final class Week6CoinChange {
     func run() {
-        let f = dp4
+        let f = dfsWithMemo4
         printAndAssert(result: f([1,2,5], 11), expected: 3)
         printAndAssert(result: f([2], 3), expected: -1)
         printAndAssert(result: f([1], 0), expected: 0)
@@ -27,6 +27,11 @@ final class Week6CoinChange {
         printAndAssert(result: f([1], 2), expected: 2)
         printAndAssert(result: f([1,2,5], 100), expected: 20)
     }
+
+
+
+
+
 
 
 
@@ -42,6 +47,15 @@ final class Week6CoinChange {
 
 
 
+
+
+
+
+
+
+
+
+
     func dp5(_ coins: [Int], _ amount: Int) -> Int {
         fatalError()
     }
@@ -53,8 +67,30 @@ final class Week6CoinChange {
 
 
 
+
+
+
+
+
+
     func dfsWithMemo4(_ coins: [Int], _ amount: Int) -> Int {
-        fatalError()
+        var memo = [Int: Int]()
+        func f(amount: Int) -> Int {
+            if amount < 0 { return .max }
+            if amount == 0 { return 0 }
+            if let v = memo[amount] { return v }
+            var minCount = Int.max
+            for coin in coins {
+                let count = f(amount: amount - coin)
+                if count != .max {
+                    minCount = min(minCount, count + 1)
+                }
+            }
+            memo[amount] = minCount
+            return minCount
+        }
+        let res = f(amount: amount)
+        return res == .max ? -1 : res
     }
 
 

@@ -9,7 +9,7 @@ import Foundation
 
 /*
  https://leetcode-cn.com/problems/minesweeper/description/
- 1. BFS
+ 1. BFS/DFS
  Time: O(m * n), Space: O(m * n)
  */
 final class Week4Minesweeper {
@@ -40,6 +40,44 @@ final class Week4Minesweeper {
 
 
 
+
+
+
+
+
+    func updateBoardWithBFS5(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
+        fatalError()
+    }
+
+
+    func updateBoardWithDFS5(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+    func updateBoardWithBFS4(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
+        fatalError()
+    }
+
+
+    func updateBoardWithDFS4(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
     func updateBoardWithBFS3(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
         fatalError()
     }
@@ -51,6 +89,16 @@ final class Week4Minesweeper {
 
 
 
+
+
+
+
+
+
+
+    func updateBoardWithDFS2(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
+        fatalError()
+    }
 
 
     func updateBoardWithBFS2(_ board: [[Character]], _ click: [Int]) -> [[Character]] {

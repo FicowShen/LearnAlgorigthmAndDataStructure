@@ -21,7 +21,7 @@ import Foundation
  */
 final class Week4NumberOfIslands {
     func run() {
-        let f = unionFind2
+        let f = numIslandsWithDFS3
         func judge(_ grid: [[Character]], _ output: Int) {
             printAndAssert(result: f(grid), expected: output)
         }
@@ -41,9 +41,24 @@ final class Week4NumberOfIslands {
     }
 
 
+
+    func unionFind4(_ grid: [[Character]]) -> Int {
+        fatalError()
+    }
+
+    func numIslandsWithBFS4(_ grid: [[Character]]) -> Int {
+        fatalError()
+    }
+
+    func numIslandsWithDFS4(_ grid: [[Character]]) -> Int {
+        fatalError()
+    }
+
+
+
+
+
     func unionFind3(_ grid: [[Character]]) -> Int {
-        // https://leetcode.com/problems/number-of-islands/discuss/56354/1D-Union-Find-Java-solution-easily-generalized-to-other-problems/205951
-        // only need to check forward and downward directions instead of 4 directions
         fatalError()
     }
 
@@ -52,7 +67,27 @@ final class Week4NumberOfIslands {
     }
 
     func numIslandsWithDFS3(_ grid: [[Character]]) -> Int {
-        fatalError()
+        let Row = grid.count, Col = grid[0].count
+        let drow = [-1, 0, 1, 0], dcol = [0, 1, 0, -1]
+        var grid = grid, ans = 0
+        func dfs(row: Int, col: Int) {
+            for i in 0..<drow.count {
+                let r = row + drow[i], c = col + dcol[i]
+                if r < 0 || c < 0 || r >= Row || c >= Col { continue }
+                if grid[r][c] == "0" { continue }
+                grid[r][c] = "0"
+                dfs(row: r, col: c)
+            }
+        }
+        for row in 0..<Row {
+            for col in 0..<Col {
+                if grid[row][col] == "0" { continue }
+                ans += 1
+                grid[row][col] = "0"
+                dfs(row: row, col: col)
+            }
+        }
+        return ans
     }
 
 
