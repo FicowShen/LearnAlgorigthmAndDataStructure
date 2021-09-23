@@ -16,12 +16,13 @@ import Foundation
 
  2. binary divide and conquer
  Time: O(1), Space: O(1)
+ See `reverse bits.jpg` in the Week8 folder
  https://leetcode-cn.com/problems/reverse-bits/solution/fu-xue-ming-zhu-xun-huan-yu-fen-zhi-jie-hoakf/
  https://leetcode-cn.com/problems/reverse-bits/solution/fu-xue-ming-zhu-xun-huan-yu-fen-zhi-jie-hoakf/859892
  */
 final class Week8ReverseBits {
     func run() {
-        let f = binaryDivideAndConquer2
+        let f = binaryDivideAndConquer3
         printAndAssert(result: f(0b00000010100101000001111010011100),
                        //          00111001011110000010100101000000
                        expected: 964176192)
@@ -63,11 +64,22 @@ final class Week8ReverseBits {
 
 
     func binaryDivideAndConquer3(_ n: Int) -> Int {
-        fatalError()
+        let m1 = 0x55555555, m2 = 0x33333333,
+            m4 = 0x0f0f0f0f, m8 = 0x00ff00ff
+        var n = n >> 16 | n << 16
+        n = n >> 8 & m8 | (n & m8) << 8
+        n = n >> 4 & m4 | (n & m4) << 4
+        n = n >> 2 & m2 | (n & m2) << 2
+        n = n >> 1 & m1 | (n & m1) << 1
+        return n
     }
 
     func iteration3(_ n: Int) -> Int {
-        fatalError()
+        var ans = 0
+        for i in 0..<32 {
+            ans = ans << 1 + (n >> i) & 1
+        }
+        return ans
     }
 
 
@@ -105,15 +117,21 @@ final class Week8ReverseBits {
             m4 = 0x0f0f0f0f, // 0000111100001111 0000111100001111
             m8 = 0x00ff00ff  // 0000000011111111 0000000011111111
         var n = n // 1010010100 0001111010011100
-        print(String.init(n, radix: 2, uppercase: false))
+        print("n:", n.bits)
+        print("n >> 16:", (n >> 16).bits)
+        print("n << 16:", (n << 16).bits)
         n = n >> 16 | n << 16
-        // n >> 16:
-        // 1010010100
-        // n << 16:
-        // 101001010000011110100111000000000000000000
-        // n:
-        // 1010010100 0001111010011100 0000001010010100
-        print(String.init(n, radix: 2, uppercase: false))
+        print("16 moves:", n.bits)
+        func printBits(moves: Int, m: Int) {
+            print("")
+            print("n >> \(moves):", (n >> moves).bits)
+            print("n >> \(moves) & m\(moves):", (n >> moves & m).bits)
+            print("n & m\(moves):", (n & m).bits)
+            print("(n & m\(moves)) << \(moves):", ((n & m) << moves).bits)
+            let x = n >> moves & m | (n & m) << moves
+            print("\(moves) moves:", x.bits)
+        }
+        printBits(moves: 8, m: m8)
         n = n >> 8 & m8 | (n & m8) << 8
         // 00011110 10011100 00000010 10010100
         // n >> 8:
@@ -126,13 +144,13 @@ final class Week8ReverseBits {
         // 10011100 00000000 10010100 00000000
         // n:
         // 10011100 00011110 10010100 00000010
-        print(String.init(n, radix: 2, uppercase: false))
+        printBits(moves: 4, m: m4)
         n = n >> 4 & m4 | (n & m4) << 4
-        print(String.init(n, radix: 2, uppercase: false))
+        printBits(moves: 2, m: m2)
         n = n >> 2 & m2 | (n & m2) << 2
-        print(String.init(n, radix: 2, uppercase: false))
+        printBits(moves: 1, m: m1)
         n = n >> 1 & m1 | (n & m1) << 1
-        print(String.init(n, radix: 2, uppercase: false))
+        print("---\n\n")
         return n
     }
 
