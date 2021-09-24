@@ -70,58 +70,8 @@ final class Week2GetLeastNumbers {
 
 
     func heap4(_ arr: [Int], _ k: Int) -> [Int] {
-        struct BinaryHeap {
-            private var size = 0, capacity = 0, heap = [Int]()
-            private var last: Int { size - 1 } // heap[size] is invalid
-            var top: Int { heap[0] }
-            var isEmpty: Bool { size == 0 }
-            var isFull: Bool { size == capacity }
-            init(capacity: Int) {
-                self.capacity = capacity
-                // one more position for validating the full status
-                self.heap = [Int](repeating: 0, count: capacity + 1)
-            }
-            mutating func insert(_ x: Int) {
-                if isFull { fatalError() }
-                heap[size] = x
-                size += 1
-                heapifyUp(last)
-            }
-            mutating func pop() -> Int {
-                if isEmpty { fatalError() }
-                let top = top
-                heap[0] = heap[last]
-                size -= 1
-                heapifyDown()
-                return top
-            }
-            private mutating func heapifyUp(_ index: Int) {
-                func parent(_ i: Int) -> Int { (i - 1) >> 1 }
-                var i = index, v = heap[i]
-                while i > 0, heap[parent(i)] < v {
-                    heap[i] = heap[parent(i)]
-                    i = parent(i)
-                }
-                heap[i] = v
-            }
-            private mutating func heapifyDown() {
-                func nthChild(_ i: Int, _ k: Int) -> Int { i << 1 + k }
-                func maxChild(_ i: Int) -> Int {
-                    let l = nthChild(i, 1), r = nthChild(i, 2)
-                    return heap[l] > heap[r] ? l : r
-                }
-                var i = 0, v = top
-                while nthChild(i, 1) < size {
-                    let child = maxChild(i)
-                    if v >= heap[child] { break }
-                    heap[i] = heap[child]
-                    i = child
-                }
-                heap[i] = v
-            }
-        }
         if arr.isEmpty || k == 0 { return [] }
-        var q = BinaryHeap(capacity: k)
+        var q = PriorityQueue<Int>(capacity: k, defaultValue: 0, sort: >)
         for i in 0..<k {
             q.insert(arr[i])
         }

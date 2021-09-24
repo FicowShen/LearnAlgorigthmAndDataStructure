@@ -336,3 +336,90 @@ struct BinaryHeap {
         return heap[leftChild] > heap[rightChild] ? leftChild : rightChild
     }
 }
+
+
+struct PriorityQueue<T> {
+
+    var isEmpty: Bool { heapSize == 0 }
+
+    /// Returns the max value. To return min value, insert with the opposite numbers.
+    var top: T {
+        if isEmpty { fatalError() }
+        return heap[0]
+    }
+
+    var size: Int { heapSize }
+
+    private let degree = 2
+    private let sort: ((T, T) -> Bool)
+    private var heap = [T](), heapSize = 0
+
+    private var isFull: Bool { heapSize == heap.count }
+
+    init(capacity: Int, defaultValue: T, sort: @escaping ((T, T) -> Bool)) {
+        self.sort = sort
+        heap = [T](repeating: defaultValue, count: capacity)
+    }
+
+    /// O(log N)
+    mutating func insert(_ x: T) {
+        if isFull { assertionFailure("heap is full") }
+        heap[heapSize] = x
+        heapSize += 1
+        heapifyUp(heapSize - 1)
+    }
+
+    /// O(log N)
+    @discardableResult
+    mutating func pop() -> T { deleteAt(0) }
+
+    /// O(log N)
+    @discardableResult
+    mutating func deleteAt(_ index: Int) -> T {
+        if isEmpty { assertionFailure("heap is empty") }
+        let element = heap[index]
+        heap[index] = heap[heapSize - 1]
+        heapSize -= 1
+        heapifyDown(index)
+        return element
+    }
+
+    /// Adjusts the last number, move it up if it's bigger than its children.
+    /// - Parameter index: The end index of the heap
+    private mutating func heapifyUp(_ index: Int) {
+        var i = index
+        let insertValue = heap[i]
+        while i > 0, sort(insertValue, heap[parent(i)]) {
+            heap[i] = heap[parent(i)]
+            i = parent(i)
+        }
+        heap[i] = insertValue
+    }
+
+    /// Adjusts the first number, move it down if it's smaller than its children.
+    /// - Parameter index: The start index of the heap
+    private mutating func heapifyDown(_ index: Int) {
+        var i = index, child = 0, temp = heap[i]
+        while kthChild(i, 1) < heapSize {
+            child = nextChild(i)
+            if sort(temp, heap[child]) { break }
+            heap[i] = heap[child]
+            i = child
+        }
+        heap[i] = temp
+    }
+
+    private func parent(_ i: Int) -> Int {
+        return (i - 1) / degree
+    }
+
+    private func kthChild(_ i: Int, _ k: Int) -> Int {
+        return degree * i + k
+    }
+
+    private func nextChild(_ i: Int) -> Int {
+        let leftChild = kthChild(i, 1)
+        let rightChild = kthChild(i, 2)
+        return sort(heap[leftChild], heap[rightChild]) ? leftChild : rightChild
+    }
+}
