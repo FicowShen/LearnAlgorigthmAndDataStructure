@@ -20,14 +20,29 @@ import Foundation
  */
 final class Week5JumpGameII {
     func run() {
-        let f = bfs4
+        let f = bfs5
         printAndAssert(result: f([0]), expected: 0)
         printAndAssert(result: f([1,0]), expected: 1)
         printAndAssert(result: f([2,1]), expected: 1)
+        printAndAssert(result: f([2,3,1]), expected: 1)
         printAndAssert(result: f([2,3,1,1,4]), expected: 2)
         printAndAssert(result: f([2,3,0,1,4]), expected: 2)
         printAndAssert(result: f([3,1,4,1,1,6,2,1,2,0,1,2]), expected: 3)
         printAndAssert(result: f(edgeCase1), expected: 5753)
+    }
+
+
+
+    func bfs7(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+    func greedy7(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+    func dpBackwards7(_ nums: [Int]) -> Int {
+        fatalError()
     }
 
 
@@ -49,15 +64,42 @@ final class Week5JumpGameII {
     
 
     func bfs5(_ nums: [Int]) -> Int {
-        fatalError()
+        if nums.count == 1 { return 0 }
+        var i = 0, curMax = 0, nextMax = 0, jump = 0
+        while curMax - i + 1 > 0 {
+            jump += 1
+            while i <= curMax {
+                nextMax = max(nextMax, i + nums[i])
+                if nextMax >= nums.count - 1 { return jump }
+                i += 1
+            }
+            curMax = nextMax
+        }
+        return 0
     }
 
     func greedy5(_ nums: [Int]) -> Int {
-        fatalError()
+        var ans = 0, curMax = 0, nextMax = 0
+        for i in 0..<nums.count-1 {
+            nextMax = max(nextMax, i + nums[i])
+            if i == curMax {
+                curMax = nextMax
+                ans += 1
+            }
+        }
+        return ans
     }
 
     func dpBackwards5(_ nums: [Int]) -> Int {
-        fatalError()
+        let n = nums.count
+        var dp = [Int](repeating: Int(1e5), count: n)
+        dp[n - 1] = 0
+        for i in stride(from: n - 2, through: 0, by: -1) {
+            for j in stride(from: i + 1, through: min(n - 1, i + nums[i]), by: 1) {
+                dp[i] = min(dp[i], dp[j] + 1)
+            }
+        }
+        return dp[0]
     }
 
 

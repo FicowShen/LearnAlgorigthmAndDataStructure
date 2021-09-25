@@ -20,7 +20,7 @@ import Foundation
  */
 final class Week4JumpGame {
     func run() {
-        let f = canJumpWithGoingBackwards5
+        let f = canJumpWithRawDP5
         printAndAssert(result: f([0]), expected: true)
         printAndAssert(result: f([0,2,3]), expected: false)
         printAndAssert(result: f([2,0,0]), expected: true)
@@ -53,7 +53,14 @@ final class Week4JumpGame {
 
 
     func canJumpWithRawDP5(_ nums: [Int]) -> Bool {
-        fatalError()
+        let n = nums.count
+        var dp = [Int](repeating: 0, count: n)
+        dp[0] = nums[0]
+        for i in stride(from: 1, to: n, by: 1) {
+            if dp[i - 1] < i { return false }
+            dp[i] = max(dp[i - 1], i + nums[i])
+        }
+        return true
     }
 
 
