@@ -19,6 +19,7 @@ final class DailyProblems {
     }
 
     static func week8() {
+        Week8NQueensII().run()
         Week8CountingBits().run()
         Week8ReversePairs().run()
         Week8MergeIntervals().run()
