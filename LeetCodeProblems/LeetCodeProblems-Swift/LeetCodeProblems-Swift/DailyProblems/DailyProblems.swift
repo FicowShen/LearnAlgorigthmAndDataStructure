@@ -19,6 +19,7 @@ final class DailyProblems {
     }
 
     static func week8() {
+        Week8ReversePairs().run()
         Week8MergeIntervals().run()
         Week8RelativeSortArray().run()
         Week8LRUCache().run()
