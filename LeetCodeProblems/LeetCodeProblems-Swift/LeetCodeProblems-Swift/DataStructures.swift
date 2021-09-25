@@ -352,7 +352,8 @@ struct PriorityQueue<T> {
 
     private let degree = 2
     private let sort: ((T, T) -> Bool)
-    private var heap = [T](), heapSize = 0
+    private(set) var heap = [T]()
+    private var heapSize = 0
 
     private var isFull: Bool { heapSize == heap.count }
 

@@ -15,10 +15,11 @@ import Foundation
  2. A*
  Time: O(n*n), Space: O(n*n)
  https://leetcode.com/problems/shortest-path-in-binary-matrix/discuss/313347/A*-search-in-Python
+ https://leetcode.com/problems/shortest-path-in-binary-matrix/discuss/1063746/Java-Solution-with-A*-Search
  */
 final class Week7ShortestPathInBinaryMatrix {
     func run() {
-        let f = AStarSearch2
+        let f = AStarSearch3
         printAndAssert(result: f([[0]]), expected: 1)
         printAndAssert(result: f([[0,1],
                                   [1,0]]),
@@ -47,6 +48,15 @@ final class Week7ShortestPathInBinaryMatrix {
                                   [0,0,0,1,0,1,0,0,0],
                                   [0,1,0,1,1,0,0,0,0],
                                   [0,0,0,0,0,1,0,1,0]]),
+                       expected: 11)
+        printAndAssert(result: f([[0,0,0,1,0,0,1,0],
+                                  [0,0,0,0,0,0,0,0],
+                                  [1,0,0,1,1,0,1,0],
+                                  [0,1,1,1,0,0,0,0],
+                                  [0,0,0,0,0,1,1,1],
+                                  [1,0,1,0,0,0,0,0],
+                                  [1,1,0,0,0,1,0,0],
+                                  [0,0,0,0,0,1,0,0]]),
                        expected: 11)
     }
 
@@ -88,11 +98,58 @@ final class Week7ShortestPathInBinaryMatrix {
 
 
     func AStarSearch3(_ grid: [[Int]]) -> Int {
-        fatalError()
+        let n = grid.count
+        if grid[0][0] == 1 || grid[n - 1][n - 1] == 1 { return -1 }
+        if n == 1 { return 1 }
+        let drow = [-1,0,1,0,-1,-1,1,1], dcol = [0,1,0,-1,-1,1,-1,1]
+        let start = (row: 0, col: 0, distance: 0, step: 1)
+        var pq = PriorityQueue<(row: Int, col: Int, distance: Int, step: Int)>(
+            capacity: n * n, defaultValue: start, sort: { a, b in
+                if a.step != b.step { return a.step < b.step }
+                return a.distance < b.distance
+            }
+        )
+        pq.insert(start)
+        var grid = grid
+        while !pq.isEmpty {
+            let coord = pq.pop()
+            let row = coord.row, col = coord.col
+            if row == n - 1, col == n - 1 { return coord.step }
+            for j in 0..<drow.count {
+                let r = row + drow[j], c = col + dcol[j]
+                if r < 0 || c < 0 || r >= n || c >= n || grid[r][c] != 0 { continue }
+                grid[r][c] = 1
+                pq.insert((r, c, abs(r - n) + abs(c - n), coord.step + 1))
+            }
+        }
+        return -1
     }
 
     func bidirectionalBFS3(_ grid: [[Int]]) -> Int {
-        fatalError()
+        let n = grid.count
+        if grid[0][0] == 1 || grid[n - 1][n - 1] == 1 { return -1 }
+        if n == 1 { return 1 }
+        let drow = [-1,0,1,0,-1,-1,1,1], dcol = [0,1,0,-1,-1,1,-1,1]
+        var begin = Set([[0, 0]]), end = Set([[n - 1, n - 1]])
+        var grid = grid, ans = 1
+        while !begin.isEmpty {
+            if begin.count > end.count { (begin, end) = (end, begin) }
+            var next = Set<[Int]>()
+            for b in begin {
+                let row = b[0], col = b[1]
+                printMove(row: row, col: col, eval: 0, step: ans, grid: grid)
+                for i in 0..<drow.count {
+                    let r = row + drow[i], c = col + dcol[i]
+                    if end.contains([r, c]) { return ans + 1 }
+                    if r < 0 || c < 0 || r >= n || c >= n || grid[r][c] != 0 { continue }
+                    grid[r][c] = 2
+                    next.insert([r, c])
+                }
+            }
+            begin = next
+            ans += 1
+        }
+        return -1
     }
 
 
