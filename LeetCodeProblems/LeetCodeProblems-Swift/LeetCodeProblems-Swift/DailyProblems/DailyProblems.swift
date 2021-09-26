@@ -64,6 +64,7 @@ final class DailyProblems {
         Week6CoinChange().run()
         Week6MinimumPathSum().run()
         Week5JumpGameII().run()
+        Day56MaximumLengthOfRepeatedSubarray().run()
         Day42WordSearchII().run()
         Day40MaxSumOfRectangleNoLargerThanK().run()
         Day33LongestCommonSubsequence().run()
