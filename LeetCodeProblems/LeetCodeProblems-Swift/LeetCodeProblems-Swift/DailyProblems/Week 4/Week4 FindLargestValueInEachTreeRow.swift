@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week4FindLargestValueInEachTreeRow {
     func run() {
-        let f = bfs2
+        let f = bfs3
         func judge(_ nodes: [Int?], _ expected: [Int]) {
             let tree = TreeNode.fromPerfectBinaryTreeLevelNodes(nodes)
             printAndAssert(result: f(tree), expected: expected)
@@ -24,6 +24,20 @@ final class Week4FindLargestValueInEachTreeRow {
         judge([1,3,2,5,3,nil,9], [1,3,9])
 
     }
+
+
+
+
+
+    func bfs5(_ root: TreeNode?) -> [Int] {
+        fatalError()
+    }
+
+    func dfs5(_ root: TreeNode?) -> [Int] {
+        fatalError()
+    }
+
+
 
 
 
@@ -39,12 +53,35 @@ final class Week4FindLargestValueInEachTreeRow {
 
 
 
+
+
     func bfs3(_ root: TreeNode?) -> [Int] {
-        fatalError()
+        guard let root = root else { return [] }
+        var ans = [Int](), q = [root]
+        while !q.isEmpty {
+            var next = [TreeNode](), value = Int.min
+            for node in q {
+                value = max(value, node.val)
+                if let l = node.left { next.append(l) }
+                if let r = node.right { next.append(r) }
+            }
+            ans.append(value)
+            q = next
+        }
+        return ans
     }
 
     func dfs3(_ root: TreeNode?) -> [Int] {
-        fatalError()
+        var ans = [Int]()
+        func f(_ root: TreeNode?, level: Int) {
+            guard let root = root else { return }
+            if ans.count == level { ans.append(.min) }
+            ans[level] = max(ans[level], root.val)
+            f(root.left, level: level + 1)
+            f(root.right, level: level + 1)
+        }
+        f(root, level: 0)
+        return ans
     }
 
 

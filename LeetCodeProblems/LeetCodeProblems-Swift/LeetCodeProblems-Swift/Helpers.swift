@@ -100,3 +100,14 @@ func printAndAssert<T: Equatable>(result: T, expected: T) {
 extension Int {
     var bits: String { String(self, radix: 2, uppercase: false) }
 }
+
+
+infix operator --> : AdditionPrecedence
+func --> (lhs: Int, rhs: Int) -> StrideTo<Int> {
+    stride(from: lhs, to: rhs, by: 1)
+}
+
+infix operator --- : AdditionPrecedence
+func --- (lhs: Int, rhs: Int) -> StrideThrough<Int> {
+    stride(from: lhs, through: rhs, by: 1)
+}

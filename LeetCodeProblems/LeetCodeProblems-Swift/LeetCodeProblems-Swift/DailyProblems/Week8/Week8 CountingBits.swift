@@ -29,11 +29,31 @@ import CryptoKit
  */
 final class Week8CountingBits {
     func run() {
-        let f = lowSet2
+        let f = lowSet3
         printAndAssert(result: f(0), expected: [0])
         printAndAssert(result: f(2), expected: [0,1,1])
         printAndAssert(result: f(5), expected: [0,1,1,2,1,2])
         printAndAssert(result: f(8), expected: [0,1,1,2,1,2,2,3,1])
+    }
+
+
+
+
+
+    func lowSet5(_ n: Int) -> [Int] {
+        fatalError()
+    }
+
+    func lowBit5(_ n: Int) -> [Int] {
+        fatalError()
+    }
+
+    func highBit5(_ n: Int) -> [Int] {
+        fatalError()
+    }
+
+    func countAndRemoveLastOne5(_ n: Int) -> [Int] {
+        fatalError()
     }
 
 
@@ -62,19 +82,43 @@ final class Week8CountingBits {
 
 
     func lowSet3(_ n: Int) -> [Int] {
-        fatalError()
+        var bits = [Int](repeating: 0, count: n + 1)
+        for i in stride(from: 1, through: n, by: 1) {
+            bits[i] = bits[i & (i - 1)] + 1
+        }
+        return bits
     }
 
     func lowBit3(_ n: Int) -> [Int] {
-        fatalError()
+        var bits = [Int](repeating: 0, count: n + 1)
+        for i in stride(from: 1, through: n, by: 1) {
+            bits[i] = bits[i >> 1] + (i & 1)
+        }
+        return bits
     }
 
     func highBit3(_ n: Int) -> [Int] {
-        fatalError()
+        var highBit = 0, bits = [Int](repeating: 0, count: n + 1)
+        for i in stride(from: 1, through: n, by: 1) {
+            if i & (i - 1) == 0 {
+                highBit = i
+            }
+            bits[i] = bits[i - highBit] + 1
+        }
+        return bits
     }
 
     func countAndRemoveLastOne3(_ n: Int) -> [Int] {
-        fatalError()
+        var ans = [Int]()
+        for i in 0...n {
+            var x = i, count = 0
+            while x != 0 {
+                x &= (x - 1)
+                count += 1
+            }
+            ans.append(count)
+        }
+        return ans
     }
 
 
@@ -159,7 +203,7 @@ final class Week8CountingBits {
 
     func countAndRemoveLastOne1(_ n: Int) -> [Int] {
         var ans = [Int](repeating: 0, count: n + 1)
-        for i in 0...n {
+        for i in 0..<n {
             var x = i, count = 0
             while x != 0 {
                 x &= (x - 1)

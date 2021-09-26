@@ -17,7 +17,7 @@ import Foundation
  */
 final class Week8RelativeSortArray {
     func run() {
-        let f = countFrequency3
+        let f = countFrequency4
         printAndAssert(result: f([2,3,1,3,2,4,6,7,9,2,19],
                                  [2,1,4,3,9,6]),
                        expected: [2,2,2,1,4,3,3,9,6,7,19])
@@ -68,11 +68,33 @@ final class Week8RelativeSortArray {
 
 
     func countFrequency4(_ arr1: [Int], _ arr2: [Int]) -> [Int] {
-        fatalError()
+        let max = arr1.max()!
+        var frequency = [Int](repeating: 0, count: max + 1)
+        for num in arr1 { frequency[num] += 1 }
+        var ans = [Int]()
+        for num in arr2 {
+            let nums = [Int](repeating: num, count: frequency[num])
+            ans.append(contentsOf: nums)
+            frequency[num] = 0
+        }
+        for num in 0...max {
+            if frequency[num] == 0 { continue }
+            let nums = [Int](repeating: num, count: frequency[num])
+            ans.append(contentsOf: nums)
+            frequency[num] = 0
+        }
+        return ans
     }
 
     func sortByRank4(_ arr1: [Int], _ arr2: [Int]) -> [Int] {
-        fatalError()
+        var rank = [Int: Int]()
+        for (i, v) in arr2.enumerated() { rank[v] = i }
+        return arr1.sorted { a, b in
+            if rank[a] != nil {
+                return rank[b] == nil ? true : rank[a]! < rank[b]!
+            }
+            return rank[b] == nil ? a < b : false
+        }
     }
 
 

@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week8MergeIntervals {
     func run() {
-        let f = sortAndMerge2
+        let f = sortAndMerge3
         printAndAssert(result: f([[1,4],[4,5]]),
                        expected: [[1,5]])
         printAndAssert(result: f([[1,3],[2,6],[8,10],[15,18]]),
@@ -42,7 +42,16 @@ final class Week8MergeIntervals {
 
 
     func sortAndMerge3(_ intervals: [[Int]]) -> [[Int]] {
-        fatalError()
+        let intervals = intervals.sorted(by: { $0[0] < $1[0] })
+        var merged = [[Int]]()
+        for cur in intervals {
+            if merged.isEmpty || cur[0] > merged.last![1] {
+                merged.append(cur)
+            } else {
+                merged[merged.count - 1][1] = max(cur[1], merged[merged.count - 1][1])
+            }
+        }
+        return merged
     }
 
 

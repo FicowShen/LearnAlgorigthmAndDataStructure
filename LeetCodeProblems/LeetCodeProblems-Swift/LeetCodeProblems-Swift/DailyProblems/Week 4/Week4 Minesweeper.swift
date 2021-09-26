@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week4Minesweeper {
     func run() {
-        let f = updateBoardWithBFS2
+        let f = updateBoardWithDFS2
         func judge(_ board: [[Character]], _ click: [Int], _ expected: [[Character]]) {
             printAndAssert(result: f(board, click), expected: expected)
         }
@@ -97,7 +97,37 @@ final class Week4Minesweeper {
 
 
     func updateBoardWithDFS2(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
-        fatalError()
+        let row = click[0], col = click[1]
+        var board = board
+        if board[row][col] == "M" { // rule 1, game over
+            board[row][col] = "X"
+            return board
+        }
+        let Row = board.count, Col = board[0].count
+        let drow = [-1,1,0,0,1,1,-1,-1]
+        let dcol = [0,0,1,-1,1,-1,-1,1]
+        func dfs(row: Int, col: Int) {
+            var count = 0
+            for i in 0..<drow.count {
+                let r = row + drow[i], c = col + dcol[i]
+                if r < 0 || c < 0 || r >= Row || c >= Col { continue }
+                count += (board[r][c] == "M" ? 1 : 0)
+            }
+            if count > 0 { // rule 3, display bomb count
+                board[row][col] = Character(count.description)
+                return
+            }
+            // rule 2, revealed blank, search adjacent unrevealed squares
+            board[row][col] = Character("B")
+            for i in 0..<drow.count {
+                let r = row + drow[i], c = col + dcol[i]
+                if r < 0 || c < 0 || r >= Row || c >= Col { continue }
+                if board[r][c] != "E" { continue }
+                dfs(row: r, col: c)
+            }
+        }
+        dfs(row: row, col: col)
+        return board
     }
 
 
