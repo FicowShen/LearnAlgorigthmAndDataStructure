@@ -21,7 +21,7 @@ import Foundation
  */
 final class Week6MaximumProductSubarray {
     func run() {
-        let f = multiplyFromBothSides3
+        let f = rawDP4
         printAndAssert(result: f([2,3,-2,4]), expected: 6)
         printAndAssert(result: f([-2,0,-1]), expected: 0)
         printAndAssert(result: f([-2]), expected: -2)
@@ -56,7 +56,14 @@ final class Week6MaximumProductSubarray {
     }
 
     func rawDP4(_ nums: [Int]) -> Int {
-        fatalError()
+        var fmax = nums, fmin = nums, ans = nums[0]
+        for i in 1..<nums.count {
+            let x = nums[i]
+            fmax[i] = max(x, max(fmin[i - 1] * x, fmax[i - 1] * x))
+            fmin[i] = min(x, min(fmin[i - 1] * x, fmax[i - 1] * x))
+            ans = max(ans, fmax[i])
+        }
+        return ans
     }
 
 
