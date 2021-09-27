@@ -9,6 +9,7 @@ import Foundation
 
 final class DailyProblems {
     static func run() {
+        week9()
         week8()
         week7()
         week5And6()
@@ -16,6 +17,10 @@ final class DailyProblems {
         week3()
         week2()
         week1()
+    }
+
+    static func week9() {
+        Day57FirstUniqueCharacterInAString().run()
     }
 
     static func week8() {
