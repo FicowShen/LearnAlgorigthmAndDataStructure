@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week6BestTimeToBuyAndSellStockIV {
     func run() {
-        let f = dp3
+        let f = rawDP3
         func judge(k: Int, prices: [Int], expected: Int) {
             printAndAssert(result: f(k, prices), expected: expected)
         }
@@ -68,7 +68,32 @@ final class Week6BestTimeToBuyAndSellStockIV {
 
 
     func rawDP3(_ k: Int, _ prices: [Int]) -> Int {
-        fatalError()
+        let n = prices.count
+        // no deal
+        if n < 2 || k == 0 { return 0 }
+        // at most n/2 transactions
+        let k = min(k, n/2), dp = [Int](repeating: 0, count: k + 1)
+        // i day, j transaction
+        var buy = [[Int]](repeating: dp, count: n), sell = buy
+        // base case
+        buy[0][0] = -prices[0]
+        // edge cases
+        let Invalid = Int.min / 2
+        // 0 day, only first transaction(i == 0)
+        for i in 1...k {
+            buy[0][i] = Invalid
+            sell[0][i] = Invalid
+        }
+        for i in 1..<n {
+            // day i, transaction j: start first transaction
+            buy[i][0] = max(buy[i - 1][0], sell[i - 1][0] - prices[i])
+            for j in 1...k {
+                buy[i][j] = max(buy[i - 1][j], sell[i - 1][j] - prices[i])
+                // buy[i - 1][j - 1], bought before
+                sell[i][j] = max(sell[i - 1][j], buy[i - 1][j - 1] + prices[i])
+            }
+        }
+        return sell[n - 1].max()!
     }
 
 

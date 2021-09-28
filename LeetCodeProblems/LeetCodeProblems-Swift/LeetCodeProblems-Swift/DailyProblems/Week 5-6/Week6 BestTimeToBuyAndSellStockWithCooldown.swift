@@ -11,15 +11,19 @@ import Foundation
  https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/
  1. dp with 3 statuses
  Time: O(n), Space: O(n) / O(1)
+ https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/discuss/75928/Share-my-DP-solution-(By-State-Machine-Thinking)
 
  2. dp with 2 statuses
+ buy[i] <= rest[i] <= sell[i]
  Time: O(n), Space: O(n) / O(1)
+ https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/discuss/75927/Share-my-thinking-process
  */
 final class Week6BestTimeToBuyAndSellStockWithCooldown {
     func run() {
-        let f = rawDPWithThreeStatuses3
+        let f = dpWithTwoStatuses3
         printAndAssert(result: f([1,2,3,0,2]), expected: 3)
         printAndAssert(result: f([1]), expected: 0)
+        printAndAssert(result: f([1,2,4]), expected: 3)
     }
 
 
@@ -69,15 +73,41 @@ final class Week6BestTimeToBuyAndSellStockWithCooldown {
 
 
     func dpWithTwoStatuses3(_ prices: [Int]) -> Int {
-        fatalError()
+        var bought = 0, sold = 0, hasStock = -prices[0], noStock = 0
+        for i in 1..<prices.count {
+            bought = hasStock
+            hasStock = max(hasStock, sold - prices[i])
+            sold = noStock
+            noStock = max(noStock, bought + prices[i])
+        }
+        return noStock
     }
 
     func rawDPWithTwoStatuses3(_ prices: [Int]) -> Int {
-        fatalError()
+        let n = prices.count
+        var noStock = [Int](repeating: 0, count: n), hasStock = noStock
+        hasStock[0] = -prices[0]
+        if n > 1 {
+            noStock[1] = max(noStock[0], hasStock[0] + prices[1])
+            hasStock[1] = max(hasStock[0], noStock[0] - prices[1])
+            for i in 2..<prices.count {
+                noStock[i] = max(noStock[i - 1], hasStock[i - 1] + prices[i])
+                hasStock[i] = max(hasStock[i - 1], noStock[i - 2] - prices[i])
+            }
+        }
+        return noStock[n - 1]
     }
 
     func dpWithThreeStatuses3(_ prices: [Int]) -> Int {
-        fatalError()
+        var noStock = 0, hasStock = -prices[0], cooldown = 0
+        for i in 1..<prices.count {
+            (noStock, hasStock, cooldown) = (
+                max(noStock, cooldown),
+                max(hasStock, noStock - prices[i]),
+                hasStock + prices[i]
+            )
+        }
+        return max(noStock, cooldown)
     }
 
     func rawDPWithThreeStatuses3(_ prices: [Int]) -> Int {

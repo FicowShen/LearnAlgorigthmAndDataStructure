@@ -17,12 +17,12 @@ import Foundation
  */
 final class Week6BestTimeToBuyAndSellStockWithTransactionFee {
     func run() {
-        let f = rawDP3
+        let f = greedy3
         func judge(prices: [Int], fee: Int, result: Int) {
             printAndAssert(result: f(prices, fee), expected: result)
         }
         judge(prices: [1,3,2,8,4,9], fee: 2, result: 8)
-        judge(prices: [1,3,7,5,10,3], fee: 3, result: 6)
+//        judge(prices: [1,3,7,5,10,3], fee: 3, result: 6)
     }
 
 
@@ -60,11 +60,27 @@ final class Week6BestTimeToBuyAndSellStockWithTransactionFee {
 
 
     func greedy3(_ prices: [Int], _ fee: Int) -> Int {
-        fatalError()
+        var buy = prices[0] + fee, profit = 0
+        for i in 1..<prices.count {
+            if prices[i] + fee < buy { // prices going down
+                buy = prices[i] + fee // buy at the lowest
+            } else if prices[i] > buy { // prices going up
+                profit += prices[i] - buy // sell the the highest
+                buy = prices[i]
+            }
+        }
+        return profit
     }
 
     func dp3(_ prices: [Int], _ fee: Int) -> Int {
-        fatalError()
+        var noStock = 0, hasStock = -prices[0]
+        for i in 1..<prices.count {
+            (noStock, hasStock) = (
+                max(noStock, hasStock + prices[i] - fee),
+                max(hasStock,   noStock - prices[i])
+            )
+        }
+        return noStock
     }
 
     func rawDP3(_ prices: [Int], _ fee: Int) -> Int {
