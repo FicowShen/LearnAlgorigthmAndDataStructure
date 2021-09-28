@@ -12,10 +12,56 @@ import Foundation
  */
 final class Week6BestTimeToBuyandSellStock {
     func run() {
-        let f = maxProfit1
+        let f = maxProfit2
         printAndAssert(result: f([7,1,5,3,6,4]), expected: 5)
         printAndAssert(result: f([7,6,4,3,1]), expected: 0)
     }
+
+
+
+
+
+
+    func maxProfit5(_ prices: [Int]) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+
+    func maxProfit4(_ prices: [Int]) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+
+    func maxProfit3(_ prices: [Int]) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+
+    func maxProfit2(_ prices: [Int]) -> Int {
+        var ans = 0, cheapest = prices[0]
+        for p in prices {
+            cheapest = min(cheapest, p)
+            ans = max(ans, p - cheapest)
+        }
+        return ans
+    }
+
+
+
+
+
 
     func maxProfit1(_ prices: [Int]) -> Int {
         var ans = 0, minPrice = prices[0]
