@@ -18,7 +18,7 @@ import Foundation
  */
 final class Week6UniquePaths {
     func run() {
-        let f = rawDP3
+        let f = math3
         printAndAssert(result: f(3, 7), expected: 28)
         printAndAssert(result: f(3, 2), expected: 3)
         printAndAssert(result: f(7, 3), expected: 28)
@@ -56,11 +56,24 @@ final class Week6UniquePaths {
 
 
     func math3(_ m: Int, _ n: Int) -> Int {
-        fatalError()
+        var ans = 1, x = n, y = 1
+        while y < m {
+            ans = ans * x / y
+            x += 1
+            y += 1
+        }
+        return ans
     }
 
     func dp3(_ m: Int, _ n: Int) -> Int {
-        fatalError()
+        let (a, b) = m > n ? (m, n) : (n, m)
+        var dp = [Int](repeating: 1, count: b) // use the shorter array for dp
+        for _ in 1..<a {
+            for j in 1..<b {
+                dp[j] += dp[j - 1]
+            }
+        }
+        return dp[b - 1]
     }
 
     func rawDP3(_ m: Int, _ n: Int) -> Int {
