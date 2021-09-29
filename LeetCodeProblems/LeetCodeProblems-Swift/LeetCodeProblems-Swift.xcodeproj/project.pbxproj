@@ -72,6 +72,7 @@
 		6A42EFF426E3623B0030EE32 /* Week1 LargestRectangleInHistogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFF326E3623B0030EE32 /* Week1 LargestRectangleInHistogram.swift */; };
 		6A59A56426B0DE3E00273E66 /* MaxProfit2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59A56326B0DE3E00273E66 /* MaxProfit2.swift */; };
 		6A6730F127013C8E00C796CA /* Day57 FirstUniqueCharacterInAString .swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6730F027013C8E00C796CA /* Day57 FirstUniqueCharacterInAString .swift */; };
+		6A6730F42703E1AD00C796CA /* Week9 ReverseStringII.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6730F32703E1AD00C796CA /* Week9 ReverseStringII.swift */; };
 		6A81919426F2C3FF0000188C /* Week7 NQueens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919326F2C3FF0000188C /* Week7 NQueens.swift */; };
 		6A81919626F601920000188C /* Week7 ValidSudoku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919526F601920000188C /* Week7 ValidSudoku.swift */; };
 		6A81919826F7764A0000188C /* Week3 Subsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919726F7764A0000188C /* Week3 Subsets.swift */; };
@@ -235,6 +236,7 @@
 		6A42EFF326E3623B0030EE32 /* Week1 LargestRectangleInHistogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week1 LargestRectangleInHistogram.swift"; sourceTree = "<group>"; };
 		6A59A56326B0DE3E00273E66 /* MaxProfit2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxProfit2.swift; sourceTree = "<group>"; };
 		6A6730F027013C8E00C796CA /* Day57 FirstUniqueCharacterInAString .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day57 FirstUniqueCharacterInAString .swift"; sourceTree = "<group>"; };
+		6A6730F32703E1AD00C796CA /* Week9 ReverseStringII.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week9 ReverseStringII.swift"; sourceTree = "<group>"; };
 		6A81919326F2C3FF0000188C /* Week7 NQueens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 NQueens.swift"; sourceTree = "<group>"; };
 		6A81919526F601920000188C /* Week7 ValidSudoku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 ValidSudoku.swift"; sourceTree = "<group>"; };
 		6A81919726F7764A0000188C /* Week3 Subsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 Subsets.swift"; sourceTree = "<group>"; };
@@ -434,6 +436,15 @@
 			path = "Week 5-6";
 			sourceTree = "<group>";
 		};
+		6A6730F22703E19700C796CA /* Week 9 */ = {
+			isa = PBXGroup;
+			children = (
+				6A6730F027013C8E00C796CA /* Day57 FirstUniqueCharacterInAString .swift */,
+				6A6730F32703E1AD00C796CA /* Week9 ReverseStringII.swift */,
+			);
+			path = "Week 9";
+			sourceTree = "<group>";
+		};
 		6A81919D26FAA4640000188C /* Week8 */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,6 +484,7 @@
 		6AB35B1926B6E7AB0026173D /* DailyProblems */ = {
 			isa = PBXGroup;
 			children = (
+				6A6730F22703E19700C796CA /* Week 9 */,
 				6A81919D26FAA4640000188C /* Week8 */,
 				6A10BA7926EECC2C006CE7AC /* Week 7 */,
 				6A42EFEC26E057820030EE32 /* Week 5-6 */,
@@ -482,7 +494,6 @@
 				6AB35B3226BAD94D0026173D /* Week 1 */,
 				6AB35B1C26B6E7F40026173D /* DailyProblems.swift */,
 				6AB35B1A26B6E7D70026173D /* TheKWeakestRowsInAMatrix.swift */,
-				6A6730F027013C8E00C796CA /* Day57 FirstUniqueCharacterInAString .swift */,
 			);
 			path = DailyProblems;
 			sourceTree = "<group>";
@@ -696,6 +707,7 @@
 				6AB35B3E26BFB4B80026173D /* Week1 ReverseLinkedList.swift in Sources */,
 				6A81919A26F832450000188C /* Week7 SudokuSolver.swift in Sources */,
 				6A10BA7F26EED428006CE7AC /* Week7 NumberOfIslands.swift in Sources */,
+				6A6730F42703E1AD00C796CA /* Week9 ReverseStringII.swift in Sources */,
 				6AB89D4526A106AC00E295BA /* BacktrackProblems.swift in Sources */,
 				6A42EFEE26E057AA0030EE32 /* Day32 MaximumSubarray.swift in Sources */,
 				6A10BA7D26EECD87006CE7AC /* Week7 ImplementTrieOrPrefixTree.swift in Sources */,

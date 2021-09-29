@@ -20,6 +20,7 @@ final class DailyProblems {
     }
 
     static func week9() {
+        Week9ReverseStringII().run()
         Day57FirstUniqueCharacterInAString().run()
     }
 
