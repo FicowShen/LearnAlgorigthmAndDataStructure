@@ -27,7 +27,7 @@ import Foundation
  */
 final class Week7ImplementTrieOrPrefixTree {
     func run() {
-        let trie = Trie4.Trie()
+        let trie = Trie5.Trie()
         trie.insert("apple")
         printAndAssert(result: trie.search("apple"), expected: true)
         printAndAssert(result: trie.search("app"), expected: false)
@@ -61,20 +61,44 @@ final class Week7ImplementTrieOrPrefixTree {
 
     enum Trie5 {
         final class Trie {
-            init() {
-
+            final class TrieNode {
+                var isWord = false, children = [Character: TrieNode]()
             }
+            private let root = TrieNode()
+            init() {}
 
             func insert(_ word: String) {
+                var node = root
+                for c in word {
+                    if let n = node.children[c] {
+                        node = n
+                    } else {
+                        let new = TrieNode()
+                        node.children[c] = new
+                        node = new
+                    }
+                }
+                node.isWord = true
+            }
 
+            private func find(_ s: String) -> TrieNode? {
+                var node = root
+                for c in s {
+                    if let n = node.children[c] {
+                        node = n
+                    } else {
+                        return nil
+                    }
+                }
+                return node
             }
 
             func search(_ word: String) -> Bool {
-                fatalError()
+                find(word)?.isWord ?? false
             }
 
             func startsWith(_ prefix: String) -> Bool {
-                fatalError()
+                find(prefix) != nil
             }
         }
     }

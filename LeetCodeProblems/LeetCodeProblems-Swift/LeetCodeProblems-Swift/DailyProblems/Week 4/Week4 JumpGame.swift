@@ -20,7 +20,7 @@ import Foundation
  */
 final class Week4JumpGame {
     func run() {
-        let f = canJumpWithRawDP5
+        let f = canJumpWithGoingBackwards6
         printAndAssert(result: f([0]), expected: true)
         printAndAssert(result: f([0,2,3]), expected: false)
         printAndAssert(result: f([2,0,0]), expected: true)
@@ -29,16 +29,78 @@ final class Week4JumpGame {
     }
 
 
-    func canJumpWithGoingBackwards6(_ nums: [Int]) -> Bool {
+
+
+
+    func canJumpWithGoingBackwards8(_ nums: [Int]) -> Bool {
         fatalError()
+    }
+
+    func canJumpWithRawDP8(_ nums: [Int]) -> Bool {
+        fatalError()
+    }
+
+    func canJumpWithGreedy8(_ nums: [Int]) -> Bool {
+        fatalError()
+    }
+
+
+
+
+
+
+    func canJumpWithGoingBackwards7(_ nums: [Int]) -> Bool {
+        fatalError()
+    }
+
+    func canJumpWithRawDP7(_ nums: [Int]) -> Bool {
+        fatalError()
+    }
+
+    func canJumpWithGreedy7(_ nums: [Int]) -> Bool {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+    func canJumpWithGoingBackwards6(_ nums: [Int]) -> Bool {
+        let n = nums.count
+        var goal = n - 1
+        for i in stride(from: n - 2, through: 0, by: -1) {
+            if i + nums[i] >= goal { goal = i }
+        }
+        return goal == 0
     }
 
     func canJumpWithRawDP6(_ nums: [Int]) -> Bool {
-        fatalError()
+        let n = nums.count
+        if n == 1 { return true }
+        if nums[0] == 0 { return false }
+        var dp = [Int](repeating: 0, count: n)
+        dp[0] = nums[0]
+        for i in 1..<n {
+            if dp[i - 1] < i { return false }
+            dp[i] = max(dp[i - 1], i + nums[i])
+            if dp[i] >= n - 1 { return true }
+        }
+        return true
     }
 
     func canJumpWithGreedy6(_ nums: [Int]) -> Bool {
-        fatalError()
+        var maxJump = 0
+        for i in 0..<nums.count {
+            if maxJump < i { return false }
+            maxJump = max(maxJump, i + nums[i])
+            if maxJump >= nums.count - 1 { return true }
+        }
+        return true
     }
 
 
@@ -62,24 +124,6 @@ final class Week4JumpGame {
         }
         return true
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     func canJumpWithGoingBackwards5(_ nums: [Int]) -> Bool {
         let n = nums.count

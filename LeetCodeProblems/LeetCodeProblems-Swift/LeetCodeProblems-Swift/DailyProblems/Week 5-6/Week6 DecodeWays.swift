@@ -15,7 +15,7 @@ import Foundation
  */
 final class Week6DecodeWays {
     func run() {
-        let f = dp3
+        let f = dp4
         printAndAssert(result: f("12"), expected: 2)
         printAndAssert(result: f("226"), expected: 3)
         printAndAssert(result: f("0"), expected: 0)
@@ -48,11 +48,40 @@ final class Week6DecodeWays {
 
 
     func dp4(_ s: String) -> Int {
-        fatalError()
+        let n = s.count, s = Array(s)
+        var a = 0, b = 1, c = 0 // f[i - 2], f[i - 1], f[i]
+        func isLetter(c1: Character, c2: Character) -> Bool {
+            (c1.asciiValue! - 48) * 10 + c2.asciiValue! - 48 <= 26
+        }
+        for i in 1...n {
+            c = 0
+            if s[i - 1] != "0" {
+                c += b
+            }
+            if i > 1, s[i - 2] != "0", isLetter(c1: s[i - 2], c2: s[i - 1]) {
+                c += a
+            }
+            (a, b) = (b, c)
+        }
+        return c
     }
 
     func rawDP4(_ s: String) -> Int {
-        fatalError()
+        let n = s.count, s = Array(s)
+        var f = [Int](repeating: 0, count: n + 1)
+        f[0] = 1
+        func isLetter(c1: Character, c2: Character) -> Bool {
+            (c1.asciiValue! - 48) * 10 + c2.asciiValue! - 48 <= 26
+        }
+        for i in 1...n {
+            if s[i - 1] != "0" {
+                f[i] += f[i - 1]
+            }
+            if i > 1, s[i - 2] != "0", isLetter(c1: s[i - 2], c2: s[i - 1]) {
+                f[i] += f[i - 2]
+            }
+        }
+        return f[n]
     }
 
 

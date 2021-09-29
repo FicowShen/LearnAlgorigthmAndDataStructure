@@ -20,22 +20,52 @@ import Foundation
  */
 final class Day28MajorityElement {
     func run() {
-        let f = boyerMoore3
+        let f = boyerMoore4
         printAndAssert(result: f([3,2,3]), expected: 3)
         printAndAssert(result: f([2,2,1,1,1,2,2]), expected: 2)
     }
 
 
-    func boyerMoore4(_ nums: [Int]) -> Int {
+
+
+
+
+    func boyerMoore5(_ nums: [Int]) -> Int {
         fatalError()
+    }
+
+    func dict5(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+    func sort5(_ nums: [Int]) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+
+    func boyerMoore4(_ nums: [Int]) -> Int {
+        var count = 0, candidate = 0
+        for num in nums {
+            if count == 0 { candidate = num }
+            count += num == candidate ? 1 : -1
+        }
+        return candidate
     }
 
     func dict4(_ nums: [Int]) -> Int {
-        fatalError()
+        var dict = [Int: Int]()
+        for num in nums { dict[num, default: 0] += 1 }
+        var ans = (nums[0], 0)
+        for (k, v) in dict { if v > ans.1 { ans = (k, v) } }
+        return ans.0
     }
 
     func sort4(_ nums: [Int]) -> Int {
-        fatalError()
+        nums.sorted()[nums.count / 2]
     }
 
 
