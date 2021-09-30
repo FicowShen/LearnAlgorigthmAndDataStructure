@@ -14,12 +14,23 @@ import Foundation
  */
 final class Week6MinimumPathSum {
     func run() {
-        let f = dp4
+        let f = dp5
         printAndAssert(result: f([[4]]), expected: 4)
         printAndAssert(result: f([[1,3,1]]), expected: 5)
         printAndAssert(result: f([[1],[4]]), expected: 5)
         printAndAssert(result: f([[1,3,1],[1,5,1],[4,2,1]]), expected: 7)
         printAndAssert(result: f([[1,2,3],[4,5,6]]), expected: 12)
+    }
+
+
+
+
+    func dp7(_ grid: [[Int]]) -> Int {
+        fatalError()
+    }
+
+    func rawDP7(_ grid: [[Int]]) -> Int {
+        fatalError()
     }
 
 
@@ -40,11 +51,28 @@ final class Week6MinimumPathSum {
 
 
     func dp5(_ grid: [[Int]]) -> Int {
-        fatalError()
+        let m = grid.count, n = grid[0].count
+        var f = grid[0]
+        for i in 1..<n { f[i] += f[i - 1] }
+        for i in 1..<m {
+            for j in 0..<n {
+                f[j] = grid[i][j] + (j == 0 ? f[j] : min(f[j], f[j - 1]))
+            }
+        }
+        return f[n - 1]
     }
 
     func rawDP5(_ grid: [[Int]]) -> Int {
-        fatalError()
+        let m = grid.count, n = grid[0].count
+        var f = grid
+        for i in 1..<m { f[i][0] += f[i - 1][0] }
+        for i in 1..<n { f[0][i] += f[0][i - 1] }
+        for i in 1..<m {
+            for j in 1..<n {
+                f[i][j] = grid[i][j] + min(f[i - 1][j], f[i][j - 1])
+            }
+        }
+        return f[m - 1][n - 1]
     }
 
 

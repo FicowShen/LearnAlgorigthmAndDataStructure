@@ -17,7 +17,8 @@ import Foundation
  */
 final class Week6HouseRobber {
     func run() {
-        let f = recurseWithMemo3
+        let f = dp4
+        printAndAssert(result: f([1]), expected: 1)
         printAndAssert(result: f([1,1]), expected: 1)
         printAndAssert(result: f([1,2,3,1]), expected: 4)
         printAndAssert(result: f([2,7,9,3,1]), expected: 12)
@@ -60,15 +61,36 @@ final class Week6HouseRobber {
 
 
     func rawDp4(_ nums: [Int]) -> Int {
-        fatalError()
+        let n = nums.count
+        var f = [Int](repeating: 0, count: n)
+        f[0] = nums[0]
+        if n > 1 {
+            f[1] = max(nums[0], nums[1])
+            for i in 2..<n {
+                f[i] = max(f[i - 1], f[i - 2] + nums[i])
+            }
+        }
+        return f[n - 1]
     }
 
     func dp4(_ nums: [Int]) -> Int {
-        fatalError()
+        var pre = 0, cur = 0
+        for num in nums {
+            (pre, cur) = (cur, max(cur, pre + num))
+        }
+        return cur
     }
 
     func recurseWithMemo4(_ nums: [Int]) -> Int {
-        fatalError()
+        var memo = [Int: Int]()
+        func f(_ i: Int) -> Int {
+            if i < 0 { return 0 }
+            if let v = memo[i] { return v }
+            let v = max(f(i - 1), f(i - 2) + nums[i])
+            memo[i] = v
+            return v
+        }
+        return f(nums.count - 1)
     }
 
 

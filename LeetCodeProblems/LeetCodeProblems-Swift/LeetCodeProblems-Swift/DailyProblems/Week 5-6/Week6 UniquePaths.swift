@@ -13,17 +13,38 @@ import Foundation
  Time: O(mn), Space: O(mn) / O(n)
 
  2. math
+ (m + n - 2)!/(m - 1)!
+ n/1 * (n+1)/2 * ... * (n+m-1)/(m-1+1) => (n+m-2)/(m-1)
  ans = ans * x / y  <- VS ->  ans *= x / y (x = 3, y = 2)
  Time: O(m), Space: O(1)
  */
 final class Week6UniquePaths {
     func run() {
-        let f = math3
+        let f = math4
         printAndAssert(result: f(3, 7), expected: 28)
         printAndAssert(result: f(3, 2), expected: 3)
         printAndAssert(result: f(7, 3), expected: 28)
         printAndAssert(result: f(3, 3), expected: 6)
     }
+
+
+
+
+
+    func math6(_ m: Int, _ n: Int) -> Int {
+        fatalError()
+    }
+
+    func dp6(_ m: Int, _ n: Int) -> Int {
+        fatalError()
+    }
+
+    func rawDP6(_ m: Int, _ n: Int) -> Int {
+        fatalError()
+    }
+
+
+
 
 
     func math5(_ m: Int, _ n: Int) -> Int {
@@ -40,16 +61,44 @@ final class Week6UniquePaths {
 
 
 
+
+
+
+
+
+
     func math4(_ m: Int, _ n: Int) -> Int {
-        fatalError()
+        // (m + n - 2)!/(m - 1)!
+        // n/1 * (n+1)/2 * ... * (n+m-1)/(m-1+1)
+        var x = n, y = 1, ans = 1
+        while y < m {
+            ans = ans * x / y
+            y += 1
+            x += 1
+        }
+        return ans
     }
 
     func dp4(_ m: Int, _ n: Int) -> Int {
-        fatalError()
+        var f = [Int](repeating: 1, count: n)
+        for _ in 1..<m {
+            for j in 0..<n {
+                f[j] = f[j] + (j == 0 ? 0 : f[j - 1])
+            }
+        }
+        return f[n - 1]
     }
 
     func rawDP4(_ m: Int, _ n: Int) -> Int {
-        fatalError()
+        var f = [[Int]](repeating: [Int](repeating: 0, count: n), count: m)
+        for i in 0..<m { f[i][0] = 1 }
+        for i in 0..<n { f[0][i] = 1 }
+        for i in 1..<m {
+            for j in 1..<n {
+                f[i][j] = f[i - 1][j] + f[i][j - 1]
+            }
+        }
+        return f[m - 1][n - 1]
     }
 
 
