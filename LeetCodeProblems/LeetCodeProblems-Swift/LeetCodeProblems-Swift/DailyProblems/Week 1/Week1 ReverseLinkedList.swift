@@ -15,7 +15,7 @@ import Foundation
  */
 final class Week1ReverseLinkedList {
     func run() {
-        let f = reverseListWithIteration4
+        let f = reverseListWithRecursion5
         func judge(_ nodes: [Int], expected: [Int]) {
             let a = ListNode.fromList(nodes)
             let b = ListNode.fromList(expected)
@@ -25,6 +25,23 @@ final class Week1ReverseLinkedList {
         judge([1,2], expected: [2,1])
         judge([], expected: [])
     }
+
+
+
+
+
+
+    func reverseListWithRecursion7(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+    func reverseListWithIteration7(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+
+
+
 
 
     func reverseListWithRecursion6(_ head: ListNode?) -> ListNode? {
@@ -37,13 +54,31 @@ final class Week1ReverseLinkedList {
 
 
 
+
+
     
     func reverseListWithRecursion5(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        func reversed(_ head: ListNode?) -> ListNode? {
+            guard let head = head,
+                  let next = head.next
+            else { return head }
+            let newHead = reversed(next)
+            next.next = head
+            head.next = nil
+            return newHead
+        }
+        return reversed(head)
     }
 
     func reverseListWithIteration5(_ head: ListNode?) -> ListNode? {
-        fatalError()
+        var pre: ListNode?, cur = head
+        while cur != nil {
+            let next = cur?.next
+            cur?.next = pre
+            pre = cur
+            cur = next
+        }
+        return pre
     }
 
 
