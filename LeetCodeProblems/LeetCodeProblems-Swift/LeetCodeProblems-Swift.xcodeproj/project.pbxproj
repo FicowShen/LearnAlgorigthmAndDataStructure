@@ -457,7 +457,7 @@
 			path = "Week 9";
 			sourceTree = "<group>";
 		};
-		6A81919D26FAA4640000188C /* Week8 */ = {
+		6A81919D26FAA4640000188C /* Week 8 */ = {
 			isa = PBXGroup;
 			children = (
 				6A81919E26FAA4990000188C /* Week8 NumberOf1Bits.swift */,
@@ -470,7 +470,7 @@
 				6A8191AC26FF29740000188C /* Week8 CountingBits.swift */,
 				6A8191AE26FF5AEB0000188C /* Week8 NQueensII.swift */,
 			);
-			path = Week8;
+			path = "Week 8";
 			sourceTree = "<group>";
 		};
 		6AB35B1326B594160026173D /* HouseRobber */ = {
@@ -497,7 +497,7 @@
 			isa = PBXGroup;
 			children = (
 				6A6730F22703E19700C796CA /* Week 9 */,
-				6A81919D26FAA4640000188C /* Week8 */,
+				6A81919D26FAA4640000188C /* Week 8 */,
 				6A10BA7926EECC2C006CE7AC /* Week 7 */,
 				6A42EFEC26E057820030EE32 /* Week 5-6 */,
 				6A42EFC526D323870030EE32 /* Week 4 */,
