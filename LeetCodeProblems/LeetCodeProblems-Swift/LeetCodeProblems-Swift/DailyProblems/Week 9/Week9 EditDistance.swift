@@ -14,10 +14,27 @@ import Foundation
  */
 final class Week9EditDistance {
     func run() {
-        let f = dp2
+        let f = dp3
+        printAndAssert(result: f("", ""), expected: 0)
         printAndAssert(result: f("horse", "ros"), expected: 3)
         printAndAssert(result: f("intention", "execution"), expected: 5)
     }
+
+
+
+
+
+
+
+
+    func dp5(_ word1: String, _ word2: String) -> Int {
+        fatalError()
+    }
+
+    func rawDP5(_ word1: String, _ word2: String) -> Int {
+        fatalError()
+    }
+
 
 
 
@@ -39,12 +56,51 @@ final class Week9EditDistance {
 
 
 
+
+
+
+
     func dp3(_ word1: String, _ word2: String) -> Int {
-        fatalError()
+        // compress more space
+        var word1 = word1, word2 = word2
+        if word2.count > word1.count { (word1, word2) = (word2, word1) }
+        let m = word1.count, n = word2.count
+        // empty string
+        if m * n == 0 { return m + n }
+        var f = [Int](repeating: 0, count: n + 1)
+        // edge case
+        for j in 1...n { f[j] = j }
+        let s1 = Array(word1), s2 = Array(word2)
+        for i in 1...m {
+            var topLeft = f[0]
+            f[0] = i
+            for j in 1...n {
+                let left = f[j - 1] + 1, top = f[j] + 1
+                var preTopLeft = topLeft
+                topLeft = f[j]
+                if s1[i - 1] != s2[j - 1] { preTopLeft += 1 }
+                f[j] = min(preTopLeft, min(top, left))
+            }
+        }
+        return f[n]
     }
 
     func rawDP3(_ word1: String, _ word2: String) -> Int {
-        fatalError()
+        let m = word1.count, n = word2.count
+        if m * n == 0 { return m + n }
+        var f = [[Int]](repeating: [Int](repeating: 0, count: n + 1), count: m + 1)
+        for i in 1...m { f[i][0] = i }
+        for j in 1...n { f[0][j] = j }
+        let s1 = Array(word1), s2 = Array(word2)
+        for i in 1...m {
+            for j in 1...n {
+                let left = f[i][j - 1] + 1, top = f[i - 1][j] + 1
+                var topLeft = f[i - 1][j - 1]
+                if s1[i - 1] != s2[j - 1] { topLeft += 1 }
+                f[i][j] = min(topLeft, min(top, left))
+            }
+        }
+        return f[m][n]
     }
 
 
