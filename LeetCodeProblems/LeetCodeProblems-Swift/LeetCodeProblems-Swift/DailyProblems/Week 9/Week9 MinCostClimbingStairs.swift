@@ -16,7 +16,7 @@ import Foundation
  */
 final class Week9MinCostClimbingStairs {
     func run() {
-        let f = dp2
+        let f = topDown2
         printAndAssert(result: f([10,15,20]), expected: 15)
         printAndAssert(result: f([1,100,1,1,1,100,1,1,100,1]), expected: 6)
     }
@@ -80,6 +80,19 @@ final class Week9MinCostClimbingStairs {
         return min(f[n - 1], f[n - 2])
     }
 
+    func topDown2(_ cost: [Int]) -> Int {
+        var memo = [Int](repeating: 0, count: cost.count)
+        func f(_ i: Int) -> Int {
+            if i < 2 { return cost[i] }
+            if memo[i] != 0 { return memo[i] }
+            let v = cost[i] + min(f(i - 1), f(i - 2))
+            memo[i] = v
+            return v
+        }
+        let n = cost.count
+        return min(f(n - 1), f(n - 2))
+    }
+
 
 
     func dp1(_ cost: [Int]) -> Int {
@@ -98,5 +111,18 @@ final class Week9MinCostClimbingStairs {
             f[i] = min(f[i - 1] + cost[i - 1], f[i - 2] + cost[i - 2])
         }
         return f[n]
+    }
+
+    func topDown1(_ cost: [Int]) -> Int {
+        var memo = [Int: Int]()
+        func f(_ i: Int) -> Int {
+            if i < 2 { return cost[i] }
+            if let v = memo[i] { return v }
+            let v = min(f(i - 2), f(i - 1)) + cost[i]
+            memo[i] = v
+            return v
+        }
+        let n = cost.count
+        return min(f(n - 1), f(n - 2))
     }
 }
