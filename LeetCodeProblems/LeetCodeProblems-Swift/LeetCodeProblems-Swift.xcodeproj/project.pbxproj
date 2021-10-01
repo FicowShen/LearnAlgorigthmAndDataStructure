@@ -75,6 +75,7 @@
 		6A6730F42703E1AD00C796CA /* Week9 ReverseStringII.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6730F32703E1AD00C796CA /* Week9 ReverseStringII.swift */; };
 		6A6730F627052FCA00C796CA /* Week9 LongestIncreasingSubsequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6730F527052FCA00C796CA /* Week9 LongestIncreasingSubsequence.swift */; };
 		6A6730FF2706C41A00C796CA /* Week9 MinCostClimbingStairs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6730FE2706C41900C796CA /* Week9 MinCostClimbingStairs.swift */; };
+		6A6731012706D44600C796CA /* Week9 IsomorphicStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6731002706D44600C796CA /* Week9 IsomorphicStrings.swift */; };
 		6A81919426F2C3FF0000188C /* Week7 NQueens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919326F2C3FF0000188C /* Week7 NQueens.swift */; };
 		6A81919626F601920000188C /* Week7 ValidSudoku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919526F601920000188C /* Week7 ValidSudoku.swift */; };
 		6A81919826F7764A0000188C /* Week3 Subsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919726F7764A0000188C /* Week3 Subsets.swift */; };
@@ -241,6 +242,7 @@
 		6A6730F32703E1AD00C796CA /* Week9 ReverseStringII.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week9 ReverseStringII.swift"; sourceTree = "<group>"; };
 		6A6730F527052FCA00C796CA /* Week9 LongestIncreasingSubsequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week9 LongestIncreasingSubsequence.swift"; sourceTree = "<group>"; };
 		6A6730FE2706C41900C796CA /* Week9 MinCostClimbingStairs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week9 MinCostClimbingStairs.swift"; sourceTree = "<group>"; };
+		6A6731002706D44600C796CA /* Week9 IsomorphicStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week9 IsomorphicStrings.swift"; sourceTree = "<group>"; };
 		6A81919326F2C3FF0000188C /* Week7 NQueens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 NQueens.swift"; sourceTree = "<group>"; };
 		6A81919526F601920000188C /* Week7 ValidSudoku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 ValidSudoku.swift"; sourceTree = "<group>"; };
 		6A81919726F7764A0000188C /* Week3 Subsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 Subsets.swift"; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 				6A6730F32703E1AD00C796CA /* Week9 ReverseStringII.swift */,
 				6A6730F527052FCA00C796CA /* Week9 LongestIncreasingSubsequence.swift */,
 				6A6730FE2706C41900C796CA /* Week9 MinCostClimbingStairs.swift */,
+				6A6731002706D44600C796CA /* Week9 IsomorphicStrings.swift */,
 			);
 			path = "Week 9";
 			sourceTree = "<group>";
@@ -829,6 +832,7 @@
 				6AB35B4226BFC7390026173D /* Week1 LinkedListCycleII.swift in Sources */,
 				6A8191AF26FF5AEB0000188C /* Week8 NQueensII.swift in Sources */,
 				6AB35B3C26BE1D780026173D /* Day7 DesignCircularDeque.swift in Sources */,
+				6A6731012706D44600C796CA /* Week9 IsomorphicStrings.swift in Sources */,
 				6A10BA8926F0E958006CE7AC /* Week7 MinimumGeneticMutation.swift in Sources */,
 				6A42EFD926D9D7880030EE32 /* Week4 AssignCookies.swift in Sources */,
 				6AB35B1626B594970026173D /* HouseRobber2.swift in Sources */,
