@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A6730FA2706B55C00C796CA /* ReversePairs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6730F82706B55C00C796CA /* ReversePairs.cpp */; };
+		6A6730FD2706B58F00C796CA /* BinaryIndexedTreeProblems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6730FB2706B58F00C796CA /* BinaryIndexedTreeProblems.cpp */; };
 		6AB35B2926B98A9E0026173D /* Day1 ClimbStairs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B2726B98A9E0026173D /* Day1 ClimbStairs.cpp */; };
 		6AB35B2C26B98AB20026173D /* DailyProblems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B2A26B98AB20026173D /* DailyProblems.cpp */; };
 		6AB35B2F26B98C8C0026173D /* Day2 PlusOne.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B2D26B98C8C0026173D /* Day2 PlusOne.cpp */; };
@@ -32,6 +34,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6A6730F82706B55C00C796CA /* ReversePairs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ReversePairs.cpp; sourceTree = "<group>"; };
+		6A6730F92706B55C00C796CA /* ReversePairs.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ReversePairs.hpp; sourceTree = "<group>"; };
+		6A6730FB2706B58F00C796CA /* BinaryIndexedTreeProblems.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryIndexedTreeProblems.cpp; sourceTree = "<group>"; };
+		6A6730FC2706B58F00C796CA /* BinaryIndexedTreeProblems.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BinaryIndexedTreeProblems.hpp; sourceTree = "<group>"; };
 		6AB35B2726B98A9E0026173D /* Day1 ClimbStairs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "Day1 ClimbStairs.cpp"; sourceTree = "<group>"; };
 		6AB35B2826B98A9E0026173D /* Day1 ClimbStairs.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "Day1 ClimbStairs.hpp"; sourceTree = "<group>"; };
 		6AB35B2A26B98AB20026173D /* DailyProblems.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DailyProblems.cpp; sourceTree = "<group>"; };
@@ -66,6 +72,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A6730F72706B53300C796CA /* BinaryIndexedTreeProblems */ = {
+			isa = PBXGroup;
+			children = (
+				6A6730FB2706B58F00C796CA /* BinaryIndexedTreeProblems.cpp */,
+				6A6730FC2706B58F00C796CA /* BinaryIndexedTreeProblems.hpp */,
+				6A6730F82706B55C00C796CA /* ReversePairs.cpp */,
+				6A6730F92706B55C00C796CA /* ReversePairs.hpp */,
+			);
+			path = BinaryIndexedTreeProblems;
+			sourceTree = "<group>";
+		};
 		6AB35B2626B98A7D0026173D /* DailyProblems */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +137,7 @@
 		6AD94FAA269AAAFD00AA35B4 /* LeetCodeProblems-C++ */ = {
 			isa = PBXGroup;
 			children = (
+				6A6730F72706B53300C796CA /* BinaryIndexedTreeProblems */,
 				6AB35B2626B98A7D0026173D /* DailyProblems */,
 				6ACE5CBB26AD91F4004A24A0 /* DynamicProgrammingProblems */,
 				6AB89D4826A2743800E295BA /* BacktrackProblems */,
@@ -201,6 +219,8 @@
 				6AB35B2926B98A9E0026173D /* Day1 ClimbStairs.cpp in Sources */,
 				6ACE5CC126AD953F004A24A0 /* ClimbStairs.cpp in Sources */,
 				6AB35B2C26B98AB20026173D /* DailyProblems.cpp in Sources */,
+				6A6730FD2706B58F00C796CA /* BinaryIndexedTreeProblems.cpp in Sources */,
+				6A6730FA2706B55C00C796CA /* ReversePairs.cpp in Sources */,
 				6AD94FB8269ACB8D00AA35B4 /* DataStructures.cpp in Sources */,
 				6AB89D4E26A2751C00E295BA /* Combine.cpp in Sources */,
 				6ACE5CBE26AD920E004A24A0 /* DynamicProgrammingProblems.cpp in Sources */,

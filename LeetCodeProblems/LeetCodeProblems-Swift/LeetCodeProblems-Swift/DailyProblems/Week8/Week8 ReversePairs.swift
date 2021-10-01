@@ -11,10 +11,14 @@ import Foundation
  https://leetcode-cn.com/problems/reverse-pairs/
  1. merge sort
  Time: O(nlogn), Space: O(n)
+
+ 2. binary indexed tree
+ Time: O(nlogn), Space: O(n)
+ https://leetcode-cn.com/problems/reverse-pairs/solution/fan-zhuan-dui-by-leetcode-solution/
  */
 final class Week8ReversePairs {
     func run() {
-        let f = mergeSort4
+        let f = binaryIndexedTree1
         printAndAssert(result: f([1,3,2,3,1]), expected: 2)
         printAndAssert(result: f([2,4,3,5,1]), expected: 3)
     }
@@ -236,5 +240,49 @@ final class Week8ReversePairs {
             return ret
         }
         return reversePairs(left: 0, right: nums.count - 1)
+    }
+
+
+
+    func binaryIndexedTree1(_ nums: [Int]) -> Int {
+        final class BIT {
+            private var tree: [Int], n: Int
+            init(n: Int) {
+                self.n = n
+                self.tree = [Int](repeating: 0, count: n + 1)
+            }
+            func update(_ x: Int, _ d: Int) {
+                var x = x
+                while x <= n {
+                    tree[x] += d
+                    x += lowbit(x)
+                }
+            }
+            func query(_ x: Int) -> Int {
+                var ans = 0, x = x
+                while x != 0 {
+                    ans += tree[x]
+                    x -= lowbit(x)
+                }
+                return ans
+            }
+            func lowbit(_ x: Int) -> Int { x & -x }
+        }
+        var allNumbers = Set<Int>()
+        for x in nums {
+            allNumbers.insert(x)
+            allNumbers.insert(x * 2)
+        }
+        var values = [Int: Int](), idx = 0
+        for x in allNumbers.sorted() { idx += 1; values[x] = idx }
+
+        var ret = 0
+        let bit = BIT(n: values.count)
+        for i in 0..<nums.count {
+            let left = values[nums[i] * 2]!, right = values.count
+            ret += (bit.query(right) - bit.query(left))
+            bit.update(values[nums[i]]!, 1)
+        }
+        return ret
     }
 }

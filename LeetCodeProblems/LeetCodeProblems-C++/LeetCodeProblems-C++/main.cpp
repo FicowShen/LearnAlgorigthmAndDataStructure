@@ -10,8 +10,10 @@
 #include "BacktrackProblems.hpp"
 #include "DynamicProgrammingProblems.hpp"
 #include "DailyProblems.hpp"
+#include "BinaryIndexedTreeProblems.hpp"
 
 void runProblems() {
+    BinaryIndexedTreeProblems().run();
     BacktrackProblems().run();
     DynamicProgrammingProblems().run();
     TreeProblems().run();
