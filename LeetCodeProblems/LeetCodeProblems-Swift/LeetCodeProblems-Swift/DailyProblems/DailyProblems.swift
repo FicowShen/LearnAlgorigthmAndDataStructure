@@ -20,6 +20,7 @@ final class DailyProblems {
     }
 
     static func week9() {
+        Week9EditDistance().run()
         Week9IsomorphicStrings().run()
         Week9MinCostClimbingStairs().run()
         Week9LongestIncreasingSubsequence().run()
