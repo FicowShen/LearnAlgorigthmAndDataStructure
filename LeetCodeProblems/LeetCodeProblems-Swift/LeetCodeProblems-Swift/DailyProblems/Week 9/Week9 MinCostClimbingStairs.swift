@@ -33,6 +33,10 @@ final class Week9MinCostClimbingStairs {
         fatalError()
     }
 
+    func topDown5(_ cost: [Int]) -> Int {
+        fatalError()
+    }
+
 
 
 
@@ -42,6 +46,10 @@ final class Week9MinCostClimbingStairs {
     }
 
     func rawDP4(_ cost: [Int]) -> Int {
+        fatalError()
+    }
+
+    func topDown4(_ cost: [Int]) -> Int {
         fatalError()
     }
 
@@ -55,6 +63,10 @@ final class Week9MinCostClimbingStairs {
     }
 
     func rawDP3(_ cost: [Int]) -> Int {
+        fatalError()
+    }
+
+    func topDown3(_ cost: [Int]) -> Int {
         fatalError()
     }
 
