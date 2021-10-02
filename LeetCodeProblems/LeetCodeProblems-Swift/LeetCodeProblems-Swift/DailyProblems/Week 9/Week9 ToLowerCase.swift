@@ -17,7 +17,7 @@ import Foundation
  */
 final class Week9ToLowerCase {
     func run() {
-        let f = toLowerCase
+        let f = toLowerCase2
         printAndAssert(result: f("Hello"), expected: "hello")
         printAndAssert(result: f("LOVELY"), expected: "lovely")
     }
@@ -39,7 +39,12 @@ final class Week9ToLowerCase {
 
 
     func toLowerCase2(_ s: String) -> String {
-        fatalError()
+        var s = Array(s.utf8)
+        for i in 0..<s.count {
+            if s[i] < 65 || s[i] > 90 { continue }
+            s[i] += 32
+        }
+        return String(decoding: s, as: UTF8.self)
     }
 
 

@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week9ValidPalindromeII {
     func run() {
-        let f = validPalindrome
+        let f = validPalindrome2
         printAndAssert(result: f("aba"), expected: true)
         printAndAssert(result: f("abca"), expected: true)
         printAndAssert(result: f("abc"), expected: false)
@@ -28,7 +28,7 @@ final class Week9ValidPalindromeII {
 
 
 
-    func validPalindrome2(_ s: String) -> Bool {
+    func validPalindrome3(_ s: String) -> Bool {
         fatalError()
     }
 
@@ -40,8 +40,25 @@ final class Week9ValidPalindromeII {
 
 
 
-    func validPalindrome1(_ s: String) -> Bool {
-        fatalError()
+    func validPalindrome2(_ s: String) -> Bool {
+        var s = Array(s.utf8), l = 0, r = s.count - 1
+        func isValid(l: Int, r: Int) -> Bool {
+            var l = l, r = r
+            while l < r {
+                if s[l] != s[r] { return false }
+                l += 1
+                r -= 1
+            }
+            return true
+        }
+        while l < r {
+            if s[l] != s[r] {
+                return isValid(l: l + 1, r: r) || isValid(l: l, r: r - 1)
+            }
+            l += 1
+            r -= 1
+        }
+        return true
     }
 
 
