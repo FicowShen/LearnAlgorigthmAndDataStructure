@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week8LRUCache {
     func run() {
-        let lRUCache = LRU1.LRUCache(2);
+        let lRUCache = LRU2.LRUCache(2);
         lRUCache.put(2, 1)
         lRUCache.put(3, 2)
         assert(lRUCache.get(3) == 2)
@@ -29,7 +29,7 @@ final class Week8LRUCache {
 
 
 enum LRU5 {
-    class LRUCache {
+    final class LRUCache {
         init(_ capacity: Int) {
             fatalError()
         }
@@ -47,7 +47,7 @@ enum LRU5 {
 
 
 enum LRU4 {
-    class LRUCache {
+    final class LRUCache {
         init(_ capacity: Int) {
             fatalError()
         }
@@ -65,7 +65,7 @@ enum LRU4 {
 
 
 enum LRU3 {
-    class LRUCache {
+    final class LRUCache {
         init(_ capacity: Int) {
             fatalError()
         }
@@ -83,17 +83,71 @@ enum LRU3 {
 
 
 enum LRU2 {
-    class LRUCache {
+    final class LRUCache {
+        final class Node {
+            var key = 0, value = 0, pre: Node?, next: Node?
+            init(key: Int = 0, value: Int = 0) {
+                self.key = key
+                self.value = value
+            }
+        }
+
+        private let head = Node(), tail = Node(), notFound = -1
+        private let capacity: Int
+        private var dict = [Int: Node]()
+
         init(_ capacity: Int) {
-            fatalError()
+            self.capacity = capacity
+            head.next = tail
+            tail.pre = head
         }
 
         func get(_ key: Int) -> Int {
-            fatalError()
+            if let node = dict[key] {
+                moveToHead(node)
+                return node.value
+            }
+            return notFound
         }
 
         func put(_ key: Int, _ value: Int) {
-            fatalError()
+            if let node = dict[key] {
+                node.value = value
+                moveToHead(node)
+                return
+            }
+            if dict.keys.count == capacity {
+                let node = removeTail()
+                dict[node.key] = nil
+            }
+            let node = Node(key: key, value: value)
+            dict[key] = node
+            moveToHead(node)
+        }
+
+        private func addNodeToHead(_ node: Node) {
+            node.next = head.next
+            head.next?.pre = node
+            head.next = node
+            node.pre = head
+        }
+
+        private func removeNode(_ node: Node) {
+            let left = node.pre
+            left?.next = node.next
+            node.next?.pre = left
+        }
+
+        private func moveToHead(_ node: Node) {
+            removeNode(node)
+            addNodeToHead(node)
+        }
+
+        private func removeTail() -> Node {
+            let last = tail.pre!
+            last.pre?.next = tail
+            tail.pre = last.pre
+            return last
         }
     }
 }

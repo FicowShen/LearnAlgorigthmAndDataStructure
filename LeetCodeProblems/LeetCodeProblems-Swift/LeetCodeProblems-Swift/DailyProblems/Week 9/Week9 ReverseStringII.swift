@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week9ReverseStringII {
     func run() {
-        let f = reverseStr2
+        let f = reverseStr3
         // 1. length >= 2k, reverse k chars;
         printAndAssert(result: f("abcdefg", 2), expected: "bacdfeg")
         printAndAssert(result: f("abcdefg", 3), expected: "cbadefg")
@@ -58,7 +58,17 @@ final class Week9ReverseStringII {
 
 
     func reverseStr3(_ s: String, _ k: Int) -> String {
-        fatalError()
+        let n = s.count
+        var chars = Array(s)
+        for i in stride(from: 0, through: n, by: 2 * k) {
+            var l = i, r = min(i + k, n) - 1
+            while l < r {
+                chars.swapAt(l, r)
+                l += 1
+                r -= 1
+            }
+        }
+        return String(chars)
     }
 
 
