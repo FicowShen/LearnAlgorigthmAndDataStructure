@@ -11,7 +11,7 @@ import Foundation
  https://leetcode-cn.com/problems/word-search-ii/
  1. backtrack on Trie
  Time: O(M*4*(3^(L-1))), M: grid count, L: word length
- Space: O(n), word count
+ Space: O(k * l), k: words count, l: max length of a word
  */
 final class Week7WordSearchII {
     func run() {
