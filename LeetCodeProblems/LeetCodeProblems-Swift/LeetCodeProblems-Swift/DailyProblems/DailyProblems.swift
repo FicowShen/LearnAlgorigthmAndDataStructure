@@ -20,6 +20,9 @@ final class DailyProblems {
     }
 
     static func week9() {
+        Week9ValidPalindromeII().run()
+        Week9ValidPalindrome().run()
+        Week9ToLowerCase().run()
         Week9LongestValidParentheses().run()
         Week9EditDistance().run()
         Week9IsomorphicStrings().run()
