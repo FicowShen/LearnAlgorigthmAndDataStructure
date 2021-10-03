@@ -22,7 +22,7 @@ import Foundation
  */
 final class Week9LongestValidParentheses {
     func run() {
-        let f = leftRightCounter2
+        let f = dp3
         printAndAssert(result: f(""), expected: 0)
         printAndAssert(result: f("()"), expected: 2)
         printAndAssert(result: f("(()"), expected: 2)
@@ -58,7 +58,22 @@ final class Week9LongestValidParentheses {
 
 
     func dp3(_ s: String) -> Int {
-        fatalError()
+        let n = s.count, s = Array(s.utf8)
+        let open = Character("(").asciiValue!
+        var f = [Int](repeating: 0, count: n), ans = 0
+        for i in stride(from: 1, to: n, by: 1) {
+            if s[i] == open { continue }
+            if s[i - 1] == open {
+                // ()
+                f[i] = (i >= 2 ? f[i - 2] : 0) + 2
+            } else if i - f[i - 1] > 0, s[i - f[i - 1] - 1] == open {
+                // ()(())
+                f[i] = f[i - 1] + 2
+                    + (i - f[i - 1] >= 2 ? f[i - f[i - 1] - 2] : 0)
+            }
+            ans = max(ans, f[i])
+        }
+        return ans
     }
 
     func stack3(_ s: String) -> Int {

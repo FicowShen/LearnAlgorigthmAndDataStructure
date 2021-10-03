@@ -17,7 +17,7 @@ import Foundation
  */
 final class Week9ValidPalindrome {
     func run() {
-        let f = isPalindrome2
+        let f = isPalindrome3
         printAndAssert(result: f("A man, a plan, a canal: Panama"),
                        expected: true)
         printAndAssert(result: f("race a car"),
@@ -32,8 +32,53 @@ final class Week9ValidPalindrome {
 
 
 
-    func isPalindrome3(_ s: String) -> Bool {
+    func isPalindrome5(_ s: String) -> Bool {
         fatalError()
+    }
+
+
+
+
+
+
+
+    func isPalindrome4(_ s: String) -> Bool {
+        fatalError()
+    }
+
+
+
+
+
+
+
+    func isPalindrome3(_ s: String) -> Bool {
+        let n = s.count
+        var s = Array(s.utf8), l = 0, r = n - 1
+        func isAlphanumeric(_ c: UInt8) -> Bool {
+            (c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 97 && c <= 122)
+        }
+        func lowercase(_ i: Int) {
+            let c = s[i]
+            if c < 65 || c > 90 { return }
+            s[i] = c + 32
+        }
+        while l < r {
+            if !isAlphanumeric(s[l]) {
+                l += 1
+                continue
+            }
+            if !isAlphanumeric(s[r]) {
+                r -= 1
+                continue
+            }
+            lowercase(l)
+            lowercase(r)
+            if s[l] != s[r] { return false }
+            l += 1
+            r -= 1
+        }
+        return true
     }
 
 
