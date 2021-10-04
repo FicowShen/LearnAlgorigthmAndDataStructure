@@ -20,6 +20,7 @@ final class DailyProblems {
     }
 
     static func week9() {
+        Week9RaceCar().run()
         Week9ValidPalindromeII().run()
         Week9ValidPalindrome().run()
         Week9ToLowerCase().run()
