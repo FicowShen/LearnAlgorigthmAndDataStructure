@@ -14,7 +14,7 @@ import Foundation
  */
 final class Day57FirstUniqueCharacterInAString {
     func run() {
-        let f = firstUniqChar2
+        let f = firstUniqChar3
         printAndAssert(result: f("leetcode"), expected: 0)
         printAndAssert(result: f("loveleetcode"), expected: 2)
         printAndAssert(result: f("aabb"), expected: -1)
@@ -27,7 +27,7 @@ final class Day57FirstUniqueCharacterInAString {
 
 
 
-    func firstUniqChar3(_ s: String) -> Int {
+    func firstUniqChar4(_ s: String) -> Int {
         fatalError()
     }
 
@@ -40,6 +40,21 @@ final class Day57FirstUniqueCharacterInAString {
 
 
 
+
+
+
+
+
+
+
+    func firstUniqChar3(_ s: String) -> Int {
+        var counter = [Int](repeating: 0, count: 26)
+        for c in s.unicodeScalars { counter[Int(c.value - 97)] += 1 }
+        for (i, c) in s.unicodeScalars.enumerated() {
+            if counter[Int(c.value - 97)] == 1 { return i }
+        }
+        return -1
+    }
 
 
 
