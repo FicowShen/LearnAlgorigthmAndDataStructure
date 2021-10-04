@@ -22,7 +22,7 @@ import Foundation
  */
 final class Week9LongestValidParentheses {
     func run() {
-        let f = dp3
+        let f = leftRightCounter3
         printAndAssert(result: f(""), expected: 0)
         printAndAssert(result: f("()"), expected: 2)
         printAndAssert(result: f("(()"), expected: 2)
@@ -77,11 +77,62 @@ final class Week9LongestValidParentheses {
     }
 
     func stack3(_ s: String) -> Int {
-        fatalError()
+        let n = s.count, s = Array(s.utf8)
+        let open = Character("(").asciiValue!
+        var ans = 0, start = 0, stack = [Int]()
+        for i in 0..<n {
+            if s[i] == open {
+                // (()
+                stack.append(i)
+                continue
+            }
+            if stack.isEmpty {
+                // )()
+                start = i + 1
+                continue
+            }
+            _ = stack.popLast()
+            if let last = stack.last {
+                // (()
+                ans = max(ans, i - last)
+            } else {
+                // ()()
+                ans = max(ans, i - start + 1)
+            }
+        }
+        return ans
     }
 
     func leftRightCounter3(_ s: String) -> Int {
-        fatalError()
+        let s = Array(s.utf8), n = s.count
+        let open = Character("(").asciiValue!
+        var left = 0, right = 0, ans = 0
+        for i in 0..<n {
+            if s[i] == open {
+                left += 1
+            } else {
+                right += 1
+            }
+            if left == right {
+                ans = max(ans, right * 2)
+            } else if right > left {
+                left = 0; right = 0
+            }
+        }
+        left = 0; right = 0
+        for i in stride(from: n - 1, through: 0, by: -1) {
+            if s[i] == open {
+                left += 1
+            } else {
+                right += 1
+            }
+            if left == right {
+                ans = max(ans, 2 * left)
+            } else if left > right {
+                left = 0; right = 0
+            }
+        }
+        return ans
     }
 
 
