@@ -156,6 +156,7 @@ final class DailyProblems {
     /// array, linked list, skip list,
     /// stack, queue, priority queue, deque
     static func week1() {
+        Week1RemoveDuplicatesFromSortedArray().run()
         Week1LargestRectangleInHistogram().run()
         Week1MinStack().run()
         Week1ReverseNodesInKGroup().run()
