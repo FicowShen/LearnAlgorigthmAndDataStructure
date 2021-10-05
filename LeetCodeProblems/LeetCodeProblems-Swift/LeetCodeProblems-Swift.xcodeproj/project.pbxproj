@@ -86,6 +86,7 @@
 		6A673111270B06D100C796CA /* Week9 JewelsAndStones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A673110270B06D100C796CA /* Week9 JewelsAndStones.swift */; };
 		6A673113270B393800C796CA /* Week9 StringToIntegerATOI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A673112270B393800C796CA /* Week9 StringToIntegerATOI.swift */; };
 		6A673115270C021000C796CA /* Week9 LongestCommonPrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A673114270C021000C796CA /* Week9 LongestCommonPrefix.swift */; };
+		6A673117270C51EB00C796CA /* Week9 ReverseString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A673116270C51EB00C796CA /* Week9 ReverseString.swift */; };
 		6A81919426F2C3FF0000188C /* Week7 NQueens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919326F2C3FF0000188C /* Week7 NQueens.swift */; };
 		6A81919626F601920000188C /* Week7 ValidSudoku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919526F601920000188C /* Week7 ValidSudoku.swift */; };
 		6A81919826F7764A0000188C /* Week3 Subsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81919726F7764A0000188C /* Week3 Subsets.swift */; };
@@ -263,6 +264,7 @@
 		6A673110270B06D100C796CA /* Week9 JewelsAndStones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week9 JewelsAndStones.swift"; sourceTree = "<group>"; };
 		6A673112270B393800C796CA /* Week9 StringToIntegerATOI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week9 StringToIntegerATOI.swift"; sourceTree = "<group>"; };
 		6A673114270C021000C796CA /* Week9 LongestCommonPrefix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week9 LongestCommonPrefix.swift"; sourceTree = "<group>"; };
+		6A673116270C51EB00C796CA /* Week9 ReverseString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week9 ReverseString.swift"; sourceTree = "<group>"; };
 		6A81919326F2C3FF0000188C /* Week7 NQueens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 NQueens.swift"; sourceTree = "<group>"; };
 		6A81919526F601920000188C /* Week7 ValidSudoku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 ValidSudoku.swift"; sourceTree = "<group>"; };
 		6A81919726F7764A0000188C /* Week3 Subsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 Subsets.swift"; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 				6A673110270B06D100C796CA /* Week9 JewelsAndStones.swift */,
 				6A673112270B393800C796CA /* Week9 StringToIntegerATOI.swift */,
 				6A673114270C021000C796CA /* Week9 LongestCommonPrefix.swift */,
+				6A673116270C51EB00C796CA /* Week9 ReverseString.swift */,
 			);
 			path = "Week 9";
 			sourceTree = "<group>";
@@ -824,6 +827,7 @@
 				6AB35B2326B8C51A0026173D /* Day2 PlusOne.swift in Sources */,
 				6A42EFBE26D1DCF90030EE32 /* Week3 ValidateBinarySearchTree.swift in Sources */,
 				6A10BA5826E6DDD8006CE7AC /* Week6 CoinChange.swift in Sources */,
+				6A673117270C51EB00C796CA /* Week9 ReverseString.swift in Sources */,
 				6A42EFD526D86ECC0030EE32 /* Week4 NumberOfIslands.swift in Sources */,
 				6A42EFC026D1F2070030EE32 /* Week3 BinaryTreeMaxDepth.swift in Sources */,
 				6A10BA7826EE434B006CE7AC /* Week2 NthUglyNumber.swift in Sources */,

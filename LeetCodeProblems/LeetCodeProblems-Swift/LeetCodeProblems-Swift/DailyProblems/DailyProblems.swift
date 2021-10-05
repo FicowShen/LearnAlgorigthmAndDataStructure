@@ -20,6 +20,7 @@ final class DailyProblems {
     }
 
     static func week9() {
+        Week9ReverseString().run()
         Week9LongestCommonPrefix().run()
         Week9StringToIntegerATOI().run()
         Week9JewelsAndStones().run()
