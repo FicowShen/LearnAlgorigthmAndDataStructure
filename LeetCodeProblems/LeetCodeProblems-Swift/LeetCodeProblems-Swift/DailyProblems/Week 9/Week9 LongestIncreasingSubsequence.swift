@@ -15,6 +15,7 @@ import Foundation
  2. greedy and binary search
  Time: O(n * logn), Space: O(n)
  https://leetcode.com/problems/longest-increasing-subsequence/discuss/74824/JavaPython-Binary-search-O(nlogn)-time-with-explanation
+ My explanation: https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/zui-chang-shang-sheng-zi-xu-lie-by-leetcode-soluti/1166275
  */
 final class Week9LongestIncreasingSubsequence {
     func run() {
@@ -24,6 +25,7 @@ final class Week9LongestIncreasingSubsequence {
         printAndAssert(result: f([0,1,0,3,2,3]), expected: 4)
         printAndAssert(result: f([7,7,7,7,7,7,7]), expected: 1)
         printAndAssert(result: f([0,8,4,12,2,6]), expected: 3)
+        printAndAssert(result: f([0,8,4,12,2,6,13,7]), expected: 4)
     }
 
 
@@ -251,30 +253,32 @@ final class Week9LongestIncreasingSubsequence {
         var d = [Int](repeating: 0, count: n + 1), len = 1
         d[len] = nums[0]
         var ans = d[1...len]
+        print("- LIS:", ans)
         for i in 0..<n {
             if nums[i] > d[len] {
                 len += 1
                 d[len] = nums[i]
                 ans = d[1...len]
+                print("- LIS:", ans)
                 continue
             }
             var l = 1, r = len, pos = 0
-            print(nums[i], d[1...len])
+//            print(nums[i], d[1...len])
             while l <= r {
                 let mid = (l + r) >> 1
                 if d[mid] < nums[i] {
                     pos = mid
-                    print("pos:", pos)
+//                    print("pos:", pos)
                     l = mid + 1
                 } else {
                     r = mid - 1
                 }
             }
             d[pos + 1] = nums[i]
-            print(d[1...len])
-            print("---")
+//            print(d[1...len])
+//            print("---")
         }
-        print("LIS:", ans)
+        print("- Final LIS:", ans)
         return len
     }
 
