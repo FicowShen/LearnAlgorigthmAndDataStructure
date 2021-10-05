@@ -20,6 +20,7 @@ final class DailyProblems {
     }
 
     static func week9() {
+        Week9StringToIntegerATOI().run()
         Week9JewelsAndStones().run()
         Week9LengthOfLastWord().run()
         Week9RaceCar().run()
