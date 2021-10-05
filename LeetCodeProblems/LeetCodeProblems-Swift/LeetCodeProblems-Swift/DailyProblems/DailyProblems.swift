@@ -20,6 +20,7 @@ final class DailyProblems {
     }
 
     static func week9() {
+        Week9LongestCommonPrefix().run()
         Week9StringToIntegerATOI().run()
         Week9JewelsAndStones().run()
         Week9LengthOfLastWord().run()
