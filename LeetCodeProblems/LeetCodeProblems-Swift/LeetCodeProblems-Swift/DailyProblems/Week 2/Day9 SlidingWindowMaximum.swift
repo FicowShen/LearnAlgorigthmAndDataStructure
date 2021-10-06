@@ -10,7 +10,7 @@ import Foundation
 // https://leetcode-cn.com/problems/sliding-window-maximum/
 final class Day9SlidingWindowMaximum {
     func run() {
-        let f = maxSlidingWindow6
+        let f = maxSlidingWindow7
         func judge(_ nums: [Int], _ k: Int, expected: [Int]) {
             printAndAssert(result: f(nums, k), expected: expected)
         }
@@ -44,29 +44,43 @@ final class Day9SlidingWindowMaximum {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func maxSlidingWindow7(_ nums: [Int], _ k: Int) -> [Int] {
-        fatalError()
+        let n = nums.count
+        var q = [Int](repeating: 0, count: n)
+        var head = 0, tail = -1, ans = [Int]()
+        for i in 0..<n {
+            // remove invalid head
+            while head <= tail, q[head] <= i - k { head += 1 }
+            // remove smaller and equal tail
+            while head <= tail, nums[q[tail]] <= nums[i] { tail -= 1 }
+            // append new tail
+            tail += 1
+            q[tail] = i
+            // add window max to the output
+            if i + 1 >= k { ans.append(nums[q[head]]) }
+        }
+        return ans
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

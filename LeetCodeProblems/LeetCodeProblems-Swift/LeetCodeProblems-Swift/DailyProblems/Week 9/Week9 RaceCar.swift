@@ -20,7 +20,7 @@ import Foundation
  */
 final class Week9RaceCar {
     func run() {
-        let f = bfs2
+        let f = bfs3
         printAndAssert(result: f(1), expected: 1)
         printAndAssert(result: f(3), expected: 2)
         printAndAssert(result: f(6), expected: 5)
@@ -64,11 +64,49 @@ final class Week9RaceCar {
 
 
     func dp3(_ target: Int) -> Int {
-        fatalError()
+        var dp = [Int](repeating: 0, count: Int(1e4) + 1)
+        func f(_ t: Int) -> Int {
+            if dp[t] > 0 { return dp[t] }
+            let n = Int(floor(log2(Double(t)))) + 1
+            if 1 << n == t + 1 { // arrive directly
+                dp[t] = n
+                return n
+            }
+            // go pass the target
+            dp[t] = n + 1 + f((1 << n) - t - 1)
+            // go to the target, then go back, then go to the target
+            for i in stride(from: 0, to: n - 1, by: 1) {
+                let j = n + 1 + i + f(t - (1 << (n - 1)) + (1 << i))
+                dp[t] = min(dp[t], j)
+            }
+            return dp[t]
+        }
+        return f(target)
     }
 
 
     func bfs3(_ target: Int) -> Int {
+        var q = [(pos: 0, speed: 1, count: 0)], visited = Set([[0, 1]])
+        while !q.isEmpty {
+            var next = [(pos: Int, speed: Int, count: Int)]()
+            for cur in q {
+                if cur.pos == target { return cur.count }
+                var pos = cur.pos + cur.speed, speed = cur.speed * 2
+                if !visited.contains([pos, speed]),
+                   abs(pos - target) < target {
+                    visited.insert([pos, speed])
+                    next.append((pos, speed, cur.count + 1))
+                }
+                pos = cur.pos
+                speed = cur.speed > 0 ? -1 : 1
+                if !visited.contains([pos, speed]),
+                   abs(pos - target) < target {
+                    visited.insert([pos, speed])
+                    next.append((pos, speed, cur.count + 1))
+                }
+            }
+            q = next
+        }
         fatalError()
     }
 
