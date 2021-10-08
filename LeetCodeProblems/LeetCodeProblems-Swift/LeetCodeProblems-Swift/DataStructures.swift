@@ -342,7 +342,7 @@ struct PriorityQueue<T> {
 
     var isEmpty: Bool { heapSize == 0 }
 
-    /// Returns the max value. To return min value, insert with the opposite numbers.
+    /// Returns the top value.
     var top: T {
         if isEmpty { fatalError() }
         return heap[0]
@@ -385,7 +385,7 @@ struct PriorityQueue<T> {
         return element
     }
 
-    /// Adjusts the last number, move it up if it's bigger than its children.
+    /// Adjusts the last number, moves it up if it matches the sort predicate.
     /// - Parameter index: The end index of the heap
     private mutating func heapifyUp(_ index: Int) {
         var i = index
@@ -397,7 +397,7 @@ struct PriorityQueue<T> {
         heap[i] = insertValue
     }
 
-    /// Adjusts the first number, move it down if it's smaller than its children.
+    /// Adjusts the first number, moves it down until it matches the sort predicate.
     /// - Parameter index: The start index of the heap
     private mutating func heapifyDown(_ index: Int) {
         var i = index, child = 0, temp = heap[i]
