@@ -15,12 +15,16 @@ import Foundation
  2. priority queue
  Time: O(nlogk), Space: O(n)
 
- 3. quick sort
+ 3. quick selection
  Time: O(n), Space: O(n)
+
+ 4. bucket sort
+ Time: O(n), Space: O(n)
+ https://leetcode-cn.com/problems/top-k-frequent-elements/solution/leetcode-di-347-hao-wen-ti-qian-k-ge-gao-pin-yuan-/
  */
 final class Week2TopKFrequentElements {
     func run() {
-        let f = quickSort3
+        let f = bucketSort3
         func judge(_ nums: [Int], _ k: Int, res: [Int]) {
             let ans = f(nums, k)
             printAndAssert(result: ans.sorted(), expected: res.sorted())
@@ -32,6 +36,33 @@ final class Week2TopKFrequentElements {
 
 
 
+
+
+
+    func bucketSort5(_ nums: [Int], _ k: Int) -> [Int] {
+        fatalError()
+    }
+
+    func quickSort5(_ nums: [Int], _ k: Int) -> [Int] {
+        fatalError()
+    }
+
+    func heap5(_ nums: [Int], _ k: Int) -> [Int] {
+        fatalError()
+    }
+
+    func dictCountAndSort5(_ nums: [Int], _ k: Int) -> [Int] {
+        fatalError()
+    }
+
+
+
+
+
+
+    func bucketSort4(_ nums: [Int], _ k: Int) -> [Int] {
+        fatalError()
+    }
 
     func quickSort4(_ nums: [Int], _ k: Int) -> [Int] {
         fatalError()
@@ -51,6 +82,24 @@ final class Week2TopKFrequentElements {
 
 
 
+
+
+
+    func bucketSort3(_ nums: [Int], _ k: Int) -> [Int] {
+        let n = nums.count
+        var dict = [Int: Int]()
+        for x in nums { dict[x, default: 0] += 1 }
+        var bucket = [[Int]](repeating: [], count: n + 1)
+        for (k, v) in dict { bucket[v].append(k) }
+        var ans = [Int]()
+        for i in stride(from: n, through: 0, by: -1) {
+            let bucket = bucket[i]
+            if bucket.isEmpty { continue }
+            ans.append(contentsOf: bucket)
+            if ans.count >= k { break }
+        }
+        return ans
+    }
 
     func quickSort3(_ nums: [Int], _ k: Int) -> [Int] {
         var dict = [Int: Int]()
@@ -111,6 +160,21 @@ final class Week2TopKFrequentElements {
 
 
 
+    func bucketSort2(_ nums: [Int], _ k: Int) -> [Int] {
+        let n = nums.count
+        var dict = [Int: Int]()
+        for x in nums { dict[x, default: 0] += 1 }
+        var bucket = [[Int]](repeating: [], count: n + 1)
+        for (k, v) in dict { bucket[v].append(k) }
+        var ans = [Int]()
+        for i in stride(from: n, through: 0, by: -1) {
+            let bucket = bucket[i]
+            if bucket.isEmpty { continue }
+            ans.append(contentsOf: bucket)
+            if ans.count >= k { break }
+        }
+        return ans
+    }
 
     func quickSort2(_ nums: [Int], _ k: Int) -> [Int] {
         var dict = [Int: Int]()
@@ -177,6 +241,20 @@ final class Week2TopKFrequentElements {
 
 
 
+    func bucketSort(_ nums: [Int], _ k: Int) -> [Int] {
+        let n = nums.count
+        var dict = [Int: Int]()
+        for x in nums { dict[x, default: 0] += 1 }
+        var bucket = [[Int]](repeating: [], count: n + 1)
+        for (k, v) in dict { bucket[v].append(k) }
+        var ans = [Int]()
+        for i in stride(from: n, through: 0, by: -1) {
+            if bucket[i].isEmpty { continue }
+            if ans.count >= k { break }
+            ans.append(contentsOf: bucket[i])
+        }
+        return ans
+    }
 
     func quickSort(_ nums: [Int], _ k: Int) -> [Int] {
         var dict = [Int: Int]()
