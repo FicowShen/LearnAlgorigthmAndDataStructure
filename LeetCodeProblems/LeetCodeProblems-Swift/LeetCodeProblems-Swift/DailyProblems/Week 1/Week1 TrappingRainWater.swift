@@ -20,10 +20,28 @@ import Foundation
  */
 final class Week1TrappingRainWater {
     func run() {
-        let f = leftRightPointers2
+        let f = leftRightPointers3
         printAndAssert(result: f([0,1,0,2,1,0,1,3,2,1,2,1]), expected: 6)
         printAndAssert(result: f([4,2,0,3,2,5]), expected: 9)
     }
+
+
+
+
+
+
+    func leftRightPointers5(_ height: [Int]) -> Int {
+        fatalError()
+    }
+
+    func monotonicStack5(_ height: [Int]) -> Int {
+        fatalError()
+    }
+
+    func dp5(_ height: [Int]) -> Int {
+        fatalError()
+    }
+
 
 
 
@@ -47,16 +65,59 @@ final class Week1TrappingRainWater {
 
 
 
+
+
+
+
     func leftRightPointers3(_ height: [Int]) -> Int {
-        fatalError()
+        var l = 0, r =  height.count - 1
+        var leftMax = 0, rightMax = 0, ans = 0
+        while l < r {
+            leftMax = max(leftMax, height[l])
+            rightMax = max(rightMax, height[r])
+            if height[l] < height[r] {
+                ans += leftMax - height[l]
+                l += 1
+            } else {
+                ans += rightMax - height[r]
+                r -= 1
+            }
+        }
+        return ans
     }
 
     func monotonicStack3(_ height: [Int]) -> Int {
-        fatalError()
+        var ans = 0, stack = [Int]()
+        for i in 0..<height.count {
+            while !stack.isEmpty, height[i] > height[stack.last!] {
+                let top = stack.popLast()!
+                if stack.isEmpty { break }
+                let left = stack.last!
+                let h = min(height[left], height[i]) - height[top]
+                let w = i - left - 1
+                ans += w * h
+            }
+            stack.append(i)
+        }
+        return ans
     }
 
     func dp3(_ height: [Int]) -> Int {
-        fatalError()
+        let n = height.count
+        var leftMax = [Int](repeating: 0, count: n), rightMax = leftMax
+        leftMax[0] = height[0]
+        rightMax[n - 1] = height[n - 1]
+        for i in 1..<n {
+            leftMax[i] = max(leftMax[i - 1], height[i])
+        }
+        for i in stride(from: n - 2, through: 0, by: -1) {
+            rightMax[i] = max(rightMax[i + 1], height[i])
+        }
+        var ans = 0
+        for i in stride(from: 1, through: n - 2, by: 1) {
+            ans += min(leftMax[i], rightMax[i]) - height[i]
+        }
+        return ans
     }
 
 
