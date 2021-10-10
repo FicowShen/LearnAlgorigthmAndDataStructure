@@ -20,7 +20,7 @@ import Foundation
  */
 final class Week1RemoveDuplicatesFromSortedArray {
     func run() {
-        let f = removeDuplicates3
+        let f = removeDuplicates4
         func judge(_ nums: [Int], _ res: [Int]) {
             var nums = nums
             let ans = f(&nums)
@@ -39,6 +39,16 @@ final class Week1RemoveDuplicatesFromSortedArray {
 
 
 
+    func removeDuplicates6(_ nums: inout [Int]) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+
+
     func removeDuplicates5(_ nums: inout [Int]) -> Int {
         fatalError()
     }
@@ -49,8 +59,21 @@ final class Week1RemoveDuplicatesFromSortedArray {
 
 
 
+
+
+
+
+
+
+
     func removeDuplicates4(_ nums: inout [Int]) -> Int {
-        fatalError()
+        let n = nums.count
+        var count = 0
+        for i in stride(from: 1, to: n, by: 1) {
+            if nums[i] == nums[i - 1] { count += 1 }
+            else { nums[i - count] = nums[i] }
+        }
+        return n - count
     }
 
 
