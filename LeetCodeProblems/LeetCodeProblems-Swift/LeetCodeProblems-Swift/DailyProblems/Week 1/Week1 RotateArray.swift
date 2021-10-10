@@ -20,7 +20,7 @@ import Foundation
  */
 final class Week1RotateArray {
     func run() {
-        let f = circularReplace2
+        let f = circularReplace3
         func judge(_ nums: [Int], k: Int, res: [Int]) {
             var nums = nums
             f(&nums, k)
@@ -39,16 +39,61 @@ final class Week1RotateArray {
 
 
 
-    func circularReplace3(_ nums: inout [Int], _ k: Int) {
+    func circularReplace4(_ nums: inout [Int], _ k: Int) {
         fatalError()
+    }
+
+    func reverseInPlace4(_ nums: inout [Int], _ k: Int) {
+        fatalError()
+    }
+
+    func writeToTempArray4(_ nums: inout [Int], _ k: Int) {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+    func circularReplace3(_ nums: inout [Int], _ k: Int) {
+        func gcd(x: Int, y: Int) -> Int { y > 0 ? gcd(x: y, y: x % y) : x }
+        let n = nums.count, k = k % n, count = gcd(x: k, y: n)
+        for start in 0..<count {
+            var cur = start, curValue = nums[cur]
+            repeat {
+                let next = (cur + k) % n, nextValue = nums[next]
+                nums[next] = curValue
+                cur = next
+                curValue = nextValue
+            } while cur != start
+        }
     }
 
     func reverseInPlace3(_ nums: inout [Int], _ k: Int) {
-        fatalError()
+        func reverse(start: Int, end: Int) {
+            var l = start, r = end
+            while l < r {
+                nums.swapAt(l, r)
+                l += 1; r -= 1
+            }
+        }
+        let n = nums.count, k = k % n
+        reverse(start: 0, end: n - 1)
+        reverse(start: 0, end: k - 1)
+        reverse(start: k, end: n - 1)
     }
 
     func writeToTempArray3(_ nums: inout [Int], _ k: Int) {
-        fatalError()
+        let n = nums.count
+        var t = [Int](repeating: 0, count: n)
+        for i in 0..<n {
+            t[(i + k) % n] = nums[i]
+        }
+        nums = t
     }
 
 
