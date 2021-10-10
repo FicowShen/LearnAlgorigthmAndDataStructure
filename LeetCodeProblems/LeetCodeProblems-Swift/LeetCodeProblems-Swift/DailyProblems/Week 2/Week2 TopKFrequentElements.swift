@@ -20,10 +20,14 @@ import Foundation
  */
 final class Week2TopKFrequentElements {
     func run() {
-        let f = quickSort2
-        printAndAssert(result: Set(f([1,1,1,2,2,3], 2)), expected: Set([1,2]))
-        printAndAssert(result: Set(f([1,1,1,2,2,3,4,5], 2)), expected: Set([1,2]))
-        printAndAssert(result: Set(f([1], 1)), expected: Set([1]))
+        let f = quickSort3
+        func judge(_ nums: [Int], _ k: Int, res: [Int]) {
+            let ans = f(nums, k)
+            printAndAssert(result: ans.sorted(), expected: res.sorted())
+        }
+        judge([1,1,1,2,2,3], 2, res: [1,2])
+        judge([1,1,1,2,2,3,4,5], 2, res: [1,2])
+        judge([1], 1, res: [1])
     }
 
 
@@ -49,15 +53,56 @@ final class Week2TopKFrequentElements {
 
 
     func quickSort3(_ nums: [Int], _ k: Int) -> [Int] {
-        fatalError()
+        var dict = [Int: Int]()
+        for x in nums { dict[x, default: 0] += 1 }
+        var pairs = dict.map { (key: $0.key, count: $0.value) }
+        var ans = [Int]()
+        func sort(start: Int, end: Int, k: Int) {
+            let picked = Int.random(in: 0...(end - start)) + start
+            pairs.swapAt(start, picked)
+
+            let pivot = pairs[start].count
+            var index = start
+            for i in stride(from: start + 1, through: end, by: 1) {
+                if pairs[i].count > pivot {
+                    index += 1
+                    pairs.swapAt(i, index)
+                }
+            }
+            pairs.swapAt(start, index)
+            if index - start >= k {
+                sort(start: start, end: index - 1, k: k)
+                return
+            }
+            for i in start...index { ans.append(pairs[i].key) }
+            if index - start + 1 < k {
+                sort(start: index + 1, end: end, k: (k - (index - start + 1)))
+            }
+        }
+        sort(start: 0, end: pairs.count - 1, k: k)
+        return ans
     }
 
     func heap3(_ nums: [Int], _ k: Int) -> [Int] {
-        fatalError()
+        var dict = [Int: Int]()
+        for x in nums { dict[x, default: 0] += 1 }
+        var pq = PriorityQueue(capacity: k, defaultValue: (key: 0, count: 0), sort: { $0.count < $1.count })
+        for (key, count) in dict {
+            if pq.size < k {
+                pq.insert((key, count))
+            } else if pq.top.count < count {
+                _ = pq.pop()
+                pq.insert((key, count))
+            }
+        }
+        return (0..<k).map { _ in pq.pop().key }
     }
 
     func dictCountAndSort3(_ nums: [Int], _ k: Int) -> [Int] {
-        fatalError()
+        var dict = [Int: Int]()
+        for x in nums { dict[x, default: 0] += 1 }
+        let sortedKeys = dict.keys.sorted(by: { dict[$0]! > dict[$1]! })
+        return [Int](sortedKeys[0..<k])
     }
 
 
