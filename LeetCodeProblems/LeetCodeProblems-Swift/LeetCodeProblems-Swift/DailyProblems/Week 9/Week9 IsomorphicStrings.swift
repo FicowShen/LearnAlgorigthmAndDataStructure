@@ -18,10 +18,22 @@ import Foundation
  */
 final class Week9IsomorphicStrings {
     func run() {
-        let f = transform3
+        let f = transform4
         printAndAssert(result: f("egg", "add"), expected: true)
         printAndAssert(result: f("foo", "bar"), expected: false)
         printAndAssert(result: f("paper", "title"), expected: true)
+    }
+
+
+
+
+
+    func transform6(_ s: String, _ t: String) -> Bool {
+        fatalError()
+    }
+
+    func dict6(_ s: String, _ t: String) -> Bool {
+        fatalError()
     }
 
 
@@ -42,11 +54,26 @@ final class Week9IsomorphicStrings {
 
 
     func transform4(_ s: String, _ t: String) -> Bool {
-        fatalError()
+        func mapped(_ s: String) -> String {
+            var res = "", dict = [Character: Int]()
+            for (i, c) in s.enumerated() {
+                if dict[c] == nil { dict[c] = i }
+                res.append("\(dict[c]!) ")
+            }
+            return res
+        }
+        return mapped(s) == mapped(t)
     }
 
     func dict4(_ s: String, _ t: String) -> Bool {
-        fatalError()
+        var s2t = [Character: Character](), t2s = s2t
+        for (a, b) in zip(s, t) {
+            if let v = s2t[a], v != b { return false }
+            if let v = t2s[b], v != a { return false }
+            s2t[a] = b
+            t2s[b] = a
+        }
+        return true
     }
 
 

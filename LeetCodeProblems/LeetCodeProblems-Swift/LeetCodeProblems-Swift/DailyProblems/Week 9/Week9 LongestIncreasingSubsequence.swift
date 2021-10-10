@@ -19,7 +19,7 @@ import Foundation
  */
 final class Week9LongestIncreasingSubsequence {
     func run() {
-        let f = greedyAndBinarySearchWithAPI
+        let f = greedyAndBinarySearch4
         printAndAssert(result: f([0]), expected: 1)
         printAndAssert(result: f([10,9,2,5,3,7,101,18]), expected: 4)
         printAndAssert(result: f([0,1,0,3,2,3]), expected: 4)
@@ -53,11 +53,44 @@ final class Week9LongestIncreasingSubsequence {
 
 
     func greedyAndBinarySearch4(_ nums: [Int]) -> Int {
-        fatalError()
+        let n = nums.count
+        var sorted = [Int](repeating: 0, count: n + 1), len = 1
+        sorted[len] = nums[0]
+        for i in 1..<n {
+            if nums[i] > sorted[len] {
+                len += 1
+                sorted[len] = nums[i]
+                continue
+            }
+            var l = 1, r = len, pos = 0
+            while l <= r {
+                let mid = (l + r) >> 1
+                if sorted[mid] < nums[i] {
+                    pos = mid
+                    l = mid + 1
+                } else {
+                    r = mid - 1
+                }
+            }
+            sorted[pos + 1] = nums[i]
+        }
+        return len
     }
 
     func rawDP4(_ nums: [Int]) -> Int {
-        fatalError()
+        let n = nums.count
+        var f = [Int](repeating: 0, count: n), ans = 1
+        f[0] = 1
+        for i in 1..<n {
+            f[i] = 1
+            for j in 0..<i {
+                if nums[i] > nums[j] {
+                    f[i] = max(f[i], f[j] + 1)
+                }
+            }
+            ans = max(ans, f[i])
+        }
+        return ans
     }
 
 

@@ -36,6 +36,23 @@ final class Week9LongestValidParentheses {
 
 
 
+    func dp5(_ s: String) -> Int {
+        fatalError()
+    }
+
+    func stack5(_ s: String) -> Int {
+        fatalError()
+    }
+
+    func leftRightCounter5(_ s: String) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+
     func dp4(_ s: String) -> Int {
         fatalError()
     }
@@ -44,7 +61,7 @@ final class Week9LongestValidParentheses {
         fatalError()
     }
 
-    func leftRightCounter5(_ s: String) -> Int {
+    func leftRightCounter4(_ s: String) -> Int {
         fatalError()
     }
 

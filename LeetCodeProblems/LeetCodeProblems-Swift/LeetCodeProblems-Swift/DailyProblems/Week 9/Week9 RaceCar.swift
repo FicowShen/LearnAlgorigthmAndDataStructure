@@ -20,7 +20,7 @@ import Foundation
  */
 final class Week9RaceCar {
     func run() {
-        let f = bfs3
+        let f = dp4
         printAndAssert(result: f(1), expected: 1)
         printAndAssert(result: f(3), expected: 2)
         printAndAssert(result: f(6), expected: 5)
@@ -48,10 +48,6 @@ final class Week9RaceCar {
 
 
 
-    func dp4(_ target: Int) -> Int {
-        fatalError()
-    }
-
 
     func bfs4(_ target: Int) -> Int {
         fatalError()
@@ -59,7 +55,24 @@ final class Week9RaceCar {
 
 
 
-
+    func dp4(_ target: Int) -> Int {
+        var dp = [Int](repeating: 0, count: Int(1e4) + 1)
+        func f(_ t: Int) -> Int {
+            if dp[t] > 0 { return dp[t] }
+            let n = Int(floor(log2(Double(t)))) + 1
+            if 1 << n == t + 1 {
+                dp[t] = n
+                return n
+            }
+            dp[t] = n + 1 + f((1 << n) - t - 1)
+            for i in stride(from: 0, to: n - 1, by: 1) {
+                let j = n + i + 1 + f(t - (1 << (n - 1)) + (1 << i))
+                dp[t] = min(dp[t], j)
+            }
+            return dp[t]
+        }
+        return f(target)
+    }
 
 
 
