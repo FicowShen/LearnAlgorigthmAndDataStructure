@@ -23,7 +23,7 @@ final class TreeNode: Equatable, CustomStringConvertible {
         return equal(left: lhs, right: rhs)
     }
 
-    /// Create from a perfect binary tree
+    /// Create from a perfect binary tree(allow to ignore nil leaves for the last level)
     static func fromPerfectBinaryTreeLevelNodes(_ nodes: [Int?]) -> TreeNode? {
         guard let first = nodes.first,
               let rootValue = first

@@ -117,6 +117,7 @@ final class DailyProblems {
 
     /// recursion, tree recursion, divider and conquer, backtrack
     static func week3() {
+        Week3SerializeAndDeserializeBinaryTree().run()
         Week3Subsets().run()
         Week3BinaryTreeMinDepth().run()
         Week3Combine().run()
