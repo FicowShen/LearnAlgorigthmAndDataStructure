@@ -16,7 +16,7 @@ import Foundation
  */
 final class Week3Subsets {
     func run() {
-        let f = enumeration3
+        let f = backtrackAllCases4
         func judge(nums: [Int], expected: [[Int]]) {
             printAndAssert(result: Set(f(nums)),
                            expected: Set(expected))
@@ -61,16 +61,56 @@ final class Week3Subsets {
 
 
 
+
+
+
+
     func enumeration4(_ nums: [Int]) -> [[Int]] {
-        fatalError()
+        var ans = [[Int]]()
+        ans.append([])
+        for num in nums {
+            for res in ans {
+                var new = res
+                new.append(num)
+                ans.append(new)
+            }
+        }
+        return ans
     }
 
     func bitsMask4(_ nums: [Int]) -> [[Int]] {
-        fatalError()
+        /*
+         00,  01,  10,  11
+         [], [1], [2], [1,2]
+         */
+        let n = nums.count
+        var ans = [[Int]](), t = [Int]()
+        for mask in 0..<(1 << n) {
+            t.removeAll(keepingCapacity: true)
+            for i in 0..<n {
+                if (mask >> i) & 1 == 1 {
+                    t.append(nums[i])
+                }
+            }
+            ans.append(t)
+        }
+        return ans
     }
 
     func backtrackAllCases4(_ nums: [Int]) -> [[Int]] {
-        fatalError()
+        var ans = [[Int]](), t = [Int]()
+        func backtrack(_ i: Int) {
+            if i == nums.count {
+                ans.append(t)
+                return
+            }
+            t.append(nums[i])
+            backtrack(i + 1)
+            _ = t.popLast()
+            backtrack(i + 1)
+        }
+        backtrack(0)
+        return ans
     }
 
 

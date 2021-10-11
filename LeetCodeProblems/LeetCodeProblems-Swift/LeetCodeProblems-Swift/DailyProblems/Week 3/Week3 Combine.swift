@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week3Combine {
     func run() {
-        let f = iterate4
+        let f = iterate5
         func judge(n: Int, k: Int, expected: [[Int]]) {
             printAndAssert(result: Set(f(n, k).map { $0 }),
                            expected: Set(expected.map { $0 }))
@@ -57,11 +57,36 @@ final class Week3Combine {
 
 
     func backtrack5(_ n: Int, _ k: Int) -> [[Int]] {
-        fatalError()
+        var ans = [[Int]](), t = [Int]()
+        func backtrack(index: Int) {
+            if t.count == k {
+                ans.append(t)
+                return
+            }
+            for i in index...n {
+                if t.count + n - i + 1 < k { continue }
+                t.append(i)
+                backtrack(index: i + 1)
+                _ = t.popLast()
+            }
+        }
+        backtrack(index: 1)
+        return ans
     }
 
     func iterate5(_ n: Int, _ k: Int) -> [[Int]] {
-        fatalError()
+        var ans = [[Int]](), i = 0
+        var nums = [Int](1...k) + [n + 1]
+        while i < k {
+            ans.append(Array(nums[0...k-1]))
+            i = 0
+            while i < k, nums[i] + 1 == nums[i + 1] {
+                nums[i] = i + 1
+                i += 1
+            }
+            nums[i] += 1
+        }
+        return ans
     }
 
 

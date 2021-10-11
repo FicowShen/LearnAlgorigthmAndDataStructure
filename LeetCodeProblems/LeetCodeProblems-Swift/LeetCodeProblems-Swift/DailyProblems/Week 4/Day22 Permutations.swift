@@ -16,7 +16,7 @@ import Foundation
 */
 final class Day22Permutations {
     func run() {
-        let f = insert4
+        let f = insert5
         func judge(nums: [Int], expected: [[Int]]) {
             printAndAssert(result: Set(f(nums)), expected: Set(expected))
         }
@@ -54,15 +54,57 @@ final class Day22Permutations {
 
 
     func backtrackWithSet5(_ nums: [Int]) -> [[Int]] {
-        fatalError()
+        var ans = [[Int]](), choices = Set(nums), t = [Int]()
+        func backtrack() {
+            if choices.isEmpty {
+                ans.append(t)
+                return
+            }
+            for choice in choices {
+                choices.remove(choice)
+                t.append(choice)
+                backtrack()
+                _ = t.popLast()
+                choices.insert(choice)
+            }
+        }
+        backtrack()
+        return ans
     }
 
     func swapWithFirst5(_ nums: [Int]) -> [[Int]] {
-        fatalError()
+        var ans = [[Int]](), nums = nums
+        func backtrack(first: Int) {
+            if first == nums.count {
+                ans.append(nums)
+                return
+            }
+            for i in first..<nums.count {
+                nums.swapAt(i, first)
+                backtrack(first: first + 1)
+                nums.swapAt(i, first)
+            }
+        }
+        backtrack(first: 0)
+        return ans
     }
 
     func insert5(_ nums: [Int]) -> [[Int]] {
-        fatalError()
+        guard let first = nums.first else { return [] }
+        var ans = [[Int]]()
+        ans.append([first])
+        for i in 1..<nums.count {
+            let pre = ans
+            ans.removeAll(keepingCapacity: true)
+            for j in 0...i {
+                for old in pre {
+                    var new = old
+                    new.insert(nums[i], at: j)
+                    ans.append(new)
+                }
+            }
+        }
+        return ans
     }
 
 
