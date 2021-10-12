@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week2NthUglyNumber {
     func run() {
-        let f = dp1
+        let f = dp2
         printAndAssert(result: f(70), expected: 576)
     }
 
@@ -38,19 +38,32 @@ final class Week2NthUglyNumber {
 
 
 
+
+
+
+
+
+
+
+
+
+
     func dp2(_ n: Int) -> Int {
-        fatalError()
+        var nums = [Int](repeating: 0, count: n)
+        nums[0] = 1
+        var p2 = 0, p3 = 0, p5 = 0
+        for i in 1..<n {
+            let two = nums[p2] * 2,
+                three = nums[p3] * 3,
+                five = nums[p5] * 5,
+                m = min(two, three, five)
+            nums[i] = m
+            if m == two { p2 += 1 }
+            if m == three { p3 += 1 }
+            if m == five { p5 += 1 }
+        }
+        return nums[n - 1]
     }
-
-
-
-
-
-
-
-
-
-
 
     func dp1(_ n: Int) -> Int {
         var nums = [Int](repeating: 0, count: n)
