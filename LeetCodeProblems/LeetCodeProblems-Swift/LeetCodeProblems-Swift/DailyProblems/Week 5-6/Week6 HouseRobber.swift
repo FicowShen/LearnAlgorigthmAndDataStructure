@@ -17,7 +17,7 @@ import Foundation
  */
 final class Week6HouseRobber {
     func run() {
-        let f = dp4
+        let f = rawDp5
         printAndAssert(result: f([1]), expected: 1)
         printAndAssert(result: f([1,1]), expected: 1)
         printAndAssert(result: f([1,2,3,1]), expected: 4)
@@ -45,7 +45,11 @@ final class Week6HouseRobber {
 
 
     func rawDp5(_ nums: [Int]) -> Int {
-        fatalError()
+        var pre = 0, cur = 0
+        for num in nums {
+            (pre, cur) = (cur, max(cur, pre + num))
+        }
+        return cur
     }
 
     func dp5(_ nums: [Int]) -> Int {

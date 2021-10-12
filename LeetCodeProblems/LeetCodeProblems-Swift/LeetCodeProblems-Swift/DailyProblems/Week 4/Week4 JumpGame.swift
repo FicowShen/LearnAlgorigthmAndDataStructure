@@ -20,7 +20,7 @@ import Foundation
  */
 final class Week4JumpGame {
     func run() {
-        let f = canJumpWithGoingBackwards6
+        let f = canJumpWithGreedy7
         printAndAssert(result: f([0]), expected: true)
         printAndAssert(result: f([0,2,3]), expected: false)
         printAndAssert(result: f([2,0,0]), expected: true)
@@ -58,7 +58,14 @@ final class Week4JumpGame {
     }
 
     func canJumpWithGreedy7(_ nums: [Int]) -> Bool {
-        fatalError()
+        let n = nums.count
+        var maxJump = 0
+        for i in 0..<n {
+            if maxJump < i { return false }
+            maxJump = max(maxJump, i + nums[i])
+            if maxJump >= n - 1 { return true }
+        }
+        return true
     }
 
 
