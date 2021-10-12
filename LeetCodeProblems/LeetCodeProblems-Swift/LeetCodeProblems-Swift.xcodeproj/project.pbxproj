@@ -41,6 +41,7 @@
 		6A10BA8B26F17880006CE7AC /* Week7 FriendCircles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A10BA8A26F17880006CE7AC /* Week7 FriendCircles.swift */; };
 		6A125C7C2713ADE2003149EE /* Week3 SerializeAndDeserializeBinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A125C7B2713ADE2003149EE /* Week3 SerializeAndDeserializeBinaryTree.swift */; };
 		6A125C7E27150A06003149EE /* Week1 RemoveDuplicatesFromSortedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A125C7D27150A06003149EE /* Week1 RemoveDuplicatesFromSortedList.swift */; };
+		6A125C802715189C003149EE /* Week3 MyPow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A125C7F2715189C003149EE /* Week3 MyPow.swift */; };
 		6A42EFB226CBFC0F0030EE32 /* Day16 ReplaceSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB126CBFC0F0030EE32 /* Day16 ReplaceSpace.swift */; };
 		6A42EFB426CC8BF20030EE32 /* Day17 ReversePrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB326CC8BF20030EE32 /* Day17 ReversePrint.swift */; };
 		6A42EFB626CD48F20030EE32 /* Week3 GenerateParentheses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFB526CD48F20030EE32 /* Week3 GenerateParentheses.swift */; };
@@ -225,6 +226,7 @@
 		6A10BA8A26F17880006CE7AC /* Week7 FriendCircles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week7 FriendCircles.swift"; sourceTree = "<group>"; };
 		6A125C7B2713ADE2003149EE /* Week3 SerializeAndDeserializeBinaryTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 SerializeAndDeserializeBinaryTree.swift"; sourceTree = "<group>"; };
 		6A125C7D27150A06003149EE /* Week1 RemoveDuplicatesFromSortedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week1 RemoveDuplicatesFromSortedList.swift"; sourceTree = "<group>"; };
+		6A125C7F2715189C003149EE /* Week3 MyPow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 MyPow.swift"; sourceTree = "<group>"; };
 		6A42EFB126CBFC0F0030EE32 /* Day16 ReplaceSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day16 ReplaceSpace.swift"; sourceTree = "<group>"; };
 		6A42EFB326CC8BF20030EE32 /* Day17 ReversePrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day17 ReversePrint.swift"; sourceTree = "<group>"; };
 		6A42EFB526CD48F20030EE32 /* Week3 GenerateParentheses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 GenerateParentheses.swift"; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 				6A9B0B0926F5B78B00FA12DC /* Week3 BinaryTreeMinDepth.swift */,
 				6A81919726F7764A0000188C /* Week3 Subsets.swift */,
 				6A125C7B2713ADE2003149EE /* Week3 SerializeAndDeserializeBinaryTree.swift */,
+				6A125C7F2715189C003149EE /* Week3 MyPow.swift */,
 			);
 			path = "Week 3";
 			sourceTree = "<group>";
@@ -876,6 +879,7 @@
 				6AB35B2126B83C2D0026173D /* HouseRobber3.swift in Sources */,
 				6A81919826F7764A0000188C /* Week3 Subsets.swift in Sources */,
 				6AB35B1B26B6E7D70026173D /* TheKWeakestRowsInAMatrix.swift in Sources */,
+				6A125C802715189C003149EE /* Week3 MyPow.swift in Sources */,
 				6AB35B5426C4A1480026173D /* Week2 ValidAnagram.swift in Sources */,
 				6AB35B1826B6360A0026173D /* WeeklyContest252.swift in Sources */,
 				6AB35B1226B22A4E0026173D /* MaxProfitWithCooldown.swift in Sources */,
