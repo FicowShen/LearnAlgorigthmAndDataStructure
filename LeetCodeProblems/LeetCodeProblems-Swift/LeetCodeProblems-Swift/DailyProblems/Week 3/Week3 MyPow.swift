@@ -17,7 +17,7 @@ import Foundation
  */
 final class Week3MyPow {
     func run() {
-        let f = fastModWithRecursion1
+        let f = fastModWithIteration2
         func judge(_ x: Double, _ n: Int, ans: Double) {
             let res = f(x, n)
             printAndAssert(result: Double(String(format: "%.3f", res)),
@@ -31,6 +31,9 @@ final class Week3MyPow {
 
 
 
+    func fastModWithIteration5(_ x: Double, _ n: Int) -> Double {
+        fatalError()
+    }
 
     func fastModWithRecursion5(_ x: Double, _ n: Int) -> Double {
         fatalError()
@@ -39,12 +42,24 @@ final class Week3MyPow {
 
 
 
+
+
+    func fastModWithIteration4(_ x: Double, _ n: Int) -> Double {
+        fatalError()
+    }
+
     func fastModWithRecursion4(_ x: Double, _ n: Int) -> Double {
         fatalError()
     }
 
 
 
+
+
+
+    func fastModWithIteration3(_ x: Double, _ n: Int) -> Double {
+        fatalError()
+    }
 
     func fastModWithRecursion3(_ x: Double, _ n: Int) -> Double {
         fatalError()
@@ -53,11 +68,49 @@ final class Week3MyPow {
 
 
 
+
+
+    func fastModWithIteration2(_ x: Double, _ n: Int) -> Double {
+        func f(x: Double, n: Int) -> Double {
+            var ans = 1 as Double, n = n, xContribute = x
+            while n > 0 {
+                if n & 1 == 1 { ans *= xContribute }
+                xContribute *= xContribute
+                n >>= 1
+            }
+            return ans
+        }
+        return n >= 0 ? f(x: x, n: n) : 1/f(x: x, n: -n)
+    }
+
     func fastModWithRecursion2(_ x: Double, _ n: Int) -> Double {
-        fatalError()
+        func mod(x: Double, n: Int) -> Double {
+            if n == 0 { return 1 }
+            let y = mod(x: x, n: n >> 1)
+            return n & 1 == 1 ? y * y * x : y * y
+        }
+        return n >= 0 ? mod(x: x, n: n) : 1/mod(x: x, n: -n)
     }
 
 
+
+
+
+
+
+
+    func fastModWithIteration1(_ x: Double, _ n: Int) -> Double {
+        func f(x: Double, n: Int) -> Double {
+            var ans = 1 as Double, n = n, xContribute = x
+            while n > 0 {
+                if n & 1 == 1 { ans *= xContribute }
+                xContribute *= xContribute
+                n >>= 1
+            }
+            return ans
+        }
+        return n >= 0 ? f(x: x, n: n) : 1/f(x: x, n: -n)
+    }
 
     func fastModWithRecursion1(_ x: Double, _ n: Int) -> Double {
         func mod(_ x: Double, _ n: Int) -> Double {
@@ -70,6 +123,8 @@ final class Week3MyPow {
 
 
 
+
+
     func fastModWithRecursion(_ x: Double, _ n: Int) -> Double {
         func quickModular(_ x: Double, _ n: Int) -> Double {
             if n == 0 { return 1 }
@@ -77,5 +132,20 @@ final class Week3MyPow {
             return n & 1 == 0 ? y * y : y * y * x
         }
         return n >= 0 ? quickModular(x, n) : 1/quickModular(x, -n)
+    }
+
+
+
+    func fastModWithIteration(_ x: Double, _ n: Int) -> Double {
+        func f(x: Double, n: Int) -> Double {
+            var ans = 1 as Double, xContribute = x, n = n
+            while n > 0 {
+                if n & 1 == 1 { ans *= xContribute }
+                xContribute *= xContribute
+                n >>= 1
+            }
+            return ans
+        }
+        return n >= 0 ? f(x: x, n: n) : 1/f(x: x, n: -n)
     }
 }
