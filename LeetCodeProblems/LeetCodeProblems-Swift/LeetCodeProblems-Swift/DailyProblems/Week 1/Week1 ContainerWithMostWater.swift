@@ -13,7 +13,7 @@ import Foundation
  */
 final class Week1ContainerWithMostWater {
     func run() {
-        let f = leftRightPointers5
+        let f = leftRightPointers6
         func judge(_ height: [Int], expected: Int) {
             printAndAssert(result: f(height), expected: expected)
         }
@@ -27,36 +27,43 @@ final class Week1ContainerWithMostWater {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func leftRightPointers6(_ height: [Int]) -> Int {
-        fatalError()
+        var l = 0, r = height.count - 1, ans = 0
+        while l < r {
+            let h = min(height[l], height[r])
+            ans = max(ans, (r - l) * h)
+            while l < r, height[l] <= h { l += 1 }
+            while l < r, height[r] <= h { r -= 1 }
+        }
+        return ans
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

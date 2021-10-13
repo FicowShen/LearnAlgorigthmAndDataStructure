@@ -42,12 +42,29 @@ final class Day7DesignCircularDeque {
             assert(deque.getFront() == 4)     // return 4
             (0...10).forEach { _ in _ = deque.deleteLast() }
             assert(deque.getRear() == -1)
+
+            let deque2 = Deque.init(3)
+            assert(deque2.insertFront(9))  // return True
+            assert(deque2.getRear() == 9)  // return 9
+            assert(deque2.insertFront(9)) // return True
+            assert(deque2.getRear() == 9) // return 9
+            assert(deque2.insertLast(5))      // return true
+            assert(deque2.getFront() == 9)       // return 9
+            assert(deque2.getRear() == 5)   // return 5
+            assert(deque2.getFront() == 9) // return 9
+            assert(deque2.insertLast(8) == false)     // return false
+            assert(deque2.deleteLast())     // return true
+            assert(deque2.getFront() == 9) // return 9
         }
-        judge(Deque: CircularDequeWithNodes4.self)
+        judge(Deque: CircularDequeWithArray4.self)
     }
 }
 
-class CircularDequeWithArray4: CircularDequeConvertible {
+
+
+
+
+class CircularDequeWithArray5: CircularDequeConvertible {
     required init(_ k: Int) {
         fatalError()
     }
@@ -76,6 +93,83 @@ class CircularDequeWithArray4: CircularDequeConvertible {
         fatalError()
     }
 }
+
+
+class CircularDequeWithNodes5: CircularDequeConvertible {
+    required init(_ k: Int) {
+        fatalError()
+    }
+    func insertFront(_ value: Int) -> Bool {
+        fatalError()
+    }
+    func insertLast(_ value: Int) -> Bool {
+        fatalError()
+    }
+    func deleteFront() -> Bool {
+        fatalError()
+    }
+    func deleteLast() -> Bool {
+        fatalError()
+    }
+    func getFront() -> Int {
+        fatalError()
+    }
+    func getRear() -> Int {
+        fatalError()
+    }
+    func isEmpty() -> Bool {
+        fatalError()
+    }
+    func isFull() -> Bool {
+        fatalError()
+    }
+}
+
+
+class CircularDequeWithArray4: CircularDequeConvertible {
+    private let capacity: Int
+    private var front = 0, rear = 0, values: [Int]
+    required init(_ k: Int) {
+        capacity = k + 1 // one more position to check full status
+        values = [Int](repeating: 0, count: capacity)
+    }
+    func insertFront(_ value: Int) -> Bool {
+        if isFull() { return false }
+        front = (front - 1 + capacity) % capacity
+        values[front] = value // front points to a front value
+        return true
+    }
+    func insertLast(_ value: Int) -> Bool {
+        if isFull() { return false }
+        values[rear] = value
+        rear = (rear + 1) % capacity // rear points to the rear(invalid)
+        return true
+    }
+    func deleteFront() -> Bool {
+        if isEmpty() { return false }
+        front = (front + 1) % capacity
+        return true
+    }
+    func deleteLast() -> Bool {
+        if isEmpty() { return false }
+        rear = (rear - 1 + capacity) % capacity
+        return true
+    }
+    func getFront() -> Int {
+        isEmpty() ? -1 : values[front]
+    }
+    func getRear() -> Int {
+        isEmpty() ? -1 : values[(rear - 1 + capacity) % capacity]
+    }
+    func isEmpty() -> Bool {
+        front == rear
+    }
+    func isFull() -> Bool {
+        (rear + 1) % capacity == front
+    }
+}
+
+
 
 class CircularDequeWithNodes4: CircularDequeConvertible {
     private var front = DoubleLinkedNode(), rear = DoubleLinkedNode()

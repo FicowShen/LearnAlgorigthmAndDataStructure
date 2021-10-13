@@ -15,7 +15,7 @@ import Foundation
  */
 final class Week3BinaryTreeMinDepth {
     func run() {
-        let f = dfsWithLevel1
+        let f = bfs1
         var levelNodes = [3,9,20,nil,nil,15,7]
         var tree = TreeNode.fromPerfectBinaryTreeLevelNodes(levelNodes)
         printAndAssert(result: f(tree), expected: 2)
@@ -88,6 +88,20 @@ final class Week3BinaryTreeMinDepth {
 
 
     func bfs1(_ root: TreeNode?) -> Int {
+        guard let root = root else { return 0 }
+        var q = [root], level = 1
+        while !q.isEmpty {
+            var next = [TreeNode]()
+            for node in q {
+                if node.left == nil, node.right == nil {
+                    return level
+                }
+                if let l = node.left { next.append(l) }
+                if let r = node.right { next.append(r) }
+            }
+            level += 1
+            q = next
+        }
         fatalError()
     }
 

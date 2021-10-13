@@ -18,7 +18,7 @@ import Foundation
  */
 final class Week1RemoveDuplicatesFromSortedList {
     func run() {
-        let f = deleteDuplicatesRecursively
+        let f = deleteDuplicatesRecursively1
         func judge(_ list: [Int], _ res: [Int]) {
             let list = ListNode.fromList(list)
             printAndAssert(result: f(list), expected: ListNode.fromList(res))
@@ -30,17 +30,69 @@ final class Week1RemoveDuplicatesFromSortedList {
     }
 
 
+
+
+    func deleteDuplicatesRecursively3(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+    func deleteDuplicates3(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+    func deleteDuplicatesRecursively2(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+    func deleteDuplicates2(_ head: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+    func deleteDuplicatesRecursively1(_ head: ListNode?) -> ListNode? {
+        func f(_ head: ListNode?) -> ListNode? {
+            guard let head = head, let next = head.next else { return head }
+            head.next = f(next)
+            return head.val == next.val ? head.next : head
+        }
+        return f(head)
+    }
+
     func deleteDuplicates1(_ head: ListNode?) -> ListNode? {
         var cur: ListNode! = head
         while cur?.next != nil {
             if cur.val == cur.next!.val {
-                cur.next = cur.next?.next
+                cur.next = cur.next!.next
             } else {
                 cur = cur.next
             }
         }
         return head
     }
+
+
+
+
+
+
+
+
+
 
     func deleteDuplicatesRecursively(_ head: ListNode?) -> ListNode? {
         func f(_ head: ListNode?) -> ListNode? {

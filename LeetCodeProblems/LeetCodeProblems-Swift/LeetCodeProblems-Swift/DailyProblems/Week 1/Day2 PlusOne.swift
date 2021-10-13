@@ -10,8 +10,9 @@ import Foundation
 // https://leetcode-cn.com/problems/plus-one
 final class Day2PlusOne {
     func run() {
+        let f = plusOne8
         func judge(_ digits: [Int], expected: [Int]) {
-            printAndAssert(result: plusOne7(digits), expected: expected)
+            printAndAssert(result: f(digits), expected: expected)
         }
         judge([9], expected: [1, 0])
         judge([9, 9], expected: [1, 0, 0])
@@ -21,7 +22,7 @@ final class Day2PlusOne {
     }
 
 
-    func plusOne8(_ digits: [Int]) -> [Int] {
+    func plusOne9(_ digits: [Int]) -> [Int] {
         fatalError()
     }
 
@@ -47,6 +48,20 @@ final class Day2PlusOne {
 
 
 
+
+
+
+    func plusOne8(_ digits: [Int]) -> [Int] {
+        let n = digits.count
+        var nums = digits
+        for i in stride(from: n - 1, through: 0, by: -1) {
+            nums[i] = (nums[i] + 1) % 10
+            if nums[i] != 0 { return nums }
+        }
+        nums = [Int](repeating: 0, count: n + 1)
+        nums[0] = 1
+        return nums
+    }
 
 
 

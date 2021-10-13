@@ -10,7 +10,7 @@ import Foundation
 // https://leetcode-cn.com/problems/merge-two-sorted-lists/
 final class Day5MergeTwoSortedLists {
     func run() {
-        let f = mergeTwoListsWithRecursion5
+        let f = mergeTwoListsWithRecursion6
         func judge(_ l1: [Int], _ l2: [Int], expected: [Int]) {
             let node1 = ListNode.fromList(l1)
             let node2 = ListNode.fromList(l2)
@@ -25,27 +25,64 @@ final class Day5MergeTwoSortedLists {
 
 
 
-    func mergeTwoListsWithRecursion6(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+    func mergeTwoListsWithRecursion7(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         fatalError()
+    }
+
+    func mergeTwoListsWithIteration7(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    func mergeTwoListsWithRecursion6(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+        func merged(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+            guard let l1 = l1, let l2 = l2 else {
+                return l1 == nil ? l2 : l1
+            }
+            if l1.val <= l2.val {
+                l1.next = merged(l1.next, l2)
+                return l1
+            }
+            l2.next = merged(l1, l2.next)
+            return l2
+        }
+        return merged(l1, l2)
     }
 
     func mergeTwoListsWithIteration6(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
-        fatalError()
+        if l1 == nil { return l2 }
+        if l2 == nil { return l1 }
+        let newHead = ListNode()
+        var p1: ListNode! = l1, p2: ListNode! = l2, cur: ListNode! = newHead
+        while p1 != nil, p2 != nil {
+            if p1.val <= p2.val {
+                cur.next = p1
+                p1 = p1.next
+            } else {
+                cur.next = p2
+                p2 = p2.next
+            }
+            cur = cur.next
+        }
+        cur.next = p1 == nil ? p2 : p1
+        return newHead.next
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
