@@ -10,7 +10,7 @@ import Foundation
 // https://leetcode-cn.com/problems/fizz-buzz/
 final class Day11FizzBuzz {
     func run() {
-        let f = concat4
+        let f = countFizzBuzz4
         printAndAssert(result: f(3), expected: ["1","2","Fizz"])
         printAndAssert(result: f(5), expected: ["1","2","Fizz","4","Buzz"])
     }
@@ -47,7 +47,24 @@ final class Day11FizzBuzz {
     }
 
     func countFizzBuzz4(_ n: Int) -> [String] {
-        fatalError()
+        var three = 0, five = 0, ans = [String]()
+        for i in 1...n {
+            three += 1
+            five += 1
+            if three == 3, five == 5 {
+                ans.append("FizzBuzz")
+                three = 0; five = 0
+            } else if three == 3 {
+                ans.append("Fizz")
+                three = 0
+            } else if five == 5 {
+                ans.append("Buzz")
+                five = 0
+            } else {
+                ans.append(i.description)
+            }
+        }
+        return ans
     }
 
     func concat4(_ n: Int) -> [String] {

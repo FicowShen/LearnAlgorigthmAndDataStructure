@@ -23,7 +23,7 @@ import Foundation
  */
 final class Week2GetLeastNumbers {
     func run() {
-        let f = heap4
+        let f = heap5
         func judge(_ arr: [Int], _ k: Int, expected: [Int]) {
             printAndAssert(result: Set(f(arr, k)), expected: Set(expected))
         }
@@ -31,6 +31,7 @@ final class Week2GetLeastNumbers {
         judge([3,2,1], 2, expected: [2,1])
         judge([3,1,5,4,3,0,9], 2, expected: [0,1])
         judge([3,1,5,4,3,0,9], 4, expected: [0,1,3,3])
+        judge([0,0,0,2,0,5], 0, expected: [])
     }
 
 
@@ -57,12 +58,22 @@ final class Week2GetLeastNumbers {
 
 
 
-    func heap5(_ arr: [Int], _ k: Int) -> [Int] {
+    func quickSort5(_ arr: [Int], _ k: Int) -> [Int] {
         fatalError()
     }
 
-    func quickSort5(_ arr: [Int], _ k: Int) -> [Int] {
-        fatalError()
+    func heap5(_ arr: [Int], _ k: Int) -> [Int] {
+        if arr.isEmpty || k == 0 { return [] }
+        var pq = PriorityQueue<Int>(capacity: k, defaultValue: 0, sort: >)
+        for x in arr {
+            if pq.size < k {
+                pq.insert(x)
+            } else if x < pq.top {
+                pq.pop()
+                pq.insert(x)
+            }
+        }
+        return (0..<k).map { _ in pq.pop() }
     }
 
 
