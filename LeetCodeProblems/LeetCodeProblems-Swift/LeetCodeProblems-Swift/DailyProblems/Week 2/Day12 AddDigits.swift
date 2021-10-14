@@ -10,7 +10,7 @@ import Foundation
 // https://leetcode-cn.com/problems/add-digits/
 final class Day12AddDigits {
     func run() {
-        let f = addDigitsLoop4
+        let f = addDigitsRecursion4
         printAndAssert(result: f(38), expected: 2)
         printAndAssert(result: f(0), expected: 0)
     }
@@ -55,7 +55,15 @@ final class Day12AddDigits {
     }
 
     func addDigitsRecursion4(_ num: Int) -> Int {
-        fatalError()
+        func f(_ x: Int) -> Int {
+            var x = x, sum = 0
+            while x > 0 {
+                sum += (x % 10)
+                x /= 10
+            }
+            return sum > 9 ? f(sum) : sum
+        }
+        return f(num)
     }
 
     func addDigitsLoop4(_ num: Int) -> Int {

@@ -15,7 +15,7 @@ import Foundation
  */
 final class Day10RemoveOutermostParentheses {
     func run() {
-        let f = stack4
+        let f = counter4
         func judge(_ s: String, expected: String) {
             printAndAssert(result: f(s), expected: expected)
         }
@@ -61,7 +61,15 @@ final class Day10RemoveOutermostParentheses {
 
 
     func counter4(_ s: String) -> String {
-        fatalError()
+        var open = Character("("),
+            close = Character(")"),
+            ans = "", level = 0
+        for c in s {
+            if c == close { level -= 1 }
+            if level > 0 { ans.append(c) }
+            if c == open { level += 1 }
+        }
+        return ans
     }
 
     func stack4(_ s: String) -> String {

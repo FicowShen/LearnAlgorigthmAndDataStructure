@@ -16,7 +16,7 @@ import Foundation
 */
 final class Day22Permutations {
     func run() {
-        let f = insert5
+        let f = swapWithFirst6
         func judge(nums: [Int], expected: [[Int]]) {
             printAndAssert(result: Set(f(nums)), expected: Set(expected))
         }
@@ -34,6 +34,17 @@ final class Day22Permutations {
     }
 
 
+    func backtrackWithSet7(_ nums: [Int]) -> [[Int]] {
+        fatalError()
+    }
+
+    func swapWithFirst7(_ nums: [Int]) -> [[Int]] {
+        fatalError()
+    }
+
+    func insert7(_ nums: [Int]) -> [[Int]] {
+        fatalError()
+    }
 
 
 
@@ -41,14 +52,26 @@ final class Day22Permutations {
         fatalError()
     }
 
-    func swapWithFirst6(_ nums: [Int]) -> [[Int]] {
-        fatalError()
-    }
-
     func insert6(_ nums: [Int]) -> [[Int]] {
         fatalError()
     }
 
+    func swapWithFirst6(_ nums: [Int]) -> [[Int]] {
+        var ans = [[Int]](), t = nums
+        func backtrack(first: Int) {
+            if first == t.count {
+                ans.append(t)
+                return
+            }
+            for i in first..<t.count {
+                t.swapAt(i, first)
+                backtrack(first: first + 1)
+                t.swapAt(i, first)
+            }
+        }
+        backtrack(first: 0)
+        return ans
+    }
 
 
 
