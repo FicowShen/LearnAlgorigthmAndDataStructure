@@ -21,7 +21,7 @@ import Foundation
  */
 final class Week4BestTimeToBuyAndSellStockII {
     func run() {
-        let f = greedy6
+        let f = greedy7
         printAndAssert(result: f([7,1,5,3,6,4]), expected: 7)
         printAndAssert(result: f([7,6,4,3,1]), expected: 0)
     }
@@ -32,17 +32,54 @@ final class Week4BestTimeToBuyAndSellStockII {
 
 
 
-    func greedy7(_ prices: [Int]) -> Int {
+    func greedy8(_ prices: [Int]) -> Int {
         fatalError()
+    }
+
+
+    func dp8(_ prices: [Int]) -> Int {
+        fatalError()
+    }
+
+    func rawDP8(_ prices: [Int]) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+
+
+    func greedy7(_ prices: [Int]) -> Int {
+        var sum = 0
+        for i in 1..<prices.count {
+            sum += max(0, prices[i] - prices[i - 1])
+        }
+        return sum
     }
 
 
     func dp7(_ prices: [Int]) -> Int {
-        fatalError()
+        var noStock = 0, hasStock = -prices[0]
+        for price in prices[1...] {
+            (noStock, hasStock) = (
+                max(noStock, hasStock + price),
+                max(hasStock, noStock - price)
+            )
+        }
+        return noStock
     }
 
     func rawDP7(_ prices: [Int]) -> Int {
-        fatalError()
+        let n = prices.count
+        var noStock = [Int](repeating: 0, count: n), hasStock = noStock
+        hasStock[0] = -prices[0]
+        for i in 1..<n {
+            noStock[i] = max(noStock[i - 1], hasStock[i - 1] + prices[i])
+            hasStock[i] = max(hasStock[i - 1], noStock[i - 1] - prices[i])
+        }
+        return noStock[n - 1]
     }
 
 
