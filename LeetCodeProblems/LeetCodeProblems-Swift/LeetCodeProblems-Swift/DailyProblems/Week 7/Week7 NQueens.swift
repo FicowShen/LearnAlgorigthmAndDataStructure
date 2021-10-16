@@ -21,11 +21,11 @@ import Foundation
  Note:
  x & (−x) 可以获得 x 的二进制表示中的最低位的 1 的位置；
  x & (x−1) 可以将 x 的二进制表示中的最低位的 1 置成 0。
- 负数的补码：https://blog.csdn.net/qq20004604/article/details/50130921
+ 负数的补码：https://blog.csdn.net/qq20004604/article/details/50130921，取反再加1
  */
 final class Week7NQueens {
     func run() {
-        let f = backtrackWithBitOperation4
+        let f = backtrackWithBitOperation5
         func judge(n: Int, expected: [[String]]) {
             printAndAssert(result: Set(f(n)), expected: Set(expected))
         }
@@ -39,14 +39,121 @@ final class Week7NQueens {
 
 
 
-    func backtrackWithBitOperation5(_ n: Int) -> [[String]] {
+
+
+    func backtrackWithBitOperation7(_ n: Int) -> [[String]] {
         fatalError()
+    }
+
+
+    func backtrackWithSet7(_ n: Int) -> [[String]] {
+        fatalError()
+    }
+
+
+
+
+
+
+
+    func backtrackWithBitOperation6(_ n: Int) -> [[String]] {
+        fatalError()
+    }
+
+
+    func backtrackWithSet6(_ n: Int) -> [[String]] {
+        fatalError()
+    }
+
+
+
+
+
+
+
+    func backtrackWithBitOperation5(_ n: Int) -> [[String]] {
+        var queens = [Int](repeating: -1, count: n), ans = [[String]]()
+        let rawBoardRow = [Character](repeating: Character("."), count: n)
+        func makeBoard() -> [String] {
+            var board = [String]()
+            for i in 0..<n {
+                var row = rawBoardRow
+                row[queens[i]] = "Q"
+                board.append(String(row))
+            }
+            return board
+        }
+        func bitCount(_ x: Int) -> Int {
+            var x = x, count = 0
+            while x != 0 {
+                x &= (x - 1)
+                count += 1
+            }
+            return count
+        }
+        func backtrack(row: Int, cols: Int, diagonals1: Int, diagonals2: Int) {
+            if row == n {
+                ans.append(makeBoard())
+                return
+            }
+            let d1 = diagonals1, d2 = diagonals2
+            var validPos = ((1 << n) - 1) & (~(cols | d1 | d2))
+            while validPos != 0 {
+                let pos = validPos & -validPos
+                validPos &= (validPos - 1)
+                let col = bitCount(pos - 1)
+                queens[row] = col
+                backtrack(row: row + 1,
+                          cols: cols | pos,
+                          diagonals1: (d1 | pos) << 1,
+                          diagonals2: (d2 | pos) >> 1)
+            }
+        }
+        backtrack(row: 0, cols: 0, diagonals1: 0, diagonals2: 0)
+        return ans
     }
 
 
     func backtrackWithSet5(_ n: Int) -> [[String]] {
-        fatalError()
+        var cols = Set<Int>(), diagonals1 = cols, diagonals2 = cols
+        var queens = [Int](repeating: -1, count: n), ans = [[String]]()
+        let rawBoardRow = [Character](repeating: Character("."), count: n)
+        func makeBoard() -> [String] {
+            var board = [String]()
+            for i in 0..<n {
+                var row = rawBoardRow
+                row[queens[i]] = "Q"
+                board.append(String(row))
+            }
+            return board
+        }
+        func backtrack(row: Int) {
+            if row == n {
+                ans.append(makeBoard())
+                return
+            }
+            for col in 0..<n {
+                if cols.contains(col) { continue }
+                let d1 = row + col
+                if diagonals1.contains(d1) { continue }
+                let d2 = row - col
+                if diagonals2.contains(d2) { continue }
+                queens[row] = col
+                cols.insert(col)
+                diagonals1.insert(d1)
+                diagonals2.insert(d2)
+                backtrack(row: row + 1)
+                queens[row] = -1
+                cols.remove(col)
+                diagonals1.remove(d1)
+                diagonals2.remove(d2)
+            }
+        }
+        backtrack(row: 0)
+        return ans
     }
+
+
 
 
 

@@ -17,7 +17,7 @@ import Foundation
  */
 final class Day18LowestCommonAncestor {
     func run() {
-        let f = dfs4
+        let f = mapAndSet4
         func judge(nodes: [Int?], p: Int, q: Int, expected: Int) {
             let tree = TreeNode.fromPerfectBinaryTreeLevelNodes(nodes)
             // find the node with a specified value
@@ -33,6 +33,9 @@ final class Day18LowestCommonAncestor {
 
 
 
+
+
+
     func dfs6(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
         fatalError()
     }
@@ -40,6 +43,9 @@ final class Day18LowestCommonAncestor {
     func mapAndSet6(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
         fatalError()
     }
+
+
+
 
 
 
@@ -55,20 +61,46 @@ final class Day18LowestCommonAncestor {
 
 
 
+
+
+
     func mapAndSet4(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
-        fatalError()
+        guard let root = root else { return nil }
+        var parent = [Int: TreeNode](), stack = [root]
+        while let node = stack.popLast() {
+            if let l = node.left {
+                parent[l.val] = node
+                stack.append(l)
+            }
+            if let r = node.right {
+                parent[r.val] = node
+                stack.append(r)
+            }
+        }
+        var visited = Set<Int>(), node: TreeNode! = p
+        while node != nil {
+            visited.insert(node.val)
+            node = parent[node.val]
+        }
+        node = q
+        while node != nil {
+            if visited.contains(node.val) { return node }
+            node = parent[node.val]
+        }
+        return nil
     }
 
     func dfs4(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
         func f(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
             if root == nil || root === p || root === q { return root }
-            let l = f(root!.left, p, q)
-            let r = f(root!.right, p, q)
+            let l = f(root!.left, p, q), r = f(root!.right, p, q)
             if l != nil, r != nil { return root }
             return l == nil ? r : l
         }
         return f(root, p, q)
     }
+
+
 
 
 
