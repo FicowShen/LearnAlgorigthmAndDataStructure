@@ -9,6 +9,7 @@ import Foundation
 
 final class DailyProblems {
     static func run() {
+        week10()
         week9()
         week8()
         week7()
@@ -17,6 +18,10 @@ final class DailyProblems {
         week3()
         week2()
         week1()
+    }
+
+    static func week10() {
+        Day69ProductOfArrayExceptSelf().run()
     }
 
     static func week9() {
