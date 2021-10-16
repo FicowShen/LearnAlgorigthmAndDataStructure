@@ -7,10 +7,15 @@
 
 import Foundation
 
-// https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
+/*
+ https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
+ 1. DFS
+ 2. BFS
+ Time: O(n), Space: O(1)
+ */
 final class Day13MaximumDepthOfBinaryTree {
     func run() {
-        let f = maxDepthWithBFS3
+        let f = maxDepthWithBFS4
         func judge(nodes: [Int?], expected: Int) {
             let root = TreeNode.fromPerfectBinaryTreeLevelNodes(nodes)
             printAndAssert(result: f(root), expected: expected)
@@ -22,16 +27,50 @@ final class Day13MaximumDepthOfBinaryTree {
 
 
 
-    func maxDepthWithBFS4(_ root: TreeNode?) -> Int {
+
+
+
+
+    func maxDepthWithBFS5(_ root: TreeNode?) -> Int {
         fatalError()
     }
 
-    func maxDepthWithoutMaxFunction4(_ root: TreeNode?) -> Int {
+    func maxDepthWithoutMaxFunction5(_ root: TreeNode?) -> Int {
         fatalError()
+    }
+
+    func maxDepthShortest5(_ root: TreeNode?) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+    func maxDepthWithBFS4(_ root: TreeNode?) -> Int {
+        guard let root = root else { return 0 }
+        var depth = 0, q = [root]
+        while !q.isEmpty {
+            var next = [TreeNode]()
+            for node in q {
+                if let l = node.left { next.append(l) }
+                if let r = node.right { next.append(r) }
+            }
+            q = next
+            depth += 1
+        }
+        return depth
     }
 
     func maxDepthShortest4(_ root: TreeNode?) -> Int {
-        fatalError()
+        func f(_ root: TreeNode?) -> Int {
+            root == nil ? 0 : max(f(root!.left), f(root!.right)) + 1
+        }
+        return f(root)
     }
 
 

@@ -14,13 +14,24 @@ import Foundation
  */
 final class Week3LetterCombinationsOfAPhoneNumber {
     func run() {
-        let f = iteration1
+        let f = iteration2
         printAndAssert(result: f(""),
                        expected: [])
         printAndAssert(result: f("2"),
                        expected: ["a","b","c"])
         printAndAssert(result: Set(f("23")),
                        expected: Set(["ad","ae","af","bd","be","bf","cd","ce","cf"]))
+    }
+
+
+
+
+    func iteration4(_ digits: String) -> [String] {
+        fatalError()
+    }
+
+    func backtrack4(_ digits: String) -> [String] {
+        fatalError()
     }
 
 
@@ -37,12 +48,57 @@ final class Week3LetterCombinationsOfAPhoneNumber {
 
 
 
+
+
+
     func iteration2(_ digits: String) -> [String] {
-        fatalError()
+        if digits.isEmpty { return [] }
+        let digits = Array(digits)
+        var mapping = [Character: [Character]](), ans = [String]()
+        [
+            "2": "abc", "3": "def", "4": "ghi", "5": "jkl",
+            "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"
+        ].forEach { mapping[$0.key] = $0.value.map { $0 }}
+        for (i, numChar) in digits.enumerated() {
+            let old = ans
+            ans.removeAll(keepingCapacity: true)
+            for c in mapping[numChar]! {
+                if i == 0 { // a, b, c
+                    ans.append(String(c))
+                    continue
+                }
+                for s in old { // ad, ae, af
+                    var t = s
+                    t.append(c)
+                    ans.append(t)
+                }
+            }
+
+        }
+        return ans
     }
 
     func backtrack2(_ digits: String) -> [String] {
-        fatalError()
+        if digits.isEmpty { return [] }
+        let digits = Array(digits)
+        var mapping = [Character: [Character]](), ans = [String]()
+        [
+            "2": "abc", "3": "def", "4": "ghi", "5": "jkl",
+            "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"
+        ].forEach { mapping[$0.key] = $0.value.map { $0 }}
+        func backtrack(i: Int, s: String) {
+            if i == digits.count {
+                ans.append(s)
+                return
+            }
+            for c in mapping[digits[i]]! {
+                var t = s
+                t.append(c)
+                backtrack(i: i + 1, s: t)
+            }
+        }
+        backtrack(i: 0, s: "")
+        return ans
     }
 
 

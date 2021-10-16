@@ -10,7 +10,7 @@ import Foundation
 // https://leetcode-cn.com/problems/invert-binary-tree/description/
 final class Week3InvertBinaryTree {
     func run() {
-        let f = recurse3
+        let f = iterate3
         func judge(_ nodes: [Int?], expected nodes2: [Int?]) {
             let tree1 = TreeNode.fromPerfectBinaryTreeLevelNodes(nodes)
             let tree2 = TreeNode.fromPerfectBinaryTreeLevelNodes(nodes2)
@@ -18,6 +18,22 @@ final class Week3InvertBinaryTree {
         }
         judge([4,2,7,1,3,6,9], expected: [4,7,2,9,6,3,1])
     }
+
+
+
+
+
+
+    func iterate5(_ root: TreeNode?) -> TreeNode? {
+        fatalError()
+    }
+
+    func recurse5(_ root: TreeNode?) -> TreeNode? {
+        fatalError()
+    }
+
+
+
 
 
 
@@ -39,27 +55,19 @@ final class Week3InvertBinaryTree {
 
 
     func iterate3(_ root: TreeNode?) -> TreeNode? {
-        fatalError()
+        guard let root = root else { return nil }
+        var q = [root]
+        while !q.isEmpty {
+            var next = [TreeNode]()
+            for node in q {
+                (node.left, node.right) = (node.right, node.left)
+                if let l = node.left { next.append(l) }
+                if let r = node.right { next.append(r) }
+            }
+            q = next
+        }
+        return root
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     func recurse3(_ root: TreeNode?) -> TreeNode? {
         func f(_ root: TreeNode?) -> TreeNode? {
