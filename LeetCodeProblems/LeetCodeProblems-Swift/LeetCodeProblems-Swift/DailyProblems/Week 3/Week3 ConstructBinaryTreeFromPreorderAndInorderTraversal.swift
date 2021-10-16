@@ -12,9 +12,9 @@ import Foundation
  1. build with preStart, preEnd, inStart, inEnd and an inMap
  2. build with inorder stop flag
  */
-final class Week3BuildTree {
+final class Week3ConstructBinaryTreeFromPreorderAndInorderTraversal {
     func run() {
-        let f = buildTreeWithStop4
+        let f = buildTreeWithStop5
         func judge(_ pre: [Int], _ in: [Int], expected: [Int?]) {
             let tree = TreeNode.fromPerfectBinaryTreeLevelNodes(expected)
             printAndAssert(result: f(pre, `in`), expected: tree)
@@ -53,11 +53,44 @@ final class Week3BuildTree {
 
 
     func buildTreeWithIndex5(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
-        fatalError()
+        var inMap = [Int: Int]()
+        for (i, v) in inorder.enumerated() { inMap[v] = i }
+        func build(preStart: Int, preEnd: Int, inStart: Int, inEnd: Int) -> TreeNode? {
+            if preStart > preEnd || inStart > inEnd { return nil }
+            let rootValue = preorder[preStart]
+            let root = TreeNode(rootValue)
+            let inorderIndex = inMap[rootValue]!
+            let leftNodeCount = inorderIndex - inStart
+            root.left = build(preStart: preStart + 1,
+                              preEnd: preStart + leftNodeCount,
+                              inStart: inStart,
+                              inEnd: inorderIndex - 1)
+            root.right = build(preStart: preStart + leftNodeCount + 1,
+                               preEnd: preEnd,
+                               inStart: inorderIndex + 1,
+                               inEnd: inEnd)
+            return root
+        }
+        return build(preStart: 0, preEnd: preorder.count - 1,
+                     inStart: 0, inEnd: inorder.count - 1)
     }
 
     func buildTreeWithStop5(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
-        fatalError()
+        var preIndex = 0, inIndex = 0
+        func build(stop: Int?) -> TreeNode? {
+            if preIndex == preorder.count { return nil }
+            if stop == inorder[inIndex] {
+                inIndex += 1
+                return nil
+            }
+            let rootValue = preorder[preIndex]
+            preIndex += 1
+            let root = TreeNode(rootValue)
+            root.left = build(stop: rootValue)
+            root.right = build(stop: stop)
+            return root
+        }
+        return build(stop: nil)
     }
 
 

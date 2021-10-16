@@ -128,7 +128,7 @@ final class DailyProblems {
         Week3Subsets().run()
         Week3BinaryTreeMinDepth().run()
         Week3Combine().run()
-        Week3BuildTree().run()
+        Week3ConstructBinaryTreeFromPreorderAndInorderTraversal().run()
         Week3BinaryTreeMaxDepth().run()
         Week3ValidateBinarySearchTree().run()
         Week3InvertBinaryTree().run()

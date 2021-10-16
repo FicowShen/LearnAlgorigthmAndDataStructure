@@ -51,7 +51,7 @@
 		6A42EFBC26D1D68D0030EE32 /* Week3 InvertBinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFBB26D1D68D0030EE32 /* Week3 InvertBinaryTree.swift */; };
 		6A42EFBE26D1DCF90030EE32 /* Week3 ValidateBinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFBD26D1DCF90030EE32 /* Week3 ValidateBinarySearchTree.swift */; };
 		6A42EFC026D1F2070030EE32 /* Week3 BinaryTreeMaxDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFBF26D1F2070030EE32 /* Week3 BinaryTreeMaxDepth.swift */; };
-		6A42EFC226D204C10030EE32 /* Week3 BuildTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFC126D204C10030EE32 /* Week3 BuildTree.swift */; };
+		6A42EFC226D204C10030EE32 /* Week3 ConstructBinaryTreeFromPreorderAndInorderTraversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFC126D204C10030EE32 /* Week3 ConstructBinaryTreeFromPreorderAndInorderTraversal.swift */; };
 		6A42EFC426D297E00030EE32 /* Week3 Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFC326D297E00030EE32 /* Week3 Combine.swift */; };
 		6A42EFC726D323A60030EE32 /* Day22 Permutations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFC626D323A60030EE32 /* Day22 Permutations.swift */; };
 		6A42EFC926D4675E0030EE32 /* Week4 BinaryTreeLevelOrderTraversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42EFC826D4675E0030EE32 /* Week4 BinaryTreeLevelOrderTraversal.swift */; };
@@ -238,7 +238,7 @@
 		6A42EFBB26D1D68D0030EE32 /* Week3 InvertBinaryTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 InvertBinaryTree.swift"; sourceTree = "<group>"; };
 		6A42EFBD26D1DCF90030EE32 /* Week3 ValidateBinarySearchTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 ValidateBinarySearchTree.swift"; sourceTree = "<group>"; };
 		6A42EFBF26D1F2070030EE32 /* Week3 BinaryTreeMaxDepth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 BinaryTreeMaxDepth.swift"; sourceTree = "<group>"; };
-		6A42EFC126D204C10030EE32 /* Week3 BuildTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 BuildTree.swift"; sourceTree = "<group>"; };
+		6A42EFC126D204C10030EE32 /* Week3 ConstructBinaryTreeFromPreorderAndInorderTraversal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 ConstructBinaryTreeFromPreorderAndInorderTraversal.swift"; sourceTree = "<group>"; };
 		6A42EFC326D297E00030EE32 /* Week3 Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 Combine.swift"; sourceTree = "<group>"; };
 		6A42EFC626D323A60030EE32 /* Day22 Permutations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day22 Permutations.swift"; sourceTree = "<group>"; };
 		6A42EFC826D4675E0030EE32 /* Week4 BinaryTreeLevelOrderTraversal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week4 BinaryTreeLevelOrderTraversal.swift"; sourceTree = "<group>"; };
@@ -420,7 +420,7 @@
 				6A42EFBB26D1D68D0030EE32 /* Week3 InvertBinaryTree.swift */,
 				6A42EFBD26D1DCF90030EE32 /* Week3 ValidateBinarySearchTree.swift */,
 				6A42EFBF26D1F2070030EE32 /* Week3 BinaryTreeMaxDepth.swift */,
-				6A42EFC126D204C10030EE32 /* Week3 BuildTree.swift */,
+				6A42EFC126D204C10030EE32 /* Week3 ConstructBinaryTreeFromPreorderAndInorderTraversal.swift */,
 				6A42EFC326D297E00030EE32 /* Week3 Combine.swift */,
 				6A9B0B0926F5B78B00FA12DC /* Week3 BinaryTreeMinDepth.swift */,
 				6A81919726F7764A0000188C /* Week3 Subsets.swift */,
@@ -805,7 +805,7 @@
 				6A10BA5426E46025006CE7AC /* TestProblems.swift in Sources */,
 				6AD94F7E269AA9A000AA35B4 /* TreePreorderTraversal.swift in Sources */,
 				6A42EFDF26DAFDD40030EE32 /* Day28 MajorityElement.swift in Sources */,
-				6A42EFC226D204C10030EE32 /* Week3 BuildTree.swift in Sources */,
+				6A42EFC226D204C10030EE32 /* Week3 ConstructBinaryTreeFromPreorderAndInorderTraversal.swift in Sources */,
 				6A10BA7426EDE2AD006CE7AC /* Week6 BestTimeToBuyAndSellStockIV.swift in Sources */,
 				6A81919C26F8CCD70000188C /* Week7 ShortestPathInBinaryMatrix.swift in Sources */,
 				6A8191A926FED4810000188C /* Week8 MergeIntervals.swift in Sources */,
