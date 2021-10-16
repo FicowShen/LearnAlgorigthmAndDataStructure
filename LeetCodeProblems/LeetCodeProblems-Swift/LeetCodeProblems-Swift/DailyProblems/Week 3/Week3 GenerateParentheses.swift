@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week3GenerateParentheses {
     func run() {
-        let f = dp6
+        let f = dp7
         func judge(n: Int, expected: [String]) {
             printAndAssert(result: Set(f(n)), expected: Set(expected))
         }
@@ -22,6 +22,19 @@ final class Week3GenerateParentheses {
         judge(n: 1, expected: ["()"])
     }
 
+
+
+
+
+
+
+    func dp9(_ n: Int) -> [String] {
+        fatalError()
+    }
+
+    func backtrackWithLeftRight9(_ n: Int) -> [String] {
+        fatalError()
+    }
 
 
 
@@ -43,11 +56,33 @@ final class Week3GenerateParentheses {
 
 
     func dp7(_ n: Int) -> [String] {
-        fatalError()
+        if n < 2 { return n == 1 ? ["()"] : [""] }
+        var dp = [[String]](repeating: [], count: n + 1)
+        dp[0] = [""]
+        dp[1] = ["()"]
+        for i in 2...n {
+            for j in 0..<i {
+                for left in dp[j] {
+                    for right in dp[i - j - 1] {
+                        let s = "(" + left + ")" + right
+                        dp[i].append(s)
+                    }
+                }
+            }
+        }
+        return dp[n]
     }
 
     func backtrackWithLeftRight7(_ n: Int) -> [String] {
-        fatalError()
+        var ans = [String]()
+        func backtrack(left: Int, right: Int, s: String) {
+            if right > left || left < 0 || right < 0 { return }
+            if left == 0, right == 0 { ans.append(s) }
+            backtrack(left: left - 1, right: right, s: "(" + s)
+            backtrack(left: left, right: right - 1, s: ")" + s)
+        }
+        backtrack(left: n, right: n, s: "")
+        return ans
     }
 
 
