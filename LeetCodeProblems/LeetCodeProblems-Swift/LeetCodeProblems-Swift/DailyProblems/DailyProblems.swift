@@ -122,6 +122,7 @@ final class DailyProblems {
 
     /// recursion, tree recursion, divider and conquer, backtrack
     static func week3() {
+        Week3PermutationsII().run()
         Week3LetterCombinationsOfAPhoneNumber().run()
         Week3MyPow().run()
         Week3SerializeAndDeserializeBinaryTree().run()
