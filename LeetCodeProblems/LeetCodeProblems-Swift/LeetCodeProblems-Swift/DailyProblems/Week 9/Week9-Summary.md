@@ -217,15 +217,91 @@ class LRUCache {
 ```
 
 
-- [problem](link)
+
+- [数组的相对排序](https://leetcode-cn.com/problems/relative-sort-array/)
 
 
-> ? 解法 - 解题思路：
-
+> 计数排序解法 - 解题思路：
+> 首先，统计 arr1 中每个元素的出现频次；
+> 然后遍历 arr2，根据元素在 arr1 中的频次，将元素重复输出到最终结果中，同时将该元素的频次置为0；
+> 最后，从小到大遍历频次数组，根据频次值，将频次不为0的元素重复输出到最终结果中；
 
 ``` swift
-// Time: O(?), Space: O(?)
+// Time: O(m + n + max), Space: O(max), max 是 arr1 中的最大值
+func countFrequency4(_ arr1: [Int], _ arr2: [Int]) -> [Int] {
+    let max = arr1.max()!
+    var frequency = [Int](repeating: 0, count: max + 1)
+    for num in arr1 { frequency[num] += 1 }
+    var ans = [Int]()
+    for num in arr2 {
+        let nums = [Int](repeating: num, count: frequency[num])
+        ans.append(contentsOf: nums)
+        frequency[num] = 0
+    }
+    for num in 0...max {
+        if frequency[num] == 0 { continue }
+        let nums = [Int](repeating: num, count: frequency[num])
+        ans.append(contentsOf: nums)
+        frequency[num] = 0
+    }
+    return ans
+}
+```
 
+
+- [翻转对](https://leetcode-cn.com/problems/reverse-pairs/)
+
+
+> 归并排序解法 - 解题思路：
+> 每次将原数组二分为左右子数组，然后分别进行归并排序排序；
+> 在左右数组分别有序的情况下，可以高效地统计翻转对的数量；然后，将左右子数组合并；
+
+``` swift
+// Time: O(nlogn), Space: O(n)
+func reversePairs(_ nums: [Int]) -> Int {
+    if nums.isEmpty { return 0 }
+    var nums = nums
+    func reversedPairs(left: Int, right: Int) -> Int {
+        if left == right { return 0 }
+        let mid = (left + right) >> 1
+        let leftPairs = reversePairs(left: left, right: mid)
+        let rightPairs = reversePairs(left: mid + 1, right: right)
+        var pairs = leftPairs + rightPairs
+        // now, left...right is sorted by reversePairs
+        var i = left, j = mid + 1
+        while i <= mid {
+            while j <= right, nums[i] > 2 * nums[j] { j += 1 }
+            pairs += (j - mid - 1)
+            i += 1
+        }
+        // merge two parts
+        var sorted = [Int](repeating: 0, count: right - left + 1)
+        var p = 0, p1 = left, p2 = mid + 1
+        while p1 <= mid || p2 <= right {
+            defer { p += 1 }
+            if p1 > mid {
+                sorted[p] = nums[p2]
+                p2 += 1
+            } else if p2 > right {
+                sorted[p] = nums[p1]
+                p1 += 1
+            } else {
+                if nums[p1] < nums[p2] {
+                    sorted[p] = nums[p1]
+                    p1 += 1
+                } else {
+                    sorted[p] = nums[p2]
+                    p2 += 1
+                }
+            }
+        }
+        for i in 0..<sorted.count {
+            nums[left + i] = sorted[i]
+        }
+        return pairs
+    }
+    return reversedPairs(left: 0, right: nums.count - 1)
+}
 ```
 
 

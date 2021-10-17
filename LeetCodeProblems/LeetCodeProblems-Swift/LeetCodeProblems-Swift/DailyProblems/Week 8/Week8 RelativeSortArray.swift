@@ -12,7 +12,7 @@ import Foundation
  1. sort by rank
  Time: O(mlogm + n), Space: O(logm + n)
 
- 2. count frequency
+ 2. count frequency(count sort)
  Time: O(m + n + max), Space: O(max), max is the max number in arr1
  */
 final class Week8RelativeSortArray {
