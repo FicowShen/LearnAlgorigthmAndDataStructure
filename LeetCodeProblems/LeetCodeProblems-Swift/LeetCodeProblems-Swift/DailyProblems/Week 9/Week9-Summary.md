@@ -118,6 +118,12 @@ func selectSort(_ nums: inout [Int]) {
 ![](images/DP_Stock1.jpg)
 ![](images/DP_Stock2.jpg)
 
+### [不同路径2](https://leetcode-cn.com/problems/unique-paths-ii/) 的状态转移方程
+
+``` swift
+dp[i][j] = grid[i][j] == 1 ? 0 : dp[i - 1][j] + dp[i][j - 1]
+```
+
 
 
 

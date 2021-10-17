@@ -15,7 +15,6 @@ import Foundation
  */
 final class Week9SimpleSortAlgorithms {
     func run() {
-//        let values = (0...100).map { _ in Int.random(in: 0...1000) }
         let values = [5,3,4,1,2,0,6]
         let expected = values.sorted()
         func judge(f: (inout [Int]) -> ()) {
