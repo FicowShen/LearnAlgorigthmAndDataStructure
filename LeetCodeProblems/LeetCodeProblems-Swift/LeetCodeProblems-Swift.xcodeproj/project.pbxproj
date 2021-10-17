@@ -112,6 +112,7 @@
 		6A8191B126FFEAF50000188C /* Day56 MaximumLengthOfRepeatedSubarray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8191B026FFEAF50000188C /* Day56 MaximumLengthOfRepeatedSubarray.swift */; };
 		6A845924271A8823002CBA48 /* Day69 ProductOfArrayExceptSelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A845923271A8823002CBA48 /* Day69 ProductOfArrayExceptSelf.swift */; };
 		6A845926271B05B6002CBA48 /* Week3 PermutationsII.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A845925271B05B6002CBA48 /* Week3 PermutationsII.swift */; };
+		6A845928271C0C02002CBA48 /* Week9 SimpleSortAlgorithms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A845927271C0C02002CBA48 /* Week9 SimpleSortAlgorithms.swift */; };
 		6A9B0B0A26F5B78B00FA12DC /* Week3 BinaryTreeMinDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9B0B0926F5B78B00FA12DC /* Week3 BinaryTreeMinDepth.swift */; };
 		6AB35B1226B22A4E0026173D /* MaxProfitWithCooldown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B1126B22A4E0026173D /* MaxProfitWithCooldown.swift */; };
 		6AB35B1626B594970026173D /* HouseRobber2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB35B1526B594970026173D /* HouseRobber2.swift */; };
@@ -300,6 +301,7 @@
 		6A8191B026FFEAF50000188C /* Day56 MaximumLengthOfRepeatedSubarray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day56 MaximumLengthOfRepeatedSubarray.swift"; sourceTree = "<group>"; };
 		6A845923271A8823002CBA48 /* Day69 ProductOfArrayExceptSelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day69 ProductOfArrayExceptSelf.swift"; sourceTree = "<group>"; };
 		6A845925271B05B6002CBA48 /* Week3 PermutationsII.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 PermutationsII.swift"; sourceTree = "<group>"; };
+		6A845927271C0C02002CBA48 /* Week9 SimpleSortAlgorithms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week9 SimpleSortAlgorithms.swift"; sourceTree = "<group>"; };
 		6A9B0B0926F5B78B00FA12DC /* Week3 BinaryTreeMinDepth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week3 BinaryTreeMinDepth.swift"; sourceTree = "<group>"; };
 		6AB35B1126B22A4E0026173D /* MaxProfitWithCooldown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxProfitWithCooldown.swift; sourceTree = "<group>"; };
 		6AB35B1526B594970026173D /* HouseRobber2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseRobber2.swift; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 				6A673112270B393800C796CA /* Week9 StringToIntegerATOI.swift */,
 				6A673114270C021000C796CA /* Week9 LongestCommonPrefix.swift */,
 				6A673116270C51EB00C796CA /* Week9 ReverseString.swift */,
+				6A845927271C0C02002CBA48 /* Week9 SimpleSortAlgorithms.swift */,
 			);
 			path = "Week 9";
 			sourceTree = "<group>";
@@ -921,6 +924,7 @@
 				6AB35B3C26BE1D780026173D /* Day7 DesignCircularDeque.swift in Sources */,
 				6A6731012706D44600C796CA /* Week9 IsomorphicStrings.swift in Sources */,
 				6A10BA8926F0E958006CE7AC /* Week7 MinimumGeneticMutation.swift in Sources */,
+				6A845928271C0C02002CBA48 /* Week9 SimpleSortAlgorithms.swift in Sources */,
 				6A673107270844B600C796CA /* Week9 ValidPalindromeII.swift in Sources */,
 				6A0FB45A270EF83E00451540 /* Week1 TrappingRainWater.swift in Sources */,
 				6A42EFD926D9D7880030EE32 /* Week4 AssignCookies.swift in Sources */,
