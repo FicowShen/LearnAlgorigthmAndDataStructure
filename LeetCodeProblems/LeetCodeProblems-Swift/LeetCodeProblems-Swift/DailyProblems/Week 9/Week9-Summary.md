@@ -131,8 +131,8 @@ dp[i][j] = grid[i][j] == 1 ? 0 : dp[i - 1][j] + dp[i][j - 1]
 ## 实战题目总结
 
 
-- [LRU缓存机制](https://leetcode-cn.com/problems/lru-cache/)
 
+- [LRU缓存机制](https://leetcode-cn.com/problems/lru-cache/)
 
 > 解题思路：
 > 首先，构建一个字典用于存储值和结点之间的映射关系，基于双向链表构建头、尾结点并指向彼此；
@@ -220,7 +220,6 @@ class LRUCache {
 
 - [数组的相对排序](https://leetcode-cn.com/problems/relative-sort-array/)
 
-
 > 计数排序解法 - 解题思路：
 > 首先，统计 arr1 中每个元素的出现频次；
 > 然后遍历 arr2，根据元素在 arr1 中的频次，将元素重复输出到最终结果中，同时将该元素的频次置为0；
@@ -249,8 +248,8 @@ func countFrequency4(_ arr1: [Int], _ arr2: [Int]) -> [Int] {
 ```
 
 
-- [翻转对](https://leetcode-cn.com/problems/reverse-pairs/)
 
+- [翻转对](https://leetcode-cn.com/problems/reverse-pairs/)
 
 > 归并排序解法 - 解题思路：
 > 每次将原数组二分为左右子数组，然后分别进行归并排序排序；
@@ -305,13 +304,67 @@ func reversePairs(_ nums: [Int]) -> Int {
 ```
 
 
-- [problem](link)
 
+- [最长有效括号](https://leetcode-cn.com/problems/longest-valid-parentheses/)
 
-> ? 解法 - 解题思路：
-
+> 动态规划 解法 - 解题思路：
+> 遍历字符串数组，如果是左括号就跳过；否则，就要进行递推的累加；
+> 当前元素为右括号时，如果前一个元素是左括号，有效的括号就要加 2，如果有之前的递推结果，此时也要加上（i >= 2 ? f[i - 2] : 0）；
+> 如果前一个元素不是左括号，而且如果可以继续往前查找（i - f[i - 1] > 0），就查找前面是否有括号对；如果有，而且括号对前面就是左括号（s[i - f[i - 1] - 1]），那么当前的有效括号数量就可以加 2，如果有之前的递推结果，此时也要加上（i - f[i - 1] >= 2 ? f[i - f[i - 1] - 2] : 0）；
 
 ``` swift
-// Time: O(?), Space: O(?)
-
+// Time: O(n), Space: O(n)
+func dp(_ s: String) -> Int {
+    let n = s.count, s = Array(s.utf8)
+    let open = Character("(").asciiValue!
+    var f = [Int](repeating: 0, count: n), ans = 0
+    for i in stride(from: 1, to: n, by: 1) {
+        if s[i] == open { continue }
+        if s[i - 1] == open {
+            // ()
+            f[i] = (i >= 2 ? f[i - 2] : 0) + 2
+        } else if i - f[i - 1] > 0, s[i - f[i - 1] - 1] == open {
+            // ()(())
+            f[i] = f[i - 1] + 2
+                + (i - f[i - 1] >= 2 ? f[i - f[i - 1] - 2] : 0)
+        }
+        ans = max(ans, f[i])
+    }
+    return ans
+}
 ```
+
+
+
+
+- [赛车](https://leetcode-cn.com/problems/race-car/)
+
+> 动态规划解法 - 解题思路：
+> 首先，要理解速度值是2之间的关系：2^(n - 1)，如果前进 n 次，速度可以达到 2^n - 1；
+> 所以，如果速度等于 (1 << n) - 1 时，说明可以通过 n 次前进直接抵达；
+> 如果无法直接抵达，则需要考虑两种情况：
+> 1. 前进 n 次，越过目标，然后换挡调头 1 次，返回并向目标前进，速度需要达到 (2^n - 1 - t)；
+> 2. 前进 n - 1 次，然后换挡 1 次；然后，前进 i 次（与目标反向）；然后，再换挡 1 次，再尝试前进 i 次（朝向目标）抵达目标；（n - 1 + 2 + i) + f(t - (1 << (n - 1)) + (1 << i))
+
+``` swift
+// Time: O(nlogn), Space: O(n)
+func dp(_ target: Int) -> Int {
+    var dp = [Int](repeating: 0, count: Int(1e4) + 1)
+    func f(_ t: Int) -> Int {
+        if dp[t] > 0 { return dp[t] }
+        let n = Int(floor(log2(Double(t)))) + 1
+        if 1 << n == t + 1 {
+            dp[t] = n
+            return n
+        }
+        dp[t] = n + 1 + f((1 << n) - t - 1)
+        for i in stride(from: 0, to: n - 1, by: 1) {
+            let j = n + i + 1 + f(t - (1 << (n - 1)) + (1 << i))
+            dp[t] = min(dp[t], j)
+        }
+        return dp[t]
+    }
+    return f(target)
+}
+```
+
