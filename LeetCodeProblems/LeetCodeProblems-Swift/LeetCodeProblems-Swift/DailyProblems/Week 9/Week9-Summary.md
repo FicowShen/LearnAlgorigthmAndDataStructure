@@ -260,11 +260,11 @@ func countFrequency4(_ arr1: [Int], _ arr2: [Int]) -> [Int] {
 func reversePairs(_ nums: [Int]) -> Int {
     if nums.isEmpty { return 0 }
     var nums = nums
-    func reversedPairs(left: Int, right: Int) -> Int {
+    func mergeSort(left: Int, right: Int) -> Int {
         if left == right { return 0 }
         let mid = (left + right) >> 1
-        let leftPairs = reversePairs(left: left, right: mid)
-        let rightPairs = reversePairs(left: mid + 1, right: right)
+        let leftPairs = mergeSort(left: left, right: mid)
+        let rightPairs = mergeSort(left: mid + 1, right: right)
         var pairs = leftPairs + rightPairs
         // now, left...right is sorted by reversePairs
         var i = left, j = mid + 1
@@ -299,7 +299,7 @@ func reversePairs(_ nums: [Int]) -> Int {
         }
         return pairs
     }
-    return reversedPairs(left: 0, right: nums.count - 1)
+    return mergeSort(left: 0, right: nums.count - 1)
 }
 ```
 
