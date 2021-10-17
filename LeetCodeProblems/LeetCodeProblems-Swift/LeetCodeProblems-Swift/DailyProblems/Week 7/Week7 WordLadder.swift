@@ -18,7 +18,7 @@ import Foundation
  */
 final class Week7WordLadder {
     func run() {
-        let f = bfs2
+        let f = bfs3
         func judge(_ begin: String, _ end: String, _ list: [String], expected: Int) {
             printAndAssert(result: f(begin, end, list), expected: expected)
         }
@@ -40,22 +40,47 @@ final class Week7WordLadder {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     func bfs3(_ beginWord: String, _ endWord: String, _ wordList: [String]) -> Int {
-        fatalError()
+        if !wordList.contains(endWord) { return 0 }
+        let letters = (0..<26).map { Character(UnicodeScalar(97 + $0)) }
+        var begin = Set([beginWord]), end = Set([endWord])
+        var valid = Set(wordList), ans = 1
+        while !begin.isEmpty {
+            if begin.count > end.count { (begin, end) = (end, begin) }
+            var next = Set<String>()
+            for s in begin {
+                let chars = Array(s)
+                for i in 0..<s.count {
+                    for letter in letters {
+                        if chars[i] == letter { continue }
+                        var temp = chars
+                        temp[i] = letter
+                        let new = String(temp)
+                        if end.contains(new) { return ans + 1 }
+                        if !valid.contains(new) { continue }
+                        valid.remove(new)
+                        next.insert(new)
+                    }
+                }
+            }
+            begin = next
+            ans += 1
+        }
+        return 0
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     func bfs2(_ beginWord: String, _ endWord: String, _ wordList: [String]) -> Int {

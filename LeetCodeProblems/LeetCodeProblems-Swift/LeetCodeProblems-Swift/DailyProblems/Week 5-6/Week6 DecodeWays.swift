@@ -47,6 +47,10 @@ final class Week6DecodeWays {
 
 
 
+
+
+
+
     func dp4(_ s: String) -> Int {
         let n = s.count, s = Array(s)
         var a = 0, b = 1, c = 0 // f[i - 2], f[i - 1], f[i]
