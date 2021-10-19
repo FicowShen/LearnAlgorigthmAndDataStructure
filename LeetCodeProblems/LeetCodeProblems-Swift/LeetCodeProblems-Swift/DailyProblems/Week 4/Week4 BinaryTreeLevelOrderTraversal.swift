@@ -16,7 +16,7 @@ import Foundation
  */
 final class Week4BinaryTreeLevelOrderTraversal {
     func run() {
-        let f = dfs4
+        let f = dfs5
         func judge(nodes: [Int?], expected: [[Int]]) {
             let tree = TreeNode.fromPerfectBinaryTreeLevelNodes(nodes)
             printAndAssert(result: f(tree), expected: expected)
@@ -24,6 +24,19 @@ final class Week4BinaryTreeLevelOrderTraversal {
         judge(nodes: [], expected: [])
         judge(nodes: [1], expected: [[1]])
         judge(nodes: [3,9,20,nil,nil,15,7], expected: [[3],[9,20],[15,7]])
+    }
+
+
+
+
+
+
+    func dfs7(_ root: TreeNode?) -> [[Int]] {
+        fatalError()
+    }
+
+    func bfs7(_ root: TreeNode?) -> [[Int]] {
+        fatalError()
     }
 
 
@@ -45,11 +58,32 @@ final class Week4BinaryTreeLevelOrderTraversal {
 
 
     func dfs5(_ root: TreeNode?) -> [[Int]] {
-        fatalError()
+        var ans = [[Int]]()
+        func f(_ root: TreeNode?, level: Int) {
+            guard let root = root else { return }
+            if ans.count == level { ans.append([]) }
+            ans[level].append(root.val)
+            f(root.left, level: level + 1)
+            f(root.right, level: level + 1)
+        }
+        f(root, level: 0)
+        return ans
     }
 
     func bfs5(_ root: TreeNode?) -> [[Int]] {
-        fatalError()
+        guard let root = root else { return [] }
+        var q = [root], ans = [[Int]]()
+        while !q.isEmpty {
+            var next = [TreeNode](), values = [Int]()
+            for node in q {
+                values.append(node.val)
+                if let l = node.left { next.append(l) }
+                if let r = node.right { next.append(r) }
+            }
+            q = next
+            ans.append(values)
+        }
+        return ans
     }
 
 

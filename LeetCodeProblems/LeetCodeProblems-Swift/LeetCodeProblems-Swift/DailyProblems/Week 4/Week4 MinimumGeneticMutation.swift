@@ -18,7 +18,7 @@ import Foundation
  */
 final class Week4MinimumGeneticMutation {
     func run() {
-        let f = minMutationWithDFS4
+        let f = minMutationWithDFS5
         func judge(_ start: String, _ end: String, _ bank: [String], _ expected: Int) {
             printAndAssert(result: f(start, end, bank), expected: expected)
         }
@@ -32,15 +32,91 @@ final class Week4MinimumGeneticMutation {
     }
 
 
-    func minMutationWithDFS5(_ start: String, _ end: String, _ bank: [String]) -> Int {
+
+
+
+    func minMutationWithDFS6(_ start: String, _ end: String, _ bank: [String]) -> Int {
         fatalError()
+    }
+
+    func minMutationWithBFS6(_ start: String, _ end: String, _ bank: [String]) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+    func minMutationWithDFS5(_ start: String, _ end: String, _ bank: [String]) -> Int {
+        if start == end { return 0 }
+        if !bank.contains(end) { return -1 }
+        var valid = Set(bank), visited = Set<String>(), ans: Int?
+        func f(s: String, mutation: Int) {
+            if s == end {
+                ans = min(ans ?? .max, mutation)
+                return
+            }
+            for v in valid {
+                var diff = 0
+                for (a, b) in zip(s, v) {
+                    if a == b { continue }
+                    diff += 1
+                    if diff > 1 { break }
+                }
+                if diff != 1 || visited.contains(v) { continue }
+                visited.insert(v)
+                f(s: v, mutation: mutation + 1)
+                visited.remove(v)
+            }
+        }
+        f(s: start, mutation: 0)
+        return ans ?? -1
     }
 
     func minMutationWithBFS5(_ start: String, _ end: String, _ bank: [String]) -> Int {
-        fatalError()
+        if start == end { return 0 }
+        if !bank.contains(end) { return -1 }
+        let letters = ["A", "C", "G", "T"] as [Character]
+        var from = Set([start]), to = Set([end]), valid = Set(bank), ans = 0
+        while !from.isEmpty {
+            var next = Set<String>()
+            if from.count > to.count { (from, to) = (to, from) }
+            for s in from {
+                let chars = Array(s)
+                for i in 0..<chars.count {
+                    for letter in letters {
+                        if chars[i] == letter { continue }
+                        var temp = chars
+                        temp[i] = letter
+                        let new = String(temp)
+                        if to.contains(new) { return ans + 1 }
+                        if !valid.contains(new) { continue }
+                        valid.remove(new)
+                        next.insert(new)
+                    }
+                }
+            }
+            ans += 1
+            from = next
+        }
+        return -1
     }
 
-    
+
+
+
+
+
+
+
+
+
+
 
     func minMutationWithDFS4(_ start: String, _ end: String, _ bank: [String]) -> Int {
         if start == end { return 0 }
