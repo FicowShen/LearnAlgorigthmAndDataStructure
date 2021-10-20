@@ -24,6 +24,7 @@ final class DailyProblems {
         Day69ProductOfArrayExceptSelf().run()
     }
 
+    /// Advanced DP
     static func week9() {
         Week9SimpleSortAlgorithms().run()
         Week9ReverseString().run()
@@ -44,6 +45,7 @@ final class DailyProblems {
         Day57FirstUniqueCharacterInAString().run()
     }
 
+    /// Bits, LRU, Sort
     static func week8() {
         Week8NQueensII().run()
         Week8CountingBits().run()
@@ -56,6 +58,7 @@ final class DailyProblems {
         Week8NumberOf1Bits().run()
     }
 
+    /// Union-Find, Trie, Search
     static func week7() {
         Week7ShortestPathInBinaryMatrix().run()
         Week7SudokuSolver().run()
@@ -74,6 +77,7 @@ final class DailyProblems {
 
     /// dynamic programming
     static func week5And6() {
+        Week6PerfectSquares().run()
         Week6DecodeWays().run()
         Week6BestTimeToBuyAndSellStockIV().run()
         Week6BestTimeToBuyAndSellStockIII().run()
