@@ -15,13 +15,15 @@ import Foundation
  */
 final class Day25LemonadeChange {
     func run() {
-        let f = lemonadeChange3
+        let f = lemonadeChange4
         printAndAssert(result: f([5,5,5,10,20]), expected: true)
         printAndAssert(result: f([5,5,10,10,20]), expected: false)
         printAndAssert(result: f([5,5,10]), expected: true)
         printAndAssert(result: f([10,10]), expected: false)
         printAndAssert(result: f([5,5,10,20,5,5,5,5,5,5,5,5,5,10,5,5,20,5,20,5]), expected: true)
     }
+
+
 
 
 
@@ -33,6 +35,10 @@ final class Day25LemonadeChange {
 
 
 
+
+
+
+
     func lemonadeChange5(_ bills: [Int]) -> Bool {
         fatalError()
     }
@@ -40,8 +46,20 @@ final class Day25LemonadeChange {
 
 
 
+
+
+
+
     func lemonadeChange4(_ bills: [Int]) -> Bool {
-        fatalError()
+        var five = 0, ten = 0
+        for bill in bills {
+            if bill == 5 { five += 1 }
+            else if bill == 10 { ten += 1; five -= 1 }
+            else if ten > 0 { ten -= 1; five -= 1 }
+            else { five -= 3 }
+            if five < 0 { return false }
+        }
+        return true
     }
 
 
