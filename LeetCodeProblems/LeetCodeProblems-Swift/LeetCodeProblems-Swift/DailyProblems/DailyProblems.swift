@@ -77,6 +77,7 @@ final class DailyProblems {
 
     /// dynamic programming
     static func week5And6() {
+        Week6CoinChange2().run()
         Week6UniquePathsIII().run()
         Week6PerfectSquares().run()
         Week6DecodeWays().run()
