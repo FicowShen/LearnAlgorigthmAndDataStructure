@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week4AssignCookies {
     func run() {
-        let f = sortAndGreedy3
+        let f = sortAndGreedy4
         printAndAssert(result: f([1,2,3], [1,1]), expected: 1)
         printAndAssert(result: f([1,2], [1,2,3]), expected: 2)
         printAndAssert(result: f([4,6], [1,2,5,7,3]), expected: 2)
@@ -22,9 +22,52 @@ final class Week4AssignCookies {
 
 
 
-    func sortAndGreedy4(_ g: [Int], _ s: [Int]) -> Int {
+    func sortAndGreedy6(_ g: [Int], _ s: [Int]) -> Int {
         fatalError()
     }
+
+
+
+    func sortAndGreedy5(_ g: [Int], _ s: [Int]) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    func sortAndGreedy4(_ g: [Int], _ s: [Int]) -> Int {
+        let g = g.sorted(), s = s.sorted()
+        var i = 0, j = 0
+        while i < g.count, j < s.count {
+            if s[j] >= g[i] {
+                i += 1
+            }
+            j += 1
+        }
+        return i
+    }
+
+
+
+
+
 
 
 
@@ -39,28 +82,6 @@ final class Week4AssignCookies {
         }
         return ans
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

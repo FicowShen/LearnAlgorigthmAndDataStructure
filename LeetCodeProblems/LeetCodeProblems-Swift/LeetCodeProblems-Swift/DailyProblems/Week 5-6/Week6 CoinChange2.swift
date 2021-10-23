@@ -15,11 +15,22 @@ import Foundation
  */
 final class Week6CoinChange2 {
     func run() {
-        let f = dp0
+        let f = dp3
         printAndAssert(result: f(5, [1,2,5]), expected: 4)
         printAndAssert(result: f(3, [2]), expected: 0)
         printAndAssert(result: f(10, [10]), expected: 1)
         printAndAssert(result: f(0, [7]), expected: 1)
+        printAndAssert(result: f(500, [2,7,13]), expected: 717)
+    }
+
+
+
+
+
+
+
+    func dp5(_ amount: Int, _ coins: [Int]) -> Int {
+        fatalError()
     }
 
 
@@ -39,7 +50,14 @@ final class Week6CoinChange2 {
 
 
     func dp3(_ amount: Int, _ coins: [Int]) -> Int {
-        fatalError()
+        var f = [Int](repeating: 0, count: amount + 1)
+        f[0] = 1
+        for coin in coins {
+            for i in stride(from: coin, through: amount, by: 1) {
+                f[i] += f[i - coin]
+            }
+        }
+        return f[amount]
     }
 
 
@@ -76,21 +94,14 @@ final class Week6CoinChange2 {
 
     // https://leetcode-cn.com/problems/coin-change-2/solution/ling-qian-dui-huan-iihe-pa-lou-ti-wen-ti-dao-di-yo/
     func dp0(_ amount: Int, _ coins: [Int]) -> Int {
-        let K = coins.count + 1, I = amount + 1
-        var dp = [[Int]](repeating: [Int](repeating: 0, count: I), count: K)
-        for k in 0..<K {
-            for i in 0..<I {
-                dp[k][i] = 0
-            }
-        }
-        for k in 0..<K { dp[k][0] = 1 }
-        for k in 1..<K {
-            for i in 1..<I {
-                if i >= coins[k - 1] {
-                    dp[k][i] = dp[k][i - coins[k - 1]] + dp[k - 1][i]
-                } else {
-                    dp[k][i] = dp[k - 1][k]
-                }
+        let Coin = coins.count + 1, Amount = amount + 1
+        var dp = [[Int]](repeating: [Int](repeating: 0, count: Amount), count: Coin)
+        // base case
+        dp[0][0] = 1
+        for c in 1..<Coin {
+            dp[c][0] = 1 // base case
+            for a in 1..<Amount {
+                dp[c][a] = dp[c - 1][a] + (a >= coins[c - 1] ? dp[c][a - coins[c - 1]] : 0)
             }
         }
         return dp[coins.count][amount]
