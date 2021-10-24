@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week4Minesweeper {
     func run() {
-        let f = updateBoardWithBFS3
+        let f = updateBoardWithBFS4
         func judge(_ board: [[Character]], _ click: [Int], _ expected: [[Character]]) {
             printAndAssert(result: f(board, click), expected: expected)
         }
@@ -46,6 +46,24 @@ final class Week4Minesweeper {
 
 
 
+
+    func updateBoardWithBFS6(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
+        fatalError()
+    }
+
+
+    func updateBoardWithDFS6(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
     func updateBoardWithBFS5(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
         fatalError()
     }
@@ -63,12 +81,81 @@ final class Week4Minesweeper {
 
 
     func updateBoardWithBFS4(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
-        fatalError()
+        let r = click[0], c = click[1]
+        var board = board
+        if board[r][c] == "M" { // rule 1
+            board[r][c] = "X"
+            return board
+        }
+        let Row = board.count, Col = board[0].count
+        let drow = [0, 1, 0, -1, 1, 1, -1, -1],
+            dcol = [1, 0, -1, 0, 1, -1, -1, 1]
+        func bfs(row: Int, col: Int) {
+            var q = [[row, col]]
+            while !q.isEmpty {
+                var next = [[Int]]()
+                for pos in q {
+                    let row = pos[0], col = pos[1]
+                    var adjacentCount = 0
+                    for i in 0..<drow.count {
+                        let r = row + drow[i], c = col + dcol[i]
+                        if r < 0 || r >= Row || c < 0 || c >= Col { continue }
+                        if board[r][c] != "M" { continue }
+                        adjacentCount += 1
+                    }
+                    if adjacentCount != 0 { // rule 3
+                        board[row][col] = Character(adjacentCount.description)
+                        continue
+                    }
+                    board[row][col] = "B" // rule 2
+                    for i in 0..<drow.count {
+                        let r = row + drow[i], c = col + dcol[i]
+                        if r < 0 || r >= Row || c < 0 || c >= Col { continue }
+                        if board[r][c] != "E" { continue }
+                        board[r][c] = "B"
+                        next.append([r, c])
+                    }
+                }
+                q = next
+            }
+        }
+        bfs(row: r, col: c)
+        return board
     }
 
 
     func updateBoardWithDFS4(_ board: [[Character]], _ click: [Int]) -> [[Character]] {
-        fatalError()
+        let r = click[0], c = click[1]
+        var board = board
+        if board[r][c] == "M" { // rule 1
+            board[r][c] = "X"
+            return board
+        }
+        let Row = board.count, Col = board[0].count
+        let drow = [0, 1, 0, -1, 1, 1, -1, -1],
+            dcol = [1, 0, -1, 0, 1, -1, -1, 1]
+        func dfs(row: Int, col: Int) {
+            var adjacentCount = 0
+            for i in 0..<drow.count {
+                let r = row + drow[i], c = col + dcol[i]
+                if r < 0 || r >= Row || c < 0 || c >= Col { continue }
+                if board[r][c] != "M" { continue }
+                adjacentCount += 1
+            }
+            if adjacentCount != 0 { // rule 3
+                board[row][col] = Character(adjacentCount.description)
+                return
+            }
+            board[row][col] = "B" // rule 2
+            for i in 0..<drow.count {
+                let r = row + drow[i], c = col + dcol[i]
+                if r < 0 || r >= Row || c < 0 || c >= Col { continue }
+                if board[r][c] != "E" { continue }
+                dfs(row: r, col: c)
+            }
+        }
+        dfs(row: r, col: c)
+        return board
     }
 
 
