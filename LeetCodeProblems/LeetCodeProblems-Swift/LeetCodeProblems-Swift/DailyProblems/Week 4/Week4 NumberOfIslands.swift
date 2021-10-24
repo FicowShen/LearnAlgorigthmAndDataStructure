@@ -21,7 +21,7 @@ import Foundation
  */
 final class Week4NumberOfIslands {
     func run() {
-        let f = numIslandsWithDFS3
+        let f = unionFind3
         func judge(_ grid: [[Character]], _ output: Int) {
             printAndAssert(result: f(grid), expected: output)
         }
@@ -42,6 +42,10 @@ final class Week4NumberOfIslands {
 
 
 
+
+
+
+
     func unionFind4(_ grid: [[Character]]) -> Int {
         fatalError()
     }
@@ -58,33 +62,82 @@ final class Week4NumberOfIslands {
 
 
 
+
+
+
+
     func unionFind3(_ grid: [[Character]]) -> Int {
-        fatalError()
+        let Row = grid.count, Col = grid[0].count
+        let drow = [1, 0, -1, 0], dcol = [0, 1, 0, -1]
+        var island = UnionFind(n: Row * Col), water = 0
+        for row in 0..<Row {
+            for col in 0..<Col {
+                if grid[row][col] == "0" {
+                    water += 1
+                    continue
+                }
+                for i in 0..<drow.count {
+                    let r = row + drow[i], c = col + dcol[i]
+                    if r < 0 || r >= Row || c < 0 || c >= Col { continue }
+                    if grid[r][c] == "0" { continue }
+                    island.unite(row * Col + col, r * Col + c)
+                }
+            }
+        }
+        return island.count - water
     }
 
     func numIslandsWithBFS3(_ grid: [[Character]]) -> Int {
-        fatalError()
+        let Row = grid.count, Col = grid[0].count
+        let drow = [1, 0, -1, 0], dcol = [0, 1, 0, -1]
+        var grid = grid
+        func clear(row: Int, col: Int) {
+            grid[row][col] = "0"
+            var q = [[row, col]]
+            while !q.isEmpty {
+                var next = [[Int]]()
+                for pos in q {
+                    for i in 0..<drow.count {
+                        let r = pos[0] + drow[i], c = pos[1] + dcol[i]
+                        if r < 0 || r >= Row || c < 0 || c >= Col { continue }
+                        if grid[r][c] == "0" { continue }
+                        grid[r][c] = "0"
+                        next.append([r, c])
+                    }
+                }
+                q = next
+            }
+        }
+        var ans = 0
+        for r in 0..<Row {
+            for c in 0..<Col {
+                if grid[r][c] == "0" { continue }
+                ans += 1
+                clear(row: r, col: c)
+            }
+        }
+        return ans
     }
 
     func numIslandsWithDFS3(_ grid: [[Character]]) -> Int {
         let Row = grid.count, Col = grid[0].count
-        let drow = [-1, 0, 1, 0], dcol = [0, 1, 0, -1]
-        var grid = grid, ans = 0
-        func dfs(row: Int, col: Int) {
+        let drow = [1, 0, -1, 0], dcol = [0, 1, 0, -1]
+        var grid = grid
+        func clear(row: Int, col: Int) {
+            grid[row][col] = "0"
             for i in 0..<drow.count {
                 let r = row + drow[i], c = col + dcol[i]
-                if r < 0 || c < 0 || r >= Row || c >= Col { continue }
+                if r < 0 || r >= Row || c < 0 || c >= Col { continue }
                 if grid[r][c] == "0" { continue }
-                grid[r][c] = "0"
-                dfs(row: r, col: c)
+                clear(row: r, col: c)
             }
         }
-        for row in 0..<Row {
-            for col in 0..<Col {
-                if grid[row][col] == "0" { continue }
+        var ans = 0
+        for r in 0..<Row {
+            for c in 0..<Col {
+                if grid[r][c] == "0" { continue }
                 ans += 1
-                grid[row][col] = "0"
-                dfs(row: row, col: col)
+                clear(row: r, col: c)
             }
         }
         return ans

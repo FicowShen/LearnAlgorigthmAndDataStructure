@@ -424,3 +424,43 @@ struct PriorityQueue<T> {
         return sort(heap[leftChild], heap[rightChild]) ? leftChild : rightChild
     }
 }
+
+struct UnionFind {
+    private(set) var count: Int
+    private var parent: [Int]
+    private var size: [Int]
+    
+    init(n: Int) {
+        count = n
+        parent = [Int](repeating: 0, count: n)
+        size = parent // no children, size is 0
+        for i in 0..<n { parent[i] = i } // initially points parent to self
+    }
+
+    mutating func unite(_ p: Int, _ q: Int) {
+        let a = parent(p), b = parent(q)
+        if a == b { return } // united
+        // small trees should connect to a bigger tree
+        if size[a] > size[b] {
+            parent[b] = a
+            size[a] += size[b]
+        } else {
+            parent[a] = b
+            size[b] += size[a]
+        }
+        count -= 1
+    }
+
+    mutating func isConnected(_ p: Int, _ q: Int) -> Bool {
+        parent(p) == parent(q)
+    }
+
+    private mutating func parent(_ x: Int) -> Int {
+        var x = x
+        while parent[x] != x {
+            parent[x] = parent[parent[x]] // compress long paths
+            x = parent[x]
+        }
+        return x
+    }
+}

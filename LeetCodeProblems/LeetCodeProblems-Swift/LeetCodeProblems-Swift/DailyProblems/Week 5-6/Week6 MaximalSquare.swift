@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week6MaximalSquare {
     func run() {
-        let f = compressedDP
+        let f = compressedDP3
         printAndAssert(result: f([["0"]]),
                        expected: 0)
         printAndAssert(result: f([["0","1"],
@@ -32,6 +32,15 @@ final class Week6MaximalSquare {
 
 
 
+
+
+
+
+
+    func compressedDP4(_ matrix: [[Character]]) -> Int {
+        fatalError()
+    }
+
     func dp4(_ matrix: [[Character]]) -> Int {
         fatalError()
     }
@@ -41,8 +50,37 @@ final class Week6MaximalSquare {
 
 
 
+    func compressedDP3(_ matrix: [[Character]]) -> Int {
+        if matrix.isEmpty || matrix[0].isEmpty { return 0 }
+        let Row = matrix.count, Col = matrix[0].count
+        var f = [Int](repeating: 0, count: Col + 1), maxSide = 0, topLeft = 0
+        for i in 1...Row {
+            for j in 1...Col {
+                let preTopLeft = f[j]
+                if matrix[i - 1][j - 1] == "0" {
+                    f[j] = 0
+                } else {
+                    f[j] = min(f[j], f[j - 1], topLeft) + 1
+                    maxSide = max(maxSide, f[j])
+                }
+                topLeft = preTopLeft
+            }
+        }
+        return maxSide * maxSide
+    }
+
     func dp3(_ matrix: [[Character]]) -> Int {
-        fatalError()
+        if matrix.isEmpty || matrix[0].isEmpty { return 0 }
+        let Row = matrix.count, Col = matrix[0].count
+        var f = [[Int]](repeating: [Int](repeating: 0, count: Col + 1), count: Row + 1), maxSide = 0
+        for i in 1...Row {
+            for j in 1...Col {
+                if matrix[i - 1][j - 1] == "0" { continue }
+                f[i][j] = min(f[i - 1][j], f[i][j - 1], f[i - 1][j - 1]) + 1
+                maxSide = max(maxSide, f[i][j])
+            }
+        }
+        return maxSide * maxSide
     }
 
 
