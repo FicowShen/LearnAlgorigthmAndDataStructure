@@ -20,9 +20,25 @@ import Foundation
  */
 final class Week6PerfectSquares {
     func run() {
-        let f = math2
+        let f = math3
         printAndAssert(result: f(12), expected: 3) // 4 + 4 + 4
         printAndAssert(result: f(13), expected: 2) // 4 + 9
+    }
+
+
+
+
+
+    func math5(_ n: Int) -> Int {
+        fatalError()
+    }
+
+    func dp5(_ n: Int) -> Int {
+        fatalError()
+    }
+
+    func bidirectionalBFS5(_ n: Int) -> Int {
+        fatalError()
     }
 
 
@@ -37,7 +53,7 @@ final class Week6PerfectSquares {
         fatalError()
     }
 
-    func bidirectionBFS4(_ n: Int) -> Int {
+    func bidirectionalBFS4(_ n: Int) -> Int {
         fatalError()
     }
 
@@ -47,15 +63,65 @@ final class Week6PerfectSquares {
 
 
     func math3(_ n: Int) -> Int {
-        fatalError()
+        func isPerfectSquare(_ x: Int) -> Bool {
+            let y = Int(sqrt(Double(x)))
+            return y * y == x
+        }
+        func check4Answer(_ x: Int) -> Bool {
+            var x = x
+            while x & 3 == 0 { x >>= 2 }
+            return x & 7 == 7
+        }
+        if isPerfectSquare(n) { return 1 }
+        if check4Answer(n) { return 4 }
+        var i = 0
+        while i * i <= n {
+            let a = n - i * i
+            if isPerfectSquare(a) { return 2 }
+            i += 1
+        }
+        return 3
     }
 
     func dp3(_ n: Int) -> Int {
-        fatalError()
+        if n == 1 { return 1 }
+        var f = [Int](repeating: 0, count: n + 1)
+        for i in 1...n {
+            var j = 1, minimum = Int.max
+            while j * j <= i {
+                minimum = min(minimum, f[i - j * j])
+                j += 1
+            }
+            f[i] = minimum + 1
+        }
+        return f[n]
     }
 
-    func bidirectionBFS3(_ n: Int) -> Int {
-        fatalError()
+    func bidirectionalBFS3(_ n: Int) -> Int {
+        if n == 1 { return 1 }
+        let squares = (1...n).compactMap { $0 * $0 <= n ? $0 * $0 : nil }
+        var from = Set([0]), to = Set([n]), visited = Set<Int>()
+        var ans = 0, plus = true
+        while !from.isEmpty {
+            if from.count > to.count {
+                (from, to) = (to, from)
+                plus = !plus
+            }
+            var next = Set<Int>()
+            for sum in from {
+                for square in squares {
+                    let newSum = sum + (plus ? square : -square)
+                    if newSum < 0 || newSum > n { break }
+                    if to.contains(newSum) { return ans + 1 }
+                    if visited.contains(newSum) { continue }
+                    visited.insert(newSum)
+                    next.insert(newSum)
+                }
+            }
+            from = next
+            ans += 1
+        }
+        return -1
     }
 
 

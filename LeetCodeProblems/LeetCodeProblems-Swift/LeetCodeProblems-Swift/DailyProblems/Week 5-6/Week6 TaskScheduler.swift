@@ -17,7 +17,7 @@ import Foundation
  */
 final class Week6TaskScheduler {
     func run() {
-        let f = construction2
+        let f = construction3
         printAndAssert(result: f(["A","A","A","B","B","B"], 2),
                        expected: 8)
         printAndAssert(result: f(["A","A","A","B","B","B"], 0),
@@ -49,11 +49,40 @@ final class Week6TaskScheduler {
 
 
     func construction3(_ tasks: [Character], _ n: Int) -> Int {
-        fatalError()
+        var frequency = [Character: Int]()
+        for task in tasks { frequency[task, default: 0] += 1 }
+        let maxExec = frequency.values.max()!
+        let maxCount = frequency.values.reduce(into: 0) {
+            $0 += $1 == maxExec ? 1 : 0
+        }
+        return max((maxExec - 1) * (n + 1) + maxCount, tasks.count)
     }
 
     func simulation3(_ tasks: [Character], _ n: Int) -> Int {
-        fatalError()
+        var frequency = [Character: Int]()
+        for task in tasks { frequency[task, default: 0] += 1 }
+        var taskPairs = [(nextValidTime: Int, frequency: Int)]()
+        for f in frequency.values { taskPairs.append((1, f)) }
+        var time = 0
+        for _ in 0..<tasks.count {
+            time += 1
+            var nextValidTime = Int.max
+            for task in taskPairs {
+                if task.frequency == 0 { continue }
+                nextValidTime = min(nextValidTime, task.nextValidTime)
+            }
+            time = max(time, nextValidTime)
+            var best = -1
+            for i in 0..<taskPairs.count {
+                let task = taskPairs[i]
+                if task.frequency == 0 || task.nextValidTime > time { continue }
+                if best == -1 || task.frequency > taskPairs[best].frequency {
+                    best = i
+                }
+            }
+            taskPairs[best] = (time + n + 1, taskPairs[best].frequency - 1)
+        }
+        return time
     }
 
 
