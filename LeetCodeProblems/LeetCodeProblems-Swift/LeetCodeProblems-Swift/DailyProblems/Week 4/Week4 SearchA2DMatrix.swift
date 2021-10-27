@@ -15,7 +15,7 @@ import Foundation
  */
 final class Week4SearchA2DMatrix {
     func run() {
-        let f = binarySearch6
+        let f = binarySearch7
         printAndAssert(result: f([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 3),
                        expected: true)
         printAndAssert(result: f([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 13),
@@ -23,9 +23,33 @@ final class Week4SearchA2DMatrix {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     func binarySearch9(_ matrix: [[Int]], _ target: Int) -> Bool {
         fatalError()
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     func binarySearch8(_ matrix: [[Int]], _ target: Int) -> Bool {
@@ -33,21 +57,32 @@ final class Week4SearchA2DMatrix {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     func binarySearch7(_ matrix: [[Int]], _ target: Int) -> Bool {
-        fatalError()
+        let Row = matrix.count, Col = matrix[0].count
+        var l = 0, r = Row * Col - 1
+        while l < r {
+            let mid = l + (r - l) >> 1
+            let pivot = matrix[mid/Col][mid%Col]
+            if pivot >= target {
+                r = mid
+            } else {
+                l = mid + 1
+            }
+        }
+        return matrix[r/Col][r%Col] == target
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
