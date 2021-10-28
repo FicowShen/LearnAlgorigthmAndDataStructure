@@ -104,6 +104,7 @@ final class Week9LongestIncreasingSubsequence {
                 tails.append(x)
                 continue
             }
+            // O(n), not binary search!!!
             let i = tails.firstIndex(where: { $0 >= x })!
             tails[i] = x
         }
