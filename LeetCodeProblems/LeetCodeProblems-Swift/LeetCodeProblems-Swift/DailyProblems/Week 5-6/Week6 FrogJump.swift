@@ -20,7 +20,7 @@ import Foundation
  */
 final class Week6FrogJump {
     func run() {
-        let f = bfs2
+        let f = bfs3
         printAndAssert(result: f([0,1,3,5,6,8,12,17]), expected: true)
         printAndAssert(result: f([0,1,2,3,4,8,9,11]), expected: false)
     }
@@ -30,16 +30,83 @@ final class Week6FrogJump {
 
 
 
-    func dp3(_ stones: [Int]) -> Bool {
+    func dp4(_ stones: [Int]) -> Bool {
         fatalError()
     }
 
-    func dfs3(_ stones: [Int]) -> Bool {
+    func dfs4(_ stones: [Int]) -> Bool {
         fatalError()
+    }
+
+    func bfs4(_ stones: [Int]) -> Bool {
+        fatalError()
+    }
+
+
+
+
+
+
+    func dfs3(_ stones: [Int]) -> Bool {
+        let n = stones.count
+        var memo = [[Bool?]](repeating: [Bool?](repeating: nil, count: n), count: n)
+        func dfs(i: Int, k: Int) -> Bool {
+            if let v = memo[i][k] { return v }
+            if i == n - 1 { return true }
+            for newK in stride(from: k - 1, through: k + 1, by: 1) {
+                guard newK > 0 else { continue }
+                let pos = stones[i] + newK,
+                    j = stones.firstIndex(where: { $0 >= pos })
+                guard let j = j,
+                      stones[j] == pos,
+                      dfs(i: j, k: newK) else { continue }
+                memo[i][k] = true
+                return true
+            }
+            memo[i][k] = false
+            return false
+        }
+        return dfs(i: 0, k: 0)
     }
 
     func bfs3(_ stones: [Int]) -> Bool {
-        fatalError()
+        let n = stones.count
+        var q = [[0, 0]], visited = Set<[Int]>()
+        while !q.isEmpty {
+            var next = [[Int]]()
+            for pair in q {
+                let i = pair[0], k = pair[1], pos = stones[i]
+                for newK in stride(from: k - 1, through: k + 1, by: 1) {
+                    guard newK > 0, !visited.contains([i, newK]) else { continue }
+                    visited.insert([i, newK])
+                    let newPos = pos + newK
+                    if newPos == stones[n - 1] { return true }
+                    guard let j = stones.firstIndex(where: { $0 >= newPos }),
+                          stones[j] == newPos else { continue }
+                    next.append([j, newK])
+                }
+            }
+            q = next
+        }
+        return false
+    }
+
+    func dp3(_ stones: [Int]) -> Bool {
+        let n = stones.count
+        for i in 1..<n {
+            if stones[i] - stones[i - 1] > i { return false }
+        }
+        var f = [[Bool]](repeating: [Bool](repeating: false, count: n), count: n)
+        f[0][0] = true
+        for i in 1..<n {
+            for j in stride(from: i - 1, through: 0, by: -1) {
+                let k = stones[i] - stones[j]
+                if k > j + 1 { break }
+                f[i][k] = f[j][k - 1] || f[j][k] || f[j][k + 1]
+                if i == n - 1, f[i][k] { return true }
+            }
+        }
+        return false
     }
 
 
@@ -87,7 +154,7 @@ final class Week6FrogJump {
     }
 
     func bfs2(_ stones: [Int]) -> Bool {
-        let n = stones.count - 1
+        let n = stones.count
         var q = [[0, 0]], memo = Set<[Int]>()
         while !q.isEmpty {
             var next = [[Int]]()
@@ -97,10 +164,10 @@ final class Week6FrogJump {
                     guard newK > 0, !memo.contains([i, newK]) else { continue }
                     memo.insert([i, newK])
                     let newPos = pos + newK
-                    if newPos == stones[n] { return true }
+                    if newPos == stones[n - 1] { return true }
                     var j = i
-                    while j <= n, stones[j] < newPos { j += 1 }
-                    guard j <= n, stones[j] == newPos else { continue }
+                    while j < n, stones[j] < newPos { j += 1 }
+                    guard j < n, stones[j] == newPos else { continue }
                     next.append([j, newK])
                 }
             }
