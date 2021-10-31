@@ -13,10 +13,16 @@ import Foundation
  */
 final class Week4FindMinimumInRotatedSortedArray {
     func run() {
-        let f = findMin3
+        let f = findMin5
         printAndAssert(result: f([3,4,5,1,2]), expected: 1)
         printAndAssert(result: f([4,5,6,7,0,1,2]), expected: 0)
         printAndAssert(result: f([11,13,15,17]), expected: 11)
+    }
+
+
+
+    func findMin7(_ nums: [Int]) -> Int {
+        fatalError()
     }
 
 
@@ -27,32 +33,41 @@ final class Week4FindMinimumInRotatedSortedArray {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     func findMin5(_ nums: [Int]) -> Int {
-        fatalError()
+        var l = 0, r = nums.count - 1
+        while l < r {
+            let mid = l + (r - l) >> 1
+            if nums[mid] > nums[r] {
+                l = mid + 1
+            } else {
+                r = mid
+            }
+        }
+        return nums[r]
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     func findMin4(_ nums: [Int]) -> Int {
