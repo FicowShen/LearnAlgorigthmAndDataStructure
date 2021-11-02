@@ -17,7 +17,7 @@ import Foundation
  */
 final class Week6SplitArrayLargestSum {
     func run() {
-        let f = binarySearch2
+        let f = binarySearch3
         printAndAssert(result: f([7,2,5,10,8], 2), expected: 18)
         printAndAssert(result: f([1,2,3,4,5], 2), expected: 9)
         printAndAssert(result: f([1,4,4], 3), expected: 4)
@@ -32,12 +32,78 @@ final class Week6SplitArrayLargestSum {
 
 
 
-    func dp3(_ nums: [Int], _ m: Int) -> Int {
+    func dp5(_ nums: [Int], _ m: Int) -> Int {
         fatalError()
     }
 
-    func binarySearch3(_ nums: [Int], _ m: Int) -> Int {
+    func binarySearch5(_ nums: [Int], _ m: Int) -> Int {
         fatalError()
+    }
+
+
+
+
+
+
+
+
+
+    func dp4(_ nums: [Int], _ m: Int) -> Int {
+        fatalError()
+    }
+
+    func binarySearch4(_ nums: [Int], _ m: Int) -> Int {
+        fatalError()
+    }
+
+
+
+
+
+
+
+
+
+
+    func dp3(_ nums: [Int], _ m: Int) -> Int {
+        let n = nums.count
+        var f = [[Int]](repeating: [Int](repeating: .max, count: m + 1), count: n + 1)
+        f[0][0] = 0
+        var sum = [Int](repeating: 0, count: n + 1)
+        for i in 0..<n { sum[i + 1] = nums[i] + sum[i] }
+        for i in 1...n {
+            for j in 1...min(i, m) {
+                for k in 0..<i {
+                    f[i][j] = min(f[i][j], max(f[k][j - 1], sum[i] - sum[k]))
+                }
+            }
+        }
+        return f[n][m]
+    }
+
+    func binarySearch3(_ nums: [Int], _ m: Int) -> Int {
+        var l = 0, r = 0
+        for n in nums {
+            r += n
+            l = n > l ? n : l
+        }
+        while l < r {
+            let mid = l + (r - l) >> 1
+            var sum = 0, cnt = 1
+            for n in nums {
+                sum += n
+                if sum > mid {
+                    cnt += 1
+                    sum = n
+                }
+            }
+            if cnt <= m {
+                r = mid
+            } else {
+                l = mid + 1
+            }
+        }
+        return l
     }
 
 
