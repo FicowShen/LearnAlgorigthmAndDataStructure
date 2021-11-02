@@ -20,12 +20,14 @@ import Foundation
  */
 final class Week6UniquePaths {
     func run() {
-        let f = math4
+        let f = math5
         printAndAssert(result: f(3, 7), expected: 28)
         printAndAssert(result: f(3, 2), expected: 3)
         printAndAssert(result: f(7, 3), expected: 28)
         printAndAssert(result: f(3, 3), expected: 6)
     }
+
+
 
 
 
@@ -47,16 +49,40 @@ final class Week6UniquePaths {
 
 
 
+
+
     func math5(_ m: Int, _ n: Int) -> Int {
-        fatalError()
+        var x = n, y = 1, ans = 1
+        while y < m {
+            ans = ans * x / y
+            y += 1
+            x += 1
+        }
+        return ans
     }
 
     func dp5(_ m: Int, _ n: Int) -> Int {
-        fatalError()
+        let (m, n) = m > n ? (m, n) : (n, m)
+        var f = [Int](repeating: 0, count: n)
+        for j in 0..<n { f[j] = 1 }
+        for _ in 1..<m {
+            for j in 1..<n {
+                f[j] += f[j - 1]
+            }
+        }
+        return f[n - 1]
     }
 
     func rawDP5(_ m: Int, _ n: Int) -> Int {
-        fatalError()
+        var f = [[Int]](repeating: [Int](repeating: 0, count: n), count: m)
+        for i in 0..<m { f[i][0] = 1 }
+        for j in 0..<n { f[0][j] = 1 }
+        for i in 1..<m {
+            for j in 1..<n {
+                f[i][j] = f[i - 1][j] + f[i][j - 1]
+            }
+        }
+        return f[m - 1][n - 1]
     }
 
 
