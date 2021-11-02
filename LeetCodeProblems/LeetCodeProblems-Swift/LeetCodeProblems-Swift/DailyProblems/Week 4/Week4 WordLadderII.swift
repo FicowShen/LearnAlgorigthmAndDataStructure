@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week4WordLadderII {
     func run() {
-        let f = bfs4
+        let f = bfs5
         func judge(_ begin: String, _ end: String, _ wordList: [String], expected: [[String]]) {
             printAndAssert(result: Set(f(begin, end, wordList)), expected: Set(expected))
         }
@@ -22,10 +22,24 @@ final class Week4WordLadderII {
               expected: [["hit","hot","dot","dog","cog"],
                          ["hit","hot","lot","log","cog"]])
         judge("hit", "cog", ["hot","dot","dog","lot","log"], expected: [])
+        judge("a", "c", ["a","b","c"], expected: [["a","c"]])
+        judge("red", "tax", ["ted","tex","red","tax","tad","den","rex","pee"], expected: [["red","ted","tad","tax"],["red","ted","tex","tax"],["red","rex","tex","tax"]])
     }
 
 
-    func bfs5(_ beginWord: String, _ endWord: String, _ wordList: [String]) -> [[String]] {
+
+
+
+    func bfs7(_ beginWord: String, _ endWord: String, _ wordList: [String]) -> [[String]] {
+        fatalError()
+    }
+
+
+    
+
+
+
+    func bfs6(_ beginWord: String, _ endWord: String, _ wordList: [String]) -> [[String]] {
         fatalError()
     }
 
@@ -38,6 +52,44 @@ final class Week4WordLadderII {
 
 
 
+
+
+
+
+
+    func bfs5(_ beginWord: String, _ endWord: String, _ wordList: [String]) -> [[String]] {
+        guard wordList.contains(endWord) else { return [] }
+        let letters = (0..<26).map { Character(UnicodeScalar($0 + 97)) }
+        var from = [[beginWord]], ans = [[String]](),
+            valid = Set(wordList), visited = Set<String>()
+        while !from.isEmpty, ans.isEmpty {
+            var next = [[String]]()
+            for words in from {
+                let chars = Array(words.last!)
+                for i in 0..<chars.count {
+                    for letter in letters {
+                        if letter == chars[i] { continue }
+                        var temp = chars
+                        temp[i] = letter
+                        let new = String(temp)
+                        if !valid.contains(new) { continue }
+                        visited.insert(new)
+                        var newPath = words
+                        newPath.append(new)
+                        if new == endWord {
+                            ans.append(newPath)
+                        } else {
+                            next.append(newPath)
+                        }
+                    }
+                }
+            }
+            visited.forEach { valid.remove($0) }
+            visited.removeAll(keepingCapacity: true)
+            from = next
+        }
+        return ans
+    }
 
 
 
