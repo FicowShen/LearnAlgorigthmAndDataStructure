@@ -99,6 +99,15 @@ func printAndAssert<T: Equatable>(result: T, expected: T) {
 
 extension Int {
     var bits: String { String(self, radix: 2, uppercase: false) }
+
+    var isPrimeNumber: Bool {
+        if self < 2 { return false }
+        let k = Int(sqrt(Double(self)))
+        for i in stride(from: 2, through: k, by: 1) where self % i == 0 {
+            return false
+        }
+        return true
+    }
 }
 
 
