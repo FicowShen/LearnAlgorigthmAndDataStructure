@@ -14,13 +14,19 @@ import Foundation
  */
 final class Week6UniquePathsII {
     func run() {
-        let f = rawDP3
+        let f = dp3
         printAndAssert(result: f([[1,1],[0,0]]), expected: 0)
         printAndAssert(result: f([[0,0,0],[0,1,0],[0,0,0]]), expected: 2)
         printAndAssert(result: f([[0,1],[0,0]]), expected: 1)
         printAndAssert(result: f([[0,0],[0,1]]), expected: 0)
         printAndAssert(result: f([[0,0],[1,1],[0,0]]), expected: 0)
     }
+
+
+
+
+
+
 
     func dp5(_ obstacleGrid: [[Int]]) -> Int {
         fatalError()
@@ -29,6 +35,12 @@ final class Week6UniquePathsII {
     func rawDP5(_ obstacleGrid: [[Int]]) -> Int {
         fatalError()
     }
+
+
+
+
+
+
 
 
 
@@ -42,8 +54,29 @@ final class Week6UniquePathsII {
 
 
 
+
+
+
+
+
+
     func dp3(_ obstacleGrid: [[Int]]) -> Int {
-        fatalError()
+        let m = obstacleGrid.count, n = obstacleGrid[0].count
+        var f = [Int](repeating: 0, count: n)
+        for j in 0..<n {
+            if obstacleGrid[0][j] == 1 { break }
+            f[j] = 1
+        }
+        for i in 1..<m {
+            for j in 0..<n {
+                if obstacleGrid[i][j] == 0 {
+                    f[j] += (j == 0 ? 0 : f[j - 1])
+                } else {
+                    f[j] = 0
+                }
+            }
+        }
+        return f[n - 1]
     }
 
     func rawDP3(_ obstacleGrid: [[Int]]) -> Int {
