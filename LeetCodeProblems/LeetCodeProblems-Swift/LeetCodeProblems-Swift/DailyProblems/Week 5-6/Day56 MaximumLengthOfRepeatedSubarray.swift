@@ -21,7 +21,7 @@ import Foundation
  */
 final class Day56MaximumLengthOfRepeatedSubarray {
     func run() {
-        let f = compressedDP3
+        let f = slidingWindow3
         printAndAssert(result: f([1,2,3,2,1], [3,2,1,4,7]), expected: 3)
         printAndAssert(result: f([0,0,0,0,0], [0,0,0,0,0]), expected: 5)
         printAndAssert(result: f([1,2,3,2,1], [3,2,1,4]), expected: 3)
@@ -71,7 +71,29 @@ final class Day56MaximumLengthOfRepeatedSubarray {
 
 
     func slidingWindow3(_ nums1: [Int], _ nums2: [Int]) -> Int {
-        fatalError()
+        let m = nums1.count, n = nums2.count
+        var ans = 0
+        func maxLength(add1: Int, add2: Int, len: Int) -> Int {
+            var res = 0, k = 0
+            for i in 0..<len {
+                k = nums1[add1 + i] == nums2[add2 + i] ? k + 1 : 0
+                res = max(res, k)
+            }
+            return res
+        }
+        for i in 0..<m {
+            let l = min(n, m - i)
+            if l <= ans { break }
+            let ml = maxLength(add1: i, add2: 0, len: l)
+            ans = max(ans, ml)
+        }
+        for i in 0..<n {
+            let l = min(m, n - i)
+            if l <= ans { break }
+            let ml = maxLength(add1: 0, add2: i, len: l)
+            ans = max(ans, ml)
+        }
+        return ans
     }
 
 
