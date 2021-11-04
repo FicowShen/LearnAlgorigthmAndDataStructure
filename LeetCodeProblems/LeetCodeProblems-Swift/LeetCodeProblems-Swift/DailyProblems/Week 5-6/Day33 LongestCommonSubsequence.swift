@@ -14,12 +14,33 @@ import Foundation
  */
 final class Day33LongestCommonSubsequence {
     func run() {
-        let f = rawDp5
+        let f = dp5
         printAndAssert(result: f("abcde","ace"), expected: 3)
         printAndAssert(result: f("abc", "abc"), expected: 3)
         printAndAssert(result: f("abc", "def"), expected: 0)
         printAndAssert(result: f("bsbininm", "jmjkbkjkv"), expected: 1)
     }
+
+
+
+
+
+
+
+
+
+    func dp7(_ text1: String, _ text2: String) -> Int {
+        fatalError()
+    }
+
+    func rawDp7(_ text1: String, _ text2: String) -> Int {
+        fatalError()
+    }
+
+
+
+
+
 
 
 
@@ -39,24 +60,41 @@ final class Day33LongestCommonSubsequence {
 
 
 
+
+
+
+
+
     func dp5(_ text1: String, _ text2: String) -> Int {
-        fatalError()
+        func dp(_ text1: String, _ text2: String) -> Int {
+            let a = Array(text1), b = Array(text2), m = a.count, n = b.count
+            var f = [Int](repeating: 0, count: n + 1)
+            for i in 1...m {
+                var topLeft = f[0]
+                for j in 1...n {
+                    let newTopLeft = f[j]
+                    f[j] = a[i - 1] == b[j - 1] ? (topLeft + 1) : max(f[j], f[j - 1])
+                    topLeft = newTopLeft
+                }
+            }
+            return f[n]
+        }
+        return text1.count > text2.count ? dp(text1, text2) : dp(text2, text1)
     }
 
     func rawDp5(_ text1: String, _ text2: String) -> Int {
-        let a = Array(text1), b = Array(text2),
-            m = a.count, n = b.count
-        var dp = [[Int]](repeating: [Int](repeating: 0, count: n + 1), count: m + 1)
+        let a = Array(text1), b = Array(text2), m = a.count, n = b.count
+        var f = [[Int]](repeating: [Int](repeating: 0, count: n + 1), count: m + 1)
         for i in 1...m {
             for j in 1...n {
                 if a[i - 1] == b[j - 1] {
-                    dp[i][j] = dp[i - 1][j - 1] + 1
+                    f[i][j] = f[i - 1][j - 1] + 1
                 } else {
-                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+                    f[i][j] = max(f[i - 1][j], f[i][j - 1])
                 }
             }
         }
-        return dp[m][n]
+        return f[m][n]
     }
 
 
