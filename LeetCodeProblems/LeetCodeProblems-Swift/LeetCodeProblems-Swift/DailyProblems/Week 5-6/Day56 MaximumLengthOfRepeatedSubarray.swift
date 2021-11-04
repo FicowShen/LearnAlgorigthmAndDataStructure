@@ -21,11 +21,14 @@ import Foundation
  */
 final class Day56MaximumLengthOfRepeatedSubarray {
     func run() {
-        let f = dp3
+        let f = compressedDP3
         printAndAssert(result: f([1,2,3,2,1], [3,2,1,4,7]), expected: 3)
         printAndAssert(result: f([0,0,0,0,0], [0,0,0,0,0]), expected: 5)
         printAndAssert(result: f([1,2,3,2,1], [3,2,1,4]), expected: 3)
     }
+
+
+
 
 
 
@@ -47,6 +50,9 @@ final class Day56MaximumLengthOfRepeatedSubarray {
 
 
 
+
+
+
     func slidingWindow4(_ nums1: [Int], _ nums2: [Int]) -> Int {
         fatalError()
     }
@@ -61,22 +67,47 @@ final class Day56MaximumLengthOfRepeatedSubarray {
 
 
 
+
+
+
     func slidingWindow3(_ nums1: [Int], _ nums2: [Int]) -> Int {
         fatalError()
     }
 
+
+    func compressedDP3(_ nums1: [Int], _ nums2: [Int]) -> Int {
+        func dp(_ nums1: [Int], _ nums2: [Int]) -> Int {
+            let m = nums1.count, n = nums2.count
+            var f = [Int](repeating: 0, count: n + 1), ans = 0
+            for i in stride(from: m - 1, through: 0, by: -1) {
+                var bottomRight = f[n]
+                for j in stride(from: n - 1, through: 0, by: -1) {
+                    let newBottomRight = f[j]
+                    f[j] = nums1[i] == nums2[j] ? bottomRight + 1 : 0
+                    ans = max(ans, f[j])
+                    bottomRight = newBottomRight
+                }
+            }
+            return ans
+        }
+        return nums1.count > nums2.count ? dp(nums1, nums2) : dp(nums2, nums1)
+    }
+
     func dp3(_ nums1: [Int], _ nums2: [Int]) -> Int {
         let m = nums1.count, n = nums2.count
-        var dp = [[Int]](repeating: [Int](repeating: 0, count: n + 1), count: m + 1)
-        var ans = 0
+        var f = [[Int]](repeating: [Int](repeating: 0, count: n + 1), count: m + 1),
+            ans = 0
         for i in stride(from: m - 1, through: 0, by: -1) {
             for j in stride(from: n - 1, through: 0, by: -1) {
-                dp[i][j] = nums1[i] == nums2[j] ? dp[i + 1][j + 1] + 1 : 0
-                ans = max(ans, dp[i][j])
+                f[i][j] = nums1[i] == nums2[j] ? f[i + 1][j + 1] + 1 : 0
+                ans = max(ans, f[i][j])
             }
         }
         return ans
     }
+
+
+
 
 
 
