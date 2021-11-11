@@ -14,7 +14,7 @@ import Foundation
  */
 final class Week6StudentAttendanceRecordII {
     func run() {
-        let f = compressedDP1
+        let f = compressedDP2
         printAndAssert(result: f(2), expected: 8)
         printAndAssert(result: f(1), expected: 3)
         printAndAssert(result: f(10101), expected: 183236316)
@@ -49,11 +49,70 @@ final class Week6StudentAttendanceRecordII {
 
 
     func compressedDP2(_ n: Int) -> Int {
-        fatalError()
+        let mod = Int(1e9) + 7
+        // day, absent(0~1), late(0~2)
+        let dp = [[Int]](repeating: [Int](repeating: 0, count: 3), count: 2)
+        var f = dp
+        f[0][0] = 1
+        for _ in 1...n {
+            var t = dp
+            // present
+            for j in 0...1 {
+                for k in 0...2 {
+                    t[j][0] = (t[j][0] + f[j][k]) % mod
+                }
+            }
+            // absent
+            for k in 0...2 {
+                t[1][0] = (t[1][0] + f[0][k]) % mod
+            }
+            // late
+            for j in 0...1 {
+                for k in 1...2 {
+                    t[j][k] = (t[j][k] + f[j][k - 1]) % mod
+                }
+            }
+            f = t
+        }
+        var sum = 0
+        for j in 0...1 {
+            for k in 0...2 {
+                sum = (sum + f[j][k]) % mod
+            }
+        }
+        return sum
     }
 
     func dp2(_ n: Int) -> Int {
-        fatalError()
+        let mod = Int(1e9) + 7
+        // day, absent(0~1), late(0~2)
+        var f = [[[Int]]](repeating: [[Int]](repeating: [Int](repeating: 0, count: 3), count: 2), count: n + 1)
+        f[0][0][0] = 1
+        for i in 1...n {
+            // present
+            for j in 0...1 {
+                for k in 0...2 {
+                    f[i][j][0] = (f[i][j][0] + f[i - 1][j][k]) % mod
+                }
+            }
+            // absent
+            for k in 0...2 {
+                f[i][1][0] = (f[i][1][0] + f[i - 1][0][k]) % mod
+            }
+            // late
+            for j in 0...1 {
+                for k in 1...2 {
+                    f[i][j][k] = (f[i][j][k] + f[i - 1][j][k - 1]) % mod
+                }
+            }
+        }
+        var sum = 0
+        for j in 0...1 {
+            for k in 0...2 {
+                sum = (sum + f[n][j][k]) % mod
+            }
+        }
+        return sum
     }
 
 
