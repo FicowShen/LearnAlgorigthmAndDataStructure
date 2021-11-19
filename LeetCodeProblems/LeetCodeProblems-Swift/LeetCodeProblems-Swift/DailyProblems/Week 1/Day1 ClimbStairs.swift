@@ -18,10 +18,13 @@ import Foundation
  3. matrix fast power
  Time: O(n), Space: O(1)
  https://leetcode-cn.com/problems/climbing-stairs/solution/pa-lou-ti-by-leetcode-solution/
+
+ 4. fibonacci formula
+ Time: O(1), Space: O(1)
  */
 final class Day1ClimbStairs {
     func run() {
-        let f = matrixFastPower3
+        let f = cache
         printAndAssert(result: f(1), expected: 1)
         printAndAssert(result: f(2), expected: 2)
         printAndAssert(result: f(3), expected: 3)
@@ -313,7 +316,26 @@ final class Day1ClimbStairs {
 
 
 
+    static var values = [Int](repeating: -1, count: 46)
 
+    func cache(_ n: Int) -> Int {
+        if Self.values[n] != -1 { return Self.values[n] }
+        var a = 0, b = 0, c = 1
+        for i in 1...45 {
+            a = b
+            b = c
+            c = a + b
+            Self.values[i] = c
+        }
+        return Self.values[n]
+    }
+
+    func fibonacciFormula1(_ n: Int) -> Int {
+        let sqrt5 = sqrt(5)
+        let divisor = Double(n + 1)
+        let fibn: Double = pow((1 + sqrt5) / 2, divisor) - pow((1 - sqrt5) / 2, divisor)
+        return Int(round(fibn / sqrt5))
+    }
 
     func matrixFastPower1(_ n: Int) -> Int {
         // 如何获得系数矩阵 q？
